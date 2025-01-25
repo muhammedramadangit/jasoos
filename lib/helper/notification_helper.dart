@@ -24,11 +24,11 @@
 //     await Firebase.initializeApp(
 //       // options: DefaultFirebaseOptions.currentPlatform,
 //       options: FirebaseOptions(
-//         apiKey: 'AIzaSyClghAQy2p9jF8-qPjovhHsGF3WvPbXAPU',
-//         appId: '1:432901483845:android:9e372867863005ec92e22c',
-//         messagingSenderId: '432901483845',
-//         projectId: 'hitrips-aa935',
-//         storageBucket: 'hitrips-aa935.firebasestorage.app',
+//         apiKey: '',
+//         appId: '',
+//         messagingSenderId: '',
+//         projectId: '',
+//         storageBucket: '',
 //       ),
 //     );
 //     FirebaseMessaging.onBackgroundMessage(_fireBaseBackgroundHandler);
