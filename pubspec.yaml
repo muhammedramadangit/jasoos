@@ -1,0 +1,89 @@
+name: jasoos
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_bloc: ^9.0.0
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.17
+  flutter_launcher_icons: ^0.14.3
+  permission_handler: ^11.3.1
+  dio: ^5.7.0
+  intl: ^0.19.0
+  get_storage: ^2.1.1
+  fluttertoast: ^8.2.10
+  pin_code_fields: ^8.0.1
+  connectivity_plus: ^6.1.2
+  lottie: ^3.3.1
+  flutter_staggered_animations: ^1.1.1
+  easy_localization: ^3.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+#flutter_icons:
+#  android: "launcher_icon"
+#  image_path_android: 'assets/images/hitrips_app_icon.png'
+#  image_path_ios: 'assets/images/hitrips_app_icon.png'
+#  ios: true
+#  min_sdk_android: 21
+#  remove_alpha_ios: true
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svg/
+    - assets/translations/
+    - assets/lottie/
+
+  fonts:
+    - family: cairo-extra-light
+      fonts:
+        - asset: assets/fonts/Cairo-ExtraLight.ttf
+          weight: 200
+
+    - family: cairo-light
+      fonts:
+        - asset: assets/fonts/Cairo-Light.ttf
+          weight: 300
+
+    - family: cairo-regular
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+          weight: 400
+
+    - family: cairo-medium
+      fonts:
+        - asset: assets/fonts/Cairo-Medium.ttf
+          weight: 500
+
+    - family: cairo-semi-bold
+      fonts:
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+
+    - family: cairo-bold
+      fonts:
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+
+    - family: cairo-extra-bold
+      fonts:
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+          weight: 800
+
+    - family: cairo-black
+      fonts:
+        - asset: assets/fonts/Cairo-Black.ttf
+          weight: 900
