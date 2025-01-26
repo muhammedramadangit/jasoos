@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 abstract class Styles {
-  static const Color PRIMARY_COLOR = Color(0xff2D3393);
-  static const Color HIGHLIGHT_COLOR = Color(0xffE9EAF5);
+  static const Color PRIMARY_COLOR = Color(0xff2103ED);
+  static const Color HIGHLIGHT_COLOR = Color(0xffADC8FF);
   static const Color ACCENT_COLOR = Color(0xFFF6A01D);
   static const Color SCAFFOLD_COLOR = Color(0xFFffffff);
   static const Color FILL_COLOR = Color(0xFFFAFAFA);
-  static const Color BORDER_COLOR = Color(0xffD0D2D7);
-  static const Color GREY_TEXT_COLOR = Color(0xff7A797A);
+  static const Color BORDER_COLOR = Color(0xffD1D5DB);
+  static const Color GREY_TEXT_COLOR = Color(0xff6B7280);
   static const Color GREEN_TEXT_COLOR = Color(0xff32A071);
   static const Color RED_TEXT_COLOR = Color(0xffC8102E);
   static const Color MORE_COLOR = Color(0xffF6F6F6);
   static const Color TICKET_COLOR = Color(0xffE7E7E8);
 
-  static const Color GREY_COLOR = Color(0xff9CA2AC);
+  static const Color GREY_COLOR = Color(0xff9CA3AF);
   static const Color LIGHT_GREY_BORDER = Color(0XFFEEEEEE);
   static const Color DARK_GREY_COLOR = Color(0xff6A6A6A);
   static const Color WHITE_COLOR = Color(0xffFFFFFF);
@@ -59,7 +59,7 @@ abstract class Styles {
   static Widget divider({double? ver, double? hor, double? thickness}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: hor ?? 0, vertical: ver ?? 0),
-      child: Divider(color: Colors.grey[300], thickness: thickness ?? 0.5, height: 4),
+      child: Divider(color: BORDER_COLOR, thickness: thickness ?? 0.5, height: 4),
     );
   }
 }

@@ -25,18 +25,20 @@ dependencies:
   lottie: ^3.3.1
   flutter_staggered_animations: ^1.1.1
   easy_localization: ^3.0.7
+  country_code_picker: ^3.1.0
+  fl_country_code_picker: ^0.1.9+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-#flutter_icons:
-#  android: "launcher_icon"
-#  image_path_android: 'assets/images/hitrips_app_icon.png'
-#  image_path_ios: 'assets/images/hitrips_app_icon.png'
-#  ios: true
-#  min_sdk_android: 21
-#  remove_alpha_ios: true
+flutter_icons:
+  android: "launcher_icon"
+  image_path_android: 'assets/images/app_icon.png'
+  image_path_ios: 'assets/images/app_icon.png'
+  ios: true
+  min_sdk_android: 21
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
@@ -48,42 +50,67 @@ flutter:
     - assets/lottie/
 
   fonts:
-    - family: cairo-extra-light
+    - family: SpaceGrotesk-Light
       fonts:
-        - asset: assets/fonts/Cairo-ExtraLight.ttf
-          weight: 200
-
-    - family: cairo-light
-      fonts:
-        - asset: assets/fonts/Cairo-Light.ttf
+        - asset: assets/fonts/SpaceGrotesk-Light.ttf
           weight: 300
 
-    - family: cairo-regular
+    - family: SpaceGrotesk-Regular
       fonts:
-        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/SpaceGrotesk-Regular.ttf
           weight: 400
 
-    - family: cairo-medium
+    - family: SpaceGrotesk-Medium
       fonts:
-        - asset: assets/fonts/Cairo-Medium.ttf
+        - asset: assets/fonts/SpaceGrotesk-Medium.ttf
           weight: 500
 
-    - family: cairo-semi-bold
+    - family: SpaceGrotesk-SemiBold
       fonts:
-        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: assets/fonts/SpaceGrotesk-SemiBold.ttf
           weight: 600
 
-    - family: cairo-bold
+    - family: SpaceGrotesk-Bold
       fonts:
-        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: assets/fonts/SpaceGrotesk-Bold.ttf
           weight: 700
 
-    - family: cairo-extra-bold
-      fonts:
-        - asset: assets/fonts/Cairo-ExtraBold.ttf
-          weight: 800
-
-    - family: cairo-black
-      fonts:
-        - asset: assets/fonts/Cairo-Black.ttf
-          weight: 900
+#    - family: cairo-extra-light
+#      fonts:
+#        - asset: assets/fonts/Cairo-ExtraLight.ttf
+#          weight: 200
+#
+#    - family: cairo-light
+#      fonts:
+#        - asset: assets/fonts/Cairo-Light.ttf
+#          weight: 300
+#
+#    - family: cairo-regular
+#      fonts:
+#        - asset: assets/fonts/Cairo-Regular.ttf
+#          weight: 400
+#
+#    - family: cairo-medium
+#      fonts:
+#        - asset: assets/fonts/Cairo-Medium.ttf
+#          weight: 500
+#
+#    - family: cairo-semi-bold
+#      fonts:
+#        - asset: assets/fonts/Cairo-SemiBold.ttf
+#          weight: 600
+#
+#    - family: cairo-bold
+#      fonts:
+#        - asset: assets/fonts/Cairo-Bold.ttf
+#          weight: 700
+#
+#    - family: cairo-extra-bold
+#      fonts:
+#        - asset: assets/fonts/Cairo-ExtraBold.ttf
+#          weight: 800
+#
+#    - family: cairo-black
+#      fonts:
+#        - asset: assets/fonts/Cairo-Black.ttf
+#          weight: 900

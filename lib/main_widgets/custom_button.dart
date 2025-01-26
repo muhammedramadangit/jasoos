@@ -57,7 +57,7 @@ class CustomButton extends StatelessWidget {
           color: loading
               ? Colors.grey[300]
               : color ?? Styles.PRIMARY_COLOR,
-          borderRadius: BorderRadius.circular(radius ?? 8.r),
+          borderRadius: BorderRadius.circular(radius ?? 100.r),
           gradient: gradient,
           border: Border.all(
             width: 0.5,

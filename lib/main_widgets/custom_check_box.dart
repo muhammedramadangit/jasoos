@@ -6,9 +6,9 @@ import 'package:jasoos/helper/styles.dart';
 class CustomCheckBox extends StatefulWidget {
   final bool? isSelected;
   final Color? fillColor;
-  final void Function(bool?)? onChanged;
+  final void Function(bool?) onChanged;
 
-  const CustomCheckBox({Key? key, this.isSelected, this.onChanged, this.fillColor})
+  const CustomCheckBox({Key? key, this.isSelected, required this.onChanged, this.fillColor})
       : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         setState(() {
           isChecked = !isChecked!;
         });
-        widget.onChanged!(isChecked);
+        widget.onChanged(isChecked);
       },
       splashColor: Colors.transparent,
       child: Container(

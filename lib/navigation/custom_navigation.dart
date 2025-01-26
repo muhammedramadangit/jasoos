@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jasoos/features/login/view/login_view.dart';
+import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
 import 'package:jasoos/features/splash/view/splash_view.dart';
 import 'package:jasoos/my_app.dart';
 import 'package:jasoos/navigation/routes.dart';
@@ -34,6 +36,12 @@ abstract class CustomNavigator {
 
       case Routes.SPLASH:
         return pageRoute(SplashView());
+
+      case Routes.ONBOARDING:
+        return pageRoute(OnboardingView());
+
+      case Routes.LOGIN:
+        return pageRoute(LoginView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
         child: UnFocus(child: child ?? Container()),
       ),
       initialRoute: Routes.SPLASH,
+      // initialRoute: Routes.LOGIN,
       navigatorKey: CustomNavigator.navigatorState,
       onGenerateRoute: CustomNavigator.onCreateRoute,
       navigatorObservers: [
@@ -68,7 +69,7 @@ class _MyAppState extends State<MyApp> {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
         ),
-        snackBarTheme: SnackBarThemeData(contentTextStyle: TextStyle(fontFamily: "cairo-medium")),
+        snackBarTheme: SnackBarThemeData(contentTextStyle: TextStyle(fontFamily: "SpaceGrotesk-Medium")),
         primaryColor: Styles.PRIMARY_COLOR,
         colorScheme: ColorScheme.light(
           primary: Styles.PRIMARY_COLOR,
@@ -82,7 +83,7 @@ class _MyAppState extends State<MyApp> {
             borderRadius: BorderRadius.circular(5.0),
           ),
         ),
-        fontFamily: 'cairo-medium',
+        fontFamily: 'SpaceGrotesk-Medium',
         scaffoldBackgroundColor: Styles.SCAFFOLD_COLOR,
       ),
     );

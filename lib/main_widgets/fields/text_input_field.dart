@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
 class TextInputField extends StatefulWidget {
   const TextInputField({
@@ -42,6 +43,8 @@ class TextInputField extends StatefulWidget {
     this.autoValidateMode,
     this.errorStyle,
     this.textCapitalization = TextCapitalization.none,
+    this.onChangedCountryCode,
+    this.initialSelectionCountryCode,
   });
 
   final String? hintText;
@@ -77,6 +80,8 @@ class TextInputField extends StatefulWidget {
   final AutovalidateMode? autoValidateMode;
   final TextCapitalization textCapitalization;
   final TextStyle? errorStyle;
+  final void Function(CountryCode)? onChangedCountryCode;
+  final String? initialSelectionCountryCode;
   @override
   State<TextInputField> createState() => _TextInputFieldState();
 }
@@ -84,12 +89,18 @@ class TextInputField extends StatefulWidget {
 class _TextInputFieldState extends State<TextInputField> {
   bool showText = true;
   String? value;
+
   _mapSuffixIcon() {
     if (widget.keyboardType == null) {
       return null;
     } else if (widget.keyboardType == TextInputType.visiblePassword) {
       return GestureDetector(
-        child: SvgPicture.asset(showText ? Constants.getSvg("eye_hide") : Constants.getSvg("eye_show"), color: Styles.GREY_TEXT_COLOR),
+        child: SvgPicture.asset(
+          showText
+              ? Constants.getSvg("eye_hide")
+              : Constants.getSvg("eye_show"),
+          colorFilter: ColorFilter.mode(Styles.GREY_COLOR, BlendMode.srcIn),
+        ),
         onTap: () {
           setState(() {
             showText = !showText;
@@ -100,6 +111,66 @@ class _TextInputFieldState extends State<TextInputField> {
       return null;
     }
   }
+
+  _mapPrefixIcon() {
+    if (widget.keyboardType == null) {
+      return null;
+    } else if (widget.keyboardType == TextInputType.visiblePassword) {
+      return SvgPicture.asset(
+        Constants.getSvg("lock"),
+        colorFilter: ColorFilter.mode(Styles.GREY_COLOR, BlendMode.srcIn),
+      );
+    } else if (widget.keyboardType == TextInputType.phone) {
+      return Container(
+        child: CountryCodePicker(
+          padding: EdgeInsets.zero,
+          onChanged: widget.onChangedCountryCode,
+          initialSelection: widget.initialSelectionCountryCode ?? '+966',
+          showFlagDialog: true,
+          flagDecoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          hideMainText: true,
+          builder: (p0) {
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 26.w,
+                    height: 18.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      image: DecorationImage(
+                        image: AssetImage(
+                          "${p0?.flagUri}",
+                          package: 'country_code_picker',
+                        ),
+                        // fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 6),
+                  Icon(Icons.keyboard_arrow_down),
+                  SizedBox(width: 10),
+                  Container(
+                    height: 24,
+                    width: 1,
+                    color: Styles.BORDER_COLOR,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return null;
+    }
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -141,21 +212,20 @@ class _TextInputFieldState extends State<TextInputField> {
                   widget.onChange?.call(val);
                 },
                 keyboardType: widget.keyboardType ?? TextInputType.text,
-                style: AppTextStyles.w300.copyWith(fontSize: 14),
+                style: AppTextStyles.w500.copyWith(fontSize: 14),
                 obscureText: !showText,
                 inputFormatters: widget.inputFormatters,
                 maxLines: widget.maxLines ?? 1,
                 decoration: InputDecoration(
                   hintText: widget.hintText,
-                  errorStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w300, color: Colors.red),
+                  errorStyle: AppTextStyles.w300.copyWith(fontSize: 10, color: Colors.red),
                   errorMaxLines: 2,
-
-                  hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Styles.GREY_COLOR),
+                  hintStyle: AppTextStyles.w400.copyWith(fontSize: 14, color: Styles.GREY_COLOR),
                   contentPadding: widget.contentPadding ?? EdgeInsets.symmetric(horizontal: 16.w ,vertical: 16.h),
                   suffixIcon: widget.suffixIcon ?? _mapSuffixIcon(),
-                  prefixIcon: widget.prefixIcon,
-                  suffixIconConstraints: BoxConstraints.expand(height: widget.suffixMaxHeight ?? 24.h, width: widget.suffixMaxWidth ?? 50.w),
-                  prefixIconConstraints: BoxConstraints.expand(height: widget.prefixHeight ?? 24.h, width: widget.prefixWidth ?? 50.w),
+                  prefixIcon: widget.prefixIcon ?? _mapPrefixIcon(),
+                  suffixIconConstraints: BoxConstraints.expand(height: widget.suffixMaxHeight ?? 24.h, width: widget.suffixMaxWidth ?? 60.w),
+                  prefixIconConstraints: BoxConstraints.expand(height: widget.keyboardType == TextInputType.phone ? 30.h : widget.prefixHeight ?? 24.h, width: widget.keyboardType == TextInputType.phone ? 100.w : widget.prefixWidth ?? 55.w),
                   enabledBorder: _mapBorder(borderColor: (value != null ? Styles.PRIMARY_COLOR : widget.borderColor ?? Styles.BORDER_COLOR)),
                   focusedBorder: _mapBorder(borderColor: widget.borderColor ?? Theme.of(context).colorScheme.primary),
                   errorBorder: _mapBorder(borderColor: Colors.red),
@@ -183,7 +253,7 @@ class _TextInputFieldState extends State<TextInputField> {
 
   OutlineInputBorder _mapBorder({required Color borderColor}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(widget.radius ?? 10.r),
+      borderRadius: BorderRadius.circular(widget.radius ?? 100.r),
       borderSide: BorderSide(color: borderColor),
     );
   }
