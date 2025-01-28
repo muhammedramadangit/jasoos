@@ -14,7 +14,7 @@ class ResetPasswordView extends StatelessWidget {
     return Scaffold(
       appBar: AppBars.authAppBar(),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
+        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
         child: Column(
           children: [
             Expanded(

@@ -4,6 +4,7 @@ import 'package:jasoos/features/login/view/login_view.dart';
 import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
 import 'package:jasoos/features/otp/view/otp_view.dart';
 import 'package:jasoos/features/register/view/register_view.dart';
+import 'package:jasoos/features/reset_password/view/reset_password_success_view.dart';
 import 'package:jasoos/features/reset_password/view/reset_password_view.dart';
 import 'package:jasoos/features/select_category/view/select_category_view.dart';
 import 'package:jasoos/features/splash/view/splash_view.dart';
@@ -62,6 +63,9 @@ abstract class CustomNavigator {
 
       case Routes.RESET_PASSWORD:
         return pageRoute(ResetPasswordView());
+
+      case Routes.RESET_PASSWORD_SUCCESS:
+        return pageRoute(ResetPasswordSuccessView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
