@@ -5,4 +5,5 @@ class Routes {
   static const ONBOARDING = "ONBOARDING";
   static const LOGIN = "LOGIN";
   static const REGISTER = "REGISTER";
+  static const OTP = "OTP";
 }

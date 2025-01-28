@@ -7,6 +7,8 @@ import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 class RegisterSubmit extends StatelessWidget {
   const RegisterSubmit({super.key});
@@ -104,7 +106,9 @@ class RegisterSubmit extends StatelessWidget {
 
           CustomButton(
             text: "Create account",
-            onTap: () {},
+            onTap: () {
+              CustomNavigator.push(Routes.OTP);
+            },
           ),
 
           SizedBox(height: 16.h),

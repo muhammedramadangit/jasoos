@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jasoos/helper/text_styles.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:jasoos/core/app_validation.dart';
 import 'package:jasoos/helper/styles.dart';
@@ -24,6 +25,7 @@ class OtpTextField extends StatelessWidget {
             validator: (v) => AppValidations.code(v!),
             autovalidateMode: AutovalidateMode.disabled,
             cursorColor: Styles.PRIMARY_COLOR,
+            autoFocus: true,
             backgroundColor: Colors.transparent,
             autoDisposeControllers: true,
             autoDismissKeyboard: true,
@@ -32,7 +34,7 @@ class OtpTextField extends StatelessWidget {
             enablePinAutofill: true,
             keyboardType: TextInputType.number,
             textStyle: TextStyle(
-              fontSize: 24,
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               color: Styles.BLACK_COLOR,
             ),
@@ -40,18 +42,19 @@ class OtpTextField extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             cursorHeight: 24.h,
             pinTheme: PinTheme(
-              fieldOuterPadding: EdgeInsets.symmetric(horizontal: 12.w),
+              fieldOuterPadding: EdgeInsets.symmetric(horizontal: 8.w),
               shape: PinCodeFieldShape.box,
-              borderRadius: BorderRadius.circular(12.r),
-              fieldHeight: 55,
-              fieldWidth: 55,
-              activeFillColor: Colors.transparent,
-              activeColor: Styles.BORDER_COLOR,
-              inactiveColor: Styles.BORDER_COLOR,
-              inactiveFillColor: Colors.transparent,
-              selectedFillColor: Colors.transparent,
+              borderRadius: BorderRadius.circular(6.r),
+              borderWidth: 0.5,
+              fieldHeight: 48,
+              fieldWidth: 40,
+              activeFillColor: Color(0xFFEAEEFF),
+              activeColor: Color(0xFFEAEEFF),
+              inactiveColor: Color(0xFFEAEEFF),
+              inactiveFillColor: Color(0xFFEAEEFF),
+              selectedFillColor: Color(0xFFEAEEFF),
               selectedColor: Styles.PRIMARY_COLOR,
-              disabledColor: Styles.BORDER_COLOR,
+              disabledColor: Color(0xFFEAEEFF),
             ),
             appContext: context,
             length: 4,
@@ -62,12 +65,12 @@ class OtpTextField extends StatelessWidget {
         ),
         if (hasError) const SizedBox(height: 8),
         if (hasError)
-          Row(
-            children: [
-              Icon(Icons.error_outline, color: Colors.red, size: 16),
-              SizedBox(width: 4),
-              Text(errorText ?? "Error", style: const TextStyle(color: Colors.red)),
-            ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            child: Text(
+              errorText ?? "Error",
+              style: AppTextStyles.w400.copyWith(color: Styles.RED_COLOR, fontSize: 12),
+            ),
           ),
       ],
     );
