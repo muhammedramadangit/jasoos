@@ -6,6 +6,8 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_check_box.dart';
 import 'package:jasoos/main_widgets/fields/text_input_field.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -40,11 +42,17 @@ class LoginForm extends StatelessWidget {
                 style: AppTextStyles.w400.copyWith(fontSize: 14),
               ),
               Spacer(),
-              Text(
-                "Forgot Password?",
-                style: AppTextStyles.w400.copyWith(
-                  fontSize: 14,
-                  color: Styles.PRIMARY_COLOR,
+              InkWell(
+                onTap: () {
+                  CustomNavigator.push(Routes.FORGET_PASSWORD);
+                },
+                splashColor: Colors.transparent,
+                child: Text(
+                  "Forgot Password?",
+                  style: AppTextStyles.w400.copyWith(
+                    fontSize: 14,
+                    color: Styles.PRIMARY_COLOR,
+                  ),
                 ),
               ),
             ],

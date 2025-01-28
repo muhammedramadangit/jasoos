@@ -107,7 +107,7 @@ class RegisterSubmit extends StatelessWidget {
           CustomButton(
             text: "Create account",
             onTap: () {
-              CustomNavigator.push(Routes.OTP);
+              CustomNavigator.push(Routes.OTP, arguments: false);
             },
           ),
 

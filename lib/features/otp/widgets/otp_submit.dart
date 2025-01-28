@@ -4,14 +4,15 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
 class OtpSubmit extends StatelessWidget {
-  const OtpSubmit({super.key});
+  final bool? isForget;
+  const OtpSubmit({super.key, this.isForget});
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
       text: "Verify",
       onTap: () {
-        CustomNavigator.push(Routes.SELECT_CATEGORY);
+        CustomNavigator.push(isForget == true ? Routes.SELECT_CATEGORY : Routes.SELECT_CATEGORY);
       },
     );
   }

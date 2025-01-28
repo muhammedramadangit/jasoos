@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jasoos/features/forget_password/view/forget_password_view.dart';
 import 'package:jasoos/features/login/view/login_view.dart';
 import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
 import 'package:jasoos/features/otp/view/otp_view.dart';
@@ -50,7 +51,10 @@ abstract class CustomNavigator {
         return pageRoute(RegisterView());
 
       case Routes.OTP:
-        return pageRoute(OtpView());
+        return pageRoute(OtpView(isForget: settings.arguments as bool));
+
+      case Routes.FORGET_PASSWORD:
+        return pageRoute(ForgetPasswordView());
 
       case Routes.SELECT_CATEGORY:
         return pageRoute(SelectCategoryView());

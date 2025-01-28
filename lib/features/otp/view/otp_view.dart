@@ -7,7 +7,8 @@ import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/fields/otp_text_field.dart';
 
 class OtpView extends StatelessWidget {
-  const OtpView({super.key});
+  final bool? isForget;
+  const OtpView({super.key, this.isForget});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,9 @@ class OtpView extends StatelessWidget {
           children: [
             SizedBox(height: 90.h),
             Text(
-              "Enter Verification Code",
+              isForget == true
+                  ? "Check your Phone"
+                  : "Enter Verification Code",
               style: AppTextStyles.w500.copyWith(fontSize: 28),
             ),
             SizedBox(height: 8.h),
@@ -36,7 +39,7 @@ class OtpView extends StatelessWidget {
               onChange: (value) {},
             ),
             SizedBox(height: 20.h),
-            OtpSubmit(),
+            OtpSubmit(isForget: isForget),
             SizedBox(height: 40.h),
             OtpCountDown(),
           ],
