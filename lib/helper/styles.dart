@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 abstract class Styles {
   static const Color PRIMARY_COLOR = Color(0xff2103ED);
-  static const Color HIGHLIGHT_COLOR = Color(0xffADC8FF);
-  static const Color ACCENT_COLOR = Color(0xFFF6A01D);
+  static const Color ACCENT_COLOR = Color(0xffADC8FF);
+  static const Color HIGHLIGHT_COLOR = Color(0xFFD6E4FF);
   static const Color SCAFFOLD_COLOR = Color(0xFFffffff);
   static const Color FILL_COLOR = Color(0xFFFDFDFF);
   static const Color BORDER_COLOR = Color(0xffD1D5DB);

@@ -163,7 +163,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   width: current == pageValue ? 8 : 6,
                   margin: EdgeInsets.symmetric(horizontal: 1.5),
                   decoration: BoxDecoration(
-                    color: current == pageValue ? Styles.PRIMARY_COLOR : Styles.HIGHLIGHT_COLOR,
+                    color: current == pageValue ? Styles.PRIMARY_COLOR : Styles.ACCENT_COLOR,
                     shape: BoxShape.circle,
                   ),
                 );

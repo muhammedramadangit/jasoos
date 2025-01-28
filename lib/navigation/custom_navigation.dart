@@ -3,6 +3,7 @@ import 'package:jasoos/features/login/view/login_view.dart';
 import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
 import 'package:jasoos/features/otp/view/otp_view.dart';
 import 'package:jasoos/features/register/view/register_view.dart';
+import 'package:jasoos/features/select_category/view/select_category_view.dart';
 import 'package:jasoos/features/splash/view/splash_view.dart';
 import 'package:jasoos/my_app.dart';
 import 'package:jasoos/navigation/routes.dart';
@@ -50,6 +51,9 @@ abstract class CustomNavigator {
 
       case Routes.OTP:
         return pageRoute(OtpView());
+
+      case Routes.SELECT_CATEGORY:
+        return pageRoute(SelectCategoryView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

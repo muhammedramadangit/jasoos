@@ -78,10 +78,7 @@ class _MyAppState extends State<MyApp> {
         ),
         snackBarTheme: SnackBarThemeData(contentTextStyle: TextStyle(fontFamily: "SpaceGrotesk-Medium")),
         primaryColor: Styles.PRIMARY_COLOR,
-        colorScheme: ColorScheme.light(
-          primary: Styles.PRIMARY_COLOR,
-          secondary: Styles.ACCENT_COLOR,
-        ),
+        colorScheme: ColorScheme.light(primary: Styles.PRIMARY_COLOR),
         checkboxTheme: CheckboxThemeData(
           overlayColor: WidgetStateProperty.all<Color>(
             Styles.PRIMARY_COLOR.withOpacity(0.1),

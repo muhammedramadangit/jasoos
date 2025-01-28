@@ -6,4 +6,5 @@ class Routes {
   static const LOGIN = "LOGIN";
   static const REGISTER = "REGISTER";
   static const OTP = "OTP";
+  static const SELECT_CATEGORY = "SELECT_CATEGORY";
 }
