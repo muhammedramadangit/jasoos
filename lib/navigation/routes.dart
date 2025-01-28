@@ -4,4 +4,5 @@ class Routes {
   static const SPLASH = "SPLASH";
   static const ONBOARDING = "ONBOARDING";
   static const LOGIN = "LOGIN";
+  static const REGISTER = "REGISTER";
 }

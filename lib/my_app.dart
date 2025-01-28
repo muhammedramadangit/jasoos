@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jasoos/helper/precache_helper.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
@@ -22,6 +23,12 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // NotificationHelper.onInit();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    PrecacheHelper.preCacheHelper(context);
+    super.didChangeDependencies();
   }
 
   @override

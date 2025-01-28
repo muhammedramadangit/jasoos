@@ -7,11 +7,9 @@ import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
-import 'package:jasoos/navigation/custom_navigation.dart';
-import 'package:jasoos/navigation/routes.dart';
 
-class LoginSubmit extends StatelessWidget {
-  const LoginSubmit({super.key});
+class RegisterSubmit extends StatelessWidget {
+  const RegisterSubmit({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,28 +58,22 @@ class LoginSubmit extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomButton(
-            text: "Login",
-            onTap: () {},
-          ),
-
-          SizedBox(height: 24.h),
-
+          SizedBox(height: 32.h),
           Row(
             children: [
               Expanded(child: Styles.divider()),
               SizedBox(width: 24.w),
               Text(
-                "Or Login With Account",
+                "Or Sign up With Account",
                 style: AppTextStyles.w400.copyWith(fontSize: 14),
               ),
               SizedBox(width: 24.w),
               Expanded(child: Styles.divider()),
             ],
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 16.h),
 
-          Column(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: social.map((social) {
               return GestureDetector(
@@ -89,31 +81,30 @@ class LoginSubmit extends StatelessWidget {
                   social["onTap"]();
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 53.w),
-                  margin: EdgeInsets.symmetric(vertical: 7.h),
+                  padding: EdgeInsets.all(16),
+                  margin: EdgeInsets.symmetric(horizontal: 6.h),
                   decoration: BoxDecoration(
+                    color: Styles.FILL_COLOR,
                     border: Border.all(color: Styles.BORDER_COLOR, width: 0.5),
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                        Constants.getSvg(social["icon"]),
-                        height: 24,
-                        width: 24,
-                      ),
-                      SizedBox(width: 24.w),
-                      Text(
-                        social["name"],
-                        style: AppTextStyles.w400.copyWith(fontSize: 14),
-                      ),
-                    ],
+                  child: Center(
+                    child: SvgPicture.asset(
+                      Constants.getSvg(social["icon"]),
+                      height: 24,
+                      width: 24,
+                    ),
                   ),
                 ),
               );
             }).toList(),
+          ),
+
+          SizedBox(height: 24.h),
+
+          CustomButton(
+            text: "Create account",
+            onTap: () {},
           ),
 
           SizedBox(height: 16.h),
@@ -122,23 +113,18 @@ class LoginSubmit extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don’t have an account?",
+                "Already have an account?",
                 style: AppTextStyles.w500.copyWith(
                   fontSize: 14,
                   color: Styles.GREY_TEXT_COLOR,
                 ),
               ),
               SizedBox(width: 6.w),
-              InkWell(
-                onTap: () {
-                  CustomNavigator.push(Routes.REGISTER);
-                },
-                child: Text(
-                  "Register",
-                  style: AppTextStyles.w700.copyWith(
-                    fontSize: 14,
-                    color: Styles.PRIMARY_COLOR,
-                  ),
+              Text(
+                "Login",
+                style: AppTextStyles.w700.copyWith(
+                  fontSize: 14,
+                  color: Styles.PRIMARY_COLOR,
                 ),
               ),
             ],

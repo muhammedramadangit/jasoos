@@ -50,7 +50,7 @@ class CustomButton extends StatelessWidget {
       // borderRadius: BorderRadius.circular(radius ?? 35.r),
       child: Container(
         width: width ,
-        height: height ?? 56,
+        height: height ?? 48.h,
         margin: padding,
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         decoration: BoxDecoration(

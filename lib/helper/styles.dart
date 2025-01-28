@@ -5,7 +5,7 @@ abstract class Styles {
   static const Color HIGHLIGHT_COLOR = Color(0xffADC8FF);
   static const Color ACCENT_COLOR = Color(0xFFF6A01D);
   static const Color SCAFFOLD_COLOR = Color(0xFFffffff);
-  static const Color FILL_COLOR = Color(0xFFFAFAFA);
+  static const Color FILL_COLOR = Color(0xFFFDFDFF);
   static const Color BORDER_COLOR = Color(0xffD1D5DB);
   static const Color GREY_TEXT_COLOR = Color(0xff6B7280);
   static const Color GREEN_TEXT_COLOR = Color(0xff32A071);
@@ -13,21 +13,12 @@ abstract class Styles {
   static const Color MORE_COLOR = Color(0xffF6F6F6);
   static const Color TICKET_COLOR = Color(0xffE7E7E8);
 
+  static const Color BLACK_COLOR = Color(0xff000000);
+  static const Color DARK_GREY_COLOR = Color(0xff6A6A6A);
   static const Color GREY_COLOR = Color(0xff9CA3AF);
   static const Color LIGHT_GREY_BORDER = Color(0XFFEEEEEE);
-  static const Color DARK_GREY_COLOR = Color(0xff6A6A6A);
   static const Color WHITE_COLOR = Color(0xffFFFFFF);
-  static const Color LIGHT_GOLD_COLOR = Color(0xffFDECCC);
-  static const Color BLACK_COLOR = Color(0xff000000);
-  static const Color RED_COLOR = Color(0xffDA3B3B);
-  static const Color LIGHT_GREEN_COLOR = Color(0xffDFF8E7);
-  static const Color GREEN_COLOR = Color(0xff31B502);
-  static const Color BLUE_COLOR = Color(0xff0D99FF);
-  static const Color ORANGE_COLOR = Color(0xffDF6F79);
-  static const Color BROWN_COLOR = Color(0xffD6B200);
-  static const Color WAITING_STATUS = Color(0xffE88E00);
-  static const Color CANCELED_STATUS = Color(0xffFF3A44);
-  static const Color CONFIRMED_STATUS = Color(0xff1F8B4D);
+  static const Color RED_COLOR = Color(0xffFF472B);
 
   static List<Color> BACKGROUND_GRADIENT = [
     Color(0xffD1D3FF),

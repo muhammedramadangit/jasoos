@@ -91,9 +91,7 @@ class _TextInputFieldState extends State<TextInputField> {
   String? value;
 
   _mapSuffixIcon() {
-    if (widget.keyboardType == null) {
-      return null;
-    } else if (widget.keyboardType == TextInputType.visiblePassword) {
+    if (widget.keyboardType == TextInputType.visiblePassword) {
       return GestureDetector(
         child: SvgPicture.asset(
           showText
@@ -113,14 +111,7 @@ class _TextInputFieldState extends State<TextInputField> {
   }
 
   _mapPrefixIcon() {
-    if (widget.keyboardType == null) {
-      return null;
-    } else if (widget.keyboardType == TextInputType.visiblePassword) {
-      return SvgPicture.asset(
-        Constants.getSvg("lock"),
-        colorFilter: ColorFilter.mode(Styles.GREY_COLOR, BlendMode.srcIn),
-      );
-    } else if (widget.keyboardType == TextInputType.phone) {
+    if (widget.keyboardType == TextInputType.phone) {
       return Container(
         child: CountryCodePicker(
           padding: EdgeInsets.zero,
@@ -132,35 +123,31 @@ class _TextInputFieldState extends State<TextInputField> {
           ),
           hideMainText: true,
           builder: (p0) {
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 26.w,
-                    height: 18.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      image: DecorationImage(
-                        image: AssetImage(
-                          "${p0?.flagUri}",
-                          package: 'country_code_picker',
-                        ),
-                        // fit: BoxFit.cover,
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 26.w,
+                  height: 18.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "${p0?.flagUri}",
+                        package: 'country_code_picker',
                       ),
                     ),
                   ),
-                  SizedBox(width: 6),
-                  Icon(Icons.keyboard_arrow_down),
-                  SizedBox(width: 10),
-                  Container(
-                    height: 24,
-                    width: 1,
-                    color: Styles.BORDER_COLOR,
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(width: 6),
+                SvgPicture.asset(Constants.getSvg("arrow-down")),
+                SizedBox(width: 10),
+                Container(
+                  height: 24,
+                  width: 1,
+                  color: Styles.BORDER_COLOR,
+                ),
+              ],
             );
           },
         ),
@@ -222,13 +209,19 @@ class _TextInputFieldState extends State<TextInputField> {
                   errorMaxLines: 2,
                   hintStyle: AppTextStyles.w400.copyWith(fontSize: 14, color: Styles.GREY_COLOR),
                   contentPadding: widget.contentPadding ?? EdgeInsets.symmetric(horizontal: 16.w ,vertical: 16.h),
-                  suffixIcon: widget.suffixIcon ?? _mapSuffixIcon(),
-                  prefixIcon: widget.prefixIcon ?? _mapPrefixIcon(),
-                  suffixIconConstraints: BoxConstraints.expand(height: widget.suffixMaxHeight ?? 24.h, width: widget.suffixMaxWidth ?? 60.w),
-                  prefixIconConstraints: BoxConstraints.expand(height: widget.keyboardType == TextInputType.phone ? 30.h : widget.prefixHeight ?? 24.h, width: widget.keyboardType == TextInputType.phone ? 100.w : widget.prefixWidth ?? 55.w),
-                  enabledBorder: _mapBorder(borderColor: (value != null ? Styles.PRIMARY_COLOR : widget.borderColor ?? Styles.BORDER_COLOR)),
-                  focusedBorder: _mapBorder(borderColor: widget.borderColor ?? Theme.of(context).colorScheme.primary),
-                  errorBorder: _mapBorder(borderColor: Colors.red),
+                  suffixIcon: Padding(
+                    padding: EdgeInsetsDirectional.only(start: 12, end: 16),
+                    child: widget.suffixIcon ?? _mapSuffixIcon(),
+                  ),
+                  prefixIcon: Padding(
+                    padding: EdgeInsetsDirectional.only(start: 16, end: 12),
+                    child: widget.prefixIcon ?? _mapPrefixIcon(),
+                  ),
+                  suffixIconConstraints: BoxConstraints(maxHeight: widget.suffixMaxHeight ?? 24.h, maxWidth: widget.suffixMaxWidth ?? 100.w),
+                  prefixIconConstraints: BoxConstraints(maxHeight: widget.prefixHeight ?? 24.h, maxWidth: widget.prefixWidth ?? 100.w),
+                  enabledBorder: _mapBorder(borderColor: widget.hasError ? Styles.RED_COLOR : (value != null ? Styles.PRIMARY_COLOR : widget.borderColor ?? Styles.BORDER_COLOR)),
+                  focusedBorder: _mapBorder(borderColor: widget.hasError ? Styles.RED_COLOR : (widget.borderColor ?? Theme.of(context).colorScheme.primary)),
+                  errorBorder: _mapBorder(borderColor: Styles.RED_COLOR),
                   border: _mapBorder(borderColor: Colors.transparent),
                   fillColor: widget.color,
                   filled: true,
@@ -236,14 +229,14 @@ class _TextInputFieldState extends State<TextInputField> {
               ),
             ),
           ),
-          if (widget.hasError) const SizedBox(height: 8),
+          if (widget.hasError) SizedBox(height: 6),
           if (widget.hasError)
-            Row(
-              children: [
-                const Icon(Icons.error_outline, color: Colors.red, size: 16),
-                const SizedBox(width: 4),
-                Expanded(child: Text(widget.errorText ?? "Error", style: widget.errorStyle ?? TextStyle(color: Colors.red))),
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Text(
+                widget.errorText ?? "Error",
+                style: widget.errorStyle ?? AppTextStyles.w400.copyWith(color: Styles.RED_COLOR, fontSize: 12),
+              ),
             ),
           if (widget.withBottomPadding) SizedBox(height: 16.h),
         ],

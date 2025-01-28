@@ -51,7 +51,7 @@ class AppBars {
       ),
       leading: back != true ? SizedBox() : IconButton(
         onPressed: () => CustomNavigator.pop(),
-        icon: Icon(Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios_new),
+        icon: SvgPicture.asset(Constants.getSvg("arrow-left")),
       ),
       actions: actions ?? [
         Padding(

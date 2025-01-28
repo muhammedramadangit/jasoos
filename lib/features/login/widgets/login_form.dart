@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_check_box.dart';
@@ -21,8 +23,10 @@ class LoginForm extends StatelessWidget {
         TextInputField(
           hintText: "Password",
           keyboardType: TextInputType.visiblePassword,
+          prefixIcon: SvgPicture.asset(Constants.getSvg("lock")),
           withBottomPadding: false,
         ),
+
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 24.h),
           child: Row(
