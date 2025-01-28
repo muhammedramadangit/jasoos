@@ -12,7 +12,7 @@ class OtpSubmit extends StatelessWidget {
     return CustomButton(
       text: "Verify",
       onTap: () {
-        CustomNavigator.push(isForget == true ? Routes.SELECT_CATEGORY : Routes.SELECT_CATEGORY);
+        CustomNavigator.push(isForget == true ? Routes.RESET_PASSWORD : Routes.SELECT_CATEGORY);
       },
     );
   }

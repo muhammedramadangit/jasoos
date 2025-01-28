@@ -8,4 +8,5 @@ class Routes {
   static const OTP = "OTP";
   static const SELECT_CATEGORY = "SELECT_CATEGORY";
   static const FORGET_PASSWORD = "FORGET_PASSWORD";
+  static const RESET_PASSWORD = "RESET_PASSWORD";
 }
