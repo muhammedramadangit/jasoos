@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class Styles {
   static const Color PRIMARY_COLOR = Color(0xff2103ED);
@@ -9,7 +10,7 @@ abstract class Styles {
   static const Color BORDER_COLOR = Color(0xffD1D5DB);
   static const Color GREY_TEXT_COLOR = Color(0xff6B7280);
   static const Color GREEN_TEXT_COLOR = Color(0xff32A071);
-  static const Color RED_TEXT_COLOR = Color(0xffC8102E);
+  static const Color RED_TEXT_COLOR = Color(0xffF43F5D);
   static const Color MORE_COLOR = Color(0xffF6F6F6);
   static const Color TICKET_COLOR = Color(0xffE7E7E8);
 
@@ -27,9 +28,7 @@ abstract class Styles {
     Color(0xffFEFEFE),
   ];
 
-  static const SCREEN_PADDING = const EdgeInsets.symmetric(horizontal: 16, vertical: 20);
-  static const HORIZONTAL_PADDING = const EdgeInsets.symmetric(horizontal: 16, vertical: 20);
-  static const VERTICAL_PADDING = const EdgeInsets.symmetric(horizontal: 16, vertical: 20);
+  static EdgeInsets SCREEN_PADDING = EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h);
 
   static const String FONT_EN = 'en';
   static const String FONT_AR = 'ar';

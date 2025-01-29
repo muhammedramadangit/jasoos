@@ -5,6 +5,8 @@ import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 class ResetPasswordSuccessView extends StatelessWidget {
   const ResetPasswordSuccessView({super.key});
@@ -38,7 +40,7 @@ class ResetPasswordSuccessView extends StatelessWidget {
             CustomButton(
               text: "Continue Home",
               onTap: () {
-                // CustomNavigator.push(Routes.RESET_PASSWORD);
+                CustomNavigator.push(Routes.MAIN_PAGES);
               },
             ),
           ],

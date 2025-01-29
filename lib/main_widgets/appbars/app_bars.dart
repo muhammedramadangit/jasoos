@@ -19,7 +19,7 @@ class AppBars {
       title: titleWidget ?? Text(
         title ?? "",
         textAlign: TextAlign.center,
-        style: AppTextStyles.w700.copyWith(fontSize: 14, color: titleColor ?? Styles.BLACK_COLOR),
+        style: AppTextStyles.w500.copyWith(fontSize: 20, color: titleColor ?? Styles.BLACK_COLOR),
       ),
       iconTheme: IconThemeData(color: titleColor ?? Styles.BLACK_COLOR),
       leading: back == true ? leading ?? IconButton(

@@ -10,4 +10,5 @@ class Routes {
   static const FORGET_PASSWORD = "FORGET_PASSWORD";
   static const RESET_PASSWORD = "RESET_PASSWORD";
   static const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
+  static const MAIN_PAGES = "MAIN_PAGES";
 }

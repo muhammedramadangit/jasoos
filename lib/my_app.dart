@@ -56,8 +56,8 @@ class _MyAppState extends State<MyApp> {
         data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
         child: UnFocus(child: child ?? Container()),
       ),
-      initialRoute: Routes.SPLASH,
-      // initialRoute: Routes.LOGIN,
+      // initialRoute: Routes.SPLASH,
+      initialRoute: Routes.MAIN_PAGES,
       navigatorKey: CustomNavigator.navigatorState,
       onGenerateRoute: CustomNavigator.onCreateRoute,
       navigatorObservers: [
@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      title: "Hi NET ERP",
+      title: "Jasoos",
       theme: ThemeData(
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
