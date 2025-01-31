@@ -26,7 +26,7 @@ class MoreView extends StatelessWidget {
                   Stack(
                     children: [
                       Image.asset(
-                        Constants.getAsset("Profile"),
+                        Constants.getAsset("profile"),
                         height: 64.h,
                         width: 64.h,
                       ),
@@ -91,7 +91,11 @@ class MoreView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 12.w),
-                    SvgPicture.asset(Constants.getSvg("arrow-ios-right")),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Styles.DARK_GREY_COLOR,
+                      size: 18,
+                    ),
                   ],
                 ),
               ),

@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:jasoos/features/bank_account/view/bank_account_view.dart';
+import 'package:jasoos/features/change_password/view/change_password_view.dart';
 import 'package:jasoos/features/forget_password/view/forget_password_view.dart';
+import 'package:jasoos/features/help/view/help_view.dart';
+import 'package:jasoos/features/id_information/view/id_information_view.dart';
+import 'package:jasoos/features/language/view/language_view.dart';
 import 'package:jasoos/features/login/view/login_view.dart';
+import 'package:jasoos/features/notification_setting/view/notification_setting_view.dart';
 import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
 import 'package:jasoos/features/otp/view/otp_view.dart';
+import 'package:jasoos/features/policy/view/policy_view.dart';
+import 'package:jasoos/features/profile/view/profile_view.dart';
 import 'package:jasoos/features/register/view/register_view.dart';
 import 'package:jasoos/features/reset_password/view/reset_password_success_view.dart';
 import 'package:jasoos/features/reset_password/view/reset_password_view.dart';
+import 'package:jasoos/features/security_and_password/view/security_and_password_view.dart';
 import 'package:jasoos/features/select_category/view/select_category_view.dart';
 import 'package:jasoos/features/splash/view/splash_view.dart';
+import 'package:jasoos/features/terms/view/terms_view.dart';
+import 'package:jasoos/features/two_step_verification/view/two_step_verification.dart';
 import 'package:jasoos/main_pages/view/main_pages_view.dart';
 import 'package:jasoos/my_app.dart';
 import 'package:jasoos/navigation/routes.dart';
@@ -70,6 +81,39 @@ abstract class CustomNavigator {
 
       case Routes.MAIN_PAGES:
         return pageRoute(MainPagesView());
+
+      case Routes.HELP:
+        return pageRoute(HelpView());
+
+      case Routes.TERMS:
+        return pageRoute(TermsView());
+
+      case Routes.POLICY:
+        return pageRoute(PolicyView());
+
+      case Routes.NOTIFICATION_SETTING:
+        return pageRoute(NotificationSettingView());
+
+      case Routes.SECURITY_AND_PASSWORD:
+        return pageRoute(SecurityAndPassword());
+
+      case Routes.TWO_STEP_VERIFICATION:
+        return pageRoute(TwoStepVerification());
+
+      case Routes.CHANGE_PASSWORD:
+        return pageRoute(ChangePasswordView());
+
+      case Routes.LANGUAGE:
+        return pageRoute(LanguageView());
+
+      case Routes.PROFILE:
+        return pageRoute(ProfileView());
+
+      case Routes.BANK_ACCOUNT:
+        return pageRoute(BankAccountView());
+
+      case Routes.ID_INFORMATION:
+        return pageRoute(IdInformationView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

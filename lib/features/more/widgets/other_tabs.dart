@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 class OtherTabs extends StatelessWidget {
   const OtherTabs({super.key});
@@ -14,22 +16,30 @@ class OtherTabs extends StatelessWidget {
       {
         "icon" : "notification",
         "title" : "Notifications",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.NOTIFICATION_SETTING);
+        },
       },
       {
         "icon" : "security",
         "title" : "Security & Password",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.SECURITY_AND_PASSWORD);
+        },
       },
       {
         "icon" : "global",
         "title" : "Language",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.LANGUAGE);
+        },
       },
       {
         "icon" : "message",
         "title" : "Help Center",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.HELP);
+        },
       },
       {
         "icon" : "message",
@@ -41,7 +51,7 @@ class OtherTabs extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "General",
+          "Other",
           style: AppTextStyles.w500.copyWith(fontSize: 16),
         ),
         Container(
@@ -73,7 +83,11 @@ class OtherTabs extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 12.w),
-                    SvgPicture.asset(Constants.getSvg("arrow-ios-right")),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Styles.DARK_GREY_COLOR,
+                      size: 18,
+                    ),
                   ],
                 ),
               );

@@ -44,7 +44,7 @@ class TextInputField extends StatefulWidget {
     this.errorStyle,
     this.textCapitalization = TextCapitalization.none,
     this.onChangedCountryCode,
-    this.initialSelectionCountryCode,
+    this.initialSelectionCountryCode, this.labelStyle,
   });
 
   final String? hintText;
@@ -80,6 +80,7 @@ class TextInputField extends StatefulWidget {
   final AutovalidateMode? autoValidateMode;
   final TextCapitalization textCapitalization;
   final TextStyle? errorStyle;
+  final TextStyle? labelStyle;
   final void Function(CountryCode)? onChangedCountryCode;
   final String? initialSelectionCountryCode;
   @override
@@ -174,7 +175,7 @@ class _TextInputFieldState extends State<TextInputField> {
           if (widget.labelText != null)
             Text(
               widget.labelText ?? "",
-              style: AppTextStyles.w700.copyWith(fontSize: 12),
+              style: widget.labelStyle ?? AppTextStyles.w700.copyWith(fontSize: 12),
             ),
           if (widget.labelText != null) const SizedBox(height: 8),
           Container(

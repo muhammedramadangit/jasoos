@@ -7,8 +7,9 @@ class CustomTitledSwitch extends StatefulWidget {
   final String? label;
   final String? hint;
   final bool? isActive;
+  final EdgeInsets? padding;
   final void Function(bool)? onChange;
-  const CustomTitledSwitch({super.key, this.label, this.hint, this.isActive, this.onChange});
+  const CustomTitledSwitch({super.key, this.label, this.hint, this.isActive, this.onChange, this.padding});
 
   @override
   State<CustomTitledSwitch> createState() => _CustomTitledSwitchState();
@@ -26,7 +27,7 @@ class _CustomTitledSwitchState extends State<CustomTitledSwitch> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 14.h),
+      padding: widget.padding ?? EdgeInsets.symmetric(vertical: 14.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

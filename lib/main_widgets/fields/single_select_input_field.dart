@@ -12,6 +12,7 @@ class SingleSelectInputField extends StatefulWidget {
     this.errorText,
     this.hintText,
     this.labelText,
+    this.labelStyle,
     this.withBottomPadding = true,
     this.hasError = false,
     this.hasSearch = false,
@@ -50,6 +51,7 @@ class SingleSelectInputField extends StatefulWidget {
   final bool withBottomPadding;
   final List<SelectOption> valueSet;
   final SelectOption? initialValue;
+  final TextStyle? labelStyle;
 
   @override
   State<SingleSelectInputField> createState() => _SingleSelectInputFieldState();
@@ -75,7 +77,7 @@ class _SingleSelectInputFieldState extends State<SingleSelectInputField> {
             children: [
               Text(
                 widget.labelText ?? "",
-                style: AppTextStyles.w700.copyWith(fontSize: 12),
+                style: widget.labelStyle ?? AppTextStyles.w700.copyWith(fontSize: 12),
               ),
               SizedBox(width: 4),
               Expanded(
@@ -118,7 +120,7 @@ class _SingleSelectInputFieldState extends State<SingleSelectInputField> {
             margin: widget.margin ?? EdgeInsets.symmetric(horizontal: 2.w),
             decoration: BoxDecoration(
               color: widget.color,
-              borderRadius: BorderRadius.circular(widget.radius ?? 10.r),
+              borderRadius: BorderRadius.circular(widget.radius ?? 100.r),
               border: Border.all(color: widget.borderColor ?? Styles.BORDER_COLOR),
             ),
             child: Row(

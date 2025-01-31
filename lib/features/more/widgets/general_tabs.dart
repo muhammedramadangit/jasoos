@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 class GeneralTabs extends StatelessWidget {
   const GeneralTabs({super.key});
@@ -15,19 +17,25 @@ class GeneralTabs extends StatelessWidget {
         "icon" : "user-info",
         "title" : "Personal Information",
         "description" : "Detail your personal data",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.PROFILE);
+        },
       },
       {
         "icon" : "id-info",
         "title" : "ID Information",
         "description" : "Settings for payment transactions",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.ID_INFORMATION);
+        },
       },
       {
         "icon" : "bank",
         "title" : "Bank Account",
         "description" : "Settings for payment transactions",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.BANK_ACCOUNT);
+        },
       },
       {
         "icon" : "gift",
@@ -97,7 +105,11 @@ class GeneralTabs extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 12.w),
-                    SvgPicture.asset(Constants.getSvg("arrow-ios-right")),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Styles.DARK_GREY_COLOR,
+                      size: 18,
+                    ),
                   ],
                 ),
               );

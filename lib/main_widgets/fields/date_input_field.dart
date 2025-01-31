@@ -16,6 +16,7 @@ class DateInputField extends StatefulWidget {
     this.errorText,
     this.hintText,
     this.labelText,
+    this.labelStyle,
     this.withBottomPadding = true,
     this.hasError = false,
     this.initialValue,
@@ -38,6 +39,7 @@ class DateInputField extends StatefulWidget {
   final Color? color;
   final Color? borderColor;
   final EdgeInsetsGeometry? padding;
+  final TextStyle? labelStyle;
 
   @override
   State<DateInputField> createState() => _DateInputFieldState();
@@ -49,7 +51,7 @@ class _DateInputFieldState extends State<DateInputField> {
   @override
   void initState() {
     super.initState();
-    // date = widget.initialValue;
+    date = widget.initialValue;
   }
 
   @override
@@ -57,7 +59,7 @@ class _DateInputFieldState extends State<DateInputField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.labelText != null) Text(widget.labelText ?? "",style: AppTextStyles.w700.copyWith(fontSize: 12),),
+        if (widget.labelText != null) Text(widget.labelText ?? "",style: widget.labelStyle ?? AppTextStyles.w700.copyWith(fontSize: 12),),
         if (widget.labelText != null) const SizedBox(height: 8),
         GestureDetector(
           onTap: () => showBottomSheetDatePicker(
@@ -77,7 +79,7 @@ class _DateInputFieldState extends State<DateInputField> {
             decoration: BoxDecoration(
               color: widget.color,
               border: _mapBorder(borderColor: date != null ? Theme.of(context).colorScheme.primary : widget.borderColor ?? Styles.BORDER_COLOR),
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(100.r),
             ),
             child: Row(
               children: [

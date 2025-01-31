@@ -21,13 +21,6 @@ abstract class Styles {
   static const Color WHITE_COLOR = Color(0xffFFFFFF);
   static const Color RED_COLOR = Color(0xffFF472B);
 
-  static List<Color> BACKGROUND_GRADIENT = [
-    Color(0xffD1D3FF),
-    Color(0xffF0EFF6).withOpacity(0.75),
-    Color(0xffF6F6F9),
-    Color(0xffFEFEFE),
-  ];
-
   static EdgeInsets SCREEN_PADDING = EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h);
 
   static const String FONT_EN = 'en';

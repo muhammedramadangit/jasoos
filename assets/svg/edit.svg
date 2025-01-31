@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="24mm" height="24mm"
+    viewBox="0 0 4.2333331 4.2333331" version="1.1" id="svg839">
+    <defs id="defs833" />
+    <g id="layer1" transform="translate(73.404884,-1.9651226)">
+        <g id="g1564">
+            <g id="g4067" transform="translate(8.2194025e-4)">
+                <g id="g7841">
+                    <g id="g7841-3" transform="translate(-1.8848453e-6,5.169554e-4)">
+                        <g id="g8091">
+                            <g id="g8578">
+                                <g id="g5182">
+                                    <g id="g3944">
+                                        <g id="g4213" transform="translate(-0.22538466)">
+                                            <path id="rect4206"
+                                                style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+                                                d="m -69.664553,2.4566093 c 0.128526,0.1285258 0.128526,0.3354662 10e-7,0.4639914 l -2.160261,2.1602608 c -0.128525,0.1285259 -0.566976,0.3600362 -0.695502,0.2315104 -0.128525,-0.1285252 0.102985,-0.5669762 0.231511,-0.6955016 l 2.16026,-2.1602606 c 0.128526,-0.128526 0.335466,-0.1285256 0.463991,-4e-7 z" />
+                                            <path
+                                                style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+                                                d="m -72.20371,5.8010639 h 2.237588"
+                                                id="path4209" />
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
