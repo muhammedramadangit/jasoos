@@ -41,7 +41,9 @@ class GeneralTabs extends StatelessWidget {
         "icon" : "gift",
         "title" : "Rewards",
         "description" : "Manage your account security",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.REWARDS);
+        },
       },
       {
         "icon" : "safe",
@@ -53,7 +55,9 @@ class GeneralTabs extends StatelessWidget {
         "icon" : "group",
         "title" : "Invite Friends",
         "description" : "Share referral code and get bonus",
-        "onTap" : () {},
+        "onTap" : () {
+          CustomNavigator.push(Routes.INVITE_FRIENDS);
+        },
       },
     ];
     return Column(

@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
           colorScheme: ColorScheme.light(primary: Styles.PRIMARY_COLOR),
           checkboxTheme: CheckboxThemeData(
             overlayColor: WidgetStateProperty.all<Color>(
-              Styles.PRIMARY_COLOR.withOpacity(0.1),
+              Styles.PRIMARY_COLOR.withValues(alpha: 0.1),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0),

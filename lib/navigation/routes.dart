@@ -22,4 +22,6 @@ class Routes {
   static const PROFILE = "PROFILE";
   static const BANK_ACCOUNT = "BANK_ACCOUNT";
   static const ID_INFORMATION = "ID_INFORMATION";
+  static const INVITE_FRIENDS = "INVITE_FRIENDS";
+  static const REWARDS = "REWARDS";
 }

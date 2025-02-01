@@ -4,6 +4,7 @@ import 'package:jasoos/features/change_password/view/change_password_view.dart';
 import 'package:jasoos/features/forget_password/view/forget_password_view.dart';
 import 'package:jasoos/features/help/view/help_view.dart';
 import 'package:jasoos/features/id_information/view/id_information_view.dart';
+import 'package:jasoos/features/invite_friend/view/invite_friend_view.dart';
 import 'package:jasoos/features/language/view/language_view.dart';
 import 'package:jasoos/features/login/view/login_view.dart';
 import 'package:jasoos/features/notification_setting/view/notification_setting_view.dart';
@@ -14,6 +15,7 @@ import 'package:jasoos/features/profile/view/profile_view.dart';
 import 'package:jasoos/features/register/view/register_view.dart';
 import 'package:jasoos/features/reset_password/view/reset_password_success_view.dart';
 import 'package:jasoos/features/reset_password/view/reset_password_view.dart';
+import 'package:jasoos/features/rewards/view/rewards_view.dart';
 import 'package:jasoos/features/security_and_password/view/security_and_password_view.dart';
 import 'package:jasoos/features/select_category/view/select_category_view.dart';
 import 'package:jasoos/features/splash/view/splash_view.dart';
@@ -114,6 +116,12 @@ abstract class CustomNavigator {
 
       case Routes.ID_INFORMATION:
         return pageRoute(IdInformationView());
+
+      case Routes.INVITE_FRIENDS:
+        return pageRoute(InviteFriendView());
+
+      case Routes.REWARDS:
+        return pageRoute(RewardsView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
