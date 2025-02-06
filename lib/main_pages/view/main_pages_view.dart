@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/features/home/view/home_view.dart';
 import 'package:jasoos/features/more/view/more_view.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
@@ -29,12 +30,12 @@ class MainPagesView extends StatefulWidget {
 
 class _MainPagesViewState extends State<MainPagesView>
     with WidgetsBindingObserver {
-  int currentIndex = 3;
+  int currentIndex = 0;
 
   Widget taps(int index) {
     switch (index) {
       case 0:
-        return Container();
+        return HomeView();
       case 1:
         return Container();
       case 2:

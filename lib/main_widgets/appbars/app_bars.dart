@@ -35,6 +35,7 @@ class AppBars {
       ) : SizedBox(),
       actions: actions,
       bottom: bottom,
+      shape: RoundedRectangleBorder(),
     );
   }
 
