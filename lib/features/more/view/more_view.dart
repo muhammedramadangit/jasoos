@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/more/widgets/general_tabs.dart';
 import 'package:jasoos/features/more/widgets/other_tabs.dart';
 import 'package:jasoos/helper/constants.dart';
@@ -59,7 +60,9 @@ class MoreView extends StatelessWidget {
             SizedBox(height: 10.h),
             OtherTabs(),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                AppStorage.signOut();
+              },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               child: Padding(

@@ -1,8 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/features/login/bloc/login_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
@@ -60,9 +64,16 @@ class LoginSubmit extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomButton(
-            text: "Login",
-            onTap: () {},
+          BlocBuilder<LoginBloc, AppState>(
+            builder: (context, state) {
+              return CustomButton(
+                text: "Login",
+                loading: state is Loading,
+                onTap: () {
+                  LoginBloc.instance.add(Click());
+                },
+              );
+            },
           ),
 
           SizedBox(height: 24.h),
@@ -89,7 +100,8 @@ class LoginSubmit extends StatelessWidget {
                   social["onTap"]();
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 53.w),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 14.h, horizontal: 53.w),
                   margin: EdgeInsets.symmetric(vertical: 7.h),
                   decoration: BoxDecoration(
                     border: Border.all(color: Styles.BORDER_COLOR, width: 0.5),

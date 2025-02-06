@@ -38,9 +38,9 @@ class ResetPasswordSuccessView extends StatelessWidget {
 
             Spacer(),
             CustomButton(
-              text: "Continue Home",
+              text: "Back to login",
               onTap: () {
-                CustomNavigator.push(Routes.MAIN_PAGES);
+                CustomNavigator.push(Routes.LOGIN, clean: true);
               },
             ),
           ],

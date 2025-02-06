@@ -1,14 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/features/register/bloc/register_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
-import 'package:jasoos/navigation/custom_navigation.dart';
-import 'package:jasoos/navigation/routes.dart';
 
 class RegisterSubmit extends StatelessWidget {
   const RegisterSubmit({super.key});
@@ -104,10 +106,15 @@ class RegisterSubmit extends StatelessWidget {
 
           SizedBox(height: 24.h),
 
-          CustomButton(
-            text: "Create account",
-            onTap: () {
-              CustomNavigator.push(Routes.OTP, arguments: false);
+          BlocBuilder<RegisterBloc, AppState>(
+            builder: (context, state) {
+              return CustomButton(
+                text: "Create account",
+                loading: state is Loading,
+                onTap: () {
+                  RegisterBloc.instance.add(Click());
+                },
+              );
             },
           ),
 

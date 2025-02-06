@@ -20,6 +20,7 @@ abstract class Styles {
   static const Color LIGHT_GREY_BORDER = Color(0XFFEEEEEE);
   static const Color WHITE_COLOR = Color(0xffFFFFFF);
   static const Color RED_COLOR = Color(0xffFF472B);
+  static const Color GREEN_COLOR = Color(0xff31B502);
 
   static EdgeInsets SCREEN_PADDING = EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h);
 

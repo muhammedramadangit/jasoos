@@ -5,14 +5,37 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:jasoos/core/app_validation.dart';
 import 'package:jasoos/helper/styles.dart';
 
-class OtpTextField extends StatelessWidget {
+class OtpTextField extends StatefulWidget {
   final void Function(String?)? onSave;
   final void Function(String) onChange;
   final TextEditingController? controller;
   final String? errorText;
   final bool hasError;
+  final void Function(String)? onCompleted;
 
-  OtpTextField({this.onSave, required this.onChange, this.controller, this.errorText, this.hasError = false});
+  OtpTextField({this.onSave, required this.onChange, this.controller, this.errorText, this.hasError = false, this.onCompleted});
+
+  @override
+  State<OtpTextField> createState() => _OtpTextFieldState();
+}
+
+class _OtpTextFieldState extends State<OtpTextField> {
+
+  @override
+  void initState() {
+    if (mounted) {
+      setState(() {
+        // Update UI safely
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.controller?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +53,7 @@ class OtpTextField extends StatelessWidget {
             autoDisposeControllers: true,
             autoDismissKeyboard: true,
             enableActiveFill: true,
-            controller: controller,
+            controller: widget.controller,
             enablePinAutofill: true,
             keyboardType: TextInputType.number,
             textStyle: TextStyle(
@@ -58,17 +81,18 @@ class OtpTextField extends StatelessWidget {
             ),
             appContext: context,
             length: 4,
-            onSaved: onSave,
-            onChanged: onChange,
+            onSaved: widget.onSave,
+            onChanged: widget.onChange,
+            onCompleted: widget.onCompleted,
             errorTextSpace: 30,
           ),
         ),
-        if (hasError) const SizedBox(height: 8),
-        if (hasError)
+        if (widget.hasError) const SizedBox(height: 8),
+        if (widget.hasError)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: Text(
-              errorText ?? "Error",
+              widget.errorText ?? "Error",
               style: AppTextStyles.w400.copyWith(color: Styles.RED_COLOR, fontSize: 12),
             ),
           ),

@@ -2,6 +2,7 @@ import "dart:async";
 
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:jasoos/core/app_storage.dart";
 import "package:jasoos/helper/constants.dart";
 import "package:jasoos/helper/styles.dart";
 import "package:jasoos/navigation/custom_navigation.dart";
@@ -18,13 +19,13 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Timer(Duration(seconds: 3), () {
-      CustomNavigator.push(Routes.ONBOARDING, replace: true);
-      // if(AppStorage.getOpenOnboarding == 0) {
-      //   CustomNavigator.push(Routes.ONBOARDING, replace: true);
-      //   AppStorage.cacheOpenOnboarding(1);
-      // } else {
-      //   CustomNavigator.push(AppStorage.isLogged ? Routes.MAIN_PAGES : Routes.LOGIN, replace: true);
-      // }
+      if(AppStorage.getOpenOnboarding == 0) {
+        CustomNavigator.push(Routes.ONBOARDING, replace: true);
+        AppStorage.cacheOpenOnboarding(1);
+      } else {
+        // CustomNavigator.push(AppStorage.isLogged ? Routes.MAIN_PAGES : Routes.LOGIN, replace: true);
+        CustomNavigator.push(Routes.LOGIN, replace: true);
+      }
     });
     super.initState();
   }

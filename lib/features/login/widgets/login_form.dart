@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/features/login/bloc/login_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
@@ -14,12 +16,27 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LoginBloc bloc = LoginBloc.instance;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextInputField(
           hintText: "Your number",
           keyboardType: TextInputType.phone,
+          controller: bloc.phone,
+          errorText: bloc.phoneError,
+          hasError: !bloc.phoneValidation,
+          initialSelectionCountryCode: bloc.countryCode ?? "+966",
+          onChangedCountryCode: (value) {
+            bloc.countryCode = value.code;
+            bloc.add(Update());
+          },
+          onChange: (value) {
+            if (!bloc.phoneValidation) {
+              bloc.phoneValidation = true;
+              bloc.add(Update());
+            }
+          },
         ),
 
         TextInputField(
@@ -27,6 +44,15 @@ class LoginForm extends StatelessWidget {
           keyboardType: TextInputType.visiblePassword,
           prefixIcon: SvgPicture.asset(Constants.getSvg("lock")),
           withBottomPadding: false,
+          controller: bloc.password,
+          errorText: bloc.passwordError,
+          hasError: !bloc.passwordValidation,
+          onChange: (value) {
+            if (!bloc.passwordValidation) {
+              bloc.passwordValidation = true;
+              bloc.add(Update());
+            }
+          },
         ),
 
         Padding(
