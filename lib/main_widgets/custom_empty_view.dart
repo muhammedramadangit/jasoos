@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/text_styles.dart';
+import 'package:lottie/lottie.dart';
 
 class CustomEmptyView extends StatelessWidget {
   final String? message;
@@ -17,8 +18,8 @@ class CustomEmptyView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            Constants.getAsset("empty"),
+          Lottie.asset(
+            Constants.getLottie("empty"),
             height: 160.h,
             width: 230.w,
           ),

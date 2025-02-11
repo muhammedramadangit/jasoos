@@ -9,6 +9,7 @@ import 'package:jasoos/core/app_validation.dart';
 import 'package:jasoos/features/forget_password/bloc/forget_password_bloc.dart';
 import 'package:jasoos/features/otp/repo/otp_repo.dart';
 import 'package:jasoos/features/register/bloc/register_bloc.dart';
+import 'package:jasoos/features/select_category/bloc/select_category_bloc.dart';
 import 'package:jasoos/main_widgets/custom_toast.dart';
 import 'package:jasoos/main_widgets/dialogs/custom_alert_dialog.dart';
 import 'package:jasoos/main_widgets/dialogs/custom_show_dialog.dart';
@@ -52,7 +53,9 @@ class OtpBloc extends Bloc<AppEvent, AppState> {
           if(isForget == true) {
             CustomNavigator.push(Routes.RESET_PASSWORD);
           } else {
-            CustomNavigator.push(Routes.LOGIN, clean: true);
+            SelectCategoryBloc.instance.categories = [];
+            SelectCategoryBloc.instance.add(Get());
+            CustomNavigator.push(Routes.SELECT_CATEGORY, clean: true);
           }
           emit(Done());
           RegisterBloc.instance.clear();

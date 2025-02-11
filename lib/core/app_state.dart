@@ -99,6 +99,12 @@ class Error extends AppState {
   Error({this.error});
 }
 
+class ErrorBTN extends AppState {
+  String? error;
+
+  ErrorBTN({this.error});
+}
+
 class FilterState extends AppState {}
 
 class Loading extends AppState {
