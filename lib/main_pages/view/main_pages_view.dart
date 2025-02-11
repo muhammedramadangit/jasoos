@@ -10,6 +10,8 @@ import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/no_internet.dart';
 
+import '../../features/discover_map/view/discover_view.dart';
+
 Widget image(image) => Padding(
       padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
       child: SvgPicture.asset(
@@ -37,7 +39,7 @@ class _MainPagesViewState extends State<MainPagesView>
       case 0:
         return HomeView();
       case 1:
-        return Container();
+        return DiscoverView();
       case 2:
         return Container();
       case 3:
