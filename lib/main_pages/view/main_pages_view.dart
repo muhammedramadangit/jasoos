@@ -11,6 +11,7 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/no_internet.dart';
 
 import '../../features/discover_map/view/discover_view.dart';
+import '../../features/my_tasks/view/my_tasks_view.dart';
 
 Widget image(image) => Padding(
       padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
@@ -41,7 +42,7 @@ class _MainPagesViewState extends State<MainPagesView>
       case 1:
         return DiscoverView();
       case 2:
-        return Container();
+        return MyTasksView();
       case 3:
         return MoreView();
       default:

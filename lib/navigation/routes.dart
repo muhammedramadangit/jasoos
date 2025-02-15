@@ -24,4 +24,5 @@ class Routes {
   static const ID_INFORMATION = "ID_INFORMATION";
   static const INVITE_FRIENDS = "INVITE_FRIENDS";
   static const REWARDS = "REWARDS";
+  static const MY_TASK_DETAILS = "MY_TASK_DETAILS";
 }

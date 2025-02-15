@@ -10,16 +10,16 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 
 class AppBars {
 
-  static titledAppBar({PreferredSizeWidget? bottom, Widget? titleWidget, String? title, double? elevation, Color? color, Color? titleColor, bool? back = true, VoidCallback? onBack, Widget? leading, List<Widget>? actions}) {
+  static titledAppBar({PreferredSizeWidget? bottom, Widget? titleWidget, bool? center, String? title, double? elevation, double? leadingWidth, Color? color, Color? titleColor, bool? back = true, VoidCallback? onBack, Widget? leading, List<Widget>? actions}) {
     return AppBar(
       elevation: elevation ?? 0,
-      centerTitle: true,
+      centerTitle: center ?? true,
       surfaceTintColor: Styles.SCAFFOLD_COLOR,
       backgroundColor: color ?? Styles.SCAFFOLD_COLOR,
       title: titleWidget ?? Text(
         title ?? "",
         textAlign: TextAlign.center,
-        style: AppTextStyles.w500.copyWith(fontSize: 20, color: titleColor ?? Styles.BLACK_COLOR),
+        style: AppTextStyles.w500.copyWith(fontSize: 24, color: titleColor ?? Styles.BLACK_COLOR),
       ),
       iconTheme: IconThemeData(color: titleColor ?? Styles.BLACK_COLOR),
       leading: back == true ? leading ?? IconButton(
@@ -33,6 +33,7 @@ class AppBars {
         },
         icon: Icon(Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios_new),
       ) : SizedBox(),
+      leadingWidth: leadingWidth,
       actions: actions,
       bottom: bottom,
       shape: RoundedRectangleBorder(),

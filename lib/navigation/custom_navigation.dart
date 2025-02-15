@@ -26,6 +26,8 @@ import 'package:jasoos/my_app.dart';
 import 'package:jasoos/navigation/routes.dart';
 import 'package:jasoos/no_internet.dart';
 
+import '../features/my_task_details/view/my_task_details_view.dart';
+
 const begin = Offset(0.0, 1.0);
 const end = Offset.zero;
 const curve = Curves.bounceInOut;
@@ -122,6 +124,9 @@ abstract class CustomNavigator {
 
       case Routes.REWARDS:
         return pageRoute(RewardsView());
+
+      case Routes.MY_TASK_DETAILS:
+        return pageRoute(MyTaskDetailsView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
