@@ -17,7 +17,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        CustomNavigator.push(Routes.MY_TASK_DETAILS);
+        CustomNavigator.push(Routes.TASK_DETAILS);
       },
       child: Container(
         width: 195.w,
