@@ -14,6 +14,7 @@ class AppBars {
     return AppBar(
       elevation: elevation ?? 0,
       centerTitle: center ?? true,
+      scrolledUnderElevation: 0,
       surfaceTintColor: Styles.SCAFFOLD_COLOR,
       backgroundColor: color ?? Styles.SCAFFOLD_COLOR,
       title: titleWidget ?? Text(

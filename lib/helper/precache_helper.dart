@@ -7,5 +7,6 @@ abstract class PrecacheHelper {
     precacheImage(AssetImage(Constants.getAsset("v1")), context);
     precacheImage(AssetImage(Constants.getAsset("v2")), context);
     precacheImage(AssetImage(Constants.getAsset("v3")), context);
+    precacheImage(AssetImage(Constants.getAsset("task-background")), context);
   }
 }

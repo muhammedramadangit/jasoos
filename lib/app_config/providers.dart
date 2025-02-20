@@ -10,6 +10,8 @@ import 'package:jasoos/features/reset_password/bloc/reset_password_bloc.dart';
 import 'package:jasoos/features/select_category/bloc/select_category_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 
+import '../features/add_task/bloc/add_task_bloc.dart';
+
 abstract class ProviderList {
   static List<SingleChildWidget> providers = [
     BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
@@ -21,5 +23,6 @@ abstract class ProviderList {
 
     BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
     BlocProvider<BankAccountBloc>(create: (_) => BankAccountBloc()),
+    BlocProvider<AddTaskBloc>(create: (_) => AddTaskBloc()),
   ];
 }

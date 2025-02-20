@@ -32,7 +32,7 @@ class _CustomRadioState extends State<CustomRadio> {
         ),
         child: Icon(
           Icons.circle,
-          size: 16,
+          size: 12,
           color: selected ? widget.activeColor ?? Styles.PRIMARY_COLOR : widget.nonActiveColor ?? Colors.transparent,
         ),
       ),

@@ -26,4 +26,5 @@ class Routes {
   static const REWARDS = "REWARDS";
   static const TASK_DETAILS = "TASK_DETAILS";
   static const START_TASK = "START_TASK";
+  static const TASK_COMPLETE = "TASK_COMPLETE";
 }

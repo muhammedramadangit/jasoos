@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jasoos/features/add_task/bloc/add_task_bloc.dart';
 import 'package:jasoos/features/bank_account/view/bank_account_view.dart';
 import 'package:jasoos/features/change_password/view/change_password_view.dart';
 import 'package:jasoos/features/forget_password/view/forget_password_view.dart';
@@ -19,6 +20,7 @@ import 'package:jasoos/features/rewards/view/rewards_view.dart';
 import 'package:jasoos/features/security_and_password/view/security_and_password_view.dart';
 import 'package:jasoos/features/select_category/view/select_category_view.dart';
 import 'package:jasoos/features/splash/view/splash_view.dart';
+import 'package:jasoos/features/task_complete/view/task_complete_view.dart';
 import 'package:jasoos/features/terms/view/terms_view.dart';
 import 'package:jasoos/features/two_step_verification/view/two_step_verification.dart';
 import 'package:jasoos/main_pages/view/main_pages_view.dart';
@@ -130,7 +132,11 @@ abstract class CustomNavigator {
         return pageRoute(TaskDetailsView());
 
       case Routes.START_TASK:
+        AddTaskBloc.instance.resetData();
         return pageRoute(AddTaskView());
+
+      case Routes.TASK_COMPLETE:
+        return pageRoute(TaskComplete());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
