@@ -22,11 +22,13 @@ class ResetPasswordForm extends StatelessWidget {
           controller: bloc.password,
           errorText: bloc.passwordError,
           hasError: !bloc.passwordValidation,
+          hasValidationHint: true,
+          validationHint: "Password must be at least 8 characters",
           onChange: (value) {
             if (!bloc.passwordValidation) {
               bloc.passwordValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
         SizedBox(height: 8.h),
@@ -38,11 +40,13 @@ class ResetPasswordForm extends StatelessWidget {
           controller: bloc.confirmPassword,
           errorText: bloc.confirmPasswordError,
           hasError: !bloc.confirmPasswordValidation,
+          hasValidationHint: true,
+          validationHint: "Both password must match",
           onChange: (value) {
             if (!bloc.confirmPasswordValidation) {
               bloc.confirmPasswordValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
       ],

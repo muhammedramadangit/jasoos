@@ -3,7 +3,7 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 
 Future<void> showCustomDialog({bool? dismiss, required Widget dialog}) {
   return showDialog(
-    barrierDismissible: dismiss ?? true,
+    barrierDismissible: dismiss ?? false,
     context: CustomNavigator.navigatorState.currentContext!,
     builder: (_) => dialog,
   );

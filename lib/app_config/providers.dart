@@ -17,7 +17,7 @@ abstract class ProviderList {
     BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
     BlocProvider<OtpBloc>(create: (_) => OtpBloc()),
     BlocProvider<SelectCategoryBloc>(create: (_) => SelectCategoryBloc()..add(Get())),
-    BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
+    BlocProvider<LoginBloc>(create: (_) => LoginBloc()..add(Check())),
     BlocProvider<ForgetPasswordBloc>(create: (_) => ForgetPasswordBloc()),
     BlocProvider<ResetPasswordBloc>(create: (_) => ResetPasswordBloc()),
 

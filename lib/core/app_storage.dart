@@ -1,4 +1,6 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/features/login/bloc/login_bloc.dart';
 import 'package:jasoos/main_models/user_model.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
@@ -18,6 +20,18 @@ class AppStorage {
 
   static Future<void> cacheUser(UserModel? user) async => await _box.write('user', user!.toJson());
 
+  static void cacheRememberMe(bool value) => _box.write('remember_user', value);
+
+  static void cacheUserPhone(String value) => _box.write('user_phone', value);
+
+  static void cacheUserPassword(String value) => _box.write('user_password', value);
+
+  static bool? get getRememberUser => _box.read('remember_user');
+
+  static String? get getUserPhone => _box.read('user_phone');
+
+  static String? get getUserPassword => _box.read('user_password');
+
   static UserModel? get getUser => _box.read("user") != null ? UserModel.fromJson(_box.read("user")) : null;
 
   static int get getOpenOnboarding => _box.read('onboarding') ?? 0;
@@ -36,8 +50,13 @@ class AppStorage {
   }
 
   static Future signOut() async {
-    await _box.erase();
-    CustomNavigator.push(Routes.SPLASH, clean: true);
+    // await _box.erase();
+    cacheToken("");
+    cachePhone("");
+    cachePhoneCode("");
+    cacheUser(UserModel());
     cacheOpenOnboarding(1);
+    LoginBloc.instance.add(Check());
+    CustomNavigator.push(Routes.SPLASH, clean: true);
   }
 }

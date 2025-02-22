@@ -56,8 +56,8 @@ class ForgetPasswordView extends StatelessWidget {
                         onChange: (value) {
                           if (!bloc.phoneValidation) {
                             bloc.phoneValidation = true;
-                            bloc.add(Update());
                           }
+                          bloc.add(Update());
                         },
                       ),
                     ],
@@ -68,6 +68,7 @@ class ForgetPasswordView extends StatelessWidget {
               CustomButton(
                 text: "Next",
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
+                disable: bloc.phone.text.isEmpty,
                 loading: state is Loading,
                 onTap: () {
                   bloc.add(Click());

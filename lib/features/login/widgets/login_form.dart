@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/login/bloc/login_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
@@ -34,8 +35,8 @@ class LoginForm extends StatelessWidget {
           onChange: (value) {
             if (!bloc.phoneValidation) {
               bloc.phoneValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
 
@@ -50,8 +51,8 @@ class LoginForm extends StatelessWidget {
           onChange: (value) {
             if (!bloc.passwordValidation) {
               bloc.passwordValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
 
@@ -60,7 +61,10 @@ class LoginForm extends StatelessWidget {
           child: Row(
             children: [
               CustomCheckBox(
-                onChanged: (value) {},
+                isSelected: AppStorage.getRememberUser,
+                onChanged: (value) {
+                  AppStorage.cacheRememberMe(value!);
+                },
               ),
               SizedBox(width: 6.w),
               Text(

@@ -37,12 +37,17 @@ class OtpBloc extends Bloc<AppEvent, AppState> {
     code.clear();
   }
 
+  resetValidation() {
+    codeValidation = true;
+    add(Update());
+  }
+
   _click(AppEvent event, Emitter<AppState> emit) async {
     bool isForget = event.arguments as bool;
     emit(Loading());
     if(_validation()){
       Map<String, dynamic> body = {
-        "phone" : AppStorage.getPhone,
+        "phone" : AppStorage.getPhone.replaceAll("-", ""),
         "phone_code" : AppStorage.getPhoneCode,
         "otp" : code.text,
       };
@@ -74,5 +79,7 @@ class OtpBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async {
+    emit(Start());
+  }
 }

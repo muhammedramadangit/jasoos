@@ -11,6 +11,7 @@ import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
 
 class RegisterSubmit extends StatelessWidget {
   const RegisterSubmit({super.key});
@@ -108,11 +109,13 @@ class RegisterSubmit extends StatelessWidget {
 
           BlocBuilder<RegisterBloc, AppState>(
             builder: (context, state) {
+              RegisterBloc bloc = RegisterBloc.instance;
               return CustomButton(
                 text: "Create account",
                 loading: state is Loading,
+                // disable: bloc.name.text.isEmpty || bloc.phone.text.isEmpty || bloc.email.text.isEmpty || bloc.password.text.isEmpty,
                 onTap: () {
-                  RegisterBloc.instance.add(Click());
+                  bloc.add(Click());
                 },
               );
             },
@@ -131,11 +134,16 @@ class RegisterSubmit extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 6.w),
-              Text(
-                "Login",
-                style: AppTextStyles.w700.copyWith(
-                  fontSize: 14,
-                  color: Styles.PRIMARY_COLOR,
+              GestureDetector(
+                onTap: () {
+                  CustomNavigator.pop();
+                },
+                child: Text(
+                  "Login",
+                  style: AppTextStyles.w700.copyWith(
+                    fontSize: 14,
+                    color: Styles.PRIMARY_COLOR,
+                  ),
                 ),
               ),
             ],

@@ -66,11 +66,13 @@ class LoginSubmit extends StatelessWidget {
         children: [
           BlocBuilder<LoginBloc, AppState>(
             builder: (context, state) {
+              LoginBloc bloc = LoginBloc.instance;
               return CustomButton(
                 text: "Login",
+                disable: bloc.phone.text.isEmpty || bloc.password.text.isEmpty,
                 loading: state is Loading,
                 onTap: () {
-                  LoginBloc.instance.add(Click());
+                  bloc.add(Click());
                 },
               );
             },

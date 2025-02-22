@@ -17,6 +17,7 @@ class OtpSubmit extends StatelessWidget {
         return CustomButton(
           text: "Verify",
           loading: state is Loading,
+          disable: OtpBloc.instance.code.text.isEmpty,
           onTap: () {
             OtpBloc.instance.add(Click(arguments: isForget));
           },

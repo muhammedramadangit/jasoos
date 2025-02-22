@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/features/register/bloc/register_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
+import 'package:jasoos/helper/styles.dart';
+import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/fields/text_input_field.dart';
 
 class RegisterForm extends StatelessWidget {
@@ -24,8 +26,8 @@ class RegisterForm extends StatelessWidget {
           onChange: (value) {
             if (!bloc.nameValidation) {
               bloc.nameValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
 
@@ -43,8 +45,8 @@ class RegisterForm extends StatelessWidget {
           onChange: (value) {
             if (!bloc.phoneValidation) {
               bloc.phoneValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
 
@@ -58,8 +60,8 @@ class RegisterForm extends StatelessWidget {
           onChange: (value) {
             if (!bloc.emailValidation) {
               bloc.emailValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
 
@@ -71,11 +73,17 @@ class RegisterForm extends StatelessWidget {
           controller: bloc.password,
           errorText: bloc.passwordError,
           hasError: !bloc.passwordValidation,
+          hasValidationHint: true,
+          validationHint: "Password must be at least 8 characters",
+          validationHintStyle: AppTextStyles.w400.copyWith(
+            fontSize: 16,
+            color: bloc.password.text.isEmpty ? Styles.GREY_COLOR : bloc.password.text.length >= 8 ?  Styles.LIGHT_GREEN_TEXT_COLOR : Styles.RED_COLOR,
+          ),
           onChange: (value) {
             if (!bloc.passwordValidation) {
               bloc.passwordValidation = true;
-              bloc.add(Update());
             }
+            bloc.add(Update());
           },
         ),
       ],

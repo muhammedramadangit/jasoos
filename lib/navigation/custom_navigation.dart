@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/features/add_task/bloc/add_task_bloc.dart';
 import 'package:jasoos/features/bank_account/view/bank_account_view.dart';
 import 'package:jasoos/features/change_password/view/change_password_view.dart';
+import 'package:jasoos/features/forget_password/bloc/forget_password_bloc.dart';
 import 'package:jasoos/features/forget_password/view/forget_password_view.dart';
 import 'package:jasoos/features/help/view/help_view.dart';
 import 'package:jasoos/features/id_information/view/id_information_view.dart';
 import 'package:jasoos/features/invite_friend/view/invite_friend_view.dart';
 import 'package:jasoos/features/language/view/language_view.dart';
+import 'package:jasoos/features/login/bloc/login_bloc.dart';
 import 'package:jasoos/features/login/view/login_view.dart';
 import 'package:jasoos/features/notification_setting/view/notification_setting_view.dart';
 import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
+import 'package:jasoos/features/otp/bloc/otp_bloc.dart';
 import 'package:jasoos/features/otp/view/otp_view.dart';
 import 'package:jasoos/features/policy/view/policy_view.dart';
 import 'package:jasoos/features/profile/view/profile_view.dart';
+import 'package:jasoos/features/register/bloc/register_bloc.dart';
 import 'package:jasoos/features/register/view/register_view.dart';
+import 'package:jasoos/features/reset_password/bloc/reset_password_bloc.dart';
 import 'package:jasoos/features/reset_password/view/reset_password_success_view.dart';
 import 'package:jasoos/features/reset_password/view/reset_password_view.dart';
 import 'package:jasoos/features/rewards/view/rewards_view.dart';
@@ -66,21 +72,27 @@ abstract class CustomNavigator {
         return pageRoute(OnboardingView());
 
       case Routes.LOGIN:
+        LoginBloc.instance.add(Update());
         return pageRoute(LoginView());
 
       case Routes.REGISTER:
+        RegisterBloc.instance.add(Update());
         return pageRoute(RegisterView());
 
       case Routes.OTP:
+        OtpBloc.instance.code.clear();
+        OtpBloc.instance.add(Update());
         return pageRoute(OtpView(isForget: settings.arguments as bool));
 
       case Routes.FORGET_PASSWORD:
+        ForgetPasswordBloc.instance.add(Update());
         return pageRoute(ForgetPasswordView());
 
       case Routes.SELECT_CATEGORY:
         return pageRoute(SelectCategoryView());
 
       case Routes.RESET_PASSWORD:
+        ResetPasswordBloc.instance.add(Update());
         return pageRoute(ResetPasswordView());
 
       case Routes.RESET_PASSWORD_SUCCESS:

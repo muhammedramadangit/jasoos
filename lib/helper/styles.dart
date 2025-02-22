@@ -11,6 +11,7 @@ abstract class Styles {
   static const Color GREY_TEXT_COLOR = Color(0xff6B7280);
   static const Color DARK_TEXT_COLOR = Color(0xff4B5563);
   static const Color GREEN_TEXT_COLOR = Color(0xff2E8E18);
+  static const Color LIGHT_GREEN_TEXT_COLOR = Color(0xff60C631);
   static const Color RED_TEXT_COLOR = Color(0xffF43F5D);
   static const Color MORE_COLOR = Color(0xffF6F6F6);
   static const Color TICKET_COLOR = Color(0xffE7E7E8);

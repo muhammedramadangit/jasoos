@@ -15,6 +15,7 @@ class ResetPasswordSubmit extends StatelessWidget {
         return CustomButton(
           text: "Reset password",
           loading: state is Loading,
+          disable: ResetPasswordBloc.instance.password.text.isEmpty || ResetPasswordBloc.instance.confirmPassword.text.isEmpty,
           onTap: () {
             ResetPasswordBloc.instance.add(Click());
           },

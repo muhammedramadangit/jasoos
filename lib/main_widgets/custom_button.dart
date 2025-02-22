@@ -15,6 +15,7 @@ class CustomButton extends StatelessWidget {
       this.txtColor,
       this.txtWeight,
       this.loading = false,
+      this.disable = false,
       this.loadingSize,
       this.txtFontSize,
       this.gradient,
@@ -38,6 +39,7 @@ class CustomButton extends StatelessWidget {
   final Widget? prefixIcon;
   final Function()? onTap;
   final bool loading;
+  final bool disable;
   final double? loadingSize;
   final Gradient? gradient;
   final EdgeInsets? padding;
@@ -46,7 +48,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: loading ? null : onTap,
+      onTap: loading || disable ? null : onTap,
       // borderRadius: BorderRadius.circular(radius ?? 35.r),
       child: Container(
         width: width ,
@@ -54,14 +56,14 @@ class CustomButton extends StatelessWidget {
         margin: padding,
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         decoration: BoxDecoration(
-          color: loading
+          color: loading || disable
               ? Colors.grey[300]
               : color ?? Styles.PRIMARY_COLOR,
           borderRadius: BorderRadius.circular(radius ?? 100.r),
           gradient: gradient,
           border: Border.all(
             width: 0.5,
-            color: loading ? Colors.grey[300]! : borderColor ?? Colors.transparent,
+            color: loading || disable ? Colors.grey[300]! : borderColor ?? Colors.transparent,
           ),
         ),
         child: loading

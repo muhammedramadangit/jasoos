@@ -18,6 +18,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
   LoginBloc() : super(Start()) {
     on<Update>(_update);
     on<Click>(_click);
+    on<Check>(_checkUserRemember);
   }
   static LoginBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
 
@@ -31,29 +32,45 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
   String? passwordError;
 
   bool _validation(){
-    phoneError = AppValidations.phone(phone.text);
+    phoneError = AppValidations.phone(phone.text.replaceAll("-", ""));
     passwordError = AppValidations.password(password.text);
     phoneValidation = phoneError!.isEmpty;
     passwordValidation = passwordError!.isEmpty;
     return phoneValidation && passwordValidation;
   }
 
-  clear() {
-    phone.clear();
-    password.clear();
+  _checkUserRemember(AppEvent event, Emitter<AppState> emit) async {
+    if(AppStorage.getRememberUser == true) {
+      phone = TextEditingController(text: AppStorage.getUserPhone);
+      password = TextEditingController(text: AppStorage.getUserPassword);
+      emit(Start());
+    } else {
+      phone.clear();
+      password.clear();
+      emit(Start());
+    }
+    emit(Start());
+  }
+
+  resetValidation() {
+    phoneValidation = true;
+    passwordValidation = true;
+    add(Update());
   }
 
   _click(AppEvent event, Emitter<AppState> emit) async {
     emit(Loading());
     if(_validation()){
       Map<String, dynamic> body = {
-        "phone" : phone.text,
+        "phone" : phone.text.replaceAll("-", ""),
         "phone_code" : countryCode ?? "+966",
         "password" : password.text,
       };
       try {
         Response response = await LoginRepo.login(body);
         if(response.statusCode == 200) {
+          AppStorage.cacheUserPhone(phone.text);
+          AppStorage.cacheUserPassword(password.text);
           if(response.data["data"]["is_active"] == 0) {
             showCustomDialog(dialog: CustomAlertDialog(response.data["message"]));
             emit(Error());
@@ -72,7 +89,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
             AppStorage.cacheUser(UserModel.fromJson(response.data));
             AppStorage.cacheToken(response.data["data"]["token"]);
             CustomNavigator.push(Routes.MAIN_PAGES, clean: true);
-            clear();
+            add(Check());
             emit(Done());
           }
         } else {
@@ -88,5 +105,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async {
+    emit(Start());
+  }
 }

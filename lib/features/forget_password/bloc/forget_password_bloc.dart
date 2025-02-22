@@ -28,7 +28,7 @@ class ForgetPasswordBloc extends Bloc<AppEvent, AppState> {
   String? countryCode;
 
   bool _validation(){
-    phoneError = AppValidations.phone(phone.text);
+    phoneError = AppValidations.phone(phone.text.replaceAll("-", ""));
     phoneValidation = phoneError!.isEmpty;
     return phoneValidation;
   }
@@ -37,11 +37,16 @@ class ForgetPasswordBloc extends Bloc<AppEvent, AppState> {
     phone.clear();
   }
 
+  resetValidation() {
+    phoneValidation = true;
+    add(Update());
+  }
+
   _click(AppEvent event, Emitter<AppState> emit) async {
     emit(Loading());
     if(_validation()){
       Map<String, dynamic> body = {
-        "phone" : phone.text,
+        "phone" : phone.text.replaceAll("-", ""),
         "phone_code" : countryCode ?? "+966",
       };
       try {
@@ -65,5 +70,7 @@ class ForgetPasswordBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async {
+    emit(Start());
+  }
 }

@@ -59,8 +59,8 @@ class _MyAppState extends State<MyApp> {
           data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
           child: UnFocus(child: child ?? Container()),
         ),
-        // initialRoute: Routes.SPLASH,
-        initialRoute: Routes.MAIN_PAGES,
+        initialRoute: Routes.SPLASH,
+        // initialRoute: Routes.MAIN_PAGES,
         navigatorKey: CustomNavigator.navigatorState,
         onGenerateRoute: CustomNavigator.onCreateRoute,
         navigatorObservers: [

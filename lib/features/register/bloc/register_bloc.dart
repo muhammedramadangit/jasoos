@@ -39,7 +39,7 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
 
   bool _validation(){
     nameError = AppValidations.name(name.text);
-    phoneError = AppValidations.phone(phone.text);
+    phoneError = AppValidations.phone(phone.text.replaceAll("-", ""));
     emailError = AppValidations.email(email.text);
     passwordError = AppValidations.password(password.text);
     nameValidation = nameError!.isEmpty;
@@ -47,6 +47,14 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
     emailValidation = emailError!.isEmpty;
     passwordValidation = passwordError!.isEmpty;
     return nameValidation && phoneValidation && emailValidation && passwordValidation;
+  }
+
+  resetValidation() {
+    nameValidation = true;
+    phoneValidation = true;
+    emailValidation = true;
+    passwordValidation = true;
+    add(Update());
   }
 
   clear() {
@@ -61,7 +69,7 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
     if(_validation()){
       Map<String, dynamic> body = {
         "name" : name.text,
-        "phone" : phone.text,
+        "phone" : phone.text.replaceAll("-", ""),
         "phone_code" : countryCode ?? "+966",
         "email" : email.text,
         "password" : password.text,
@@ -86,5 +94,7 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async {
+    emit(Start());
+  }
 }

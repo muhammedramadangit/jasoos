@@ -20,6 +20,8 @@ class TextInputField extends StatefulWidget {
     this.withBottomPadding = true,
     this.readOnly = false,
     this.hasError = false,
+    this.hasValidationHint = false,
+    this.validationHint,
     this.keyboardType,
     this.suffixIcon,
     this.maxLines,
@@ -42,6 +44,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.autoValidateMode,
     this.errorStyle,
+    this.validationHintStyle,
     this.textCapitalization = TextCapitalization.none,
     this.onChangedCountryCode,
     this.initialSelectionCountryCode, this.labelStyle, this.style,
@@ -50,6 +53,8 @@ class TextInputField extends StatefulWidget {
   final String? hintText;
   final String? labelText;
   final String? errorText;
+  final String? validationHint;
+  final bool hasValidationHint;
   final bool hasError;
   final String? initialValue;
   final TextEditingController? controller;
@@ -80,6 +85,7 @@ class TextInputField extends StatefulWidget {
   final AutovalidateMode? autoValidateMode;
   final TextCapitalization textCapitalization;
   final TextStyle? errorStyle;
+  final TextStyle? validationHintStyle;
   final TextStyle? labelStyle;
   final TextStyle? style;
   final void Function(CountryCode)? onChangedCountryCode;
@@ -203,7 +209,9 @@ class _TextInputFieldState extends State<TextInputField> {
                 keyboardType: widget.keyboardType ?? TextInputType.text,
                 style: widget.style ?? AppTextStyles.w500.copyWith(fontSize: 14),
                 obscureText: !showText,
-                inputFormatters: widget.inputFormatters,
+                inputFormatters: widget.keyboardType == TextInputType.phone ? [
+                  PhoneNumberFormatter(),
+                ] : widget.inputFormatters,
                 maxLines: widget.maxLines ?? 1,
                 decoration: InputDecoration(
                   hintText: widget.hintText,
@@ -231,15 +239,18 @@ class _TextInputFieldState extends State<TextInputField> {
               ),
             ),
           ),
-          if (widget.hasError) SizedBox(height: 6),
-          if (widget.hasError)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
-              child: Text(
-                widget.errorText ?? "Error",
-                style: widget.errorStyle ?? AppTextStyles.w400.copyWith(color: Styles.RED_COLOR, fontSize: 12),
-              ),
+          if (widget.hasError || widget.hasValidationHint) SizedBox(height: 6),
+          if (widget.hasError)...[
+            Text(
+              widget.errorText ?? "Error",
+              style: widget.errorStyle ?? AppTextStyles.w400.copyWith(color: Styles.RED_COLOR, fontSize: 16),
             ),
+          ]else if(widget.hasValidationHint)...[
+            Text(
+              widget.validationHint ?? "",
+              style: widget.validationHintStyle ?? AppTextStyles.w400.copyWith(color: Styles.GREY_COLOR, fontSize: 16),
+            ),
+          ],
           if (widget.withBottomPadding) SizedBox(height: 16.h),
         ],
       ),
@@ -250,6 +261,25 @@ class _TextInputFieldState extends State<TextInputField> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(widget.radius ?? 100.r),
       borderSide: BorderSide(color: borderColor),
+    );
+  }
+}
+
+class PhoneNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    String digits = newValue.text.replaceAll(RegExp(r'\D'), ''); // Remove non-numeric chars
+
+    String formatted = '';
+    for (int i = 0; i < digits.length; i++) {
+      if (i == 3 || i == 6) formatted += '-';
+      formatted += digits[i];
+    }
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
     );
   }
 }

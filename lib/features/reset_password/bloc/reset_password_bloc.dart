@@ -41,6 +41,12 @@ class ResetPasswordBloc extends Bloc<AppEvent, AppState> {
     confirmPassword.clear();
   }
 
+  resetValidation() {
+    passwordValidation = true;
+    confirmPasswordValidation = true;
+    add(Update());
+  }
+
   _click(AppEvent event, Emitter<AppState> emit) async {
     emit(Loading());
     if(_validation()){
@@ -66,5 +72,7 @@ class ResetPasswordBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async {
+    emit(Start());
+  }
 }

@@ -19,28 +19,62 @@ class _OnboardingViewState extends State<OnboardingView> {
   late PageController _controller = PageController();
   int pageValue = 0;
 
-  // @override
-  // void initState() {
-  //   _controller = PageController(initialPage: pageValue);
-  //   // _controller = PageController();
-  //   super.initState();
-  // }
-
   List<Map<String, dynamic>> data = [
     {
       "image" : "assets/images/v1.png",
-      "title" : "Find a your fav spot, and start rating your items from now",
+      "title" : RichText(
+        text: TextSpan(
+            text: "Find a your fav spot, and ",
+            style: AppTextStyles.w500.copyWith(fontSize: 32),
+            children: [
+              TextSpan(
+                text: "start rating",
+                style: AppTextStyles.w500.copyWith(fontSize: 32, color: Styles.BLUE_COLOR),
+              ),
+              TextSpan(
+                text: " your items from now",
+                style: AppTextStyles.w500.copyWith(fontSize: 32),
+              ),
+            ]
+        ),
+      ),
       "description" : "Explore over 25,924 available job roles and upgrade your operator now.",
     },
     {
       "image" : "assets/images/v2.png",
-      "title" : "Get Ready and submit your Review always dreamed of",
-      "description" : "The better the skills you have, the greater the good job opportunities for you.",
+      "title" : RichText(
+        text: TextSpan(
+            text: "Hundreds of jobs are waiting for you to ",
+            style: AppTextStyles.w500.copyWith(fontSize: 32),
+            children: [
+              TextSpan(
+                text: "join together",
+                style: AppTextStyles.w500.copyWith(fontSize: 32, color: Styles.BLUE_COLOR),
+              ),
+            ]
+        ),
+      ),
+      "description" : "Immediately join us and start applying for the job you are interested in.",
     },
     {
       "image" : "assets/images/v3.png",
-      "title" : "Hundreds of jobs are waiting for you to join together",
-      "description" : "Immediately join us and start applying for the job you are interested in.",
+      "title" : RichText(
+        text: TextSpan(
+            text: "Get Ready and submit ",
+            style: AppTextStyles.w500.copyWith(fontSize: 32),
+            children: [
+              TextSpan(
+                text: "your Review",
+                style: AppTextStyles.w500.copyWith(fontSize: 32, color: Styles.BLUE_COLOR),
+              ),
+              TextSpan(
+                text: " always dreamed of",
+                style: AppTextStyles.w500.copyWith(fontSize: 32),
+              ),
+            ]
+        ),
+      ),
+      "description" : "The better the skills you have, the greater the good job opportunities for you.",
     },
   ];
 
@@ -62,7 +96,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   PageView.builder(
                     controller: _controller,
                     itemCount: data.length,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: ClampingScrollPhysics(),
                     onPageChanged: (index) {
                       setState(() {
                         pageValue = index;
@@ -112,11 +146,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                           InkWell(
                             onTap: () {
                               CustomNavigator.push(Routes.LOGIN, clean: true);
-                              // _controller.jumpToPage(data.length - 1);
-                              // _controller.previousPage(
-                              //   duration: Duration(milliseconds: 300),
-                              //   curve: Curves.easeInOut,
-                              // );
                             },
                             child: Text(
                               "Skip",
@@ -139,10 +168,7 @@ class _OnboardingViewState extends State<OnboardingView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    data[pageValue]["title"],
-                    style: AppTextStyles.w500.copyWith(fontSize: 30),
-                  ),
+                  data[pageValue]["title"],
                   SizedBox(height: 12.h),
                   Text(
                     data[pageValue]["description"],
