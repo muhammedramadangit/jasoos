@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "463487556848",
+    "project_id": "jassos",
+    "storage_bucket": "jassos.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463487556848:android:d70ac2612a68551c513635",
+        "android_client_info": {
+          "package_name": "com.jasoos.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463487556848-5b169k46hd84covqi0oa9q0pk62tbp7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jasoos.user",
+            "certificate_hash": "faa40c11b14f7c19ff40602eaaf353e63c8f880e"
+          }
+        },
+        {
+          "client_id": "463487556848-mu09omj3nrjlfbu2c4akd1havnm27q7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCavOBR3600qrC7uNRwqX6Egwo9bBiymSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463487556848-mu09omj3nrjlfbu2c4akd1havnm27q7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

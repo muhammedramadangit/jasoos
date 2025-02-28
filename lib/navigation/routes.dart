@@ -27,4 +27,5 @@ class Routes {
   static const TASK_DETAILS = "TASK_DETAILS";
   static const START_TASK = "START_TASK";
   static const TASK_COMPLETE = "TASK_COMPLETE";
+  static const NEAREST_TASKS = "NEAREST_TASKS";
 }

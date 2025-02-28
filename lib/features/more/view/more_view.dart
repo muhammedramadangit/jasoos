@@ -27,9 +27,10 @@ class MoreView extends StatelessWidget {
                   Stack(
                     children: [
                       Image.asset(
-                        Constants.getAsset("profile"),
+                        Constants.getAsset("w-logo"),
                         height: 64.h,
                         width: 64.h,
+                        color: Styles.PRIMARY_COLOR,
                       ),
                       Positioned.directional(
                         bottom: 0,
@@ -41,12 +42,12 @@ class MoreView extends StatelessWidget {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    "Muhamad Elhadedy",
+                    AppStorage.getUser?.data?.name ?? "",
                     style: AppTextStyles.w500.copyWith(fontSize: 14),
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    "muhamadelhadedy@gmail.com",
+                    AppStorage.getUser?.data?.email ?? "",
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 12,
                       color: Styles.GREY_TEXT_COLOR,

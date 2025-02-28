@@ -4,6 +4,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/features/home/bloc/current_location_bloc.dart';
+import 'package:jasoos/features/home/bloc/shops_bloc.dart';
 import 'package:jasoos/features/home/view/home_view.dart';
 import 'package:jasoos/features/more/view/more_view.dart';
 import 'package:jasoos/helper/constants.dart';
@@ -11,6 +14,8 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/no_internet.dart';
 
 import '../../features/discover_map/view/discover_view.dart';
+import '../../features/home/bloc/home_categories_bloc.dart';
+import '../../features/home/bloc/nearest_shop_bloc.dart';
 import '../../features/my_tasks/view/my_tasks_view.dart';
 
 Widget image(image) => Padding(
@@ -56,7 +61,18 @@ class _MainPagesViewState extends State<MainPagesView>
       currentIndex = widget.index!;
     }
     checkConnectivity();
+    CurrentLocationBloc.instance.startSendingLocation().then((value) {
+      ShopsBloc.instance.add(Get());
+      NearestShopsBloc.instance.add(Get());
+      HomeCategoriesBloc.instance.add(Get());
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    CurrentLocationBloc.instance.stopSendingLocation();
+    super.dispose();
   }
 
   Future<List<ConnectivityResult>> checkConnectivity() async {

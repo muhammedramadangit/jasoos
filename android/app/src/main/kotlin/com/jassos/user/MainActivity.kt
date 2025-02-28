@@ -1,4 +1,4 @@
-package com.example.jasoos
+package com.jasoos.user
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,10 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/features/home/bloc/home_categories_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/media_quary_helper.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
+
+import '../../../main_widgets/custom_center_text.dart';
+import '../../../main_widgets/custom_empty_view.dart';
+import '../../../main_widgets/custom_loading.dart';
+import '../../home/models/home_categories_model.dart';
 
 AppBar discoverAppBar() {
   return AppBar(
@@ -13,33 +22,46 @@ AppBar discoverAppBar() {
     toolbarHeight: 80.h,
     bottom: PreferredSize(
       preferredSize: Size.fromHeight(0),
-      child: SizedBox(
-        width: MediaQueryHelper.width,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundColor: Styles.WHITE_COLOR,
-                child: Center(
-                  child: SvgPicture.asset(Constants.getSvg("logo")),
+      child: BlocBuilder<HomeCategoriesBloc, AppState>(
+        builder: (context, state) {
+          if(state is Loading) {
+            return CustomLoading();
+          } else if (state is Error) {
+            return CustomCenterText(state.error ?? tr("errorException"));
+          } else if (state is Empty) {
+            return SizedBox();
+          } else {
+            return SizedBox(
+              width: MediaQueryHelper.width,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Styles.WHITE_COLOR,
+                      child: Center(
+                        child: SvgPicture.asset(Constants.getSvg("logo")),
+                      ),
+                    ),
+
+                    DiscoverCategoryList(model: HomeCategoriesBloc.instance.model),
+                  ],
                 ),
               ),
-
-              DiscoverCategoryList(),
-            ],
-          ),
-        ),
+            );
+          }
+        }
       ),
     ),
   );
 }
 
 class DiscoverCategoryList extends StatefulWidget {
-  const DiscoverCategoryList({super.key});
+  final HomeCategoriesModel? model;
+  const DiscoverCategoryList({super.key, this.model});
 
   @override
   State<DiscoverCategoryList> createState() => _DiscoverCategoryListState();
@@ -59,13 +81,14 @@ class _DiscoverCategoryListState extends State<DiscoverCategoryList> {
     return SizedBox(
       height: 34.h,
       child: ListView.separated(
-        itemCount: 6,
+        itemCount: widget.model!.data!.length,
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         shrinkWrap: true,
         physics: ClampingScrollPhysics(),
         separatorBuilder: (context, index) => 8.horizontalSpace,
         itemBuilder: (context, index) {
+          HomeCategoryInfo? task = widget.model?.data?[index];
           return GestureDetector(
             onTap: () {
               setState(() {
@@ -86,7 +109,7 @@ class _DiscoverCategoryListState extends State<DiscoverCategoryList> {
                   ),
                   10.horizontalSpace,
                   Text(
-                    "Burgur",
+                    task?.name ?? "",
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 12,
                       color: selected == index ? Styles.WHITE_COLOR : Styles.PRIMARY_COLOR,

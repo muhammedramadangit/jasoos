@@ -14,6 +14,9 @@ import 'package:jasoos/main_widgets/custom_button.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
+import '../../../helper/socail_auth_helper.dart';
+import '../bloc/social_login.dart';
+
 class LoginSubmit extends StatelessWidget {
   const LoginSubmit({super.key});
 
@@ -24,28 +27,24 @@ class LoginSubmit extends StatelessWidget {
         "icon": "google",
         "name": "Continue With Google",
         "onTap": () {
-          // SocialAuthHelper.loginWithGoogle.call().then((value) {
-          //   SocialLoginBloc.instance.add(Click(arguments: {
-          //     "email": value.email,
-          //     "name": value.name,
-          //     "source": "google",
-          //   }));
-          // });
+          SocialAuthHelper.loginWithGoogle.call().then((value) {
+            SocialLoginBloc.instance.add(Click(arguments: {
+              "access_token": value.accessToken,
+              "provider": "google",
+            }));
+          });
         },
       },
       {
         "icon": "facebook",
         "name": "Continue With Facebook",
         "onTap": () {
-          // SocialAuthHelper.loginWithFacebook.call().then((value) {
-          //   log("FACEBOOK VALUEE ${value.email}");
-          //   value.printData();
-          //   // SocialLoginBloc.instance.add(Click(arguments: {
-          //   //   "email": value.email,
-          //   //   "name": value.name,
-          //   //   "source": "facebook",
-          //   // }));
-          // });
+          SocialAuthHelper.loginWithFacebook.call().then((value) {
+            SocialLoginBloc.instance.add(Click(arguments: {
+              "access_token": value.accessToken,
+              "provider": "facebook",
+            }));
+          });
         },
       },
       if(Platform.isAndroid)
@@ -53,9 +52,12 @@ class LoginSubmit extends StatelessWidget {
           "icon": "apple",
           "name": "Continue With Apple",
           "onTap": () {
-            // SocialAuthHelper.loginWithApple.call().then((value) {
-            //   // AuthCubit.get(NavigatorHelper.currentContext).socialLogin(socialId: value.id);
-            // });
+            SocialAuthHelper.loginWithApple.call().then((value) {
+              SocialLoginBloc.instance.add(Click(arguments: {
+                "access_token": value.accessToken,
+                "provider": "apple",
+              }));
+            });
           },
         },
     ];

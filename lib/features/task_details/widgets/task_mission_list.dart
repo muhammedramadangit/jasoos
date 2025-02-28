@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/features/home/models/shops_model.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
 
 class TaskMissionList extends StatelessWidget {
-  const TaskMissionList({super.key});
+  final ShopInfo? model;
+  const TaskMissionList({super.key, this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class TaskMissionList extends StatelessWidget {
               8.horizontalSpace,
               Expanded(
                 child: Text(
-                  "4 Missions is avaliable",
+                  "${model?.tasksCount} Missions is available",
                   style: AppTextStyles.w500.copyWith(fontSize: 14),
                 ),
               ),
@@ -38,17 +40,18 @@ class TaskMissionList extends StatelessWidget {
         SizedBox(
           height: 66.h,
           child: ListView.separated(
-            itemCount: 6,
+            itemCount: model!.tasks!.length,
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
             separatorBuilder: (context, index) => 8.horizontalSpace,
             itemBuilder: (context, index) {
+              Tasks? task = model?.tasks?[index];
               return GestureDetector(
                 onTap: () {},
                 child: Container(
-                  width: 164.w,
+                  width: 180.w,
                   padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
                   decoration: BoxDecoration(
                     color: Styles.BORDER_COLOR.withValues(alpha: 0.5),
@@ -62,13 +65,13 @@ class TaskMissionList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Barista Tracker",
+                              task?.name ?? "",
                               style: AppTextStyles.w500.copyWith(fontSize: 14),
                             ),
                             4.verticalSpace,
                             if(index.isEven)...[
                               Text(
-                                "400 Point",
+                                "${task?.reward} Point",
                                 style: AppTextStyles.w500.copyWith(
                                   fontSize: 12,
                                   color: Styles.PRIMARY_COLOR,
@@ -80,9 +83,9 @@ class TaskMissionList extends StatelessWidget {
                                   SvgPicture.asset(Constants.getSvg("star")),
                                   4.horizontalSpace,
                                   Text(
-                                    "Earned 50 Points",
+                                    "Earned ${task?.reward} Points",
                                     style: AppTextStyles.w500.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 11,
                                       color: Styles.GREEN_TEXT_COLOR,
                                     ),
                                   ),

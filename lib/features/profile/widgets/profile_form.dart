@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
@@ -9,46 +10,34 @@ import 'package:jasoos/main_widgets/fields/date_input_field.dart';
 import 'package:jasoos/main_widgets/fields/single_select_input_field.dart';
 import 'package:jasoos/main_widgets/fields/text_input_field.dart';
 
+import '../../../main_models/user_model.dart';
+
 class ProfileForm extends StatelessWidget {
   const ProfileForm({super.key});
 
   @override
   Widget build(BuildContext context) {
+    UserModel? userModel = AppStorage.getUser;
     return Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: TextInputField(
-                labelText: "First Name",
-                labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
-                keyboardType: TextInputType.name,
-                controller: TextEditingController(text: "muhammed"),
-              ),
-            ),
-            SizedBox(width: 16.w),
-            Expanded(
-              child: TextInputField(
-                labelText: "Last Name",
-                labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
-                keyboardType: TextInputType.name,
-                controller: TextEditingController(text: "Elhadedy"),
-              ),
-            ),
-          ],
+        TextInputField(
+          labelText: "Name",
+          labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
+          keyboardType: TextInputType.name,
+          controller: TextEditingController(text: userModel?.data?.name ?? ""),
         ),
         TextInputField(
           labelText: "Email",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.emailAddress,
           prefixIcon: SvgPicture.asset(Constants.getSvg("sms")),
-          controller: TextEditingController(text: "a@b.com"),
+          controller: TextEditingController(text: userModel?.data?.email ?? ""),
         ),
         TextInputField(
           labelText: "Phone number",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.phone,
-          controller: TextEditingController(text: "111444333"),
+          controller: TextEditingController(text: userModel?.data?.phone ?? ""),
         ),
         DateInputField(
           labelText: "Date Of Brith",

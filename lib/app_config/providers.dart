@@ -11,9 +11,16 @@ import 'package:jasoos/features/select_category/bloc/select_category_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 
 import '../features/add_task/bloc/add_task_bloc.dart';
+import '../features/home/bloc/current_location_bloc.dart';
+import '../features/home/bloc/home_categories_bloc.dart';
+import '../features/home/bloc/nearest_shop_bloc.dart';
+import '../features/home/bloc/shops_bloc.dart';
+import '../features/login/bloc/social_login.dart';
+import '../features/task_details/bloc/shop_details_bloc.dart';
 
 abstract class ProviderList {
   static List<SingleChildWidget> providers = [
+    BlocProvider<SocialLoginBloc>(create: (_) => SocialLoginBloc()),
     BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
     BlocProvider<OtpBloc>(create: (_) => OtpBloc()),
     BlocProvider<SelectCategoryBloc>(create: (_) => SelectCategoryBloc()..add(Get())),
@@ -24,5 +31,11 @@ abstract class ProviderList {
     BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
     BlocProvider<BankAccountBloc>(create: (_) => BankAccountBloc()),
     BlocProvider<AddTaskBloc>(create: (_) => AddTaskBloc()),
+
+    BlocProvider<HomeCategoriesBloc>(create: (_) => HomeCategoriesBloc()),
+    BlocProvider<ShopsBloc>(create: (_) => ShopsBloc()),
+    BlocProvider<NearestShopsBloc>(create: (_) => NearestShopsBloc()),
+    BlocProvider<ShopDetailsBloc>(create: (_) => ShopDetailsBloc()),
+    BlocProvider<CurrentLocationBloc>(create: (_) => CurrentLocationBloc()),
   ];
 }

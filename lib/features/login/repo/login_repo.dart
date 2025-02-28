@@ -10,4 +10,12 @@ abstract class LoginRepo {
       body: FormData.fromMap(body),
     );
   }
+
+  static Future socialLogin(Map<String, dynamic> body) async {
+    return await Network().request(
+      Endpoints.SOCIAL_AUTH,
+      method: ServerMethods.POST,
+      body: FormData.fromMap(body),
+    );
+  }
 }

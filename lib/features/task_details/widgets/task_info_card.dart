@@ -6,9 +6,11 @@ import '../../../helper/constants.dart';
 import '../../../helper/media_quary_helper.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
+import '../../home/models/shops_model.dart';
 
 class TaskInfoCard extends StatelessWidget {
-  const TaskInfoCard({super.key});
+  final ShopInfo? model;
+  const TaskInfoCard({super.key, this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,10 @@ class TaskInfoCard extends StatelessWidget {
             width: MediaQueryHelper.width,
             height: 250.h,
             decoration: BoxDecoration(
+              color: Colors.grey[100],
               borderRadius: BorderRadius.circular(12.r),
               image: DecorationImage(
-                image: NetworkImage("https://s3-alpha-sig.figma.com/img/f6c7/0a58/8fa88d7db8bcd35dc4175ac5f9aa6591?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=YMS4FRRnM9dnFsTjCQstZ5I48YW6KwSBm6oysMdnJDka2JZgkWhb81Ncwrx5Ohsj~LTpai9-lNtXCtSny2oB6m64HGyfTl1rNBMbhKUSKHrGjOiNrIXlh2Z0efMZy9LDN6qYiiR7rNzHA2RGUAbbEcA1K584U4n2k-bsHbs~CwilMnOA9~YGqHSHKr29JpA4Q-vUeSyPKQnpUWHJjxVUn4zDIrf-Pr5J3qDYFqbADBesQ4JAjUkfPkJzbfGNeW9m22pyV~zo-bBD8QXkitJeQmk1hDzaE4HXkHTUuUOskXQLnOb3qDH5EIOLvGrXfK6BeE7dUNjSmqy3XphbVrowBA__"),
+                image: NetworkImage(model?.image ?? ""),
                 fit: BoxFit.cover,
               ),
             ),
@@ -32,8 +35,8 @@ class TaskInfoCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20.r,
-                backgroundColor: Styles.FILL_COLOR,
-                backgroundImage: NetworkImage("https://s3-alpha-sig.figma.com/img/335f/6412/5ee06051627761293de643be6867113e?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=JrUjFdDjOjXQ-KUHYl3nL~Hi2nWlx2yrVk89Dyum8fFCCiqZRRfgLZ-oxzO1nbc0s0ibjmyUt6EFOQEm0~NewlT2HyM3thlHoeZqEIevhXtX0msIrPQYdSEtpI2~J7Abyys8DDfcrYqCQXdhIO3VFLNkac4KUIrktkARycrEsqdo7aVrXWawAhDSX8uV7cZ4AT25~Qs2u~oiN6TOfWlKKSoKhXKUd~rwjc7ZoUoZDj3uQ5GvI2VcN2nQXWBQqpp5jry0Gg4qQ98RDrUphlMho90R4SOM-0MaVuxYNVRqZLR3TZjKyBdBNwU5kb-hak260rqeGbR9wBSn4NrOrh4apQ__"),
+                backgroundColor: Colors.grey[100],
+                backgroundImage: NetworkImage(model?.image ?? ""),
               ),
               8.horizontalSpace,
               Expanded(
@@ -41,14 +44,14 @@ class TaskInfoCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Al Baik Restaurant",
+                      model?.name ?? "",
                       style: AppTextStyles.w500.copyWith(fontSize: 16),
                     ),
-                    4.verticalSpace,
-                    Text(
-                      "Italian Chinese Restaurant",
-                      style: AppTextStyles.w400.copyWith(fontSize: 14),
-                    ),
+                    // 4.verticalSpace,
+                    // Text(
+                    //   "Italian Chinese Restaurant",
+                    //   style: AppTextStyles.w400.copyWith(fontSize: 14),
+                    // ),
                     4.verticalSpace,
                     Row(
                       children: [
@@ -58,7 +61,7 @@ class TaskInfoCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          "1 Mile",
+                          model?.distance ?? "",
                           style: AppTextStyles.w400.copyWith(
                             color: Styles.DARK_TEXT_COLOR,
                             fontSize: 12,
@@ -71,7 +74,7 @@ class TaskInfoCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          "valid till tuesday",
+                          "${model?.tasksCount} mission",
                           style: AppTextStyles.w400.copyWith(
                             color: Styles.DARK_TEXT_COLOR,
                             fontSize: 12,
@@ -82,23 +85,23 @@ class TaskInfoCard extends StatelessWidget {
                   ],
                 ),
               ),
-              8.horizontalSpace,
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.w),
-                decoration: BoxDecoration(
-                  color: Styles.GREEN_COLOR,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Center(
-                  child: Text(
-                    "x10 Point",
-                    style: AppTextStyles.w700.copyWith(
-                      fontSize: 12,
-                      color: Styles.WHITE_COLOR,
-                    ),
-                  ),
-                ),
-              ),
+              // 8.horizontalSpace,
+              // Container(
+              //   padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.w),
+              //   decoration: BoxDecoration(
+              //     color: Styles.GREEN_COLOR,
+              //     borderRadius: BorderRadius.circular(8.r),
+              //   ),
+              //   child: Center(
+              //     child: Text(
+              //       "x10 Point",
+              //       style: AppTextStyles.w700.copyWith(
+              //         fontSize: 12,
+              //         color: Styles.WHITE_COLOR,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ],

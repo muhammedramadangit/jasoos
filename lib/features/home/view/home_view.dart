@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/home/widgets/complete_profile.dart';
 import 'package:jasoos/features/home/widgets/home_appbar.dart';
 import 'package:jasoos/features/home/widgets/home_slider.dart';
 import 'package:jasoos/helper/text_styles.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 import '../../../helper/styles.dart';
+import '../../../utiltiy/formatted_name.dart';
 import '../widgets/home_categories_list.dart';
 import '../widgets/nearest_tasks_list.dart';
 import '../widgets/recent_tasks_list.dart';
@@ -25,22 +29,20 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
-                "Hi, Muhamad👋",
+                "Hi, ${FormattedName.format(AppStorage.getUser?.data?.name)}👋",
                 style: AppTextStyles.w500.copyWith(fontSize: 24),
               ),
             ),
             CompleteProfile(),
             HomeSlider(),
             16.verticalSpace,
-            _ViewAll(
-              title: "Choose categories",
-              onView: () {},
-            ),
             HomeCategoriesList(),
             16.verticalSpace,
             _ViewAll(
               title: "Nearest Tasks",
-              onView: () {},
+              onView: () {
+                CustomNavigator.push(Routes.NEAREST_TASKS);
+              },
             ),
             NearestTasksList(),
             16.verticalSpace,

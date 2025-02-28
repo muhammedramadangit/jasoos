@@ -1,10 +1,21 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/features/home/bloc/shops_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
+
+import '../../../main_widgets/custom_center_text.dart';
+import '../../../main_widgets/custom_empty_view.dart';
+import '../../../main_widgets/custom_loading.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
+import '../models/shops_model.dart';
 
 class HomeSlider extends StatefulWidget {
   const HomeSlider({Key? key}) : super(key: key);
@@ -17,30 +28,45 @@ class _HomeSliderState extends State<HomeSlider> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> images = [
-      Constants.getAsset("burger"),
-    ];
-    return CarouselSlider(
-      items: images.map((element) {
-        return _BannerItem(image: element);
-      }).toList(),
-      options: CarouselOptions(
-        viewportFraction: 0.9,
-        autoPlay: true,
-        height: 184.h,
-        onPageChanged: (index, reason) {
-          setState(() {
-            current = index;
-          });
-        },
-      ),
+    return BlocBuilder<ShopsBloc, AppState>(
+      builder: (context, state) {
+        if(state is Loading) {
+          return CustomLoading();
+        } else if (state is Error) {
+          return CustomCenterText(state.error ?? tr("errorException"));
+        } else if (state is Empty) {
+          return CustomEmptyView();
+        } else {
+          ShopsBloc bloc = ShopsBloc.instance;
+          return CarouselSlider(
+            items: bloc.model.data?.map((element) {
+              return GestureDetector(
+                onTap: () {
+                  CustomNavigator.push(Routes.TASK_DETAILS, arguments: element.id);
+                },
+                child: _BannerItem(shop: element),
+              );
+            }).toList(),
+            options: CarouselOptions(
+              viewportFraction: 0.9,
+              autoPlay: true,
+              height: 184.h,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  current = index;
+                });
+              },
+            ),
+          );
+        }
+      },
     );
   }
 }
 
 class _BannerItem extends StatelessWidget {
-  final String? image;
-  const _BannerItem({Key? key, this.image}) : super(key: key);
+  final ShopInfo? shop;
+  const _BannerItem({Key? key, this.shop}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +81,7 @@ class _BannerItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.r),
               image: DecorationImage(
-                image: AssetImage("$image"),
+                image: NetworkImage(shop?.image ?? ""),
                 fit: BoxFit.cover,
               ),
             ),
@@ -98,7 +124,7 @@ class _BannerItem extends StatelessWidget {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        "Quality",
+                        shop?.taskName ?? "",
                         style: AppTextStyles.w700.copyWith(fontSize: 12),
                       ),
                     ],
@@ -111,7 +137,7 @@ class _BannerItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Name of the Restaurant",
+                          shop?.name ?? "",
                           style: AppTextStyles.w500.copyWith(
                             color: Styles.WHITE_COLOR,
                             fontSize: 14,
@@ -123,7 +149,7 @@ class _BannerItem extends StatelessWidget {
                             SvgPicture.asset(Constants.getSvg("routing")),
                             SizedBox(width: 4.w),
                             Text(
-                              "1 Mile",
+                              shop?.distance ?? "",
                               style: AppTextStyles.w400.copyWith(
                                 color: Styles.WHITE_COLOR,
                                 fontSize: 12,
@@ -133,7 +159,7 @@ class _BannerItem extends StatelessWidget {
                             SvgPicture.asset(Constants.getSvg("medal-star")),
                             SizedBox(width: 4.w),
                             Text(
-                              "4 Mission",
+                              "${shop?.tasksCount} Mission",
                               style: AppTextStyles.w400.copyWith(
                                 color: Styles.WHITE_COLOR,
                                 fontSize: 12,
@@ -143,29 +169,29 @@ class _BannerItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Spacer(),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Styles.WHITE_COLOR,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 8.w),
-                        decoration: BoxDecoration(
-                          color: Styles.RED_TEXT_COLOR.withValues(alpha: 0.05),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "50% OFF",
-                            style: AppTextStyles.w500.copyWith(
-                              fontSize: 12,
-                              color: Styles.RED_TEXT_COLOR,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Spacer(),
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //     color: Styles.WHITE_COLOR,
+                    //     borderRadius: BorderRadius.circular(100),
+                    //   ),
+                    //   child: Container(
+                    //     padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 8.w),
+                    //     decoration: BoxDecoration(
+                    //       color: Styles.RED_TEXT_COLOR.withValues(alpha: 0.05),
+                    //       borderRadius: BorderRadius.circular(100),
+                    //     ),
+                    //     child: Center(
+                    //       child: Text(
+                    //         "50% OFF",
+                    //         style: AppTextStyles.w500.copyWith(
+                    //           fontSize: 12,
+                    //           color: Styles.RED_TEXT_COLOR,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ],

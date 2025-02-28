@@ -22,7 +22,7 @@ class RecentTasksList extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            CustomNavigator.push(Routes.TASK_DETAILS);
+            // CustomNavigator.push(Routes.TASK_DETAILS);
           },
           child: Row(
             children: [
