@@ -8,16 +8,19 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
 import '../../../helper/constants.dart';
+import '../models/tasks_model.dart';
 
 class TaskCard extends StatelessWidget {
   final bool? isComplete;
-  const TaskCard({super.key, this.isComplete});
+  final bool? isRecent;
+  final TaskInfo? model;
+  const TaskCard({super.key, this.isComplete = false, this.isRecent = false, this.model});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // CustomNavigator.push(Routes.TASK_DETAILS);
+        CustomNavigator.push(Routes.TASK_DETAILS, arguments: model?.id);
       },
       child: Container(
         width: 195.w,
@@ -34,16 +37,22 @@ class TaskCard extends StatelessWidget {
               height: 110.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
+                color: Styles.BORDER_COLOR.withValues(alpha: 0.2),
                 image: DecorationImage(
-                  image: NetworkImage("https://s3-alpha-sig.figma.com/img/f6c7/0a58/8fa88d7db8bcd35dc4175ac5f9aa6591?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=YMS4FRRnM9dnFsTjCQstZ5I48YW6KwSBm6oysMdnJDka2JZgkWhb81Ncwrx5Ohsj~LTpai9-lNtXCtSny2oB6m64HGyfTl1rNBMbhKUSKHrGjOiNrIXlh2Z0efMZy9LDN6qYiiR7rNzHA2RGUAbbEcA1K584U4n2k-bsHbs~CwilMnOA9~YGqHSHKr29JpA4Q-vUeSyPKQnpUWHJjxVUn4zDIrf-Pr5J3qDYFqbADBesQ4JAjUkfPkJzbfGNeW9m22pyV~zo-bBD8QXkitJeQmk1hDzaE4HXkHTUuUOskXQLnOb3qDH5EIOLvGrXfK6BeE7dUNjSmqy3XphbVrowBA__"),
+                  image: NetworkImage(model?.shopImage ?? ""),
                   fit: BoxFit.cover,
                 )
               ),
             ),
             8.verticalSpace,
             Text(
-              "Al Baik Resturant",
+              model?.name ?? "",
               style: AppTextStyles.w500.copyWith(fontSize: 14),
+            ),
+            4.verticalSpace,
+            Text(
+              model?.shop ?? "",
+              style: AppTextStyles.w300.copyWith(fontSize: 12, color: Styles.DARK_TEXT_COLOR),
             ),
             8.verticalSpace,
 
@@ -53,7 +62,55 @@ class TaskCard extends StatelessWidget {
                   SvgPicture.asset(Constants.getSvg("star")),
                   4.horizontalSpace,
                   Text(
-                    "Earned 50 Points",
+                    "Earned ${model?.reward} Points",
+                    style: AppTextStyles.w500.copyWith(
+                      fontSize: 12,
+                      color: Styles.GREEN_TEXT_COLOR,
+                    ),
+                  ),
+                ],
+              ),
+            ]else if(isRecent == true)...[
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    Constants.getSvg("routing"),
+                    colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+                  ),
+                  SizedBox(width: 4.w),
+                  Text(
+                    model?.distance ?? "",
+                    style: AppTextStyles.w400.copyWith(
+                      color: Styles.DARK_TEXT_COLOR,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              8.verticalSpace,
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    Constants.getSvg("discount-round"),
+                    colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+                  ),
+                  SizedBox(width: 4.w),
+                  Text(
+                    model?.type ?? "",
+                    style: AppTextStyles.w400.copyWith(
+                      color: Styles.DARK_TEXT_COLOR,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              8.verticalSpace,
+              Row(
+                children: [
+                  SvgPicture.asset(Constants.getSvg("star")),
+                  4.horizontalSpace,
+                  Text(
+                    "Reward ${model?.reward} Points",
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 12,
                       color: Styles.GREEN_TEXT_COLOR,
@@ -70,20 +127,24 @@ class TaskCard extends StatelessWidget {
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    "1 Mile",
+                    model?.distance ?? "",
                     style: AppTextStyles.w400.copyWith(
                       color: Styles.DARK_TEXT_COLOR,
                       fontSize: 12,
                     ),
                   ),
-                  SizedBox(width: 4.w),
+                ],
+              ),
+              8.verticalSpace,
+              Row(
+                children: [
                   SvgPicture.asset(
                     Constants.getSvg("discount-round"),
                     colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    "valid till tuesday",
+                    model?.type ?? "",
                     style: AppTextStyles.w400.copyWith(
                       color: Styles.DARK_TEXT_COLOR,
                       fontSize: 12,
@@ -113,7 +174,7 @@ class TaskCard extends StatelessWidget {
                           ),
                           Container(
                             height: 6,
-                            width: (56.w * 1) / 4,
+                            width: (56.w * int.parse("${model?.answeredQuestions}")) / int.parse("${model?.totalQuestions}"),
                             decoration: BoxDecoration(
                               color: Styles.PRIMARY_COLOR,
                               borderRadius: BorderRadius.circular(12.r),
@@ -123,7 +184,7 @@ class TaskCard extends StatelessWidget {
                       ),
                       SizedBox(width: 16.w),
                       Text(
-                        "1/4",
+                        "${model?.answeredQuestions}/${model?.totalQuestions}",
                         style: AppTextStyles.w700.copyWith(fontSize: 12),
                       ),
                     ],

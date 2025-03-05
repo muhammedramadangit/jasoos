@@ -16,6 +16,9 @@ import 'package:jasoos/no_internet.dart';
 import '../../features/discover_map/view/discover_view.dart';
 import '../../features/home/bloc/home_categories_bloc.dart';
 import '../../features/home/bloc/nearest_shop_bloc.dart';
+import '../../features/home/bloc/recent_tasks_bloc.dart';
+import '../../features/my_tasks/bloc/completed_tasks_bloc.dart';
+import '../../features/my_tasks/bloc/ongoing_tasks_bloc.dart';
 import '../../features/my_tasks/view/my_tasks_view.dart';
 
 Widget image(image) => Padding(
@@ -65,7 +68,10 @@ class _MainPagesViewState extends State<MainPagesView>
       ShopsBloc.instance.add(Get());
       NearestShopsBloc.instance.add(Get());
       HomeCategoriesBloc.instance.add(Get());
+      RecentTasksBloc.instance.add(Get());
     });
+    OngoingTasksBloc.instance.add(Get());
+    CompletedTasksBloc.instance.add(Get());
     super.initState();
   }
 

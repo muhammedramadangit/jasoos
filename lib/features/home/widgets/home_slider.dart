@@ -42,7 +42,7 @@ class _HomeSliderState extends State<HomeSlider> {
             items: bloc.model.data?.map((element) {
               return GestureDetector(
                 onTap: () {
-                  CustomNavigator.push(Routes.TASK_DETAILS, arguments: element.id);
+                  CustomNavigator.push(Routes.SHOP_DETAILS, arguments: element.id);
                 },
                 child: _BannerItem(shop: element),
               );

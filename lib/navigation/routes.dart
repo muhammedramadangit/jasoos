@@ -24,8 +24,9 @@ class Routes {
   static const ID_INFORMATION = "ID_INFORMATION";
   static const INVITE_FRIENDS = "INVITE_FRIENDS";
   static const REWARDS = "REWARDS";
-  static const TASK_DETAILS = "TASK_DETAILS";
+  static const SHOP_DETAILS = "SHOP_DETAILS";
   static const START_TASK = "START_TASK";
   static const TASK_COMPLETE = "TASK_COMPLETE";
-  static const NEAREST_TASKS = "NEAREST_TASKS";
+  static const NEAREST_SHOPS = "NEAREST_SHOPS";
+  static const TASK_DETAILS = "TASK_DETAILS";
 }

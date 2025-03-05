@@ -39,9 +39,9 @@ class HomeView extends StatelessWidget {
             HomeCategoriesList(),
             16.verticalSpace,
             _ViewAll(
-              title: "Nearest Tasks",
+              title: "Nearest Shops",
               onView: () {
-                CustomNavigator.push(Routes.NEAREST_TASKS);
+                CustomNavigator.push(Routes.NEAREST_SHOPS);
               },
             ),
             NearestTasksList(),

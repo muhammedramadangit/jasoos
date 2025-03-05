@@ -14,9 +14,13 @@ import '../features/add_task/bloc/add_task_bloc.dart';
 import '../features/home/bloc/current_location_bloc.dart';
 import '../features/home/bloc/home_categories_bloc.dart';
 import '../features/home/bloc/nearest_shop_bloc.dart';
+import '../features/home/bloc/recent_tasks_bloc.dart';
 import '../features/home/bloc/shops_bloc.dart';
 import '../features/login/bloc/social_login.dart';
-import '../features/task_details/bloc/shop_details_bloc.dart';
+import '../features/my_tasks/bloc/completed_tasks_bloc.dart';
+import '../features/my_tasks/bloc/ongoing_tasks_bloc.dart';
+import '../features/shop_details/bloc/shop_details_bloc.dart';
+import '../features/task_details/bloc/task_details_bloc.dart';
 
 abstract class ProviderList {
   static List<SingleChildWidget> providers = [
@@ -31,6 +35,10 @@ abstract class ProviderList {
     BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
     BlocProvider<BankAccountBloc>(create: (_) => BankAccountBloc()),
     BlocProvider<AddTaskBloc>(create: (_) => AddTaskBloc()),
+    BlocProvider<OngoingTasksBloc>(create: (_) => OngoingTasksBloc()),
+    BlocProvider<CompletedTasksBloc>(create: (_) => CompletedTasksBloc()),
+    BlocProvider<RecentTasksBloc>(create: (_) => RecentTasksBloc()),
+    BlocProvider<TaskDetailsBloc>(create: (_) => TaskDetailsBloc()),
 
     BlocProvider<HomeCategoriesBloc>(create: (_) => HomeCategoriesBloc()),
     BlocProvider<ShopsBloc>(create: (_) => ShopsBloc()),

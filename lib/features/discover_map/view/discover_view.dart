@@ -132,7 +132,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                             ShopInfo? shop = bloc.model.data?[index];
                             return GestureDetector(
                               onTap: () {
-                                CustomNavigator.push(Routes.TASK_DETAILS, arguments: shop?.id);
+                                CustomNavigator.push(Routes.SHOP_DETAILS, arguments: shop?.id);
                               },
                               child: Container(
                                 width: 300.w,

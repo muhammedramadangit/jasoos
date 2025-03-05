@@ -9,6 +9,10 @@ abstract class Endpoints{
   static const String RESET_PASSWORD = "reset-password";
 
   static const String HOME_CATEGORIES = "task-types";
+  static const String RECENT_TASKS = "tasks";
+  static const String GOING_TASKS = "tasks/ongoing";
+  static const String COMPLETED_TASKS = "tasks/completed";
+  static String TASK_DETAILS(int id) => "tasks/$id";
   static const String SHOPS = "shops";
   static String SHOPS_DETAILS(int id) => "shops/$id";
 }

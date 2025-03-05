@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:jasoos/core/app_state.dart';
-import 'package:jasoos/core/app_storage.dart';
-import 'package:jasoos/features/task_details/bloc/shop_details_bloc.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
@@ -19,18 +16,18 @@ import 'package:jasoos/navigation/routes.dart';
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
 import '../../../main_widgets/custom_center_text.dart';
+import '../bloc/task_details_bloc.dart';
 import '../widgets/how_it_work_info.dart';
 import '../widgets/task_info_card.dart';
-import '../widgets/task_mission_list.dart';
 
 class TaskDetailsView extends StatelessWidget {
   const TaskDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShopDetailsBloc, AppState>(
+    return BlocBuilder<TaskDetailsBloc, AppState>(
       builder: (context, state) {
-        ShopDetailsBloc bloc = ShopDetailsBloc.instance;
+        TaskDetailsBloc bloc = TaskDetailsBloc.instance;
         return Scaffold(
           appBar: AppBars.titledAppBar(title: state is Done ? bloc.model.data?.name : ""),
           body: state is Loading ? CustomLoading() : state is Error ? CustomCenterText(state.error ?? tr("errorException")) : SingleChildScrollView(
@@ -90,9 +87,12 @@ class TaskDetailsView extends StatelessWidget {
                   ),
                 ),
 
-                24.verticalSpace,
-                TaskMissionList(model: bloc.model.data),
-                16.verticalSpace,
+
+                // TaskMissionList(model: bloc.model.data),
+                // 16.verticalSpace,
+
+                56.verticalSpace,
+
                 CustomButton(
                   onTap: () {
                     if(bloc.distance <= 100) {

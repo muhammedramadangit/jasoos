@@ -6,11 +6,11 @@ import '../../../helper/constants.dart';
 import '../../../helper/media_quary_helper.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
-import '../models/task_details_model.dart';
+import '../../home/models/shops_model.dart';
 
-class TaskInfoCard extends StatelessWidget {
-  final TaskDetailsInfo? model;
-  const TaskInfoCard({super.key, this.model});
+class ShopInfoCard extends StatelessWidget {
+  final ShopInfo? model;
+  const ShopInfoCard({super.key, this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class TaskInfoCard extends StatelessWidget {
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(12.r),
               image: DecorationImage(
-                image: NetworkImage(model?.shopImage ?? ""),
+                image: NetworkImage(model?.image ?? ""),
                 fit: BoxFit.cover,
               ),
             ),
@@ -36,7 +36,7 @@ class TaskInfoCard extends StatelessWidget {
               CircleAvatar(
                 radius: 20.r,
                 backgroundColor: Colors.grey[100],
-                backgroundImage: NetworkImage(model?.shopImage ?? ""),
+                backgroundImage: NetworkImage(model?.image ?? ""),
               ),
               8.horizontalSpace,
               Expanded(
@@ -47,11 +47,11 @@ class TaskInfoCard extends StatelessWidget {
                       model?.name ?? "",
                       style: AppTextStyles.w500.copyWith(fontSize: 16),
                     ),
-                    4.verticalSpace,
-                    Text(
-                      model?.shop ?? "",
-                      style: AppTextStyles.w400.copyWith(fontSize: 14),
-                    ),
+                    // 4.verticalSpace,
+                    // Text(
+                    //   "Italian Chinese Restaurant",
+                    //   style: AppTextStyles.w400.copyWith(fontSize: 14),
+                    // ),
                     4.verticalSpace,
                     Row(
                       children: [
@@ -61,7 +61,7 @@ class TaskInfoCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          model?.branch ?? "",
+                          model?.distance ?? "",
                           style: AppTextStyles.w400.copyWith(
                             color: Styles.DARK_TEXT_COLOR,
                             fontSize: 12,
@@ -74,7 +74,7 @@ class TaskInfoCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          "${model?.taskType}",
+                          "${model?.tasksCount} mission",
                           style: AppTextStyles.w400.copyWith(
                             color: Styles.DARK_TEXT_COLOR,
                             fontSize: 12,

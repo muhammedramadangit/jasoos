@@ -27,7 +27,8 @@ import 'package:jasoos/features/security_and_password/view/security_and_password
 import 'package:jasoos/features/select_category/view/select_category_view.dart';
 import 'package:jasoos/features/splash/view/splash_view.dart';
 import 'package:jasoos/features/task_complete/view/task_complete_view.dart';
-import 'package:jasoos/features/task_details/bloc/shop_details_bloc.dart';
+import 'package:jasoos/features/shop_details/bloc/shop_details_bloc.dart';
+import 'package:jasoos/features/task_details/view/task_details_view.dart';
 import 'package:jasoos/features/terms/view/terms_view.dart';
 import 'package:jasoos/features/two_step_verification/view/two_step_verification.dart';
 import 'package:jasoos/main_pages/view/main_pages_view.dart';
@@ -37,7 +38,8 @@ import 'package:jasoos/no_internet.dart';
 
 import '../features/add_task/view/add_task_view.dart';
 import '../features/nearest_tasks/view/nearest_tasks_view.dart';
-import '../features/task_details/view/task_details_view.dart';
+import '../features/shop_details/view/shop_details_view.dart';
+import '../features/task_details/bloc/task_details_bloc.dart';
 
 const begin = Offset(0.0, 1.0);
 const end = Offset.zero;
@@ -142,8 +144,12 @@ abstract class CustomNavigator {
       case Routes.REWARDS:
         return pageRoute(RewardsView());
 
-      case Routes.TASK_DETAILS:
+      case Routes.SHOP_DETAILS:
         ShopDetailsBloc.instance.add(Get(arguments: settings.arguments as int));
+        return pageRoute(ShopDetailsView());
+
+      case Routes.TASK_DETAILS:
+        TaskDetailsBloc.instance.add(Get(arguments: settings.arguments as int));
         return pageRoute(TaskDetailsView());
 
       case Routes.START_TASK:
@@ -153,8 +159,8 @@ abstract class CustomNavigator {
       case Routes.TASK_COMPLETE:
         return pageRoute(TaskComplete());
 
-      case Routes.NEAREST_TASKS:
-        return pageRoute(NearestTasksView());
+      case Routes.NEAREST_SHOPS:
+        return pageRoute(NearestShopsView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

@@ -22,4 +22,12 @@ abstract class HomeRepo {
       method: ServerMethods.GET,
     );
   }
+
+  static Future getRecentTasks(Map<String, dynamic> query) async {
+    return await Network().request(
+      Endpoints.RECENT_TASKS,
+      method: ServerMethods.GET,
+      query: query
+    );
+  }
 }
