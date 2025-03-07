@@ -14,7 +14,7 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
 class ResetPasswordBloc extends Bloc<AppEvent, AppState> {
-  ResetPasswordBloc() : super(Start()) {
+  ResetPasswordBloc() : super(Initial()) {
     on<Update>(_update);
     on<Click>(_click);
   }
@@ -68,11 +68,11 @@ class ResetPasswordBloc extends Bloc<AppEvent, AppState> {
         emit(Error());
       }
     } else {
-      emit(Start());
+      emit(Initial());
     }
   }
 
   _update(AppEvent event, Emitter<AppState> emit) async {
-    emit(Start());
+    emit(Initial());
   }
 }

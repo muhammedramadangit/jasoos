@@ -4,7 +4,7 @@ import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 
 class BankAccountBloc extends Bloc<AppEvent, AppState> {
-  BankAccountBloc() : super(Start()) {
+  BankAccountBloc() : super(Initial()) {
     on<Update>(_update);
   }
   static BankAccountBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
@@ -16,5 +16,5 @@ class BankAccountBloc extends Bloc<AppEvent, AppState> {
     add(Update());
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async => emit(Initial());
 }

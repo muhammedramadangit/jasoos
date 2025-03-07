@@ -1,18 +1,24 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/core/app_state.dart';
-import 'package:jasoos/features/add_task/bloc/add_task_bloc.dart';
+import 'package:jasoos/features/add_task/bloc/questions_bloc.dart';
+import 'package:jasoos/features/add_task/bloc/start_task_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/media_quary_helper.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
+import 'package:jasoos/main_widgets/custom_empty_view.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
+import '../../../main_widgets/custom_center_text.dart';
+import '../../../main_widgets/custom_loading.dart';
 
 class AddTaskView extends StatefulWidget {
   const AddTaskView({super.key});
@@ -25,9 +31,9 @@ class _AddTaskViewState extends State<AddTaskView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddTaskBloc, AppState>(
+    return BlocBuilder<QuestionsBloc, AppState>(
       builder: (context, state) {
-        AddTaskBloc bloc = AddTaskBloc.instance;
+        QuestionsBloc bloc = QuestionsBloc.instance;
         return Scaffold(
           backgroundColor: Colors.black,
           appBar: AppBars.titledAppBar(
@@ -44,7 +50,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                 color: Colors.white,
               ),
             ),
-            titleWidget: Row(
+            titleWidget: state is Done || state is Initial ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Stack(
@@ -59,7 +65,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                     ),
                     Container(
                       height: 8,
-                      width: (48.w * (bloc.index+1)) / bloc.tasks.length,
+                      width: (48.w * (bloc.index+1)) / bloc.model.data!.length,
                       decoration: BoxDecoration(
                         color: Styles.WHITE_COLOR,
                         borderRadius: BorderRadius.circular(12.r),
@@ -69,11 +75,11 @@ class _AddTaskViewState extends State<AddTaskView> {
                 ),
                 SizedBox(width: 16.w),
                 Text(
-                  "${bloc.index+1}/${bloc.tasks.length}",
+                  "${bloc.index+1}/${bloc.model.data!.length}",
                   style: AppTextStyles.w700.copyWith(fontSize: 12, color: Styles.WHITE_COLOR),
                 ),
               ],
-            ),
+            ) : SizedBox(),
             actions: [
               IconButton(
                 onPressed: () => CustomNavigator.pop(),
@@ -81,7 +87,13 @@ class _AddTaskViewState extends State<AddTaskView> {
               )
             ],
           ),
-          body: Container(
+          body: state is Loading
+              ? CustomLoading()
+              : state is Error
+              ? CustomCenterText(state.error ?? tr("errorException"))
+              : state is Empty
+              ? CustomEmptyView()
+              : Container(
             height: MediaQueryHelper.height,
             width: MediaQueryHelper.width,
             decoration: BoxDecoration(
@@ -93,11 +105,16 @@ class _AddTaskViewState extends State<AddTaskView> {
             child: Column(
               children: [
                 bloc.tasks[bloc.index],
+                // UploadImageTask(),
                 Spacer(),
                 CustomButton(
-                  text: bloc.index == 2 ? "Continue" : "Next",
+                  text: "Next",
                   onTap: () {
-                    bloc.nextTask();
+                    StartTaskBloc.instance.add(Click(arguments: {
+                      "question_id" : bloc.model.data?[bloc.index].id,
+                      "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
+                    }));
+                    // bloc.nextTask();
                   },
                   padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 42.h),
                 ),

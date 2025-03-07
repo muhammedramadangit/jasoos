@@ -1,0 +1,116 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/features/add_task/bloc/questions_bloc.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+
+import '../../../main_widgets/custom_toast.dart';
+import '../../../navigation/routes.dart';
+import '../repo/add_task_repo.dart';
+
+class StartTaskBloc extends Bloc<AppEvent, AppState> {
+  StartTaskBloc() : super(Initial()) {
+    on<Update>(_update);
+    on<Start>(_startTask);
+    on<Click>(_submitAnswer);
+  }
+  static StartTaskBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
+  double? selectedRate = 0.0;
+  String? selectedReview;
+  int? taskSubmission;
+
+  List<String> multiSelectedAnswer = [];
+  TextEditingController textAnswer = TextEditingController();
+  XFile? fileAnswer;
+  XFile? imageAnswer;
+  XFile? videoAnswer;
+
+  resetData() {
+    QuestionsBloc.instance.index = 0;
+    selectedRate = 0.0;
+    selectedReview = null;
+    add(Update());
+  }
+
+  getRate() {
+    if(selectedRate == 1.0) {
+      selectedReview = "Very poor";
+    } else if (selectedRate == 2.0) {
+      selectedReview = "Poor";
+    } else if (selectedRate == 3.0) {
+      selectedReview = "Good";
+    } else if (selectedRate == 4.0) {
+      selectedReview = "Very good";
+    } else if (selectedRate == 5.0) {
+      selectedReview = "Excellent";
+    } else {
+      selectedReview = "-";
+    }
+    add(Update());
+  }
+
+  _startTask(AppEvent event, Emitter<AppState> emit) async {
+    emit(Loading());
+    try {
+      Response response = await AddTaskRepo.startTask(event.arguments as int);
+      if(response.statusCode == 200) {
+        CustomNavigator.push(Routes.START_TASK);
+        taskSubmission = response.data["data"]["task_submission_id"];
+        QuestionsBloc.instance.add(Get(arguments: event.arguments as int));
+        emit(Done());
+      } else {
+        emit(Error(error: response.data["message"]));
+      }
+    } catch (e) {
+      showToast(e.toString());
+      emit(Error());
+    }
+  }
+
+  _submitAnswer(AppEvent event, Emitter<AppState> emit) async {
+    Map<String, dynamic> arguments = event.arguments as Map<String, dynamic>;
+    emit(Loading());
+    try {
+      Map<String, dynamic> body = {
+        if(arguments["question_type_id"] == 1) // Multiselect
+          "answer" : multiSelectedAnswer,
+        if(arguments["question_type_id"] == 2) // text
+          "answer" : textAnswer.text,
+        if(arguments["question_type_id"] == 3) // image
+          "answer" : await MultipartFile.fromFile(imageAnswer!.path),
+        if(arguments["question_type_id"] == 4) // file
+          "answer" : await MultipartFile.fromFile(fileAnswer!.path),
+        if(arguments["question_type_id"] == 5) // video
+          "answer" : await MultipartFile.fromFile(videoAnswer!.path),
+        if(arguments["question_type_id"] == 6) // review
+          "answer" : selectedRate.toString(),
+      };
+      Response response = await AddTaskRepo.submitAnswer(
+        taskSubmission: taskSubmission,
+        questionId: arguments["question_id"],
+        body: body,
+      );
+      if(response.statusCode == 200) {
+        if(QuestionsBloc.instance.index + 1 < QuestionsBloc.instance.model.data!.length){
+          QuestionsBloc.instance.index++;
+        } else {
+          CustomNavigator.push(Routes.TASK_COMPLETE);
+        }
+        QuestionsBloc.instance.add(Update());
+        emit(Done());
+      } else {
+        emit(Error(error: response.data["message"]));
+      }
+    } catch (e) {
+      showToast(e.toString());
+      emit(Error());
+    }
+  }
+
+  _update(AppEvent event, Emitter<AppState> emit) async {
+    emit(Initial());
+  }
+}

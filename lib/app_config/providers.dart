@@ -10,7 +10,8 @@ import 'package:jasoos/features/reset_password/bloc/reset_password_bloc.dart';
 import 'package:jasoos/features/select_category/bloc/select_category_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 
-import '../features/add_task/bloc/add_task_bloc.dart';
+import '../features/add_task/bloc/questions_bloc.dart';
+import '../features/add_task/bloc/start_task_bloc.dart';
 import '../features/home/bloc/current_location_bloc.dart';
 import '../features/home/bloc/home_categories_bloc.dart';
 import '../features/home/bloc/nearest_shop_bloc.dart';
@@ -34,11 +35,12 @@ abstract class ProviderList {
 
     BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
     BlocProvider<BankAccountBloc>(create: (_) => BankAccountBloc()),
-    BlocProvider<AddTaskBloc>(create: (_) => AddTaskBloc()),
+    BlocProvider<StartTaskBloc>(create: (_) => StartTaskBloc()),
     BlocProvider<OngoingTasksBloc>(create: (_) => OngoingTasksBloc()),
     BlocProvider<CompletedTasksBloc>(create: (_) => CompletedTasksBloc()),
     BlocProvider<RecentTasksBloc>(create: (_) => RecentTasksBloc()),
     BlocProvider<TaskDetailsBloc>(create: (_) => TaskDetailsBloc()),
+    BlocProvider<QuestionsBloc>(create: (_) => QuestionsBloc()),
 
     BlocProvider<HomeCategoriesBloc>(create: (_) => HomeCategoriesBloc()),
     BlocProvider<ShopsBloc>(create: (_) => ShopsBloc()),

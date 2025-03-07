@@ -11,16 +11,18 @@ import '../../../helper/constants.dart';
 import '../../../helper/media_quary_helper.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
-import '../bloc/add_task_bloc.dart';
+import '../bloc/start_task_bloc.dart';
+import '../models/questions_model.dart';
 
 class ReviewTask extends StatelessWidget {
-  const ReviewTask({super.key});
+  final QuestionInfo? model;
+  const ReviewTask({super.key, this.model});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddTaskBloc, AppState>(
+    return BlocBuilder<StartTaskBloc, AppState>(
       builder: (context, state) {
-        AddTaskBloc bloc = AddTaskBloc.instance;
+        StartTaskBloc bloc = StartTaskBloc.instance;
         return CustomTaskCard(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -38,7 +40,7 @@ class ReviewTask extends StatelessWidget {
                   height: 40, width: 40),
               12.verticalSpace,
               Text(
-                "How would you rate the quality of service you received?",
+                model?.question ?? "",
                 style: AppTextStyles.w700.copyWith(
                   fontSize: 24,
                   color: Styles.WHITE_COLOR,

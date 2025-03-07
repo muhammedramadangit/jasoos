@@ -11,6 +11,7 @@ import 'package:jasoos/main_widgets/custom_loading.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
+import '../../../helper/url_launcher_helper.dart';
 import '../../../main_widgets/custom_center_text.dart';
 import '../widgets/shop_info_card.dart';
 import '../widgets/shop_mission_list.dart';
@@ -35,7 +36,9 @@ class ShopDetailsView extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      LauncherHelper.onLaunchUrl(Uri.parse(Constants.launchMap(bloc.model.data?.latitude, bloc.model.data?.longitude)));
+                    },
                     child: Row(
                       children: [
                         SvgPicture.asset(

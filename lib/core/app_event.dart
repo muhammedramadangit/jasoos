@@ -12,6 +12,10 @@ class Click extends AppEvent {
   Click({Object? arguments}) : super(arguments);
 }
 
+class Start extends AppEvent {
+  Start({Object? arguments}) : super(arguments);
+}
+
 class ClickLoginFirst extends AppEvent {
   ClickLoginFirst({Object? arguments}) : super(arguments);
 }

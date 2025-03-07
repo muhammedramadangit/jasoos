@@ -6,7 +6,6 @@ import 'package:jasoos/features/home/models/home_categories_model.dart';
 import 'package:jasoos/main_widgets/custom_toast.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 
-import '../models/shops_model.dart';
 import '../repo/home_repo.dart';
 
 class HomeCategoriesBloc extends Bloc<AppEvent, AppState> {
@@ -34,6 +33,6 @@ class HomeCategoriesBloc extends Bloc<AppEvent, AppState> {
   }
 
   _update(AppEvent event, Emitter<AppState> emit) async {
-    emit(Start());
+    emit(Initial());
   }
 }

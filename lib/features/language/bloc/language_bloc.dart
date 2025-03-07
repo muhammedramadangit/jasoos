@@ -7,7 +7,7 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
 class LanguageBloc extends Bloc<AppEvent, AppState> {
-  LanguageBloc() : super(Start()) {
+  LanguageBloc() : super(Initial()) {
     on<Update>(_update);
     currentLangCode = CustomNavigator.navigatorState.currentContext!.locale.languageCode;
     selectedLangCode = currentLangCode == "ar" ? 0 : 1;
@@ -36,5 +36,5 @@ class LanguageBloc extends Bloc<AppEvent, AppState> {
     });
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async => emit(Initial());
 }

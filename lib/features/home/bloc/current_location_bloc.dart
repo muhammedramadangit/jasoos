@@ -7,11 +7,6 @@ import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/helper/permission_helper.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
-// import 'package:system_settings/system_settings.dart';
-
-import '../../../main_widgets/custom_button.dart';
-import '../../../main_widgets/dialogs/custom_dialog.dart';
-import '../../../main_widgets/dialogs/custom_show_dialog.dart';
 
 class CurrentLocationBloc extends Bloc<AppEvent, AppState> {
   CurrentLocationBloc() : super(Loading()) {
@@ -60,6 +55,6 @@ class CurrentLocationBloc extends Bloc<AppEvent, AppState> {
   }
 
   _update(AppEvent event, Emitter<AppState> emit) async {
-    emit(Start());
+    emit(Initial());
   }
 }

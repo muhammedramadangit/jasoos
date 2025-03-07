@@ -1,5 +1,8 @@
+import 'dart:ui' as ui;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,31 +31,88 @@ class DiscoverView extends StatefulWidget {
 }
 
 class _DiscoverViewState extends State<DiscoverView> {
-  late GoogleMapController _mapController;
   final LatLng _initialPosition = LatLng(double.parse("${AppStorage.getUserLat}"), double.parse("${AppStorage.getUserLng}")); // Example: Cairo, Egypt
-  final Set<Marker> _markers = {};
+  Set<Marker> _markers = Set();
+  Set<Circle> circles = Set();
+  final customCircle = [];
+
+  // late LatLng latLng;
+
+  GoogleMapController? mapController;
+
+  //current Location
+  onMapCreated(GoogleMapController? controller) {
+    mapController = controller;
+    mapController!.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(target: _initialPosition, zoom: 15),
+    ));
+    // _markers = widget.markers ?? Set();
+  }
+
+  Future<Uint8List> resizeAssetImage(String assetName, {required double width, required double height}) async {
+    ByteData data = await rootBundle.load(assetName);
+    final codec = await ui.instantiateImageCodec(Uint8List.sublistView(data.buffer.asUint8List()));
+    final frameInfo = await codec.getNextFrame();
+    final image = frameInfo.image;
+
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder, Rect.fromPoints(Offset(0, 0), Offset(width, height)));
+    canvas.drawImageRect(
+      image,
+      Rect.fromPoints(Offset(0, 0), Offset(image.width.toDouble(), image.height.toDouble())),
+      Rect.fromPoints(Offset(0, 0), Offset(width, height)),
+      Paint(),
+    );
+
+    final resizedImage =
+    await recorder.endRecording().toImage(width.toInt(), height.toInt());
+    final resizedImageBytes =
+    await resizedImage.toByteData(format: ui.ImageByteFormat.png);
+
+    return resizedImageBytes!.buffer.asUint8List();
+  }
+
+  getImage({List<MarkerModel>? markers}) async {
+    for (MarkerModel marker in markers!) {
+      try {
+        Uint8List resizedImage = await resizeAssetImage(
+          "assets/images/marker.png",
+          width: 48,
+          height: 48,
+        );
+        _markers.add(
+          Marker(
+            markerId: MarkerId(marker.id.toString()),
+            position: LatLng(
+              double.tryParse(marker.lat.toString()) ?? 31.0315084,
+              double.tryParse(marker.lng.toString()) ?? 31.3905576,
+            ),
+            // icon: await BitmapDescriptor.bytes(resizedImage),
+            icon: BitmapDescriptor.defaultMarker,
+          ),
+        );
+      } catch (error) {
+        _markers.add(
+          Marker(
+            markerId: MarkerId(marker.id.toString()),
+            position: LatLng(
+              double.tryParse(marker.lat.toString()) ?? 31.0315084,
+              double.tryParse(marker.lng.toString()) ?? 31.3905576,
+            ),
+            // icon: await BitmapDescriptor.asset(
+            //   ImageConfiguration(size: Size(48, 48)),
+            //   "assets/images/marker.png",
+            // ),
+            icon: BitmapDescriptor.defaultMarker,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _addMarkers();
-  }
-
-  void _addMarkers() {
-    setState(() {
-      _markers.add(
-        Marker(
-          markerId: MarkerId('restaurant'),
-          position: LatLng(30.033920, 31.233402), // Example: Restaurant Location
-          infoWindow: InfoWindow(title: "Al Baik Restaurant"),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
-        ),
-      );
-    });
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    _mapController = controller;
   }
 
   @override
@@ -67,6 +127,11 @@ class _DiscoverViewState extends State<DiscoverView> {
           return CustomEmptyView();
         } else {
           ShopsBloc bloc = ShopsBloc.instance;
+          getImage(
+            markers: ShopsBloc.instance.model.data!.map((ele) {
+              return MarkerModel(id: 1, lat: double.parse("${ele.latitude}"), lng: double.parse("${ele.longitude}"));
+            }).toList(),
+          );
           return Scaffold(
             appBar: discoverAppBar(),
             body: Padding(
@@ -80,7 +145,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                       topLeft: Radius.circular(24.r),
                     ),
                     child: GoogleMap(
-                      onMapCreated: _onMapCreated,
+                      mapType: MapType.terrain,
                       initialCameraPosition: CameraPosition(
                         target: _initialPosition,
                         zoom: 14.0,
@@ -239,4 +304,12 @@ class _DiscoverViewState extends State<DiscoverView> {
       }
     );
   }
+}
+
+class MarkerModel {
+  int? id;
+  double? lat;
+  double? lng;
+
+  MarkerModel({this.id, this.lat, this.lng});
 }

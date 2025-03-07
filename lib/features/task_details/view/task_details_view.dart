@@ -3,19 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
 import 'package:jasoos/main_widgets/custom_loading.dart';
-import 'package:jasoos/main_widgets/dialogs/custom_alert_dialog.dart';
-import 'package:jasoos/main_widgets/dialogs/custom_show_dialog.dart';
-import 'package:jasoos/navigation/custom_navigation.dart';
-import 'package:jasoos/navigation/routes.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
+import '../../../helper/url_launcher_helper.dart';
 import '../../../main_widgets/custom_center_text.dart';
+import '../../add_task/bloc/start_task_bloc.dart';
 import '../bloc/task_details_bloc.dart';
 import '../widgets/how_it_work_info.dart';
 import '../widgets/task_info_card.dart';
@@ -63,7 +62,9 @@ class TaskDetailsView extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      LauncherHelper.onLaunchUrl(Uri.parse(Constants.launchMap(bloc.model.data?.latitude, bloc.model.data?.longitude)));
+                    },
                     child: Row(
                       children: [
                         SvgPicture.asset(
@@ -93,21 +94,32 @@ class TaskDetailsView extends StatelessWidget {
 
                 56.verticalSpace,
 
-                CustomButton(
-                  onTap: () {
-                    if(bloc.distance <= 100) {
-                      CustomNavigator.push(Routes.START_TASK);
-                    } else {
-                      showCustomDialog(dialog: CustomAlertDialog("You cannot start the task unless you are at the designated location."));
-                    }
-                  },
-                  text: "Start Task",
-                  textStyle: AppTextStyles.w500.copyWith(
-                    fontSize: 16,
-                    color: bloc.distance <= 100 ? Styles.WHITE_COLOR : Styles.GREY_TEXT_COLOR,
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  color: bloc.distance <= 100 ? Styles.PRIMARY_COLOR : Styles.BORDER_COLOR,
+                if(bloc.model.data?.status == 0 || bloc.model.data?.status == 1)
+                BlocBuilder<StartTaskBloc, AppState>(
+                  builder: (context, state) {
+                    return CustomButton(
+                      onTap: () {
+                        StartTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
+                        // QuestionsBloc.instance.add(Get(arguments: bloc.model.data?.id));
+                        // CustomNavigator.push(Routes.START_TASK);
+                        // if(bloc.distance <= 100) {
+                        //   AddTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
+                        // } else {
+                        //   showCustomDialog(dialog: CustomAlertDialog("You cannot start the task unless you are at the designated location."));
+                        // }
+                      },
+                      text: bloc.model.data?.status == 1 ? "Complete Task" : "Start Task",
+                      loading: state is Loading,
+                      textStyle: AppTextStyles.w500.copyWith(
+                        fontSize: 16,
+                        // color: bloc.distance <= 100 ? Styles.WHITE_COLOR : Styles.GREY_TEXT_COLOR,
+                        color: Styles.WHITE_COLOR,
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      // color: bloc.distance <= 100 ? Styles.PRIMARY_COLOR : Styles.BORDER_COLOR,
+                      color: Styles.PRIMARY_COLOR,
+                    );
+                  }
                 ),
 
               ],

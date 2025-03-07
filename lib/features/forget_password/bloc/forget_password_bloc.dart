@@ -16,7 +16,7 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
 class ForgetPasswordBloc extends Bloc<AppEvent, AppState> {
-  ForgetPasswordBloc() : super(Start()) {
+  ForgetPasswordBloc() : super(Initial()) {
     on<Update>(_update);
     on<Click>(_click);
   }
@@ -66,11 +66,11 @@ class ForgetPasswordBloc extends Bloc<AppEvent, AppState> {
         emit(Error());
       }
     } else {
-      emit(Start());
+      emit(Initial());
     }
   }
 
   _update(AppEvent event, Emitter<AppState> emit) async {
-    emit(Start());
+    emit(Initial());
   }
 }

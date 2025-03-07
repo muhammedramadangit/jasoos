@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/core/app_state.dart';
@@ -14,7 +13,7 @@ import 'package:jasoos/navigation/routes.dart';
 import '../../../main_models/user_model.dart';
 
 class SocialLoginBloc extends Bloc<AppEvent, AppState> {
-  SocialLoginBloc() : super(Start()) {
+  SocialLoginBloc() : super(Initial()) {
     on<Update>(_update);
     on<Click>(_click);
   }
@@ -40,5 +39,5 @@ class SocialLoginBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async => emit(Start());
+  _update(AppEvent event, Emitter<AppState> emit) async => emit(Initial());
 }

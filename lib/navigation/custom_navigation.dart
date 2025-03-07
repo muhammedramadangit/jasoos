@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jasoos/core/app_event.dart';
-import 'package:jasoos/features/add_task/bloc/add_task_bloc.dart';
+import 'package:jasoos/features/add_task/bloc/start_task_bloc.dart';
 import 'package:jasoos/features/bank_account/view/bank_account_view.dart';
 import 'package:jasoos/features/change_password/view/change_password_view.dart';
 import 'package:jasoos/features/forget_password/bloc/forget_password_bloc.dart';
@@ -153,7 +153,7 @@ abstract class CustomNavigator {
         return pageRoute(TaskDetailsView());
 
       case Routes.START_TASK:
-        AddTaskBloc.instance.resetData();
+        StartTaskBloc.instance.resetData();
         return pageRoute(AddTaskView());
 
       case Routes.TASK_COMPLETE:

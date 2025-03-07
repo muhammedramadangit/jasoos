@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jasoos/features/home/models/shops_model.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
@@ -49,7 +51,9 @@ class ShopMissionList extends StatelessWidget {
             itemBuilder: (context, index) {
               Tasks? task = model?.tasks?[index];
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  CustomNavigator.push(Routes.TASK_DETAILS, arguments: task?.id);
+                },
                 child: Container(
                   width: 180.w,
                   padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
@@ -79,11 +83,10 @@ class ShopMissionList extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // Icon(Icons.arrow_forward_ios, size: 16, color: Styles.DARK_GREY_COLOR),
-
                       // if(index.isEven)...[
-                      // ]else...[
                       //   Icon(Icons.check_box, size: 16, color: Styles.GREEN_COLOR),
+                      // ]else...[
+                      //   Icon(Icons.arrow_forward_ios, size: 16, color: Styles.DARK_GREY_COLOR),
                       // ],
                     ],
                   ),

@@ -1,7 +1,9 @@
 import 'dart:developer' as developer;
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
 
 void cprint(dynamic data, {String? errorIn, String? event, String? label}) {
@@ -41,16 +43,16 @@ class Utility {
     return Localizations.localeOf(context);
   }
 
-  // static Future<File> compressImage(File file) async {
-  //   var result = await FlutterImageCompress.compressWithFile(
-  //     file.path,
-  //     quality: 70,
-  //     minHeight: 1920,
-  //     minWidth: 1080,
-  //   );
-  //
-  //   final compressedFile = result == null ? file : File(file.path)
-  //     ..writeAsBytesSync(result!);
-  //   return compressedFile;
-  // }
+  static Future<File> compressImage(File file) async {
+    var result = await FlutterImageCompress.compressWithFile(
+      file.path,
+      quality: 70,
+      minHeight: 1920,
+      minWidth: 1080,
+    );
+
+    final compressedFile = result == null ? file : File(file.path)
+      ..writeAsBytesSync(result!);
+    return compressedFile;
+  }
 }

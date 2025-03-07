@@ -15,7 +15,7 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
 class LoginBloc extends Bloc<AppEvent, AppState> {
-  LoginBloc() : super(Start()) {
+  LoginBloc() : super(Initial()) {
     on<Update>(_update);
     on<Click>(_click);
     on<Check>(_checkUserRemember);
@@ -43,13 +43,13 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
     if(AppStorage.getRememberUser == true) {
       phone = TextEditingController(text: AppStorage.getUserPhone);
       password = TextEditingController(text: AppStorage.getUserPassword);
-      emit(Start());
+      emit(Initial());
     } else {
       phone.clear();
       password.clear();
-      emit(Start());
+      emit(Initial());
     }
-    emit(Start());
+    emit(Initial());
   }
 
   resetValidation() {
@@ -101,11 +101,11 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
         emit(Error());
       }
     } else {
-      emit(Start());
+      emit(Initial());
     }
   }
 
   _update(AppEvent event, Emitter<AppState> emit) async {
-    emit(Start());
+    emit(Initial());
   }
 }

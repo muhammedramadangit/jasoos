@@ -3,7 +3,7 @@ import 'package:jasoos/network/mapper.dart';
 
 abstract class AppState {}
 
-class Start extends AppState {}
+class Initial extends AppState {}
 
 class Done extends AppState {
   Mapper? model;

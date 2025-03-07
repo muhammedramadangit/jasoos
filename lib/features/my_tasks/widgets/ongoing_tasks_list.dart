@@ -52,6 +52,7 @@ class OngoingTasksList extends StatelessWidget {
                       return TaskCard(
                         model: bloc.model.data?[index],
                         isComplete: false,
+                        isRecent: false,
                       );
                     },
                   ),

@@ -174,7 +174,7 @@ class TaskCard extends StatelessWidget {
                           ),
                           Container(
                             height: 6,
-                            width: (56.w * int.parse("${model?.answeredQuestions}")) / int.parse("${model?.totalQuestions}"),
+                            width: (int.parse("${model?.answeredQuestions}") + int.parse("${model?.totalQuestions}")) == 0 ? 56.w : (56.w * int.parse("${model?.answeredQuestions}")) / (int.parse("${model?.answeredQuestions}") + int.parse("${model?.totalQuestions}")),
                             decoration: BoxDecoration(
                               color: Styles.PRIMARY_COLOR,
                               borderRadius: BorderRadius.circular(12.r),
@@ -184,7 +184,7 @@ class TaskCard extends StatelessWidget {
                       ),
                       SizedBox(width: 16.w),
                       Text(
-                        "${model?.answeredQuestions}/${model?.totalQuestions}",
+                        "${model?.answeredQuestions}/${int.parse("${model?.answeredQuestions}") + int.parse("${model?.totalQuestions}")}",
                         style: AppTextStyles.w700.copyWith(fontSize: 12),
                       ),
                     ],

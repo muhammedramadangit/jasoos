@@ -1,0 +1,67 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/features/add_task/widgets/custom_task_card.dart';
+import 'package:jasoos/features/add_task/widgets/upload_bottom_sheet.dart';
+
+import '../../../helper/constants.dart';
+import '../../../helper/media_quary_helper.dart';
+import '../../../helper/styles.dart';
+import '../../../helper/text_styles.dart';
+import '../models/questions_model.dart';
+
+class UploadVideoTask extends StatelessWidget {
+  final QuestionInfo? model;
+  const UploadVideoTask({super.key, this.model});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomTaskCard(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Upload video",
+            style: AppTextStyles.w700.copyWith(
+              fontSize: 14,
+              color: Styles.WHITE_COLOR,
+            ),
+          ),
+          16.verticalSpace,
+          SvgPicture.asset(Constants.getSvg("rocket"), height: 40, width: 40),
+          12.verticalSpace,
+          Text(
+            model?.question ?? "",
+            style: AppTextStyles.w700.copyWith(
+              fontSize: 24,
+              color: Styles.WHITE_COLOR,
+            ),
+          ),
+          24.verticalSpace,
+          GestureDetector(
+            onTap: () {
+              showUploadImageBottomSheet(isImage: false);
+            },
+            child: Container(
+              height: 114.h,
+              width: MediaQueryHelper.width,
+              padding: EdgeInsets.symmetric(vertical: 28),
+              decoration: BoxDecoration(
+                color: Styles.PRIMARY_COLOR,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  Constants.getSvg("video"),
+                  colorFilter: ColorFilter.mode(Styles.WHITE_COLOR, BlendMode.srcIn),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -33,6 +33,6 @@ class NearestShopsBloc extends Bloc<AppEvent, AppState> {
   }
 
   _update(AppEvent event, Emitter<AppState> emit) async {
-    emit(Start());
+    emit(Initial());
   }
 }
