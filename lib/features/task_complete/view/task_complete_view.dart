@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
@@ -8,8 +10,12 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../core/app_state.dart';
 import '../../../helper/media_quary_helper.dart';
 import '../../../main_widgets/custom_button.dart';
+import '../../../main_widgets/custom_loading.dart';
+import '../../home/bloc/shops_bloc.dart';
+import '../../home/models/shops_model.dart';
 
 class TaskComplete extends StatelessWidget {
   const TaskComplete({super.key});
@@ -51,7 +57,7 @@ class TaskComplete extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
-                          "You’ve completed all the tasks and earned 50 points!",
+                          "You’ve completed all the tasks and earned ${AppStorage.getTaskRewards} points!",
                           textAlign: TextAlign.center,
                           style: AppTextStyles.w500.copyWith(
                             fontSize: 14,
@@ -73,7 +79,7 @@ class TaskComplete extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "You've Earned 50 Points!",
+                                  "You've Earned ${AppStorage.getTaskRewards} Points!",
                                   style: AppTextStyles.w700.copyWith(
                                     fontSize: 16,
                                     color: Styles.WHITE_COLOR,
@@ -89,132 +95,179 @@ class TaskComplete extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            10.horizontalSpace,
-                            Text(
-                              "50 points",
-                              style: AppTextStyles.w500.copyWith(
-                                fontSize: 16,
-                                color: Styles.WHITE_COLOR,
-                              ),
+                            Container(
+                              height: 36.h,
+                              width: 0.5,
+                              margin: EdgeInsets.symmetric(horizontal: 4.w),
+                              color: Styles.WHITE_COLOR,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${AppStorage.getTaskRewards}",
+                                  style: AppTextStyles.w500.copyWith(
+                                    fontSize: 16,
+                                    color: Styles.WHITE_COLOR,
+                                  ),
+                                ),
+                                Text(
+                                  "points",
+                                  style: AppTextStyles.w500.copyWith(
+                                    fontSize: 12,
+                                    color: Styles.WHITE_COLOR,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
                       24.verticalSpace,
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xff282928).withValues(alpha: 0.5),
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                              child: Text(
-                                "Explore More Restaurant Tasks",
-                                style: AppTextStyles.w700.copyWith(
-                                  fontSize: 16,
-                                  color: Styles.WHITE_COLOR,
-                                ),
+                      BlocBuilder<ShopsBloc, AppState>(
+                        builder: (context, state) {
+                          if(state is Loading) {
+                            return CustomLoading(color: Styles.WHITE_COLOR);
+                          } else if (state is Error) {
+                            return SizedBox();
+                          } else if (state is Empty) {
+                            return SizedBox();
+                          } else {
+                            ShopsBloc bloc = ShopsBloc.instance;
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff282928).withValues(alpha: 0.5),
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
-                            ),
-                            SizedBox(
-                              height: 125.h,
-                              child: ListView.separated(
-                                itemCount: 4,
-                                scrollDirection: Axis.horizontal,
-                                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
-                                shrinkWrap: true,
-                                physics: ClampingScrollPhysics(),
-                                separatorBuilder: (context, index) => 16.horizontalSpace,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    width: 300.w,
-                                    padding: const EdgeInsets.all(16),
-                                    decoration: BoxDecoration(
-                                      color: Styles.BACKGROUND_COLOR,
-                                      borderRadius: BorderRadius.circular(16.r),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                    child: Text(
+                                      "Explore More Restaurant Tasks",
+                                      style: AppTextStyles.w700.copyWith(
+                                        fontSize: 16,
+                                        color: Styles.WHITE_COLOR,
+                                      ),
                                     ),
-                                    child: Row(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(12.r),
-                                          child: Image.network(
-                                            "https://images.pexels.com/photos/18294662/pexels-photo-18294662/free-photo-of-restaurant-and-street-with-cars-at-night.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                                            width: 90,
-                                            height: 80,
-                                            fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 140.h,
+                                    child: ListView.separated(
+                                      itemCount: bloc.model.data!.length,
+                                      scrollDirection: Axis.horizontal,
+                                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+                                      shrinkWrap: true,
+                                      physics: ClampingScrollPhysics(),
+                                      separatorBuilder: (context, index) => 16.horizontalSpace,
+                                      itemBuilder: (context, index) {
+                                        ShopInfo? shop = bloc.model.data?[index];
+                                        return Container(
+                                          width: 300.w,
+                                          padding: const EdgeInsets.all(16),
+                                          decoration: BoxDecoration(
+                                            color: Styles.BACKGROUND_COLOR,
+                                            borderRadius: BorderRadius.circular(16.r),
                                           ),
-                                        ),
-                                        16.horizontalSpace,
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                          child: Row(
                                             children: [
-                                              Text(
-                                                "Al Baik Restaurant",
-                                                style: AppTextStyles.w800.copyWith(
-                                                  fontSize: 16,
-                                                  color: Styles.WHITE_COLOR,
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(12.r),
+                                                child: Image.network(
+                                                  shop?.image ?? "",
+                                                  width: 90,
+                                                  height: 80,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error, stackTrace) {
+                                                    return Container(
+                                                      width: 90,
+                                                      height: 80,
+                                                      color: Colors.grey[100],
+                                                      child: Center(
+                                                        child: Image.asset(
+                                                          Constants.getAsset("w-logo"),
+                                                          height: 46,
+                                                          width: 46,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                               ),
-                                              8.verticalSpace,
-                                              Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    Constants.getSvg("routing"),
-                                                    colorFilter: ColorFilter.mode(
-                                                        Styles.WHITE_COLOR,
-                                                        BlendMode.srcIn),
-                                                  ),
-                                                  SizedBox(width: 4.w),
-                                                  Text(
-                                                    "1 Mile",
-                                                    style: AppTextStyles.w500.copyWith(
-                                                      color: Styles.WHITE_COLOR,
-                                                      fontSize: 10,
+                                              16.horizontalSpace,
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      shop?.name ?? "",
+                                                      maxLines: 2,
+                                                      style: AppTextStyles.w800.copyWith(
+                                                        fontSize: 16,
+                                                        color: Styles.WHITE_COLOR,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  SizedBox(width: 4.w),
-                                                  SvgPicture.asset(
-                                                    Constants.getSvg("discount-round"),
-                                                    colorFilter: ColorFilter.mode(
-                                                        Styles.WHITE_COLOR,
-                                                        BlendMode.srcIn),
-                                                  ),
-                                                  SizedBox(width: 4.w),
-                                                  Text(
-                                                    "valid till tuesday",
-                                                    style: AppTextStyles.w500.copyWith(
-                                                      color: Styles.WHITE_COLOR,
-                                                      fontSize: 10,
+                                                    8.verticalSpace,
+                                                    Row(
+                                                      children: [
+                                                        SvgPicture.asset(
+                                                          Constants.getSvg("routing"),
+                                                          colorFilter: ColorFilter.mode(
+                                                              Styles.WHITE_COLOR,
+                                                              BlendMode.srcIn),
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        Text(
+                                                          "1 Mile",
+                                                          style: AppTextStyles.w500.copyWith(
+                                                            color: Styles.WHITE_COLOR,
+                                                            fontSize: 10,
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        SvgPicture.asset(
+                                                          Constants.getSvg("discount-round"),
+                                                          colorFilter: ColorFilter.mode(
+                                                              Styles.WHITE_COLOR,
+                                                              BlendMode.srcIn),
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        Text(
+                                                          "valid till tuesday",
+                                                          style: AppTextStyles.w500.copyWith(
+                                                            color: Styles.WHITE_COLOR,
+                                                            fontSize: 10,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              8.verticalSpace,
-                                              Text(
-                                                "View Details",
-                                                style: AppTextStyles.w400.copyWith(
-                                                  color: Styles.WHITE_COLOR,
-                                                  fontSize: 12,
+                                                    8.verticalSpace,
+                                                    Text(
+                                                      "View Details",
+                                                      style: AppTextStyles.w400.copyWith(
+                                                        color: Styles.WHITE_COLOR,
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
+                                              )
                                             ],
                                           ),
-                                        )
-                                      ],
+                                        );
+                                      },
                                     ),
-                                  );
-                                },
+                                  ),
+                                  16.verticalSpace,
+                                ],
                               ),
-                            ),
-                            16.verticalSpace,
-                          ],
-                        ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -237,7 +290,8 @@ class TaskComplete extends StatelessWidget {
                 colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
               ),
               onTap: () {
-                CustomNavigator.push(Routes.MAIN_PAGES);
+                AppStorage.cacheTaskRewards("");
+                CustomNavigator.push(Routes.MAIN_PAGES, clean: true);
               },
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 42.h),
             ),

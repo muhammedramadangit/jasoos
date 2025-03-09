@@ -26,7 +26,7 @@ class QuestionsBloc extends Bloc<AppEvent, AppState> {
   }
   static QuestionsBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
   QuestionsModel model = QuestionsModel();
-  List<bool>? selectedProblem;
+  List<bool> selectedProblem = [];
   int index = 0;
 
   List<Widget> tasks = [];
@@ -34,6 +34,9 @@ class QuestionsBloc extends Bloc<AppEvent, AppState> {
   Widget getTaskQuestionForType(QuestionInfo? model) {
     switch (model?.questionTypeId) {
       case 1:
+        for(int i = 0; i < model!.options!.length; i++) {
+          QuestionsBloc.instance.selectedProblem.add(false);
+        }
         return MultiSelectTask(model: model); // multi select
       case 2:
         return TextTask(model: model); // note
@@ -51,7 +54,7 @@ class QuestionsBloc extends Bloc<AppEvent, AppState> {
   }
 
   onSelectProblem(value, index) {
-    selectedProblem?[index] = value;
+    selectedProblem[index] = value;
     add(Update());
   }
 
@@ -84,9 +87,6 @@ class QuestionsBloc extends Bloc<AppEvent, AppState> {
           showCustomDialog(dialog: CustomAlertDialog("Sorry! There are no tasks yet, try again later."));
           emit(Empty());
         } else {
-          for(int i = 0; i < model.data!.length; i++) {
-            selectedProblem?.add(false);
-          }
           tasks = model.data!.map((question) {
             return getTaskQuestionForType(question);
           }).toList();

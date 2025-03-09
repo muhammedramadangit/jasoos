@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/core/app_validation.dart';
 import 'package:jasoos/features/add_task/bloc/questions_bloc.dart';
+import 'package:jasoos/main_widgets/dialogs/custom_alert_dialog.dart';
+import 'package:jasoos/main_widgets/dialogs/custom_show_dialog.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 
 import '../../../main_widgets/custom_toast.dart';
@@ -23,15 +26,24 @@ class StartTaskBloc extends Bloc<AppEvent, AppState> {
   int? taskSubmission;
 
   List<String> multiSelectedAnswer = [];
-  TextEditingController textAnswer = TextEditingController();
   XFile? fileAnswer;
   XFile? imageAnswer;
   XFile? videoAnswer;
+  TextEditingController textAnswer = TextEditingController();
+  bool textAnswerValidation = true;
+  String? textAnswerError;
 
   resetData() {
     QuestionsBloc.instance.index = 0;
     selectedRate = 0.0;
     selectedReview = null;
+    multiSelectedAnswer.clear();
+    fileAnswer = null;
+    imageAnswer = null;
+    videoAnswer = null;
+    textAnswer.clear();
+    textAnswerValidation = true;
+    textAnswerError = null;
     add(Update());
   }
 
@@ -50,6 +62,27 @@ class StartTaskBloc extends Bloc<AppEvent, AppState> {
       selectedReview = "-";
     }
     add(Update());
+  }
+
+  checkValidation(Map<String, dynamic> arguments) {
+    int type = arguments["question_type_id"];
+    if(type == 1 && multiSelectedAnswer.isEmpty) {
+      showCustomDialog(dialog: CustomAlertDialog("Please select one or more option to complete"));
+    } else if (type == 2 && textAnswer.text.isEmpty) {
+      textAnswerError = AppValidations.any(textAnswer.text);
+      textAnswerValidation = textAnswerError!.isEmpty;
+      add(Update());
+    } else if (type == 3 && imageAnswer == null) {
+      showCustomDialog(dialog: CustomAlertDialog("Please select an image to complete"));
+    } else if (type == 4 && fileAnswer == null) {
+      showCustomDialog(dialog: CustomAlertDialog("Please select a file to complete"));
+    } else if (type == 5 && videoAnswer == null) {
+      showCustomDialog(dialog: CustomAlertDialog("Please select a video to complete"));
+    } else if (type == 6 && selectedRate == 0.0) {
+      showCustomDialog(dialog: CustomAlertDialog("Please select your rate to complete"));
+    } else {
+      add(Click(arguments: arguments));
+    }
   }
 
   _startTask(AppEvent event, Emitter<AppState> emit) async {
@@ -110,7 +143,5 @@ class StartTaskBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  _update(AppEvent event, Emitter<AppState> emit) async {
-    emit(Initial());
-  }
+  _update(AppEvent event, Emitter<AppState> emit) => emit(Initial());
 }

@@ -36,6 +36,7 @@ import 'package:jasoos/my_app.dart';
 import 'package:jasoos/navigation/routes.dart';
 import 'package:jasoos/no_internet.dart';
 
+import '../features/add_task/bloc/questions_bloc.dart';
 import '../features/add_task/view/add_task_view.dart';
 import '../features/nearest_tasks/view/nearest_tasks_view.dart';
 import '../features/shop_details/view/shop_details_view.dart';
@@ -154,6 +155,7 @@ abstract class CustomNavigator {
 
       case Routes.START_TASK:
         StartTaskBloc.instance.resetData();
+        QuestionsBloc.instance.selectedProblem.clear();
         return pageRoute(AddTaskView());
 
       case Routes.TASK_COMPLETE:

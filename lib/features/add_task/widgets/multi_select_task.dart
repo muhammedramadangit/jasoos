@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/features/add_task/bloc/start_task_bloc.dart';
 import 'package:jasoos/main_widgets/custom_check_box.dart';
@@ -15,9 +16,24 @@ import '../../../helper/text_styles.dart';
 import '../bloc/questions_bloc.dart';
 import '../models/questions_model.dart';
 
-class MultiSelectTask extends StatelessWidget {
+class MultiSelectTask extends StatefulWidget {
   final QuestionInfo? model;
   const MultiSelectTask({super.key, this.model});
+
+  @override
+  State<MultiSelectTask> createState() => _MultiSelectTaskState();
+}
+
+class _MultiSelectTaskState extends State<MultiSelectTask> {
+  bool isSelected = false;
+
+  @override
+  void initState() {
+    // for(int i = 0; i < widget.model!.options!.length; i++) {
+    //   QuestionsBloc.instance.selectedProblem.add(false);
+    // }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +74,7 @@ class MultiSelectTask extends StatelessWidget {
                             SvgPicture.asset(Constants.getSvg("rocket"), height: 40, width: 40),
                             12.verticalSpace,
                             Text(
-                              model?.question ?? "",
+                              widget.model?.question ?? "",
                               style: AppTextStyles.w700.copyWith(
                                 fontSize: 24,
                                 color: Styles.WHITE_COLOR,
@@ -66,47 +82,79 @@ class MultiSelectTask extends StatelessWidget {
                             ),
                             24.verticalSpace,
                             ListView.separated(
-                              itemCount: model!.options!.length,
+                              itemCount: widget.model!.options!.length,
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
                               physics: ClampingScrollPhysics(),
                               separatorBuilder: (context, index) => 16.verticalSpace,
                               itemBuilder: (context, index) {
+                                print("ya ged3aaaaaaaaaaaaaaaaan ${bloc.selectedProblem}");
+
                                 return Container(
                                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                                   decoration: BoxDecoration(
-                                      color: bloc.selectedProblem?[index] == true ? Styles.PRIMARY_COLOR : Styles.BACKGROUND_COLOR,
-                                      borderRadius: BorderRadius.circular(12.r),
-                                      border: Border.all(color: bloc.selectedProblem?[index] == true ? Styles.BLUE_COLOR : Styles.BACKGROUND_COLOR)
+                                    color: bloc.selectedProblem[index] == true ? Styles.PRIMARY_COLOR : Styles.BACKGROUND_COLOR,
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    border: Border.all(color: bloc.selectedProblem[index] == true ? Styles.BLUE_COLOR : Styles.BACKGROUND_COLOR),
                                   ),
                                   child: Row(
                                     children: [
                                       CustomCheckBox(
-                                        isSelected: bloc.selectedProblem?[index],
+                                        isSelected: bloc.selectedProblem[index] == true,
                                         onChanged: (value) {
                                           bloc.onSelectProblem(value, index);
-                                          if (StartTaskBloc.instance.multiSelectedAnswer.any((element) => element == model!.options?[index])) {
-                                            StartTaskBloc.instance.multiSelectedAnswer.removeWhere((element) =>
-                                            element == model!.options?[index]);
+                                          bloc.add(Update());
+                                          if (StartTaskBloc.instance.multiSelectedAnswer.any((element) => element == widget.model!.options?[index])) {
+                                            StartTaskBloc.instance.multiSelectedAnswer.removeWhere((element) => element == widget.model!.options?[index]);
                                           } else {
-                                            StartTaskBloc.instance.multiSelectedAnswer.add(model!.options![index]);
+                                            StartTaskBloc.instance.multiSelectedAnswer.add(widget.model!.options![index]);
                                           }
-                                          print("object ${StartTaskBloc.instance.multiSelectedAnswer}");
                                         },
                                       ),
                                       10.horizontalSpace,
                                       Text(
-                                        model?.options?[index] ?? "",
+                                        widget.model?.options?[index] ?? "",
                                         style: AppTextStyles.w500.copyWith(
                                           fontSize: 16,
                                           color: Styles.WHITE_COLOR,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 );
                               },
                             ),
+
+                            // ...List.generate(
+                            //   widget.model!.options!.length,
+                            //       (index) {
+                            //     if (widget.selectValue != null) {
+                            //       isSelected = widget.selectValue!.any(
+                            //               (element) => element.value == widget.values[index].value);
+                            //     }
+                            //     return ListTile(
+                            //       splashColor: Colors.transparent,
+                            //       onTap: () {
+                            //         if (selectedList.any((element) =>
+                            //         element.value == widget.values[index].value)) {
+                            //           selectedList.removeWhere((element) =>
+                            //           element.value == widget.values[index].value);
+                            //         } else {
+                            //           selectedList.add(widget.values[index]);
+                            //         }
+                            //         setState(() {});
+                            //       },
+                            //       minLeadingWidth: 0,
+                            //       dense: true,
+                            //       contentPadding: EdgeInsets.zero,
+                            //       leading: CheckBoxView(isChecked: isSelected),
+                            //       title: Text(
+                            //         widget.values[index].label,
+                            //         style: AppTextStyles.w500.copyWith(fontSize: 14),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
                           ],
                         ),
                       ),

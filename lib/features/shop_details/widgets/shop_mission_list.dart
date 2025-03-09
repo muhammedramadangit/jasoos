@@ -5,6 +5,7 @@ import 'package:jasoos/features/home/models/shops_model.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
+import '../../../core/app_storage.dart';
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
@@ -52,6 +53,7 @@ class ShopMissionList extends StatelessWidget {
               Tasks? task = model?.tasks?[index];
               return GestureDetector(
                 onTap: () {
+                  AppStorage.cacheTaskRewards("${task?.reward}");
                   CustomNavigator.push(Routes.TASK_DETAILS, arguments: task?.id);
                 },
                 child: Container(

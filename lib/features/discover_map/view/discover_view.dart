@@ -129,7 +129,7 @@ class _DiscoverViewState extends State<DiscoverView> {
           ShopsBloc bloc = ShopsBloc.instance;
           getImage(
             markers: ShopsBloc.instance.model.data!.map((ele) {
-              return MarkerModel(id: 1, lat: double.parse("${ele.latitude}"), lng: double.parse("${ele.longitude}"));
+              return MarkerModel(id: ele.id, lat: double.parse("${ele.latitude}"), lng: double.parse("${ele.longitude}"));
             }).toList(),
           );
           return Scaffold(

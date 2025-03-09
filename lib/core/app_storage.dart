@@ -30,6 +30,8 @@ class AppStorage {
 
   static void cacheUserLng(String value) => _box.write('user_lng', value);
 
+  static void cacheTaskRewards(String value) => _box.write('task_rewards', value);
+
   //----------------------------------------------------------------------------
 
   static bool? get getRememberUser => _box.read('remember_user');
@@ -51,6 +53,8 @@ class AppStorage {
   static String get getUserLat => _box.read('user_lat');
 
   static String get getUserLng => _box.read('user_lng');
+
+  static String get getTaskRewards => _box.read('task_rewards');
 
   static bool get isLogged => _box.hasData('token');
 

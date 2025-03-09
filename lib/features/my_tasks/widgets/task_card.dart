@@ -7,6 +7,7 @@ import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
+import '../../../core/app_storage.dart';
 import '../../../helper/constants.dart';
 import '../models/tasks_model.dart';
 
@@ -20,6 +21,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        AppStorage.cacheTaskRewards("${model?.reward}");
         CustomNavigator.push(Routes.TASK_DETAILS, arguments: model?.id);
       },
       child: Container(

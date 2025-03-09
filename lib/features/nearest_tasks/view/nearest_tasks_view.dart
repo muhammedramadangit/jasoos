@@ -45,7 +45,7 @@ class NearestShopsView extends StatelessWidget {
                 ShopInfo? shop = bloc.model.data?[index];
                 return GestureDetector(
                   onTap: () {
-                    CustomNavigator.push(Routes.TASK_DETAILS, arguments: shop?.id);
+                    CustomNavigator.push(Routes.SHOP_DETAILS, arguments: shop?.id);
                   },
                   child: Container(
                     decoration: BoxDecoration(

@@ -102,23 +102,33 @@ class _AddTaskViewState extends State<AddTaskView> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: Column(
-              children: [
-                bloc.tasks[bloc.index],
-                // UploadImageTask(),
-                Spacer(),
-                CustomButton(
-                  text: "Next",
-                  onTap: () {
-                    StartTaskBloc.instance.add(Click(arguments: {
-                      "question_id" : bloc.model.data?[bloc.index].id,
-                      "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
-                    }));
-                    // bloc.nextTask();
-                  },
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 42.h),
-                ),
-              ],
+            child: BlocBuilder<StartTaskBloc, AppState>(
+              builder: (context, startState) {
+                return Column(
+                  children: [
+                    bloc.tasks[bloc.index],
+                    // UploadImageTask(),
+                    Spacer(),
+                    CustomButton(
+                      text: "Next",
+                      loading: startState is Loading,
+                      onTap: () {
+                        StartTaskBloc.instance.add(Update());
+                        StartTaskBloc.instance.checkValidation({
+                          "question_id" : bloc.model.data?[bloc.index].id,
+                          "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
+                        });
+                        // StartTaskBloc.instance.add(Click(arguments: {
+                        //   "question_id" : bloc.model.data?[bloc.index].id,
+                        //   "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
+                        // }));
+                        // bloc.nextTask();
+                      },
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 42.h),
+                    ),
+                  ],
+                );
+              }
             ),
           ),
         );

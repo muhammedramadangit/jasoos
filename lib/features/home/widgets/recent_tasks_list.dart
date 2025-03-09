@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/my_tasks/models/tasks_model.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 
@@ -41,6 +42,7 @@ class RecentTasksList extends StatelessWidget {
               TaskInfo? task = bloc.model.data?[index];
               return GestureDetector(
                 onTap: () {
+                  AppStorage.cacheTaskRewards("${task?.reward}");
                   CustomNavigator.push(Routes.TASK_DETAILS, arguments: task?.id);
                 },
                 child: Row(
