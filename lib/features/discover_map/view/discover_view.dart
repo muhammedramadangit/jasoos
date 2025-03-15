@@ -84,28 +84,32 @@ class _DiscoverViewState extends State<DiscoverView> {
           Marker(
             markerId: MarkerId(marker.id.toString()),
             position: LatLng(
-              double.tryParse(marker.lat.toString()) ?? 31.0315084,
-              double.tryParse(marker.lng.toString()) ?? 31.3905576,
+              double.tryParse(marker.lat.toString()) ?? double.parse("${AppStorage.getUserLat}"),
+              double.tryParse(marker.lng.toString()) ?? double.parse("${AppStorage.getUserLng}"),
             ),
-            // icon: await BitmapDescriptor.bytes(resizedImage),
-            icon: BitmapDescriptor.defaultMarker,
+            icon: await BitmapDescriptor.bytes(resizedImage),
+            // icon: BitmapDescriptor.defaultMarker,
           ),
         );
+
+        print("MARKER TRUE $markers");
+
       } catch (error) {
         _markers.add(
           Marker(
             markerId: MarkerId(marker.id.toString()),
             position: LatLng(
-              double.tryParse(marker.lat.toString()) ?? 31.0315084,
-              double.tryParse(marker.lng.toString()) ?? 31.3905576,
+              double.tryParse(marker.lat.toString()) ?? double.parse("${AppStorage.getUserLat}"),
+              double.tryParse(marker.lng.toString()) ?? double.parse("${AppStorage.getUserLng}"),
             ),
-            // icon: await BitmapDescriptor.asset(
-            //   ImageConfiguration(size: Size(48, 48)),
-            //   "assets/images/marker.png",
-            // ),
-            icon: BitmapDescriptor.defaultMarker,
+            icon: await BitmapDescriptor.asset(
+              ImageConfiguration(size: Size(48, 48)),
+              "assets/images/marker.png",
+            ),
+            // icon: BitmapDescriptor.defaultMarker,
           ),
         );
+        print("MARKER ERROR $markers");
       }
     }
   }

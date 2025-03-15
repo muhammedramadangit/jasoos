@@ -14,7 +14,7 @@ abstract class Endpoints{
   static const String COMPLETED_TASKS = "tasks/completed";
   static String TASK_DETAILS(int id) => "tasks/$id";
   static String START_TASK(int id) => "tasks/start/$id";
-  static String TASK_QUESTIONS(int id) => "tasks/23/questions";
+  static String TASK_QUESTIONS(int id) => "tasks/$id/questions";
   static String SUBMIT_ANSWER({int? taskSubmission, int? questionId}) => "taskSubmission/$taskSubmission/questions/$questionId/submit";
   static const String SHOPS = "shops";
   static String SHOPS_DETAILS(int id) => "shops/$id";
