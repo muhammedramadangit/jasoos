@@ -7,6 +7,7 @@ abstract class Endpoints{
   static const String LOGIN = "login";
   static const String FORGET_PASSWORD = "forget-password";
   static const String RESET_PASSWORD = "reset-password";
+  static const String CHANGE_PASSWORD = "profile/change-password";
 
   static const String HOME_CATEGORIES = "task-types";
   static const String RECENT_TASKS = "tasks";

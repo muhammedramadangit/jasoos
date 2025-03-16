@@ -112,6 +112,7 @@ class _DiscoverViewState extends State<DiscoverView> {
         print("MARKER ERROR $markers");
       }
     }
+
   }
 
   @override

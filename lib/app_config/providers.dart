@@ -12,6 +12,7 @@ import 'package:provider/single_child_widget.dart';
 
 import '../features/add_task/bloc/questions_bloc.dart';
 import '../features/add_task/bloc/start_task_bloc.dart';
+import '../features/change_password/bloc/change_password_bloc.dart';
 import '../features/home/bloc/current_location_bloc.dart';
 import '../features/home/bloc/home_categories_bloc.dart';
 import '../features/home/bloc/nearest_shop_bloc.dart';
@@ -32,6 +33,7 @@ abstract class ProviderList {
     BlocProvider<LoginBloc>(create: (_) => LoginBloc()..add(Check())),
     BlocProvider<ForgetPasswordBloc>(create: (_) => ForgetPasswordBloc()),
     BlocProvider<ResetPasswordBloc>(create: (_) => ResetPasswordBloc()),
+    BlocProvider<ChangePasswordBloc>(create: (_) => ChangePasswordBloc()),
 
     BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
     BlocProvider<BankAccountBloc>(create: (_) => BankAccountBloc()),

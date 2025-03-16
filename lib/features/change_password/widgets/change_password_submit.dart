@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/helper/styles.dart';
+import 'package:jasoos/main_widgets/custom_button.dart';
+
+import '../bloc/change_password_bloc.dart';
+
+class ChangePasswordSubmit extends StatelessWidget {
+  const ChangePasswordSubmit({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ChangePasswordBloc, AppState>(
+      builder: (context, state) {
+        return CustomButton(
+          text: "Save",
+          loading: state is Loading,
+          padding: Styles.SCREEN_PADDING,
+          onTap: () {
+            ChangePasswordBloc.instance.add(Click());
+          },
+        );
+      },
+    );
+  }
+}
