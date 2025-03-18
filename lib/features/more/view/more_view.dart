@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/core/app_event.dart';
+import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/more/widgets/general_tabs.dart';
 import 'package:jasoos/features/more/widgets/other_tabs.dart';
@@ -8,6 +11,9 @@ import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
+
+import '../../../helper/image_picker_helper.dart';
+import '../../profile/bloc/profile_bloc.dart';
 
 class MoreView extends StatelessWidget {
   const MoreView({super.key});
@@ -24,21 +30,42 @@ class MoreView extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  Stack(
-                    children: [
-                      Image.asset(
-                        Constants.getAsset("w-logo"),
-                        height: 64.h,
-                        width: 64.h,
-                        color: Styles.PRIMARY_COLOR,
-                      ),
-                      Positioned.directional(
-                        bottom: 0,
-                        start: 0,
-                        textDirection: TextDirection.rtl,
-                        child: SvgPicture.asset(Constants.getSvg("edit-fill")),
-                      )
-                    ],
+                  BlocBuilder<ProfileBloc, AppState>(
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          ImagePickerHelper.showOption(
+                            onGet: (value) {
+                              ProfileBloc.instance.profileImage = value;
+                              ProfileBloc.instance.add(PickImage());
+                            },
+                          );
+                        },
+                        child: Stack(
+                          children: [
+                            ProfileBloc.instance.profileImage != null
+                                ? Image.file(
+                                    ProfileBloc.instance.profileImage!,
+                                    height: 64.h,
+                                    width: 64.h,
+                                  )
+                                : Image.network(
+                                    AppStorage.getUser?.data?.profileImage ??
+                                        "",
+                                    height: 64.h,
+                                    width: 64.h,
+                                  ),
+                            Positioned.directional(
+                              bottom: 0,
+                              start: 0,
+                              textDirection: TextDirection.rtl,
+                              child: SvgPicture.asset(
+                                  Constants.getSvg("edit-fill")),
+                            )
+                          ],
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 8.h),
                   Text(

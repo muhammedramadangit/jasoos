@@ -7,12 +7,13 @@ import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/core/app_validation.dart';
 import 'package:jasoos/features/login/repo/login_repo.dart';
-import 'package:jasoos/main_models/user_model.dart';
 import 'package:jasoos/main_widgets/custom_toast.dart';
 import 'package:jasoos/main_widgets/dialogs/custom_alert_dialog.dart';
 import 'package:jasoos/main_widgets/dialogs/custom_show_dialog.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
+
+import '../../profile/bloc/profile_bloc.dart';
 
 class LoginBloc extends Bloc<AppEvent, AppState> {
   LoginBloc() : super(Initial()) {
@@ -86,7 +87,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
             );
             emit(Done());
           } else {
-            AppStorage.cacheUser(UserModel.fromJson(response.data));
+            ProfileBloc.instance.add(Get());
             AppStorage.cacheToken(response.data["data"]["token"]);
             CustomNavigator.push(Routes.MAIN_PAGES, clean: true);
             add(Check());

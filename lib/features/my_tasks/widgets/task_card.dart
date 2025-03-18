@@ -49,7 +49,8 @@ class TaskCard extends StatelessWidget {
             8.verticalSpace,
             Text(
               model?.name ?? "",
-              style: AppTextStyles.w500.copyWith(fontSize: 14),
+              maxLines: 2,
+              style: AppTextStyles.w500.copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
             ),
             4.verticalSpace,
             Text(

@@ -5,6 +5,7 @@ import 'package:jasoos/features/forget_password/bloc/forget_password_bloc.dart';
 import 'package:jasoos/features/language/bloc/language_bloc.dart';
 import 'package:jasoos/features/login/bloc/login_bloc.dart';
 import 'package:jasoos/features/otp/bloc/otp_bloc.dart';
+import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/features/register/bloc/register_bloc.dart';
 import 'package:jasoos/features/reset_password/bloc/reset_password_bloc.dart';
 import 'package:jasoos/features/select_category/bloc/select_category_bloc.dart';
@@ -18,6 +19,7 @@ import '../features/home/bloc/home_categories_bloc.dart';
 import '../features/home/bloc/nearest_shop_bloc.dart';
 import '../features/home/bloc/recent_tasks_bloc.dart';
 import '../features/home/bloc/shops_bloc.dart';
+import '../features/id_information/bloc/id_information_bloc.dart';
 import '../features/login/bloc/social_login.dart';
 import '../features/my_tasks/bloc/completed_tasks_bloc.dart';
 import '../features/my_tasks/bloc/ongoing_tasks_bloc.dart';
@@ -31,6 +33,8 @@ abstract class ProviderList {
     BlocProvider<OtpBloc>(create: (_) => OtpBloc()),
     BlocProvider<SelectCategoryBloc>(create: (_) => SelectCategoryBloc()..add(Get())),
     BlocProvider<LoginBloc>(create: (_) => LoginBloc()..add(Check())),
+    BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
+    BlocProvider<IdInformationBloc>(create: (_) => IdInformationBloc()),
     BlocProvider<ForgetPasswordBloc>(create: (_) => ForgetPasswordBloc()),
     BlocProvider<ResetPasswordBloc>(create: (_) => ResetPasswordBloc()),
     BlocProvider<ChangePasswordBloc>(create: (_) => ChangePasswordBloc()),

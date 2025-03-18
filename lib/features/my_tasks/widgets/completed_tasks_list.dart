@@ -40,7 +40,7 @@ class CompletedTasksList extends StatelessWidget {
                 ),
                 16.verticalSpace,
                 SizedBox(
-                  height: 210.h,
+                  height: 230.h,
                   child: ListView.separated(
                     itemCount: bloc.model.data!.length,
                     scrollDirection: Axis.horizontal,

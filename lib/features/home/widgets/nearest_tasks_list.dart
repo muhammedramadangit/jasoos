@@ -75,7 +75,7 @@ class NearestTasksList extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12.r),
                                       image: DecorationImage(
-                                        image: AssetImage(shop?.image ?? ""),
+                                        image: NetworkImage(shop?.image ?? ""),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -132,16 +132,15 @@ class NearestTasksList extends StatelessWidget {
                                         Spacer(),
                                         Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                shop?.name ?? "",
-                                                style: AppTextStyles.w500.copyWith(
-                                                  color: Styles.WHITE_COLOR,
-                                                  fontSize: 14,
-                                                ),
+                                          child: Align(
+                                            alignment: AlignmentDirectional.centerStart,
+                                            child: Text(
+                                              shop?.name ?? "",
+                                              style: AppTextStyles.w500.copyWith(
+                                                color: Styles.WHITE_COLOR,
+                                                fontSize: 14,
                                               ),
-                                            ],
+                                            ),
                                           ),
                                         ),
                                       ],

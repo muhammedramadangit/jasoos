@@ -5,9 +5,14 @@ abstract class Endpoints{
   static const String CATEGORIES = "categories";
   static const String SELECT_CATEGORIES = "assign-categories";
   static const String LOGIN = "login";
+  static const String PROFILE = "profile";
+  static const String UPDATE_PROFILE = "profile/update";
+  static const String UPDATE_PROFILE_IMAGE = "profile/update-image";
+  static const String UPDATE_PROFILE_ID = "profile/update-identification";
   static const String FORGET_PASSWORD = "forget-password";
   static const String RESET_PASSWORD = "reset-password";
   static const String CHANGE_PASSWORD = "profile/change-password";
+  static const String UPDATE_BANK_ACCOUNT = "profile/update-bank-account";
 
   static const String HOME_CATEGORIES = "task-types";
   static const String RECENT_TASKS = "tasks";

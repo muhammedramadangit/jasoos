@@ -38,7 +38,10 @@ import 'package:jasoos/no_internet.dart';
 
 import '../features/add_task/bloc/questions_bloc.dart';
 import '../features/add_task/view/add_task_view.dart';
+import '../features/bank_account/bloc/bank_account_bloc.dart';
+import '../features/id_information/bloc/id_information_bloc.dart';
 import '../features/nearest_tasks/view/nearest_tasks_view.dart';
+import '../features/profile/bloc/profile_bloc.dart';
 import '../features/shop_details/view/shop_details_view.dart';
 import '../features/task_details/bloc/task_details_bloc.dart';
 
@@ -131,12 +134,15 @@ abstract class CustomNavigator {
         return pageRoute(LanguageView());
 
       case Routes.PROFILE:
+        ProfileBloc.instance.fillUserData();
         return pageRoute(ProfileView());
 
       case Routes.BANK_ACCOUNT:
+        BankAccountBloc.instance.fillBankData();
         return pageRoute(BankAccountView());
 
       case Routes.ID_INFORMATION:
+        IdInformationBloc.instance.fillData();
         return pageRoute(IdInformationView());
 
       case Routes.INVITE_FRIENDS:

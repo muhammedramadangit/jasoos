@@ -41,7 +41,7 @@ class ShopMissionList extends StatelessWidget {
         ),
         16.verticalSpace,
         SizedBox(
-          height: 66.h,
+          height: 78.h,
           child: ListView.separated(
             itemCount: model!.tasks!.length,
             scrollDirection: Axis.horizontal,
@@ -72,7 +72,8 @@ class ShopMissionList extends StatelessWidget {
                           children: [
                             Text(
                               task?.name ?? "",
-                              style: AppTextStyles.w500.copyWith(fontSize: 14),
+                              maxLines: 2,
+                              style: AppTextStyles.w500.copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
                             ),
                             4.verticalSpace,
                             Text(

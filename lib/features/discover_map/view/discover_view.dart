@@ -1,16 +1,15 @@
-import 'dart:ui' as ui;
+import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/home/bloc/shops_bloc.dart';
 import 'package:jasoos/features/home/models/shops_model.dart';
+import 'package:jasoos/helper/map_helper.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/main_widgets/fields/text_input_field.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
@@ -31,94 +30,6 @@ class DiscoverView extends StatefulWidget {
 }
 
 class _DiscoverViewState extends State<DiscoverView> {
-  final LatLng _initialPosition = LatLng(double.parse("${AppStorage.getUserLat}"), double.parse("${AppStorage.getUserLng}")); // Example: Cairo, Egypt
-  Set<Marker> _markers = Set();
-  Set<Circle> circles = Set();
-  final customCircle = [];
-
-  // late LatLng latLng;
-
-  GoogleMapController? mapController;
-
-  //current Location
-  onMapCreated(GoogleMapController? controller) {
-    mapController = controller;
-    mapController!.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(target: _initialPosition, zoom: 15),
-    ));
-    // _markers = widget.markers ?? Set();
-  }
-
-  Future<Uint8List> resizeAssetImage(String assetName, {required double width, required double height}) async {
-    ByteData data = await rootBundle.load(assetName);
-    final codec = await ui.instantiateImageCodec(Uint8List.sublistView(data.buffer.asUint8List()));
-    final frameInfo = await codec.getNextFrame();
-    final image = frameInfo.image;
-
-    final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder, Rect.fromPoints(Offset(0, 0), Offset(width, height)));
-    canvas.drawImageRect(
-      image,
-      Rect.fromPoints(Offset(0, 0), Offset(image.width.toDouble(), image.height.toDouble())),
-      Rect.fromPoints(Offset(0, 0), Offset(width, height)),
-      Paint(),
-    );
-
-    final resizedImage =
-    await recorder.endRecording().toImage(width.toInt(), height.toInt());
-    final resizedImageBytes =
-    await resizedImage.toByteData(format: ui.ImageByteFormat.png);
-
-    return resizedImageBytes!.buffer.asUint8List();
-  }
-
-  getImage({List<MarkerModel>? markers}) async {
-    for (MarkerModel marker in markers!) {
-      try {
-        Uint8List resizedImage = await resizeAssetImage(
-          "assets/images/marker.png",
-          width: 48,
-          height: 48,
-        );
-        _markers.add(
-          Marker(
-            markerId: MarkerId(marker.id.toString()),
-            position: LatLng(
-              double.tryParse(marker.lat.toString()) ?? double.parse("${AppStorage.getUserLat}"),
-              double.tryParse(marker.lng.toString()) ?? double.parse("${AppStorage.getUserLng}"),
-            ),
-            icon: await BitmapDescriptor.bytes(resizedImage),
-            // icon: BitmapDescriptor.defaultMarker,
-          ),
-        );
-
-        print("MARKER TRUE $markers");
-
-      } catch (error) {
-        _markers.add(
-          Marker(
-            markerId: MarkerId(marker.id.toString()),
-            position: LatLng(
-              double.tryParse(marker.lat.toString()) ?? double.parse("${AppStorage.getUserLat}"),
-              double.tryParse(marker.lng.toString()) ?? double.parse("${AppStorage.getUserLng}"),
-            ),
-            icon: await BitmapDescriptor.asset(
-              ImageConfiguration(size: Size(48, 48)),
-              "assets/images/marker.png",
-            ),
-            // icon: BitmapDescriptor.defaultMarker,
-          ),
-        );
-        print("MARKER ERROR $markers");
-      }
-    }
-
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,11 +43,14 @@ class _DiscoverViewState extends State<DiscoverView> {
           return CustomEmptyView();
         } else {
           ShopsBloc bloc = ShopsBloc.instance;
-          getImage(
-            markers: ShopsBloc.instance.model.data!.map((ele) {
-              return MarkerModel(id: ele.id, lat: double.parse("${ele.latitude}"), lng: double.parse("${ele.longitude}"));
-            }).toList(),
-          );
+
+          log("USER LAT ${AppStorage.getUserLat} | USER LNG ${AppStorage.getUserLng}");
+          // getImage(
+          //   markers: ShopsBloc.instance.model.data!.map((ele) {
+          //     return MarkerModel(id: ele.id, lat: double.parse("${ele.latitude}"), lng: double.parse("${ele.longitude}"));
+          //   }).toList(),
+          // );
+
           return Scaffold(
             appBar: discoverAppBar(),
             body: Padding(
@@ -149,15 +63,16 @@ class _DiscoverViewState extends State<DiscoverView> {
                       topRight: Radius.circular(24.r),
                       topLeft: Radius.circular(24.r),
                     ),
-                    child: GoogleMap(
-                      mapType: MapType.terrain,
-                      initialCameraPosition: CameraPosition(
-                        target: _initialPosition,
-                        zoom: 14.0,
-                      ),
-                      markers: _markers,
-                      mapToolbarEnabled: true,
-                      zoomControlsEnabled: false,
+                    child: CustomMap(
+                      lat: double.parse("${ShopsBloc.instance.model.data?.first.latitude}"),
+                      long: double.parse("${ShopsBloc.instance.model.data?.first.longitude}"),
+                      markers: ShopsBloc.instance.model.data!.map((ele) {
+                        return MarkerModel(id: ele.id, lat: double.parse("${ele.latitude}"), lng: double.parse("${ele.longitude}"));
+                      }).toList(),
+                      // markers: [
+                      //   MarkerModel(id: 1, lat: 21.5292, lng: 39.1611),
+                      //   MarkerModel(id: 1, lat: 21.4241, lng: 39.8173),
+                      // ],
                     ),
                   ),
 
@@ -311,10 +226,10 @@ class _DiscoverViewState extends State<DiscoverView> {
   }
 }
 
-class MarkerModel {
-  int? id;
-  double? lat;
-  double? lng;
-
-  MarkerModel({this.id, this.lat, this.lng});
-}
+// class MarkerModel {
+//   int? id;
+//   double? lat;
+//   double? lng;
+//
+//   MarkerModel({this.id, this.lat, this.lng});
+// }

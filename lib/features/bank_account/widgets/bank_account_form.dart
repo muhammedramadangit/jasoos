@@ -4,6 +4,8 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/fields/text_input_field.dart';
 
+import '../../../core/app_event.dart';
+
 class BankAccountForm extends StatelessWidget {
   const BankAccountForm({super.key});
 
@@ -17,21 +19,45 @@ class BankAccountForm extends StatelessWidget {
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.name,
           readOnly: !bloc.canEdit,
-          controller: TextEditingController(text: "SNB Bank"),
+          controller: bloc.bankName,
+          errorText: bloc.bankNameError,
+          hasError: !bloc.bankNameValidation,
+          onChange: (value) {
+            if (!bloc.bankNameValidation) {
+              bloc.bankNameValidation = true;
+            }
+            bloc.add(Update());
+          },
         ),
         TextInputField(
           labelText: "Holder Name",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.name,
           readOnly: !bloc.canEdit,
-          controller: TextEditingController(text: "Muhamad Elhadedy"),
+          controller: bloc.holderName,
+          errorText: bloc.holderNameError,
+          hasError: !bloc.holderNameValidation,
+          onChange: (value) {
+            if (!bloc.holderNameValidation) {
+              bloc.holderNameValidation = true;
+            }
+            bloc.add(Update());
+          },
         ),
         TextInputField(
           labelText: "IBAN",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.text,
           readOnly: !bloc.canEdit,
-          controller: TextEditingController(text: "CUOHIHYFYT5678987986778"),
+          controller: bloc.iban,
+          errorText: bloc.ibanError,
+          hasError: !bloc.ibanValidation,
+          onChange: (value) {
+            if (!bloc.ibanValidation) {
+              bloc.ibanValidation = true;
+            }
+            bloc.add(Update());
+          },
         ),
       ],
     );

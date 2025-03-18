@@ -99,8 +99,8 @@ mixin AppValidations {
       return "";
   }
 
-  static String? gender(int? value) {
-    if (value == null || value == -1)
+  static String? gender(String? value) {
+    if (value == null || value == "")
       return tr("VGender");
     else
       return "";

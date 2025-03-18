@@ -2,7 +2,6 @@ import "dart:async";
 
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:geolocator/geolocator.dart";
 import "package:jasoos/core/app_storage.dart";
 import "package:jasoos/helper/constants.dart";
 import "package:jasoos/helper/styles.dart";
@@ -27,8 +26,8 @@ class _SplashViewState extends State<SplashView> {
         CustomNavigator.push(Routes.ONBOARDING, replace: true);
         AppStorage.cacheOpenOnboarding(1);
       } else {
-        CustomNavigator.push(AppStorage.isLogged ? Routes.MAIN_PAGES : Routes.LOGIN, replace: true);
-        // CustomNavigator.push(Routes.LOGIN, replace: true);
+        // CustomNavigator.push(AppStorage.isLogged ? Routes.MAIN_PAGES : Routes.LOGIN, replace: true);
+        CustomNavigator.push(Routes.LOGIN, replace: true);
       }
     });
     super.initState();

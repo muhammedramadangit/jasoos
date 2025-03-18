@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jasoos/core/app_storage.dart';
+import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/features/home/widgets/complete_profile.dart';
 import 'package:jasoos/features/home/widgets/home_appbar.dart';
 import 'package:jasoos/features/home/widgets/home_slider.dart';
+import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
@@ -26,14 +28,27 @@ class HomeView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Text(
-                "Hi, ${FormattedName.format(AppStorage.getUser?.data?.name)}👋",
-                style: AppTextStyles.w500.copyWith(fontSize: 24),
-              ),
+            BlocBuilder<ProfileBloc, AppState>(
+              builder: (context, state) {
+                ProfileBloc bloc = ProfileBloc.instance;
+                return state is Error || state is Loading ? SizedBox() : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        "Hi, ${FormattedName.format(bloc.model.data?.name)}👋",
+                        style: AppTextStyles.w500.copyWith(fontSize: 24),
+                      ),
+                    ),
+                    if(bloc.profileNullCount != 0)
+                      CompleteProfile(),
+                    if(bloc.profileNullCount == 0)
+                      16.verticalSpace,
+                  ],
+                );
+              },
             ),
-            CompleteProfile(),
             HomeSlider(),
             16.verticalSpace,
             HomeCategoriesList(),

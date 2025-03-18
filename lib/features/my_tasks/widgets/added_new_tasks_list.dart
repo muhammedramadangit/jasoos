@@ -40,7 +40,7 @@ class AddedNewTasksList extends StatelessWidget {
                 ),
                 16.verticalSpace,
                 SizedBox(
-                  height: 260.h,
+                  height: 280.h,
                   child: ListView.separated(
                     itemCount: bloc.model.data!.length,
                     scrollDirection: Axis.horizontal,
