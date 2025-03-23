@@ -40,36 +40,35 @@ AppBar homeAppBar() {
                       child: CircleAvatar(
                         radius: 20,
                         backgroundColor: Styles.WHITE_COLOR,
-                        child: Center(
-                          child: Image.network(bloc.model.data?.profileImage ?? ""),
-                        ),
+                        backgroundImage: NetworkImage(bloc.model.data?.profileImage ?? ""),
                       ),
                     ),
                     10.horizontalSpace,
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Styles.WHITE_COLOR,
-                        border: Border.all(color: Styles.ACCENT_COLOR),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            bloc.model.data?.completedTasks ?? "",
-                            style: AppTextStyles.w500.copyWith(
-                              fontSize: 14,
-                              color: Styles.PRIMARY_COLOR,
+                    if(bloc.model.data?.completedTasks != "0")
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Styles.WHITE_COLOR,
+                          border: Border.all(color: Styles.ACCENT_COLOR),
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              bloc.model.data?.completedTasks ?? "",
+                              style: AppTextStyles.w500.copyWith(
+                                fontSize: 14,
+                                color: Styles.PRIMARY_COLOR,
+                              ),
                             ),
-                          ),
-                          4.horizontalSpace,
-                          SvgPicture.asset(Constants.getSvg("star-move"),
-                            colorFilter: ColorFilter.mode(
-                                Styles.PRIMARY_COLOR, BlendMode.srcIn),
-                          ),
-                        ],
+                            4.horizontalSpace,
+                            SvgPicture.asset(Constants.getSvg("star-move"),
+                              colorFilter: ColorFilter.mode(
+                                  Styles.PRIMARY_COLOR, BlendMode.srcIn),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 );
               },

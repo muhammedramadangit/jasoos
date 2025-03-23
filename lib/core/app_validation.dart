@@ -67,8 +67,8 @@ mixin AppValidations {
 
     if (value!.isEmpty) {
       return tr("empty");
-    // } else if (!regExp.hasMatch(value.trim())) {
-    //   return tr("VPass");
+    } else if (!regExp.hasMatch(value.trim())) {
+      return tr("VPass");
     } else if (value.length < 8) {
       return "Password must be at least 8 characters";
     } else {

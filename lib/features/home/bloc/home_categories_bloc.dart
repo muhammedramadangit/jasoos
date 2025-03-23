@@ -16,6 +16,13 @@ class HomeCategoriesBloc extends Bloc<AppEvent, AppState> {
   static HomeCategoriesBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
   HomeCategoriesModel model = HomeCategoriesModel();
 
+  int? selectedTaskType;
+
+  onChangeTaskType(int index) {
+    selectedTaskType = index;
+    add(Update());
+  }
+
   _get(AppEvent event, Emitter<AppState> emit) async {
     emit(Loading());
     try {

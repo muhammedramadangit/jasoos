@@ -74,7 +74,7 @@ class TaskInfoCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          "${model?.taskType}",
+                          "Valid till ${model?.endDate}",
                           style: AppTextStyles.w400.copyWith(
                             color: Styles.DARK_TEXT_COLOR,
                             fontSize: 12,

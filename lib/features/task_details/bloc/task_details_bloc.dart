@@ -25,7 +25,7 @@ class TaskDetailsBloc extends Bloc<AppEvent, AppState> {
       Response response = await TaskDetailsRepo.getTaskDetails(event.arguments as int);
       if(response.statusCode == 200) {
         model = TasksDetailsModel.fromJson(response.data);
-        distance = Geolocator.distanceBetween(double.parse(AppStorage.getUserLat), double.parse(AppStorage.getUserLng), double.parse("${model.data?.latitude}"), double.parse("${model.data?.longitude}"));
+        distance = Geolocator.distanceBetween(double.parse("${AppStorage.getUserLat}"), double.parse("${AppStorage.getUserLng}"), double.parse("${model.data?.latitude}"), double.parse("${model.data?.longitude}"));
         emit(Done());
       } else {
         emit(Error(error: response.data["message"]));

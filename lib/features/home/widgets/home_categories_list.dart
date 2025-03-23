@@ -38,34 +38,45 @@ class HomeCategoriesList extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 90.h,
+                height: 100.h,
                 child: ListView.separated(
                   itemCount: bloc.model.data!.length,
                   scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
                   separatorBuilder: (context, index) => 16.horizontalSpace,
                   itemBuilder: (context, index) {
-                    return Container(
-                      width: 60.w,
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 20.r,
-                            backgroundColor: Styles.BORDER_COLOR.withValues(
-                                alpha: 0.5),
-                            child: Center(
-                              child: SvgPicture.asset(Constants.getSvg("moneys")),
+                    return GestureDetector(
+                      onTap: () => bloc.onChangeTaskType(index),
+                      child: Container(
+                        width: 80.w,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          color: bloc.selectedTaskType == index ? Styles.HIGHLIGHT_COLOR.withValues(alpha: 0.3) : Colors.transparent,
+                          border: Border.all(
+                            width: 0.5,
+                            color: bloc.selectedTaskType == index ? Styles.PRIMARY_COLOR : Colors.transparent,
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 20.r,
+                              backgroundColor: Styles.BORDER_COLOR.withValues(alpha: 0.5),
+                              child: Center(
+                                child: SvgPicture.asset(Constants.getSvg("moneys")),
+                              ),
                             ),
-                          ),
-                          8.verticalSpace,
-                          Text(
-                            bloc.model.data?[index].name ?? "",
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.w500.copyWith(fontSize: 10),
-                          ),
-                        ],
+                            8.verticalSpace,
+                            Text(
+                              bloc.model.data?[index].name ?? "",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.w500.copyWith(fontSize: 10),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },

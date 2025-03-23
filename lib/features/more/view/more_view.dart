@@ -43,18 +43,13 @@ class MoreView extends StatelessWidget {
                         },
                         child: Stack(
                           children: [
-                            ProfileBloc.instance.profileImage != null
-                                ? Image.file(
-                                    ProfileBloc.instance.profileImage!,
-                                    height: 64.h,
-                                    width: 64.h,
-                                  )
-                                : Image.network(
-                                    AppStorage.getUser?.data?.profileImage ??
-                                        "",
-                                    height: 64.h,
-                                    width: 64.h,
-                                  ),
+                            CircleAvatar(
+                              radius: 34,
+                              backgroundColor: Styles.HIGHLIGHT_COLOR,
+                              backgroundImage: ProfileBloc.instance.profileImage != null
+                                  ? FileImage(ProfileBloc.instance.profileImage!)
+                                  : NetworkImage(AppStorage.getUser?.data?.profileImage ?? ""),
+                            ),
                             Positioned.directional(
                               bottom: 0,
                               start: 0,

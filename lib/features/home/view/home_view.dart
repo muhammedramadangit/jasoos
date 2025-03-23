@@ -11,7 +11,6 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
 import '../../../helper/styles.dart';
-import '../../../utiltiy/formatted_name.dart';
 import '../widgets/home_categories_list.dart';
 import '../widgets/nearest_tasks_list.dart';
 import '../widgets/recent_tasks_list.dart';
@@ -37,7 +36,7 @@ class HomeView extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
-                        "Hi, ${FormattedName.format(bloc.model.data?.name)}👋",
+                        "Hi, ${bloc.model.data?.name!.split(" ")[0]}👋",
                         style: AppTextStyles.w500.copyWith(fontSize: 24),
                       ),
                     ),
@@ -61,7 +60,12 @@ class HomeView extends StatelessWidget {
             ),
             NearestTasksList(),
             16.verticalSpace,
-            _ViewAll(title: "Recent Tasks"),
+            _ViewAll(
+              title: "Recent Tasks",
+              onView: () {
+                CustomNavigator.push(Routes.ALL_RECENT_TASKS);
+              },
+            ),
             RecentTasksList(),
           ],
         ),

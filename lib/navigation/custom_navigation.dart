@@ -6,6 +6,7 @@ import 'package:jasoos/features/change_password/view/change_password_view.dart';
 import 'package:jasoos/features/forget_password/bloc/forget_password_bloc.dart';
 import 'package:jasoos/features/forget_password/view/forget_password_view.dart';
 import 'package:jasoos/features/help/view/help_view.dart';
+import 'package:jasoos/features/home/view/all_recent_tasks_view.dart';
 import 'package:jasoos/features/id_information/view/id_information_view.dart';
 import 'package:jasoos/features/invite_friend/view/invite_friend_view.dart';
 import 'package:jasoos/features/language/view/language_view.dart';
@@ -40,7 +41,7 @@ import '../features/add_task/bloc/questions_bloc.dart';
 import '../features/add_task/view/add_task_view.dart';
 import '../features/bank_account/bloc/bank_account_bloc.dart';
 import '../features/id_information/bloc/id_information_bloc.dart';
-import '../features/nearest_tasks/view/nearest_tasks_view.dart';
+import '../features/home/view/nearest_shops_view.dart';
 import '../features/profile/bloc/profile_bloc.dart';
 import '../features/shop_details/view/shop_details_view.dart';
 import '../features/task_details/bloc/task_details_bloc.dart';
@@ -169,6 +170,9 @@ abstract class CustomNavigator {
 
       case Routes.NEAREST_SHOPS:
         return pageRoute(NearestShopsView());
+
+      case Routes.ALL_RECENT_TASKS:
+        return pageRoute(AllRecentTasksView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

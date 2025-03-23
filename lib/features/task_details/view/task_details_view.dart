@@ -58,7 +58,7 @@ class TaskDetailsView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Styles.divider(ver: 12.h),
+                Styles.divider(ver: 16.h, hor: 16.w),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: GestureDetector(

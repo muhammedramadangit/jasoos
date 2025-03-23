@@ -33,7 +33,7 @@ class ShopMissionList extends StatelessWidget {
               Expanded(
                 child: Text(
                   "${model?.tasksCount} Missions is available",
-                  style: AppTextStyles.w500.copyWith(fontSize: 14),
+                  style: AppTextStyles.w500.copyWith(fontSize: 16),
                 ),
               ),
             ],

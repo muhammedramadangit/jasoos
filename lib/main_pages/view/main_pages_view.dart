@@ -9,6 +9,7 @@ import 'package:jasoos/features/home/bloc/current_location_bloc.dart';
 import 'package:jasoos/features/home/bloc/shops_bloc.dart';
 import 'package:jasoos/features/home/view/home_view.dart';
 import 'package:jasoos/features/more/view/more_view.dart';
+import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/no_internet.dart';
@@ -70,6 +71,7 @@ class _MainPagesViewState extends State<MainPagesView>
       HomeCategoriesBloc.instance.add(Get());
       RecentTasksBloc.instance.add(Get());
     });
+    ProfileBloc.instance.add(Get());
     OngoingTasksBloc.instance.add(Get());
     CompletedTasksBloc.instance.add(Get());
     super.initState();

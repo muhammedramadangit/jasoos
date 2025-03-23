@@ -15,9 +15,10 @@ class CustomMap extends StatefulWidget {
   final double? radius;
   final List<dynamic>? locations;
   final onTap;
-
+  final CameraPosition? initialCameraPosition;
   // final Set<Marker>? markers;
   final List<MarkerModel> markers;
+  final void Function(GoogleMapController)? onMapCreated;
 
   const CustomMap({
     Key? key,
@@ -29,7 +30,7 @@ class CustomMap extends StatefulWidget {
     this.width,
     this.radius,
     this.isScroll = true,
-    required this.markers,
+    required this.markers, this.initialCameraPosition, this.onMapCreated,
     // required this.daycareList,
   }) : super(key: key);
 
@@ -156,7 +157,7 @@ class _CustomMapState extends State<CustomMap> {
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: GoogleMap(
-                  initialCameraPosition: CameraPosition(
+                  initialCameraPosition: widget.initialCameraPosition ?? CameraPosition(
                     target: latLng,
                     zoom: 15.0,
                   ),
@@ -164,7 +165,7 @@ class _CustomMapState extends State<CustomMap> {
                   zoomGesturesEnabled: true,
                   trafficEnabled: true,
                   onTap: (position) {},
-                  onMapCreated: onMapCreated,
+                  onMapCreated: widget.onMapCreated ?? onMapCreated,
                   mapToolbarEnabled: true,
                   onCameraMove: (position) {
                     latLng = position.target;

@@ -13,6 +13,7 @@ import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/url_launcher_helper.dart';
 import '../../../main_widgets/custom_center_text.dart';
+import '../../task_details/widgets/how_it_work_info.dart';
 import '../widgets/shop_info_card.dart';
 import '../widgets/shop_mission_list.dart';
 
@@ -33,6 +34,29 @@ class ShopDetailsView extends StatelessWidget {
               children: [
                 ShopInfoCard(model: bloc.model.data),
                 24.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: GestureDetector(
+                    onTap: () {
+                      howItWorkBottomSheet();
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(Constants.getSvg("info-circle")),
+                        8.horizontalSpace,
+                        Expanded(
+                          child: Text(
+                            "How it Works",
+                            style: AppTextStyles.w500.copyWith(fontSize: 14),
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 16,
+                            color: Styles.DARK_GREY_COLOR),
+                      ],
+                    ),
+                  ),
+                ),
+                Styles.divider(ver: 16.h, hor: 16.w),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: GestureDetector(
@@ -61,7 +85,8 @@ class ShopDetailsView extends StatelessWidget {
                     ),
                   ),
                 ),
-                24.verticalSpace,
+                // 24.verticalSpace,
+                Styles.divider(ver: 16.h, hor: 16.w),
                 ShopMissionList(model: bloc.model.data),
               ],
             ),

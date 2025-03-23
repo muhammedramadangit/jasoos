@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/core/app_event.dart';
@@ -74,10 +75,14 @@ class RegisterForm extends StatelessWidget {
           errorText: bloc.passwordError,
           hasError: !bloc.passwordValidation,
           hasValidationHint: true,
-          validationHint: "Password must be at least 8 characters",
+          validationHint: tr("VPass"),
           validationHintStyle: AppTextStyles.w400.copyWith(
-            fontSize: 16,
-            color: bloc.password.text.isEmpty ? Styles.GREY_COLOR : bloc.password.text.length >= 8 ?  Styles.LIGHT_GREEN_TEXT_COLOR : Styles.RED_COLOR,
+            fontSize: 15,
+            color: bloc.password.text.isEmpty
+                ? Styles.GREY_COLOR
+                : (RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~])\S{8,}$').hasMatch(bloc.password.text.trim()) == true)
+                ? Styles.LIGHT_GREEN_TEXT_COLOR
+                : Styles.RED_COLOR,
           ),
           onChange: (value) {
             if (!bloc.passwordValidation) {

@@ -16,7 +16,7 @@ import '../../../main_widgets/custom_empty_view.dart';
 import '../../../main_widgets/custom_loading.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../home/models/shops_model.dart';
+import '../models/shops_model.dart';
 
 class NearestShopsView extends StatelessWidget {
   const NearestShopsView({super.key});

@@ -26,8 +26,8 @@ class _SplashViewState extends State<SplashView> {
         CustomNavigator.push(Routes.ONBOARDING, replace: true);
         AppStorage.cacheOpenOnboarding(1);
       } else {
-        // CustomNavigator.push(AppStorage.isLogged ? Routes.MAIN_PAGES : Routes.LOGIN, replace: true);
-        CustomNavigator.push(Routes.LOGIN, replace: true);
+        CustomNavigator.push(AppStorage.isLogged ? Routes.MAIN_PAGES : Routes.LOGIN, replace: true);
+        // CustomNavigator.push(Routes.LOGIN, replace: true);
       }
     });
     super.initState();

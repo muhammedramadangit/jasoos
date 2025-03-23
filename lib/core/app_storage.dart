@@ -50,9 +50,9 @@ class AppStorage {
 
   static String get getPhoneCode => _box.read('phone_code') ?? "+966";
 
-  static String get getUserLat => _box.read('user_lat');
+  static String? get getUserLat => _box.read('user_lat');
 
-  static String get getUserLng => _box.read('user_lng');
+  static String? get getUserLng => _box.read('user_lng');
 
   static String get getTaskRewards => _box.read('task_rewards');
 
