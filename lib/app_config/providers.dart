@@ -9,11 +9,13 @@ import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/features/register/bloc/register_bloc.dart';
 import 'package:jasoos/features/reset_password/bloc/reset_password_bloc.dart';
 import 'package:jasoos/features/select_category/bloc/select_category_bloc.dart';
+import 'package:jasoos/features/terms/bloc/terms_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 
 import '../features/add_task/bloc/questions_bloc.dart';
 import '../features/add_task/bloc/start_task_bloc.dart';
 import '../features/change_password/bloc/change_password_bloc.dart';
+import '../features/help/bloc/help_bloc.dart';
 import '../features/home/bloc/current_location_bloc.dart';
 import '../features/home/bloc/home_categories_bloc.dart';
 import '../features/home/bloc/nearest_shop_bloc.dart';
@@ -21,8 +23,9 @@ import '../features/home/bloc/recent_tasks_bloc.dart';
 import '../features/home/bloc/shops_bloc.dart';
 import '../features/id_information/bloc/id_information_bloc.dart';
 import '../features/login/bloc/social_login.dart';
-import '../features/my_tasks/bloc/completed_tasks_bloc.dart';
-import '../features/my_tasks/bloc/ongoing_tasks_bloc.dart';
+import '../features/my_tasks/bloc/my_tasks_bloc.dart';
+import '../features/my_tasks/bloc/tasks_status_bloc.dart';
+import '../features/policy/bloc/policy_bloc.dart';
 import '../features/shop_details/bloc/shop_details_bloc.dart';
 import '../features/task_details/bloc/task_details_bloc.dart';
 
@@ -42,8 +45,8 @@ abstract class ProviderList {
     BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
     BlocProvider<BankAccountBloc>(create: (_) => BankAccountBloc()),
     BlocProvider<StartTaskBloc>(create: (_) => StartTaskBloc()),
-    BlocProvider<OngoingTasksBloc>(create: (_) => OngoingTasksBloc()),
-    BlocProvider<CompletedTasksBloc>(create: (_) => CompletedTasksBloc()),
+    BlocProvider<MyTasksBloc>(create: (_) => MyTasksBloc()),
+    BlocProvider<TasksStatusBloc>(create: (_) => TasksStatusBloc()),
     BlocProvider<RecentTasksBloc>(create: (_) => RecentTasksBloc()),
     BlocProvider<TaskDetailsBloc>(create: (_) => TaskDetailsBloc()),
     BlocProvider<QuestionsBloc>(create: (_) => QuestionsBloc()),
@@ -53,5 +56,9 @@ abstract class ProviderList {
     BlocProvider<NearestShopsBloc>(create: (_) => NearestShopsBloc()),
     BlocProvider<ShopDetailsBloc>(create: (_) => ShopDetailsBloc()),
     BlocProvider<CurrentLocationBloc>(create: (_) => CurrentLocationBloc()),
+
+    BlocProvider<TermsBloc>(create: (_) => TermsBloc()),
+    BlocProvider<PolicyBloc>(create: (_) => PolicyBloc()),
+    BlocProvider<HelpBloc>(create: (_) => HelpBloc()),
   ];
 }

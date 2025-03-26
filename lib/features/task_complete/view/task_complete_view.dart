@@ -56,13 +56,32 @@ class TaskComplete extends StatelessWidget {
                       16.verticalSpace,
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          "You’ve completed all the tasks and earned ${AppStorage.getTaskRewards} points!",
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.w500.copyWith(
-                            fontSize: 14,
-                            color: Styles.WHITE_COLOR,
-                          ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "You’ve completed all the tasks and earned",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.w500.copyWith(
+                                fontSize: 14,
+                                color: Styles.WHITE_COLOR,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${AppStorage.getTaskRewards}",
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.w500.copyWith(
+                                    fontSize: 14,
+                                    color: Styles.WHITE_COLOR,
+                                  ),
+                                ),
+                                4.horizontalSpace,
+                                SvgPicture.asset(Constants.getSvg("riyal"), colorFilter: ColorFilter.mode(Styles.WHITE_COLOR, BlendMode.srcIn),),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       24.verticalSpace,
@@ -78,12 +97,18 @@ class TaskComplete extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "You've Earned ${AppStorage.getTaskRewards} Points!",
-                                  style: AppTextStyles.w700.copyWith(
-                                    fontSize: 16,
-                                    color: Styles.WHITE_COLOR,
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "You've Earned ${AppStorage.getTaskRewards}",
+                                      style: AppTextStyles.w700.copyWith(
+                                        fontSize: 16,
+                                        color: Styles.WHITE_COLOR,
+                                      ),
+                                    ),
+                                    4.horizontalSpace,
+                                    SvgPicture.asset(Constants.getSvg("riyal"), colorFilter: ColorFilter.mode(Styles.WHITE_COLOR, BlendMode.srcIn),),
+                                  ],
                                 ),
                                 8.verticalSpace,
                                 Text(
@@ -112,13 +137,8 @@ class TaskComplete extends StatelessWidget {
                                     color: Styles.WHITE_COLOR,
                                   ),
                                 ),
-                                Text(
-                                  "points",
-                                  style: AppTextStyles.w500.copyWith(
-                                    fontSize: 12,
-                                    color: Styles.WHITE_COLOR,
-                                  ),
-                                ),
+                                4.verticalSpace,
+                                SvgPicture.asset(Constants.getSvg("riyal"), colorFilter: ColorFilter.mode(Styles.WHITE_COLOR, BlendMode.srcIn),),
                               ],
                             ),
                           ],

@@ -1,8 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jasoos/helper/styles.dart';
+import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/features/terms/bloc/terms_bloc.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
+
+import '../../../main_widgets/custom_center_text.dart';
+import '../../../main_widgets/custom_empty_view.dart';
+import '../../../main_widgets/custom_loading.dart';
 
 class TermsView extends StatelessWidget {
   const TermsView({super.key});
@@ -11,26 +18,26 @@ class TermsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBars.titledAppBar(title: "Terms & Conditions"),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
-        physics: ClampingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Lorem ipsum dolor",
-              style: AppTextStyles.w500.copyWith(fontSize: 20),
-            ),
-            SizedBox(height: 12.h),
-            Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel augue sit amet est molestie viverra. Nunc quis bibendum orci. Donec feugiat massa mi, at hendrerit mauris rutrum at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel augue sit amet est molestie viverra. Nunc quis bibendum orci. Donec feugiat massa mi, at hendrerit mauris rutrum at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel augue sit amet est molestie viverra. Nunc quis bibendum orci. Donec feugiat massa mi, at hendrerit mauris rutrum at. ",
-              style: AppTextStyles.w400.copyWith(
-                fontSize: 14,
-                color: Styles.GREY_TEXT_COLOR,
+      body: BlocBuilder<TermsBloc, AppState>(
+        builder: (context, state) {
+          if(state is Loading) {
+            return CustomLoading();
+          } else if (state is Error) {
+            return CustomCenterText(state.error ?? tr("errorException"));
+          } else if (state is Empty) {
+            return CustomEmptyView();
+          } else {
+            TermsBloc bloc = TermsBloc.instance;
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
+              physics: ClampingScrollPhysics(),
+              child: Text(
+                bloc.model.data?.terms ?? "",
+                style: AppTextStyles.w400.copyWith(fontSize: 14),
               ),
-            ),
-          ],
-        ),
+            );
+          }
+        },
       ),
     );
   }

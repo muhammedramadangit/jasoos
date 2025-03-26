@@ -9,6 +9,7 @@ import 'package:jasoos/features/home/bloc/current_location_bloc.dart';
 import 'package:jasoos/features/home/bloc/shops_bloc.dart';
 import 'package:jasoos/features/home/view/home_view.dart';
 import 'package:jasoos/features/more/view/more_view.dart';
+import 'package:jasoos/features/my_tasks/bloc/tasks_status_bloc.dart';
 import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
@@ -18,8 +19,7 @@ import '../../features/discover_map/view/discover_view.dart';
 import '../../features/home/bloc/home_categories_bloc.dart';
 import '../../features/home/bloc/nearest_shop_bloc.dart';
 import '../../features/home/bloc/recent_tasks_bloc.dart';
-import '../../features/my_tasks/bloc/completed_tasks_bloc.dart';
-import '../../features/my_tasks/bloc/ongoing_tasks_bloc.dart';
+import '../../features/my_tasks/bloc/my_tasks_bloc.dart';
 import '../../features/my_tasks/view/my_tasks_view.dart';
 
 Widget image(image) => Padding(
@@ -72,8 +72,8 @@ class _MainPagesViewState extends State<MainPagesView>
       RecentTasksBloc.instance.add(Get());
     });
     ProfileBloc.instance.add(Get());
-    OngoingTasksBloc.instance.add(Get());
-    CompletedTasksBloc.instance.add(Get());
+    TasksStatusBloc.instance.add(Get());
+    MyTasksBloc.instance.add(Get(arguments: 0));
     super.initState();
   }
 

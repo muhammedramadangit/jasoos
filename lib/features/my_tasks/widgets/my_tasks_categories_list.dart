@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/core/app_state.dart';
-import 'package:jasoos/features/home/bloc/home_categories_bloc.dart';
 
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
 import '../../../main_widgets/custom_center_text.dart';
 import '../../../main_widgets/custom_loading.dart';
-import '../../home/models/home_categories_model.dart';
+import '../bloc/tasks_status_bloc.dart';
+import '../models/tasts_status_model.dart';
 
 class MyTasksCategoriesList extends StatefulWidget {
   const MyTasksCategoriesList({super.key});
@@ -19,17 +19,17 @@ class MyTasksCategoriesList extends StatefulWidget {
 }
 
 class _MyTasksCategoriesListState extends State<MyTasksCategoriesList> {
-  int? selected;
-
-  @override
-  void initState() {
-    selected = 0;
-    super.initState();
-  }
+  // int? selected;
+  //
+  // @override
+  // void initState() {
+  //   selected = 0;
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCategoriesBloc, AppState>(
+    return BlocBuilder<TasksStatusBloc, AppState>(
       builder: (context, state) {
         if(state is Loading) {
           return CustomLoading();
@@ -38,36 +38,38 @@ class _MyTasksCategoriesListState extends State<MyTasksCategoriesList> {
         } else if (state is Empty) {
           return SizedBox();
         } else {
+          TasksStatusBloc bloc = TasksStatusBloc.instance;
           return SizedBox(
             height: 34.h,
             child: ListView.separated(
-              itemCount: HomeCategoriesBloc.instance.model.data!.length,
+              itemCount: bloc.tasksStatusList.length,
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
               separatorBuilder: (context, index) => 8.horizontalSpace,
               itemBuilder: (context, index) {
-                HomeCategoryInfo? taskType = HomeCategoriesBloc.instance.model.data?[index];
+                TaskStatusInfo ele = bloc.tasksStatusList[index];
                 return GestureDetector(
                   onTap: () {
-                    setState(() {
-                      selected = index;
-                    });
+                    // setState(() {
+                    //   selected = index;
+                    // });
+                    bloc.onChangeTaskStatus(ele.value);
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: 10.w, vertical: 8.h),
                     decoration: BoxDecoration(
-                      color: selected == index ? Styles.PRIMARY_COLOR : Styles
+                      color: bloc.taskStatus == ele.value ? Styles.PRIMARY_COLOR : Styles
                           .BORDER_COLOR.withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Text(
-                      taskType?.name ?? "",
+                      ele.name ?? "",
                       style: AppTextStyles.w500.copyWith(
                         fontSize: 12,
-                        color: selected == index ? Styles.WHITE_COLOR : Styles
+                        color: bloc.taskStatus == ele.value ? Styles.WHITE_COLOR : Styles
                             .PRIMARY_COLOR,
                       ),
                     ),

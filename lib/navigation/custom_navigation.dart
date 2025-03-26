@@ -16,6 +16,7 @@ import 'package:jasoos/features/notification_setting/view/notification_setting_v
 import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
 import 'package:jasoos/features/otp/bloc/otp_bloc.dart';
 import 'package:jasoos/features/otp/view/otp_view.dart';
+import 'package:jasoos/features/policy/bloc/policy_bloc.dart';
 import 'package:jasoos/features/policy/view/policy_view.dart';
 import 'package:jasoos/features/profile/view/profile_view.dart';
 import 'package:jasoos/features/register/bloc/register_bloc.dart';
@@ -30,6 +31,7 @@ import 'package:jasoos/features/splash/view/splash_view.dart';
 import 'package:jasoos/features/task_complete/view/task_complete_view.dart';
 import 'package:jasoos/features/shop_details/bloc/shop_details_bloc.dart';
 import 'package:jasoos/features/task_details/view/task_details_view.dart';
+import 'package:jasoos/features/terms/bloc/terms_bloc.dart';
 import 'package:jasoos/features/terms/view/terms_view.dart';
 import 'package:jasoos/features/two_step_verification/view/two_step_verification.dart';
 import 'package:jasoos/main_pages/view/main_pages_view.dart';
@@ -40,6 +42,7 @@ import 'package:jasoos/no_internet.dart';
 import '../features/add_task/bloc/questions_bloc.dart';
 import '../features/add_task/view/add_task_view.dart';
 import '../features/bank_account/bloc/bank_account_bloc.dart';
+import '../features/help/bloc/help_bloc.dart';
 import '../features/id_information/bloc/id_information_bloc.dart';
 import '../features/home/view/nearest_shops_view.dart';
 import '../features/profile/bloc/profile_bloc.dart';
@@ -111,12 +114,15 @@ abstract class CustomNavigator {
         return pageRoute(MainPagesView());
 
       case Routes.HELP:
+        HelpBloc.instance.add(Get());
         return pageRoute(HelpView());
 
       case Routes.TERMS:
+        TermsBloc.instance.add(Get());
         return pageRoute(TermsView());
 
       case Routes.POLICY:
+        PolicyBloc.instance.add(Get());
         return pageRoute(PolicyView());
 
       case Routes.NOTIFICATION_SETTING:

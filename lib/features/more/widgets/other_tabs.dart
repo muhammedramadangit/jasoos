@@ -36,13 +36,27 @@ class OtherTabs extends StatelessWidget {
       },
       {
         "icon" : "message",
+        "title" : "Terms and Condition",
+        "onTap" : () {
+          CustomNavigator.push(Routes.TERMS);
+        },
+      },
+      {
+        "icon" : "message",
+        "title" : "Privacy policy",
+        "onTap" : () {
+          CustomNavigator.push(Routes.POLICY);
+        },
+      },
+      {
+        "icon" : "message",
         "title" : "Help Center",
         "onTap" : () {
           CustomNavigator.push(Routes.HELP);
         },
       },
       {
-        "icon" : "message",
+        "icon" : "call",
         "title" : "Contact Us",
         "onTap" : () {},
       },
@@ -74,7 +88,16 @@ class OtherTabs extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 child: Row(
                   children: [
-                    SvgPicture.asset(Constants.getSvg(tabs[index]["icon"])),
+                    CircleAvatar(
+                      radius: 14.r,
+                      backgroundColor: Styles.HIGHLIGHT_COLOR,
+                      child: SvgPicture.asset(
+                        Constants.getSvg(tabs[index]["icon"]),
+                        height: 16,
+                        width: 16,
+                        colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),
+                      ),
+                    ),
                     SizedBox(width: 12.w),
                     Expanded(
                       child: Text(

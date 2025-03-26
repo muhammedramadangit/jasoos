@@ -1,8 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jasoos/helper/styles.dart';
+import 'package:jasoos/features/policy/bloc/policy_bloc.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
+
+import '../../../core/app_state.dart';
+import '../../../main_widgets/custom_center_text.dart';
+import '../../../main_widgets/custom_empty_view.dart';
+import '../../../main_widgets/custom_loading.dart';
 
 class PolicyView extends StatelessWidget {
   const PolicyView({super.key});
@@ -11,26 +18,26 @@ class PolicyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBars.titledAppBar(title: "Privacy Policy"),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
-        physics: ClampingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Your privacy is important",
-              style: AppTextStyles.w500.copyWith(fontSize: 20),
-            ),
-            SizedBox(height: 12.h),
-            Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel augue sit amet est molestie viverra. Nunc quis bibendum orci. Donec feugiat massa mi, at hendrerit mauris rutrum at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel augue sit amet est molestie viverra. Nunc quis bibendum orci. Donec feugiat massa mi, at hendrerit mauris rutrum at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel augue sit amet est molestie viverra. Nunc quis bibendum orci. Donec feugiat massa mi, at hendrerit mauris rutrum at. ",
-              style: AppTextStyles.w400.copyWith(
-                fontSize: 14,
-                color: Styles.GREY_TEXT_COLOR,
+      body: BlocBuilder<PolicyBloc, AppState>(
+        builder: (context, state) {
+          if(state is Loading) {
+            return CustomLoading();
+          } else if (state is Error) {
+            return CustomCenterText(state.error ?? tr("errorException"));
+          } else if (state is Empty) {
+            return CustomEmptyView();
+          } else {
+            PolicyBloc bloc = PolicyBloc.instance;
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
+              physics: ClampingScrollPhysics(),
+              child: Text(
+                bloc.model.data?.privacy ?? "",
+                style: AppTextStyles.w400.copyWith(fontSize: 14),
               ),
-            ),
-          ],
-        ),
+            );
+          }
+        },
       ),
     );
   }

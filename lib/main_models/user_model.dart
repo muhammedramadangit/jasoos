@@ -27,6 +27,7 @@ class UserDataInfo {
   String? name;
   String? email;
   String? phone;
+  String? phoneCode;
   String? maritalStatus;
   String? gender;
   String? dateOfBirth;
@@ -42,6 +43,7 @@ class UserDataInfo {
         this.name,
         this.email,
         this.phone,
+        this.phoneCode,
         this.maritalStatus,
         this.gender,
         this.dateOfBirth,
@@ -57,6 +59,7 @@ class UserDataInfo {
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
+    phoneCode = json['phone_code'];
     maritalStatus = json['marital_status'];
     gender = json['gender'];
     dateOfBirth = json['date_of_birth'];
@@ -76,6 +79,7 @@ class UserDataInfo {
     data['name'] = this.name;
     data['email'] = this.email;
     data['phone'] = this.phone;
+    data['phone_code'] = this.phoneCode;
     data['marital_status'] = this.maritalStatus;
     data['gender'] = this.gender;
     data['date_of_birth'] = this.dateOfBirth;
@@ -118,6 +122,14 @@ class BankAccount {
   }
 
   Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['bank_name'] = this.bankName;
+    data['holder_name'] = this.holderName;
+    data['iban'] = this.iban;
+    return data;
+  }
+
+  Map<String, dynamic> checkNullBankAccount() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['bank_name'] = this.bankName;
     data['holder_name'] = this.holderName;

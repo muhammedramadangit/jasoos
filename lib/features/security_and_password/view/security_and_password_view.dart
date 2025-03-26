@@ -28,15 +28,15 @@ class _SecurityAndPasswordState extends State<SecurityAndPassword> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
-      {
-        "icon" : "user-info",
-        "title" : "Two-step verification",
-        "description" : "Detail your personal data",
-        "can_switch" : false,
-        "onTap" : () {
-          CustomNavigator.push(Routes.TWO_STEP_VERIFICATION);
-        },
-      },
+      // {
+      //   "icon" : "user-info",
+      //   "title" : "Two-step verification",
+      //   "description" : "Detail your personal data",
+      //   "can_switch" : false,
+      //   "onTap" : () {
+      //     CustomNavigator.push(Routes.TWO_STEP_VERIFICATION);
+      //   },
+      // },
       {
         "icon" : "bank",
         "title" : "Change Password",

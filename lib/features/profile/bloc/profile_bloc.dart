@@ -31,6 +31,9 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
   int profileDataCount = 0;
   int profileNullCount = 0;
 
+  int profileBankDataCount = 0;
+  int profileBankNullCount = 0;
+
   File? profileImage;
 
   TextEditingController name = TextEditingController();
@@ -42,6 +45,7 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
   String? emailError;
 
   TextEditingController phone = TextEditingController();
+  String? phoneCode;
   bool phoneValidation = true;
   String? phoneError;
 
@@ -61,7 +65,8 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
     name = TextEditingController(text: AppStorage.getUser?.data?.name ?? "");
     email = TextEditingController(text: AppStorage.getUser?.data?.email ?? "");
     phone = TextEditingController(text: AppStorage.getUser?.data?.phone ?? "");
-    birthday = DateTime.parse(AppStorage.getUser?.data?.dateOfBirth ?? "");
+    phoneCode = AppStorage.getUser?.data?.phoneCode ?? "+966";
+    birthday = AppStorage.getUser?.data?.dateOfBirth != null ? DateTime.parse(AppStorage.getUser?.data?.dateOfBirth ?? "") : null;
     gender = SelectOption("${AppStorage.getUser?.data?.gender}", "${AppStorage.getUser?.data?.gender}");
     maritalStatus = SelectOption("${AppStorage.getUser?.data?.maritalStatus}", "${AppStorage.getUser?.data?.maritalStatus}");
     add(Update());
@@ -70,7 +75,7 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
   bool _validation(){
     nameError = AppValidations.name(name.text);
     emailError = AppValidations.email(email.text);
-    phoneError = AppValidations.phone(phone.text.contains("+966") ? phone.text.replaceAll("+966", "").replaceAll("-", "") : phone.text.replaceAll("-", ""));
+    phoneError = AppValidations.phone(phone.text.replaceAll("-", ""));
     birthdayError = AppValidations.birthday(birthday?.toYearMonthDayFormat());
     genderError = AppValidations.gender(gender?.value);
     maritalStatusError = AppValidations.any(maritalStatus?.value);
@@ -102,6 +107,8 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
         AppStorage.cacheUser(model);
         profileNullCount = model.data!.checkNullMainKeys().values.where((value) => value == null).length;
         profileDataCount = model.data!.checkNullMainKeys().values.length;
+        profileBankNullCount = model.data!.bankAccount == null ? 3 : model.data!.bankAccount!.checkNullBankAccount().values.where((value) => value == null).length;
+        profileBankDataCount = model.data!.bankAccount == null ? 3 : model.data!.bankAccount!.checkNullBankAccount().values.length;
         emit(Done());
       } else {
         emit(Error(error: response.data["message"]));
@@ -139,8 +146,8 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
       Map<String, dynamic> body = {
         "name" : name.text,
         "email" : email.text,
-        "phone_code" : "+966",
-        "phone" : phone.text.contains("+966") ? phone.text.replaceAll("+966", "").replaceAll("-", "") : phone.text.replaceAll("-", ""),
+        "phone_code" : phoneCode,
+        "phone" : phone.text.replaceAll("-", ""),
         "marital_status" : maritalStatus?.value,
         "gender" : gender?.value,
         "date_of_birth" : birthday?.toYearMonthDayFormat(),

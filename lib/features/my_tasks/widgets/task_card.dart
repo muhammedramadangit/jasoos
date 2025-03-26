@@ -36,41 +36,39 @@ class TaskCard extends StatelessWidget {
           children: [
             Container(
               width: MediaQueryHelper.width,
-              height: 110.h,
+              height: 140.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
                 color: Styles.BORDER_COLOR.withValues(alpha: 0.2),
                 image: DecorationImage(
                   image: NetworkImage(model?.shopImage ?? ""),
+                  // image: NetworkImage("https://albaikmenu.net/wp-content/uploads/2024/10/albaik-1-1.webp"),
                   fit: BoxFit.cover,
                 )
               ),
             ),
             8.verticalSpace,
             Text(
-              model?.name ?? "",
+              model?.shop ?? "",
               maxLines: 2,
               style: AppTextStyles.w500.copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
-            ),
-            4.verticalSpace,
-            Text(
-              model?.shop ?? "",
-              style: AppTextStyles.w300.copyWith(fontSize: 12, color: Styles.DARK_TEXT_COLOR),
             ),
             8.verticalSpace,
 
             if(isComplete == true)...[
               Row(
                 children: [
-                  SvgPicture.asset(Constants.getSvg("star")),
+                  SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
                   4.horizontalSpace,
                   Text(
-                    "Earned ${model?.reward} Points",
+                    "Earned ${model?.reward}",
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 12,
-                      color: Styles.GREEN_TEXT_COLOR,
+                      color: Styles.PRIMARY_COLOR,
                     ),
                   ),
+                  4.horizontalSpace,
+                  SvgPicture.asset(Constants.getSvg("riyal")),
                 ],
               ),
             ]else if(isRecent == true)...[
@@ -88,18 +86,14 @@ class TaskCard extends StatelessWidget {
                       fontSize: 12,
                     ),
                   ),
-                ],
-              ),
-              8.verticalSpace,
-              Row(
-                children: [
+                  8.horizontalSpace,
                   SvgPicture.asset(
                     Constants.getSvg("discount-round"),
                     colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    model?.type ?? "",
+                    "Valid till ${model?.endDate}",
                     style: AppTextStyles.w400.copyWith(
                       color: Styles.DARK_TEXT_COLOR,
                       fontSize: 12,
@@ -107,18 +101,37 @@ class TaskCard extends StatelessWidget {
                   ),
                 ],
               ),
+              // 8.verticalSpace,
+              // Row(
+              //   children: [
+              //     SvgPicture.asset(
+              //       Constants.getSvg("discount-round"),
+              //       colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+              //     ),
+              //     SizedBox(width: 4.w),
+              //     Text(
+              //       model?.type ?? "",
+              //       style: AppTextStyles.w400.copyWith(
+              //         color: Styles.DARK_TEXT_COLOR,
+              //         fontSize: 12,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               8.verticalSpace,
               Row(
                 children: [
-                  SvgPicture.asset(Constants.getSvg("star")),
+                  SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
                   4.horizontalSpace,
                   Text(
-                    "Reward ${model?.reward} Points",
+                    "Reward ${model?.reward}",
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 12,
-                      color: Styles.GREEN_TEXT_COLOR,
+                      color: Styles.PRIMARY_COLOR,
                     ),
                   ),
+                  4.horizontalSpace,
+                  SvgPicture.asset(Constants.getSvg("riyal")),
                 ],
               ),
             ]else...[
@@ -136,18 +149,14 @@ class TaskCard extends StatelessWidget {
                       fontSize: 12,
                     ),
                   ),
-                ],
-              ),
-              8.verticalSpace,
-              Row(
-                children: [
+                  8.horizontalSpace,
                   SvgPicture.asset(
                     Constants.getSvg("discount-round"),
                     colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    model?.type ?? "",
+                    "Valid till ${model?.endDate}",
                     style: AppTextStyles.w400.copyWith(
                       color: Styles.DARK_TEXT_COLOR,
                       fontSize: 12,

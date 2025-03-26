@@ -76,12 +76,18 @@ class ShopMissionList extends StatelessWidget {
                               style: AppTextStyles.w500.copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
                             ),
                             4.verticalSpace,
-                            Text(
-                              "${task?.reward} Point",
-                              style: AppTextStyles.w500.copyWith(
-                                fontSize: 12,
-                                color: Styles.PRIMARY_COLOR,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "${task?.reward}",
+                                  style: AppTextStyles.w500.copyWith(
+                                    fontSize: 12,
+                                    color: Styles.PRIMARY_COLOR,
+                                  ),
+                                ),
+                                4.horizontalSpace,
+                                SvgPicture.asset(Constants.getSvg("riyal")),
+                              ],
                             ),
                           ],
                         ),

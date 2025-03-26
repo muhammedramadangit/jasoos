@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_models/select_option.dart';
@@ -39,7 +37,7 @@ class ProfileForm extends StatelessWidget {
           hintText: "Email",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.emailAddress,
-          prefixIcon: SvgPicture.asset(Constants.getSvg("sms")),
+          // prefixIcon: SvgPicture.asset(Constants.getSvg("sms")),
           controller: bloc.email,
           errorText: bloc.emailError,
           hasError: !bloc.emailValidation,
@@ -58,6 +56,11 @@ class ProfileForm extends StatelessWidget {
           controller: bloc.phone,
           errorText: bloc.phoneError,
           hasError: !bloc.phoneValidation,
+          initialSelectionCountryCode: bloc.phoneCode,
+          onChangedCountryCode: (value) {
+            bloc.phoneCode = value.code;
+            bloc.add(Update());
+          },
           onChange: (value) {
             if (!bloc.phoneValidation) {
               bloc.phoneValidation = true;
@@ -84,7 +87,7 @@ class ProfileForm extends StatelessWidget {
           hintText: "Gender",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           isExpanded: true,
-          initialValue: bloc.gender,
+          initialValue: bloc.gender?.value == "null" ? null : bloc.gender,
           valueSet: [
             SelectOption("male", "male"),
             SelectOption("female", "female"),
@@ -104,7 +107,7 @@ class ProfileForm extends StatelessWidget {
           hintText: "Marital Status",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           isExpanded: true,
-          initialValue: bloc.maritalStatus,
+          initialValue: bloc.maritalStatus?.value != "null" ? bloc.maritalStatus : null,
           valueSet: [
             SelectOption("Divorced", "Divorced"),
             SelectOption("Married", "Married"),

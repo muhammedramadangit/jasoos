@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/home/bloc/shops_bloc.dart';
@@ -16,7 +14,6 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/main_widgets/fields/text_input_field.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
-import 'package:geocoding/geocoding.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/text_styles.dart';
@@ -33,10 +30,15 @@ class DiscoverView extends StatefulWidget {
 }
 
 class _DiscoverViewState extends State<DiscoverView> {
-  Timer? timer;
   final TextEditingController _searchController = TextEditingController();
-  late GoogleMapController _mapController;
-  LatLng _currentLocation = LatLng(AppStorage.getUserLat != null ? double.parse("${AppStorage.getUserLat}") : 24.7136, AppStorage.getUserLng != null ? double.parse("${AppStorage.getUserLng}") : 46.6753); // Default to Riyadh, Saudi arabia
+  List<ShopInfo> _filteredShops = [];
+  List<ShopInfo> _allShops = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
 
   @override
   void dispose() {
@@ -44,25 +46,13 @@ class _DiscoverViewState extends State<DiscoverView> {
     super.dispose();
   }
 
-  void _searchLocation() async {
-    String searchText = _searchController.text.trim();
-    if (searchText.isNotEmpty) {
-      try {
-        List<Location> locations = await locationFromAddress(searchText);
-        if (locations.isNotEmpty) {
-          Location location = locations.first;
-          LatLng newLatLng = LatLng(location.latitude, location.longitude);
-
-          setState(() {
-            _currentLocation = newLatLng;
-          });
-
-          _mapController.animateCamera(CameraUpdate.newLatLngZoom(newLatLng, 14));
-        }
-      } catch (e) {
-        print("Error finding location: $e");
-      }
-    }
+  void _onSearchChanged() {
+    setState(() {
+      _filteredShops = _allShops
+          .where((shop) =>
+          shop.name!.toLowerCase().contains(_searchController.text.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -77,6 +67,10 @@ class _DiscoverViewState extends State<DiscoverView> {
           return CustomEmptyView();
         } else {
           ShopsBloc bloc = ShopsBloc.instance;
+          _allShops = bloc.model.data ?? [];
+          _filteredShops = _filteredShops.isEmpty && _searchController.text.isEmpty
+              ? _allShops
+              : _filteredShops;
           log("USER LAT ${AppStorage.getUserLat} | USER LNG ${AppStorage.getUserLng}");
           return Scaffold(
             appBar: discoverAppBar(),
@@ -91,13 +85,13 @@ class _DiscoverViewState extends State<DiscoverView> {
                       topLeft: Radius.circular(24.r),
                     ),
                     child: CustomMap(
-                      onMapCreated: (GoogleMapController controller) {
-                        _mapController = controller;
-                      },
-                      initialCameraPosition: CameraPosition(
-                        target: _currentLocation,
-                        zoom: 10,
-                      ),
+                      // onMapCreated: (GoogleMapController controller) {
+                      //   _mapController = controller;
+                      // },
+                      // initialCameraPosition: CameraPosition(
+                      //   target: _currentLocation,
+                      //   zoom: 10,
+                      // ),
                       lat: double.parse("${ShopsBloc.instance.model.data?.first.latitude}"),
                       long: double.parse("${ShopsBloc.instance.model.data?.first.longitude}"),
                       markers: ShopsBloc.instance.model.data!.map((ele) {
@@ -129,18 +123,11 @@ class _DiscoverViewState extends State<DiscoverView> {
                         withBottomPadding: false,
                         borderColor: Styles.SCAFFOLD_COLOR,
                         prefixIcon: SvgPicture.asset(Constants.getSvg("location-fill")),
-                        onChange: (value) {
-                          if (timer != null) {
-                            timer!.cancel();
-                          }
-                          timer = Timer(Duration(milliseconds: 500), () {
-                            _searchLocation();
-                          });
-                        },
                         suffixIcon: _searchController.text.isNotEmpty
                             ? GestureDetector(
                           onTap: () {
                             _searchController.clear();
+                            _onSearchChanged();
                           },
                           child: Icon(Icons.clear, color: Colors.grey),
                         )
@@ -156,8 +143,10 @@ class _DiscoverViewState extends State<DiscoverView> {
                     right: 0,
                     child: SizedBox(
                         height: 140.h,
-                        child: ListView.separated(
-                          itemCount: bloc.model.data!.length,
+                        child: _filteredShops.isEmpty
+                            ? Center(child: Text("No results found"))
+                            :ListView.separated(
+                          itemCount: _filteredShops.length,
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
                           shrinkWrap: true,

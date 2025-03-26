@@ -32,6 +32,8 @@ class TaskInfo {
   String? name;
   String? description;
   String? type;
+  String? startDate;
+  String? endDate;
   String? reward;
   String? shop;
   String? branch;
@@ -46,6 +48,8 @@ class TaskInfo {
         this.name,
         this.description,
         this.type,
+        this.startDate,
+        this.endDate,
         this.reward,
         this.shop,
         this.branch,
@@ -60,6 +64,8 @@ class TaskInfo {
     name = json['name'];
     description = json['description'];
     type = json['type'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
     reward = json['reward'];
     shop = json['shop'];
     branch = json['branch'];
@@ -76,6 +82,8 @@ class TaskInfo {
     data['name'] = this.name;
     data['description'] = this.description;
     data['type'] = this.type;
+    data['start_date'] = this.startDate;
+    data['end_date'] = this.endDate;
     data['reward'] = this.reward;
     data['shop'] = this.shop;
     data['branch'] = this.branch;

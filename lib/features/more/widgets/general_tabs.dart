@@ -45,12 +45,12 @@ class GeneralTabs extends StatelessWidget {
           CustomNavigator.push(Routes.REWARDS);
         },
       },
-      {
-        "icon" : "safe",
-        "title" : "Submissions",
-        "description" : "Manage your submissions ",
-        "onTap" : () {},
-      },
+      // {
+      //   "icon" : "safe",
+      //   "title" : "Submissions",
+      //   "description" : "Manage your submissions ",
+      //   "onTap" : () {},
+      // },
       {
         "icon" : "group",
         "title" : "Invite Friends",
@@ -87,7 +87,16 @@ class GeneralTabs extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 child: Row(
                   children: [
-                    SvgPicture.asset(Constants.getSvg(tabs[index]["icon"])),
+                    CircleAvatar(
+                      radius: 14.r,
+                      backgroundColor: Styles.HIGHLIGHT_COLOR,
+                      child: SvgPicture.asset(
+                        Constants.getSvg(tabs[index]["icon"]),
+                        height: 16,
+                        width: 16,
+                        colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),
+                      ),
+                    ),
                     SizedBox(width: 12.w),
                     Expanded(
                       child: Column(

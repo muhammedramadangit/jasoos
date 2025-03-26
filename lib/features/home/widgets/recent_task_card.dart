@@ -91,63 +91,59 @@ class RecentTaskCard extends StatelessWidget {
                 model?.shop ?? "",
                 style: AppTextStyles.w500.copyWith(fontSize: 16),
               ),
+              4.verticalSpace,
+              // Row(
+              //   children: [
+              //     SvgPicture.asset(
+              //       Constants.getSvg("routing"),
+              //       colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+              //     ),
+              //     SizedBox(width: 4.w),
+              //     Text(
+              //       "${model?.branch}",
+              //       style: AppTextStyles.w400.copyWith(
+              //         color: Styles.DARK_TEXT_COLOR,
+              //         fontSize: 12,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               // 4.verticalSpace,
               // Row(
               //   children: [
+              //     SvgPicture.asset(
+              //       Constants.getSvg("discount-round"),
+              //       colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+              //     ),
+              //     SizedBox(width: 4.w),
+              //     Text(
+              //       model?.type ?? "",
+              //       style: AppTextStyles.w400.copyWith(
+              //         color: Styles.DARK_TEXT_COLOR,
+              //         fontSize: 12,
+              //       ),
+              //     ),
               //   ],
               // ),
-              4.verticalSpace,
+              // 4.verticalSpace,
               Row(
                 children: [
-                  SvgPicture.asset(
-                    Constants.getSvg("routing"),
-                    colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
-                  ),
-                  SizedBox(width: 4.w),
-                  Text(
-                    "${model?.branch}",
-                    style: AppTextStyles.w400.copyWith(
-                      color: Styles.DARK_TEXT_COLOR,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-              4.verticalSpace,
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    Constants.getSvg("discount-round"),
-                    colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
-                  ),
-                  SizedBox(width: 4.w),
-                  Text(
-                    model?.type ?? "",
-                    style: AppTextStyles.w400.copyWith(
-                      color: Styles.DARK_TEXT_COLOR,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-              4.verticalSpace,
-              Row(
-                children: [
-                  SvgPicture.asset(Constants.getSvg("star")),
+                  SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
                   4.horizontalSpace,
                   Text(
-                    "Reward ${model?.reward} Points",
+                    "Reward ${model?.reward}",
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 12,
-                      color: Styles.GREEN_TEXT_COLOR,
+                      color: Styles.PRIMARY_COLOR,
                     ),
                   ),
+                  4.horizontalSpace,
+                  SvgPicture.asset(Constants.getSvg("riyal")),
                 ],
               ),
             ],
           ),
         ],
-
       ),
     );
   }

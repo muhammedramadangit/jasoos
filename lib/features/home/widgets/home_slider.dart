@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,26 +37,45 @@ class _HomeSliderState extends State<HomeSlider> {
           return CustomEmptyView();
         } else {
           ShopsBloc bloc = ShopsBloc.instance;
-          return CarouselSlider(
-            items: bloc.model.data?.map((element) {
-              return GestureDetector(
-                onTap: () {
-                  CustomNavigator.push(Routes.SHOP_DETAILS, arguments: element.id);
-                },
-                child: _BannerItem(shop: element),
-              );
-            }).toList(),
-            options: CarouselOptions(
-              viewportFraction: 0.9,
-              autoPlay: true,
-              height: 184.h,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  current = index;
-                });
+          return SizedBox(
+            height: 200.h,
+            child: ListView.separated(
+              itemCount: bloc.model.data!.length,
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              separatorBuilder: (context, index) => 16.horizontalSpace,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    CustomNavigator.push(Routes.SHOP_DETAILS, arguments: bloc.model.data?[index].id);
+                  },
+                  child: _BannerItem(shop: bloc.model.data?[index]),
+                );
               },
             ),
           );
+          // return CarouselSlider(
+          //   items: bloc.model.data?.map((element) {
+          //     return GestureDetector(
+          //       onTap: () {
+          //         CustomNavigator.push(Routes.SHOP_DETAILS, arguments: element.id);
+          //       },
+          //       child: _BannerItem(shop: element),
+          //     );
+          //   }).toList(),
+          //   options: CarouselOptions(
+          //     viewportFraction: 0.9,
+          //     autoPlay: true,
+          //     height: 184.h,
+          //     onPageChanged: (index, reason) {
+          //       setState(() {
+          //         current = index;
+          //       });
+          //     },
+          //   ),
+          // );
         }
       },
     );
@@ -73,7 +91,7 @@ class _BannerItem extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       height: 184.h,
-      padding: EdgeInsets.symmetric(horizontal: 8.w),
+      width: 300.w,
       child: Stack(
         children: [
           Container(

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jasoos/core/app_event.dart';
-import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/more/widgets/general_tabs.dart';
 import 'package:jasoos/features/more/widgets/other_tabs.dart';
@@ -12,8 +9,8 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
 
-import '../../../helper/image_picker_helper.dart';
-import '../../profile/bloc/profile_bloc.dart';
+import '../widgets/complete_bank_account.dart';
+import '../widgets/user_profile_card.dart';
 
 class MoreView extends StatelessWidget {
   const MoreView({super.key});
@@ -27,58 +24,9 @@ class MoreView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Column(
-                children: [
-                  BlocBuilder<ProfileBloc, AppState>(
-                    builder: (context, state) {
-                      return GestureDetector(
-                        onTap: () {
-                          ImagePickerHelper.showOption(
-                            onGet: (value) {
-                              ProfileBloc.instance.profileImage = value;
-                              ProfileBloc.instance.add(PickImage());
-                            },
-                          );
-                        },
-                        child: Stack(
-                          children: [
-                            CircleAvatar(
-                              radius: 34,
-                              backgroundColor: Styles.HIGHLIGHT_COLOR,
-                              backgroundImage: ProfileBloc.instance.profileImage != null
-                                  ? FileImage(ProfileBloc.instance.profileImage!)
-                                  : NetworkImage(AppStorage.getUser?.data?.profileImage ?? ""),
-                            ),
-                            Positioned.directional(
-                              bottom: 0,
-                              start: 0,
-                              textDirection: TextDirection.rtl,
-                              child: SvgPicture.asset(
-                                  Constants.getSvg("edit-fill")),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    AppStorage.getUser?.data?.name ?? "",
-                    style: AppTextStyles.w500.copyWith(fontSize: 14),
-                  ),
-                  SizedBox(height: 6.h),
-                  Text(
-                    AppStorage.getUser?.data?.email ?? "",
-                    style: AppTextStyles.w400.copyWith(
-                      fontSize: 12,
-                      color: Styles.GREY_TEXT_COLOR,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 32.h),
+            UserProfileCard(),
+            CompleteBankAccount(),
+            24.verticalSpace,
             GeneralTabs(),
             SizedBox(height: 10.h),
             OtherTabs(),
