@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +28,7 @@ class StartTaskBloc extends Bloc<AppEvent, AppState> {
   int? taskSubmission;
 
   List<String> multiSelectedAnswer = [];
-  XFile? fileAnswer;
+  File? fileAnswer;
   XFile? imageAnswer;
   XFile? videoAnswer;
   TextEditingController textAnswer = TextEditingController();
@@ -135,6 +137,7 @@ class StartTaskBloc extends Bloc<AppEvent, AppState> {
         QuestionsBloc.instance.add(Update());
         emit(Done());
       } else {
+        showCustomDialog(dialog: CustomAlertDialog(response.data["message"]));
         emit(Error(error: response.data["message"]));
       }
     } catch (e) {

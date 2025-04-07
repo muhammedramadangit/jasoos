@@ -63,7 +63,8 @@ class UploadFileTask extends StatelessWidget {
           ),
           8.verticalSpace,
           Text(
-            "Max. file size 10 MB",
+            StartTaskBloc.instance.fileAnswer != null ? "${StartTaskBloc.instance.fileAnswer!.path.split("/").last}" : "Max. file size 10 MB",
+            textAlign: TextAlign.center,
             style: AppTextStyles.w400.copyWith(
               color: Styles.WHITE_COLOR,
               fontSize: 12,
@@ -71,16 +72,17 @@ class UploadFileTask extends StatelessWidget {
           ),
           24.verticalSpace,
           CustomButton(
-            onTap: () {
+            onTap: () async {
               FilePickerHelper.pickFile(
-                type: FileType.media,
-                multiImages: false,
-                isSingleFile: true,
+                type: FileType.custom,
+                allowedExtensions: ['pdf', "doc", "docx"],
               ).then((value) {
-                StartTaskBloc.instance.videoAnswer = value;
+                StartTaskBloc.instance.fileAnswer = value;
               });
             },
             text: "Add file",
+            color: Styles.BLUE_COLOR,
+            borderColor: Styles.BLUE_COLOR,
             prefixIcon: SvgPicture.asset(Constants.getSvg("upload")),
           ),
         ],

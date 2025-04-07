@@ -27,4 +27,5 @@ abstract class Endpoints{
   static String POLICY = "privacy";
   static String TERMS = "terms";
   static String HELP = "faqs";
+  static String DELETE_ACCOUNT = "delete-account/";
 }

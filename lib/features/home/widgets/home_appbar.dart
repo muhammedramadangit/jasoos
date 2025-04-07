@@ -74,11 +74,16 @@ AppBar homeAppBar() {
               },
             ),
             Spacer(),
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Styles.PRIMARY_COLOR,
-              child: Center(
-                child: SvgPicture.asset(Constants.getSvg("w-gift")),
+            GestureDetector(
+              onTap: () {
+                CustomNavigator.push(Routes.REWARDS);
+              },
+              child: CircleAvatar(
+                radius: 20,
+                backgroundColor: Styles.PRIMARY_COLOR,
+                child: Center(
+                  child: SvgPicture.asset(Constants.getSvg("w-gift")),
+                ),
               ),
             ),
             SizedBox(width: 12.w),

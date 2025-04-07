@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/features/add_task/bloc/start_task_bloc.dart';
 import 'package:jasoos/helper/image_picker_helper.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
@@ -81,15 +82,22 @@ class UploadImageBottomSheet extends StatelessWidget {
             // 24.verticalSpace,
             CustomButton(
               text: isImage == true ? "Take Photo" : "Take Video",
+              color: Styles.BLUE_COLOR,
+              borderColor: Styles.BLUE_COLOR,
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               onTap: () {
-                ImagePickerHelper.openCamera().then((value) {
-                  if(isImage == true) {
+                CustomNavigator.pop();
+                if(isImage == true) {
+                  ImagePickerHelper.openCamera().then((value) {
                     StartTaskBloc.instance.imageAnswer = value;
-                  } else {
+                    StartTaskBloc.instance.add(Update());
+                  });
+                } else {
+                  ImagePickerHelper.openVideoCamera().then((value) {
                     StartTaskBloc.instance.videoAnswer = value;
-                  }
-                });
+                    StartTaskBloc.instance.add(Update());
+                  });
+                }
               },
             ),
             16.verticalSpace,
@@ -100,13 +108,18 @@ class UploadImageBottomSheet extends StatelessWidget {
               borderColor: Styles.HIGHLIGHT_COLOR,
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               onTap: () {
-                ImagePickerHelper.openGallery().then((value) {
-                  if(isImage == true) {
+                CustomNavigator.pop();
+                if(isImage == true) {
+                  ImagePickerHelper.openGallery().then((value) {
                     StartTaskBloc.instance.imageAnswer = value;
-                  } else {
+                    StartTaskBloc.instance.add(Update());
+                  });
+                } else {
+                  ImagePickerHelper.openVideoGallery().then((value) {
                     StartTaskBloc.instance.videoAnswer = value;
-                  }
-                });
+                    StartTaskBloc.instance.add(Update());
+                  });
+                }
               },
             ),
             16.verticalSpace,
@@ -119,6 +132,7 @@ class UploadImageBottomSheet extends StatelessWidget {
               onTap: () {
                 StartTaskBloc.instance.imageAnswer = null;
                 StartTaskBloc.instance.videoAnswer = null;
+                StartTaskBloc.instance.add(Update());
                 CustomNavigator.pop();
               },
             ),

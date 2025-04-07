@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/features/home/bloc/home_categories_bloc.dart';
+import 'package:jasoos/helper/media_quary_helper.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
@@ -20,7 +21,7 @@ class HomeCategoriesList extends StatelessWidget {
     return BlocBuilder<HomeCategoriesBloc, AppState>(
       builder: (context, state) {
         if(state is Loading) {
-          return CustomLoading();
+          return SizedBox(height: 100.h, width: MediaQueryHelper.width, child: CustomLoading());
         } else if (state is Error) {
           return CustomCenterText(state.error ?? tr("errorException"));
         } else if (state is Empty) {
@@ -33,31 +34,32 @@ class HomeCategoriesList extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                 child: Text(
-                  "Choose categories",
+                  "Choose Tasks",
                   style: AppTextStyles.w500.copyWith(fontSize: 16),
                 ),
               ),
               SizedBox(
                 height: 100.h,
                 child: ListView.separated(
-                  itemCount: bloc.model.data!.length,
+                  itemCount: bloc.taskTypes!.length,
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
                   separatorBuilder: (context, index) => 16.horizontalSpace,
                   itemBuilder: (context, index) {
+                    int? typeId = bloc.taskTypes?[index].id;
                     return GestureDetector(
-                      onTap: () => bloc.onChangeTaskType(index),
+                      onTap: () => bloc.onChangeTaskType(typeId),
                       child: Container(
                         width: 80.w,
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.r),
-                          color: bloc.selectedTaskType == index ? Styles.HIGHLIGHT_COLOR.withValues(alpha: 0.3) : Colors.transparent,
+                          color: bloc.selectedTaskType == typeId ? Styles.HIGHLIGHT_COLOR.withValues(alpha: 0.3) : Colors.transparent,
                           border: Border.all(
                             width: 0.5,
-                            color: bloc.selectedTaskType == index ? Styles.PRIMARY_COLOR : Colors.transparent,
+                            color: bloc.selectedTaskType == typeId ? Styles.PRIMARY_COLOR : Colors.transparent,
                           ),
                         ),
                         child: Column(
@@ -71,7 +73,7 @@ class HomeCategoriesList extends StatelessWidget {
                             ),
                             8.verticalSpace,
                             Text(
-                              bloc.model.data?[index].name ?? "",
+                              bloc.taskTypes?[index].name ?? "",
                               textAlign: TextAlign.center,
                               style: AppTextStyles.w500.copyWith(fontSize: 10),
                             ),

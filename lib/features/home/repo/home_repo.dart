@@ -3,7 +3,7 @@ import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/network/network_layer.dart';
 
 abstract class HomeRepo {
-  static Future getShops({bool? isNearest}) async {
+  static Future getShops({bool? isNearest, required int? taskType}) async {
     return await Network().request(
       Endpoints.SHOPS,
       method: ServerMethods.GET,
@@ -12,6 +12,8 @@ abstract class HomeRepo {
         "lng" : AppStorage.getUserLng,
         if(isNearest == true)
           "sort_by_distance" : 1,
+        if(taskType != null)
+          "task_type_id" : taskType,
       },
     );
   }

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jasoos/core/app_storage.dart';
+import 'package:jasoos/features/more/widgets/delete_account_dialog.dart';
 import 'package:jasoos/features/more/widgets/general_tabs.dart';
 import 'package:jasoos/features/more/widgets/other_tabs.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
+import 'package:jasoos/main_widgets/custom_button.dart';
 
+import '../../../main_widgets/dialogs/custom_show_dialog.dart';
 import '../widgets/complete_bank_account.dart';
+import '../widgets/logout_dialog.dart';
 import '../widgets/user_profile_card.dart';
 
 class MoreView extends StatelessWidget {
@@ -32,7 +35,7 @@ class MoreView extends StatelessWidget {
             OtherTabs(),
             InkWell(
               onTap: () {
-                AppStorage.signOut();
+                showCustomDialog(dialog: LogoutDialog(), dismiss: true);
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -73,6 +76,15 @@ class MoreView extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            16.verticalSpace,
+            CustomButton(
+              text: "Delete account",
+              color: Styles.BORDER_COLOR,
+              txtColor: Styles.GREY_TEXT_COLOR,
+              onTap: () {
+                showCustomDialog(dialog: DeleteAccountDialog(), dismiss: true);
+              },
             ),
           ],
         ),

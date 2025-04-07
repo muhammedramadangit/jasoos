@@ -6,9 +6,12 @@ import 'package:jasoos/helper/styles.dart';
 class CustomCheckBox extends StatefulWidget {
   final bool? isSelected;
   final Color? fillColor;
+  final Color? selectedColor;
+  final double? radius;
+  final double? size;
   final void Function(bool?) onChanged;
 
-  const CustomCheckBox({Key? key, this.isSelected, required this.onChanged, this.fillColor})
+  const CustomCheckBox({Key? key, this.isSelected, required this.onChanged, this.fillColor, this.selectedColor, this.radius, this.size})
       : super(key: key);
 
   @override
@@ -21,7 +24,6 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
   @override
   void initState() {
     isChecked = widget.isSelected ?? false;
-    print("SELECTED $isChecked");
     super.initState();
   }
 
@@ -36,18 +38,18 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
       },
       splashColor: Colors.transparent,
       child: Container(
-        height: 22,
-        width: 22,
+        height: widget.size ?? 22,
+        width: widget.size ?? 22,
         decoration: BoxDecoration(
           color: isChecked == true
-              ? Theme.of(context).primaryColor
+              ? widget.selectedColor ?? Theme.of(context).primaryColor
               : widget.fillColor ?? Colors.transparent,
           border: Border.all(
               color: isChecked == true
-                  ? Theme.of(context).primaryColor
+                  ? widget.selectedColor ?? Theme.of(context).primaryColor
                   : Styles.BORDER_COLOR,
               width: 1),
-          borderRadius: BorderRadius.circular(5.r),
+          borderRadius: BorderRadius.circular(widget.radius ?? 5.r),
         ),
         child: Center(
           child: isChecked == true

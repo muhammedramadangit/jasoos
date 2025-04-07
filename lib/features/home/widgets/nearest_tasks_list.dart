@@ -25,7 +25,7 @@ class NearestTasksList extends StatelessWidget {
     return BlocBuilder<NearestShopsBloc, AppState>(
       builder: (context, state) {
         if(state is Loading) {
-          return CustomLoading();
+          return SizedBox(height: 200.h, width: MediaQueryHelper.width, child: CustomLoading());
         } else if (state is Error) {
           return CustomCenterText(state.error ?? tr("errorException"));
         } else if (state is Empty) {

@@ -51,7 +51,7 @@ class ReviewTask extends StatelessWidget {
                 width: MediaQueryHelper.width,
                 padding: EdgeInsets.symmetric(vertical: 28),
                 decoration: BoxDecoration(
-                  color: Styles.PRIMARY_COLOR,
+                  color: Styles.BLUE_COLOR,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Column(
@@ -87,8 +87,8 @@ class ReviewTask extends StatelessWidget {
                     12.verticalSpace,
                     Text(
                       bloc.selectedReview ?? "-",
-                      style: AppTextStyles.w700.copyWith(
-                        fontSize: 24,
+                      style: AppTextStyles.w500.copyWith(
+                        fontSize: 16,
                         color: Styles.WHITE_COLOR,
                       ),
                     ),

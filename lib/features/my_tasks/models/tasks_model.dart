@@ -32,8 +32,8 @@ class TaskInfo {
   String? name;
   String? description;
   String? type;
-  String? startDate;
-  String? endDate;
+  String? latitude;
+  String? longitude;
   String? reward;
   String? shop;
   String? branch;
@@ -42,14 +42,15 @@ class TaskInfo {
   String? createdAt;
   int? totalQuestions;
   int? answeredQuestions;
+  int? status;
 
   TaskInfo(
       {this.id,
         this.name,
         this.description,
         this.type,
-        this.startDate,
-        this.endDate,
+        this.latitude,
+        this.longitude,
         this.reward,
         this.shop,
         this.branch,
@@ -64,8 +65,8 @@ class TaskInfo {
     name = json['name'];
     description = json['description'];
     type = json['type'];
-    startDate = json['start_date'];
-    endDate = json['end_date'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
     reward = json['reward'];
     shop = json['shop'];
     branch = json['branch'];
@@ -74,6 +75,7 @@ class TaskInfo {
     createdAt = json['created_at'];
     totalQuestions = json['total_questions'];
     answeredQuestions = json['answered_questions'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -82,8 +84,8 @@ class TaskInfo {
     data['name'] = this.name;
     data['description'] = this.description;
     data['type'] = this.type;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
     data['reward'] = this.reward;
     data['shop'] = this.shop;
     data['branch'] = this.branch;
@@ -92,6 +94,7 @@ class TaskInfo {
     data['created_at'] = this.createdAt;
     data['total_questions'] = this.totalQuestions;
     data['answered_questions'] = this.answeredQuestions;
+    data['status'] = this.status;
     return data;
   }
 }

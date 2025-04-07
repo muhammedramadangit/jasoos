@@ -112,6 +112,9 @@ class HowItWorkBottomSheet extends StatelessWidget {
             CustomButton(
               text: "Close",
               padding: EdgeInsets.symmetric(horizontal: 16.w),
+              onTap: () {
+                CustomNavigator.pop();
+              },
             ),
             SizedBox(height: 24.h)
           ],

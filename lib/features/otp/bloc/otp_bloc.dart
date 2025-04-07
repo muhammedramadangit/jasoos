@@ -16,6 +16,8 @@ import 'package:jasoos/main_widgets/dialogs/custom_show_dialog.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
+import '../../profile/bloc/profile_bloc.dart';
+
 class OtpBloc extends Bloc<AppEvent, AppState> {
   OtpBloc() : super(Initial()) {
     on<Update>(_update);
@@ -58,6 +60,8 @@ class OtpBloc extends Bloc<AppEvent, AppState> {
           if(isForget == true) {
             CustomNavigator.push(Routes.RESET_PASSWORD);
           } else {
+            ProfileBloc.instance.add(Get());
+            AppStorage.cacheToken(response.data["data"]["token"]);
             SelectCategoryBloc.instance.categories = [];
             SelectCategoryBloc.instance.add(Get());
             CustomNavigator.push(Routes.SELECT_CATEGORY, clean: true);

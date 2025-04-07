@@ -20,48 +20,46 @@ class MyTasksView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBars.titledAppBar(title: "My Tasks", center: false, back: false, leadingWidth: 0),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.h),
-        child: Column(
-          children: [
-            MyTasksCategoriesList(),
-            24.verticalSpace,
-            Expanded(
-              child: BlocBuilder<MyTasksBloc, AppState>(
-                builder: (context, state) {
-                  if(state is Loading) {
-                    return CustomLoading();
-                  } else if (state is Error) {
-                    return CustomCenterText(state.error ?? tr("errorException"));
-                  } else if (state is Empty) {
-                    return CustomEmptyView();
-                  } else {
-                    MyTasksBloc bloc = MyTasksBloc.instance;
-                    return ListView.separated(
-                      itemCount: bloc.model.data!.length,
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      separatorBuilder: (context, index) => 12.verticalSpace,
-                      itemBuilder: (context, index) {
-                        return TaskCard(
-                          model: bloc.model.data?[index],
-                          isComplete: bloc.model.data?[index] == 2,
-                          isRecent: bloc.model.data?[index] == 0,
-                        );
-                      },
-                    );
-                  }
-                },
-              ),
+      body: Column(
+        children: [
+          16.verticalSpace,
+          MyTasksCategoriesList(),
+          8.verticalSpace,
+          Expanded(
+            child: BlocBuilder<MyTasksBloc, AppState>(
+              builder: (context, state) {
+                if(state is Loading) {
+                  return CustomLoading();
+                } else if (state is Error) {
+                  return CustomCenterText(state.error ?? tr("errorException"));
+                } else if (state is Empty) {
+                  return CustomEmptyView();
+                } else {
+                  MyTasksBloc bloc = MyTasksBloc.instance;
+                  return ListView.separated(
+                    itemCount: bloc.model.data!.length,
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    separatorBuilder: (context, index) => 12.verticalSpace,
+                    itemBuilder: (context, index) {
+                      return TaskCard(
+                        model: bloc.model.data?[index],
+                        isComplete: bloc.model.data?[index] == 2,
+                        isRecent: bloc.model.data?[index] == 0,
+                      );
+                    },
+                  );
+                }
+              },
             ),
-            // OngoingTasksList(),
-            // 24.verticalSpace,
-            // AddedNewTasksList(),
-            // 24.verticalSpace,
-            // CompletedTasksList(),
-          ],
-        ),
+          ),
+          // OngoingTasksList(),
+          // 24.verticalSpace,
+          // AddedNewTasksList(),
+          // 24.verticalSpace,
+          // CompletedTasksList(),
+        ],
       ),
     );
   }

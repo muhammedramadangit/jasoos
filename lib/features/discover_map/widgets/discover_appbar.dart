@@ -11,7 +11,6 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 
 import '../../../main_widgets/custom_center_text.dart';
-import '../../../main_widgets/custom_empty_view.dart';
 import '../../../main_widgets/custom_loading.dart';
 import '../../home/models/home_categories_model.dart';
 
@@ -31,6 +30,7 @@ AppBar discoverAppBar() {
           } else if (state is Empty) {
             return SizedBox();
           } else {
+            HomeCategoriesBloc bloc = HomeCategoriesBloc.instance;
             return SizedBox(
               width: MediaQueryHelper.width,
               child: SingleChildScrollView(
@@ -47,7 +47,46 @@ AppBar discoverAppBar() {
                       ),
                     ),
 
-                    DiscoverCategoryList(model: HomeCategoriesBloc.instance.model),
+                    SizedBox(
+                      height: 34.h,
+                      child: ListView.separated(
+                        itemCount: bloc.taskTypes!.length,
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        separatorBuilder: (context, index) => 8.horizontalSpace,
+                        itemBuilder: (context, index) {
+                          HomeCategoryInfo? task = bloc.taskTypes?[index];
+                          return GestureDetector(
+                            onTap: () => bloc.onChangeTaskType(task?.id),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+                              decoration: BoxDecoration(
+                                color: bloc.selectedTaskType == task?.id ? Styles.PRIMARY_COLOR : Styles.BORDER_COLOR.withValues(alpha: 0.5),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    Constants.getSvg("cup"),
+                                    colorFilter: ColorFilter.mode(bloc.selectedTaskType == task?.id ? Styles.WHITE_COLOR : Styles.PRIMARY_COLOR , BlendMode.srcIn),
+                                  ),
+                                  10.horizontalSpace,
+                                  Text(
+                                    task?.name ?? "",
+                                    style: AppTextStyles.w500.copyWith(
+                                      fontSize: 12,
+                                      color: bloc.selectedTaskType == task?.id ? Styles.WHITE_COLOR : Styles.PRIMARY_COLOR,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -58,70 +97,3 @@ AppBar discoverAppBar() {
     ),
   );
 }
-
-class DiscoverCategoryList extends StatefulWidget {
-  final HomeCategoriesModel? model;
-  const DiscoverCategoryList({super.key, this.model});
-
-  @override
-  State<DiscoverCategoryList> createState() => _DiscoverCategoryListState();
-}
-
-class _DiscoverCategoryListState extends State<DiscoverCategoryList> {
-  int? selected;
-
-  @override
-  void initState() {
-    selected = 0;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 34.h,
-      child: ListView.separated(
-        itemCount: widget.model!.data!.length,
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        shrinkWrap: true,
-        physics: ClampingScrollPhysics(),
-        separatorBuilder: (context, index) => 8.horizontalSpace,
-        itemBuilder: (context, index) {
-          HomeCategoryInfo? task = widget.model?.data?[index];
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                selected = index;
-              });
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-              decoration: BoxDecoration(
-                color: selected == index ? Styles.PRIMARY_COLOR : Styles.BORDER_COLOR.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    Constants.getSvg("cup"),
-                    colorFilter: ColorFilter.mode(selected == index ? Styles.WHITE_COLOR : Styles.PRIMARY_COLOR , BlendMode.srcIn),
-                  ),
-                  10.horizontalSpace,
-                  Text(
-                    task?.name ?? "",
-                    style: AppTextStyles.w500.copyWith(
-                      fontSize: 12,
-                      color: selected == index ? Styles.WHITE_COLOR : Styles.PRIMARY_COLOR,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-

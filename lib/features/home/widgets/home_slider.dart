@@ -9,6 +9,7 @@ import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 
+import '../../../helper/media_quary_helper.dart';
 import '../../../main_widgets/custom_center_text.dart';
 import '../../../main_widgets/custom_empty_view.dart';
 import '../../../main_widgets/custom_loading.dart';
@@ -30,7 +31,7 @@ class _HomeSliderState extends State<HomeSlider> {
     return BlocBuilder<ShopsBloc, AppState>(
       builder: (context, state) {
         if(state is Loading) {
-          return CustomLoading();
+          return SizedBox(height: 200.h, width: MediaQueryHelper.width, child: CustomLoading());
         } else if (state is Error) {
           return CustomCenterText(state.error ?? tr("errorException"));
         } else if (state is Empty) {

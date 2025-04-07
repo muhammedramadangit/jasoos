@@ -23,6 +23,7 @@ import '../features/home/bloc/recent_tasks_bloc.dart';
 import '../features/home/bloc/shops_bloc.dart';
 import '../features/id_information/bloc/id_information_bloc.dart';
 import '../features/login/bloc/social_login.dart';
+import '../features/more/bloc/delete_account_bloc.dart';
 import '../features/my_tasks/bloc/my_tasks_bloc.dart';
 import '../features/my_tasks/bloc/tasks_status_bloc.dart';
 import '../features/policy/bloc/policy_bloc.dart';
@@ -60,5 +61,6 @@ abstract class ProviderList {
     BlocProvider<TermsBloc>(create: (_) => TermsBloc()),
     BlocProvider<PolicyBloc>(create: (_) => PolicyBloc()),
     BlocProvider<HelpBloc>(create: (_) => HelpBloc()),
+    BlocProvider<DeleteAccountBloc>(create: (_) => DeleteAccountBloc()),
   ];
 }

@@ -88,19 +88,20 @@ class _MultiSelectTaskState extends State<MultiSelectTask> {
                               physics: ClampingScrollPhysics(),
                               separatorBuilder: (context, index) => 16.verticalSpace,
                               itemBuilder: (context, index) {
-                                print("ya ged3aaaaaaaaaaaaaaaaan ${bloc.selectedProblem}");
-
                                 return Container(
                                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                                   decoration: BoxDecoration(
-                                    color: bloc.selectedProblem[index] == true ? Styles.PRIMARY_COLOR : Styles.BACKGROUND_COLOR,
+                                    color: bloc.selectedProblem[index] == true ? Styles.BLUE_COLOR : Styles.SELECT_BACKGROUND_COLOR,
                                     borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(color: bloc.selectedProblem[index] == true ? Styles.BLUE_COLOR : Styles.BACKGROUND_COLOR),
+                                    border: Border.all(color: bloc.selectedProblem[index] == true ? Styles.BLUE_COLOR : Styles.SELECT_BACKGROUND_COLOR),
                                   ),
                                   child: Row(
                                     children: [
                                       CustomCheckBox(
                                         isSelected: bloc.selectedProblem[index] == true,
+                                        selectedColor: Styles.BLUE_COLOR,
+                                        radius: 100,
+                                        size: 16,
                                         onChanged: (value) {
                                           bloc.onSelectProblem(value, index);
                                           bloc.add(Update());

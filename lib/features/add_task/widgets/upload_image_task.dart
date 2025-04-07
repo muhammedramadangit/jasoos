@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/features/add_task/bloc/start_task_bloc.dart';
 import 'package:jasoos/features/add_task/widgets/custom_task_card.dart';
 import 'package:jasoos/features/add_task/widgets/upload_bottom_sheet.dart';
@@ -43,25 +45,30 @@ class UploadImageTask extends StatelessWidget {
             ),
           ),
           24.verticalSpace,
-          GestureDetector(
-            onTap: () {
-              showUploadImageBottomSheet();
-            },
-            child: Container(
-              height: 114.h,
-              width: MediaQueryHelper.width,
-              padding: EdgeInsets.symmetric(vertical: 28),
-              decoration: BoxDecoration(
-                color: Styles.PRIMARY_COLOR,
-                borderRadius: BorderRadius.circular(12.r),
-                image: StartTaskBloc.instance.imageAnswer == null ? null : DecorationImage(
-                  image: FileImage(File(StartTaskBloc.instance.imageAnswer!.path)),
+          BlocBuilder<StartTaskBloc, AppState>(
+            builder: (context, state) {
+              return GestureDetector(
+                onTap: () {
+                  showUploadImageBottomSheet();
+                },
+                child: Container(
+                  height: 114.h,
+                  width: MediaQueryHelper.width,
+                  padding: EdgeInsets.symmetric(vertical: 28),
+                  decoration: BoxDecoration(
+                    color: Styles.BLUE_COLOR,
+                    borderRadius: BorderRadius.circular(12.r),
+                    image: StartTaskBloc.instance.imageAnswer == null ? null : DecorationImage(
+                      image: FileImage(File(StartTaskBloc.instance.imageAnswer!.path)),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(Constants.getSvg("camera")),
+                  ),
                 ),
-              ),
-              child: Center(
-                child: SvgPicture.asset(Constants.getSvg("camera")),
-              ),
-            ),
+              );
+            }
           ),
           // 24.verticalSpace,
           // SizedBox(

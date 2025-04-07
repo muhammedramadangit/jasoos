@@ -76,16 +76,17 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
     nameError = AppValidations.name(name.text);
     emailError = AppValidations.email(email.text);
     phoneError = AppValidations.phone(phone.text.replaceAll("-", ""));
-    birthdayError = AppValidations.birthday(birthday?.toYearMonthDayFormat());
+    // birthdayError = AppValidations.birthday(birthday != null ? birthday?.toYearMonthDayFormat() : "");
     genderError = AppValidations.gender(gender?.value);
     maritalStatusError = AppValidations.any(maritalStatus?.value);
     nameValidation = nameError!.isEmpty;
     emailValidation = emailError!.isEmpty;
     phoneValidation = phoneError!.isEmpty;
-    birthdayValidation = birthdayError!.isEmpty;
+    // birthdayValidation = birthdayError!.isEmpty;
     genderValidation = genderError!.isEmpty;
     maritalStatusValidation = maritalStatusError!.isEmpty;
-    return nameValidation && emailValidation && phoneValidation && birthdayValidation && genderValidation && maritalStatusValidation;
+    bool? validation = nameValidation && emailValidation && phoneValidation && genderValidation && maritalStatusValidation;
+    return validation;
   }
 
   clear() {
@@ -144,13 +145,20 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
     emit(Loading());
     if(_validation()){
       Map<String, dynamic> body = {
-        "name" : name.text,
-        "email" : email.text,
-        "phone_code" : phoneCode,
-        "phone" : phone.text.replaceAll("-", ""),
-        "marital_status" : maritalStatus?.value,
-        "gender" : gender?.value,
-        "date_of_birth" : birthday?.toYearMonthDayFormat(),
+        if (name.text.isNotEmpty)
+          "name": name.text,
+        if (email.text.isNotEmpty)
+          "email": email.text,
+        if (phoneCode != null)
+          "phone_code": phoneCode,
+        if (phone.text.isNotEmpty)
+          "phone": phone.text.replaceAll("-", ""),
+        if (maritalStatus?.value != "null")
+          "marital_status": maritalStatus?.value,
+        if (gender?.value != "null")
+          "gender": gender?.value,
+        if (birthday != null)
+          "date_of_birth" : birthday?.toYearMonthDayFormat(),
       };
       try {
         Response response = await ProfileRepo.updateProfile(body);

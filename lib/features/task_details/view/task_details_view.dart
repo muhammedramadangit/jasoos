@@ -94,34 +94,46 @@ class TaskDetailsView extends StatelessWidget {
 
                 56.verticalSpace,
 
-                if(bloc.model.data?.status == 0 || bloc.model.data?.status == 1)
-                BlocBuilder<StartTaskBloc, AppState>(
-                  builder: (context, state) {
-                    return CustomButton(
-                      onTap: () {
-                        StartTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
-                        // QuestionsBloc.instance.add(Get(arguments: bloc.model.data?.id));
-                        // CustomNavigator.push(Routes.START_TASK);
-                        // if(bloc.distance <= 100) {
-                        //   AddTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
-                        // } else {
-                        //   showCustomDialog(dialog: CustomAlertDialog("You cannot start the task unless you are at the designated location."));
-                        // }
-                      },
-                      text: bloc.model.data?.status == 1 ? "Complete Task" : "Start Task",
-                      loading: state is Loading,
-                      textStyle: AppTextStyles.w500.copyWith(
-                        fontSize: 16,
-                        // color: bloc.distance <= 100 ? Styles.WHITE_COLOR : Styles.GREY_TEXT_COLOR,
-                        color: Styles.WHITE_COLOR,
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      // color: bloc.distance <= 100 ? Styles.PRIMARY_COLOR : Styles.BORDER_COLOR,
-                      color: Styles.PRIMARY_COLOR,
-                    );
-                  }
-                ),
-
+                if(bloc.model.data?.totalQuestions == 0)...[
+                  CustomButton(
+                    onTap: () {},
+                    text: "Sorry! no questions yet",
+                    loading: state is Loading,
+                    textStyle: AppTextStyles.w500.copyWith(
+                      fontSize: 16,
+                      color: Styles.WHITE_COLOR,
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    color: Styles.GREY_COLOR,
+                  ),
+                ]else if(bloc.model.data?.status == 0 || bloc.model.data?.status == 1)...[
+                  BlocBuilder<StartTaskBloc, AppState>(
+                    builder: (context, state) {
+                      return CustomButton(
+                        onTap: () {
+                          StartTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
+                          // QuestionsBloc.instance.add(Get(arguments: bloc.model.data?.id));
+                          // CustomNavigator.push(Routes.START_TASK);
+                          // if(bloc.distance <= 100) {
+                          //   AddTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
+                          // } else {
+                          //   showCustomDialog(dialog: CustomAlertDialog("You cannot start the task unless you are at the designated location."));
+                          // }
+                        },
+                        text: bloc.model.data?.status == 1 ? "Complete Task" : bloc.model.data?.status == 4 ? "Resubmit Task" : "Start Task",
+                        loading: state is Loading,
+                        textStyle: AppTextStyles.w500.copyWith(
+                          fontSize: 16,
+                          // color: bloc.distance <= 100 ? Styles.WHITE_COLOR : Styles.GREY_TEXT_COLOR,
+                          color: Styles.WHITE_COLOR,
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        // color: bloc.distance <= 100 ? Styles.PRIMARY_COLOR : Styles.BORDER_COLOR,
+                        color: Styles.PRIMARY_COLOR,
+                      );
+                    },
+                  ),
+                ],
               ],
             ),
           ),

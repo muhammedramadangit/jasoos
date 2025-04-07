@@ -30,7 +30,48 @@ class TaskInfoCard extends StatelessWidget {
               ),
             ),
           ),
-          32.verticalSpace,
+          24.verticalSpace,
+
+          if(model?.status == 2)...[
+            Row(
+              children: [
+                4.horizontalSpace,
+                SvgPicture.asset(Constants.getSvg("stop")),
+                4.horizontalSpace,
+                Text(
+                  "Completed",
+                  style: AppTextStyles.w500.copyWith(
+                    fontSize: 12,
+                    color: Styles.GREEN_COLOR,
+                  ),
+                )
+              ],
+            ),
+            24.verticalSpace,
+          ]else if(model?.status == 4)...[
+            Row(
+              children: [
+                4.horizontalSpace,
+                SvgPicture.asset(
+                  Constants.getSvg("stop"),
+                  colorFilter: ColorFilter.mode(
+                    Styles.RED_COLOR,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                4.horizontalSpace,
+                Text(
+                  "Rejected",
+                  style: AppTextStyles.w500.copyWith(
+                    fontSize: 12,
+                    color: Styles.RED_COLOR,
+                  ),
+                )
+              ],
+            ),
+            24.verticalSpace,
+          ],
+
           Row(
             children: [
               CircleAvatar(
@@ -67,19 +108,19 @@ class TaskInfoCard extends StatelessWidget {
                             fontSize: 12,
                           ),
                         ),
-                        SizedBox(width: 4.w),
-                        SvgPicture.asset(
-                          Constants.getSvg("discount-round"),
-                          colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
-                        ),
-                        SizedBox(width: 4.w),
-                        Text(
-                          "Valid till ${model?.endDate}",
-                          style: AppTextStyles.w400.copyWith(
-                            color: Styles.DARK_TEXT_COLOR,
-                            fontSize: 12,
-                          ),
-                        ),
+                        // SizedBox(width: 4.w),
+                        // SvgPicture.asset(
+                        //   Constants.getSvg("discount-round"),
+                        //   colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+                        // ),
+                        // SizedBox(width: 4.w),
+                        // Text(
+                        //   "Valid till ${model?.endDate}",
+                        //   style: AppTextStyles.w400.copyWith(
+                        //     color: Styles.DARK_TEXT_COLOR,
+                        //     fontSize: 12,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],

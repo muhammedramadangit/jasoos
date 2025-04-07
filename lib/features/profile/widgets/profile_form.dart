@@ -72,10 +72,12 @@ class ProfileForm extends StatelessWidget {
           labelText: "Date Of Brith",
           hintText: "Date Of Brith",
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
-          initialValue: bloc.birthday,
+          maxDate: DateTime(DateTime.now().year - 10),
+          initialValue: bloc.birthday != null ? bloc.birthday : DateTime(DateTime.now().year - 10),
           errorText: bloc.birthdayError,
           hasError: !bloc.birthdayValidation,
           onChange: (value) {
+            bloc.birthday = value;
             if (!bloc.birthdayValidation) {
               bloc.birthdayValidation = true;
             }

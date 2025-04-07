@@ -7,6 +7,7 @@ import 'package:jasoos/navigation/custom_navigation.dart';
 
 import '../models/shops_model.dart';
 import '../repo/home_repo.dart';
+import 'home_categories_bloc.dart';
 
 class ShopsBloc extends Bloc<AppEvent, AppState> {
   ShopsBloc() : super(Loading()) {
@@ -19,7 +20,10 @@ class ShopsBloc extends Bloc<AppEvent, AppState> {
   _get(AppEvent event, Emitter<AppState> emit) async {
     emit(Loading());
     try {
-      Response response = await HomeRepo.getShops(isNearest: false);
+      Response response = await HomeRepo.getShops(
+        isNearest: false,
+        taskType: HomeCategoriesBloc.instance.selectedTaskType,
+      );
       if(response.statusCode == 200) {
         model = ShopsModel.fromJson(response.data);
         emit(Done());

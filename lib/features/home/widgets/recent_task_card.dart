@@ -84,64 +84,91 @@ class RecentTaskCard extends StatelessWidget {
             ],
           ),
           8.horizontalSpace,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                model?.shop ?? "",
-                style: AppTextStyles.w500.copyWith(fontSize: 16),
-              ),
-              4.verticalSpace,
-              // Row(
-              //   children: [
-              //     SvgPicture.asset(
-              //       Constants.getSvg("routing"),
-              //       colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
-              //     ),
-              //     SizedBox(width: 4.w),
-              //     Text(
-              //       "${model?.branch}",
-              //       style: AppTextStyles.w400.copyWith(
-              //         color: Styles.DARK_TEXT_COLOR,
-              //         fontSize: 12,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // 4.verticalSpace,
-              // Row(
-              //   children: [
-              //     SvgPicture.asset(
-              //       Constants.getSvg("discount-round"),
-              //       colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
-              //     ),
-              //     SizedBox(width: 4.w),
-              //     Text(
-              //       model?.type ?? "",
-              //       style: AppTextStyles.w400.copyWith(
-              //         color: Styles.DARK_TEXT_COLOR,
-              //         fontSize: 12,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // 4.verticalSpace,
-              Row(
-                children: [
-                  SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
-                  4.horizontalSpace,
-                  Text(
-                    "Reward ${model?.reward}",
-                    style: AppTextStyles.w500.copyWith(
-                      fontSize: 12,
-                      color: Styles.PRIMARY_COLOR,
-                    ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model?.name ?? "",
+                  maxLines: 2,
+                  style: AppTextStyles.w500.copyWith(fontSize: 16, overflow: TextOverflow.ellipsis),
+                ),
+                4.verticalSpace,
+                Text(
+                  model?.shop ?? "",
+                  maxLines: 2,
+                  style: AppTextStyles.w300.copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
+                ),
+                4.verticalSpace,
+                // Row(
+                //   children: [
+                //     SvgPicture.asset(
+                //       Constants.getSvg("routing"),
+                //       colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+                //     ),
+                //     SizedBox(width: 4.w),
+                //     Text(
+                //       "${model?.branch}",
+                //       style: AppTextStyles.w400.copyWith(
+                //         color: Styles.DARK_TEXT_COLOR,
+                //         fontSize: 12,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // 4.verticalSpace,
+                // Row(
+                //   children: [
+                //     SvgPicture.asset(
+                //       Constants.getSvg("discount-round"),
+                //       colorFilter: ColorFilter.mode(Styles.DARK_TEXT_COLOR, BlendMode.srcIn),
+                //     ),
+                //     SizedBox(width: 4.w),
+                //     Text(
+                //       model?.type ?? "",
+                //       style: AppTextStyles.w400.copyWith(
+                //         color: Styles.DARK_TEXT_COLOR,
+                //         fontSize: 12,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // 4.verticalSpace,
+                if(model?.totalQuestions != 0 && (model?.totalQuestions == model?.answeredQuestions))...[
+                  Row(
+                    children: [
+                      SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.GREEN_COLOR, BlendMode.srcIn),),
+                      4.horizontalSpace,
+                      Text(
+                        "Earned ${model?.reward}",
+                        style: AppTextStyles.w500.copyWith(
+                          fontSize: 12,
+                          color: Styles.GREEN_COLOR,
+                        ),
+                      ),
+                      4.horizontalSpace,
+                      SvgPicture.asset(Constants.getSvg("riyal"), colorFilter: ColorFilter.mode(Styles.GREEN_COLOR, BlendMode.srcIn),),
+                    ],
                   ),
-                  4.horizontalSpace,
-                  SvgPicture.asset(Constants.getSvg("riyal")),
+                ]else...[
+                  Row(
+                    children: [
+                      SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
+                      4.horizontalSpace,
+                      Text(
+                        "Reward ${model?.reward}",
+                        style: AppTextStyles.w500.copyWith(
+                          fontSize: 12,
+                          color: Styles.PRIMARY_COLOR,
+                        ),
+                      ),
+                      4.horizontalSpace,
+                      SvgPicture.asset(Constants.getSvg("riyal")),
+                    ],
+                  ),
                 ],
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

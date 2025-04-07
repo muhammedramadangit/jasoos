@@ -35,8 +35,6 @@ class TaskDetailsInfo {
   int? totalQuestions;
   String? startTime;
   String? finishTime;
-  String? startDate;
-  String? endDate;
   String? latitude;
   String? longitude;
 
@@ -53,8 +51,6 @@ class TaskDetailsInfo {
         this.totalQuestions,
         this.startTime,
         this.finishTime,
-        this.startDate,
-        this.endDate,
         this.latitude,
         this.longitude,
       });
@@ -72,8 +68,6 @@ class TaskDetailsInfo {
     totalQuestions = json['total_questions'];
     startTime = json['start_time'];
     finishTime = json['finish_time'];
-    startDate = json['start_date'];
-    endDate = json['end_date'];
     latitude = json['latitude'] ?? "0.0";
     longitude = json['longitude'] ?? "0.0";
   }
@@ -92,8 +86,6 @@ class TaskDetailsInfo {
     data['total_questions'] = this.totalQuestions;
     data['start_time'] = this.startTime;
     data['finish_time'] = this.finishTime;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
     data['latitude'] = this.latitude;
     data['longitude'] = this.longitude;
     return data;

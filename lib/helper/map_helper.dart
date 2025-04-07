@@ -19,6 +19,7 @@ class CustomMap extends StatefulWidget {
   // final Set<Marker>? markers;
   final List<MarkerModel> markers;
   final void Function(GoogleMapController)? onMapCreated;
+  final Function(MarkerModel)? onMarkerTap;
 
   const CustomMap({
     Key? key,
@@ -30,7 +31,7 @@ class CustomMap extends StatefulWidget {
     this.width,
     this.radius,
     this.isScroll = true,
-    required this.markers, this.initialCameraPosition, this.onMapCreated,
+    required this.markers, this.initialCameraPosition, this.onMapCreated, this.onMarkerTap,
     // required this.daycareList,
   }) : super(key: key);
 
@@ -106,6 +107,11 @@ class _CustomMapState extends State<CustomMap> {
               double.tryParse(marker.lng.toString()) ?? 31.3905576,
             ),
             icon: await BitmapDescriptor.fromBytes(resizedImage),
+            onTap: () {
+              if (widget.onMarkerTap != null) {
+                widget.onMarkerTap!(marker); // Notify DiscoverView
+              }
+            },
           ),
         );
       } catch (error) {

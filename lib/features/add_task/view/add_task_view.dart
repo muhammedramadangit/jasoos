@@ -98,7 +98,7 @@ class _AddTaskViewState extends State<AddTaskView> {
             width: MediaQueryHelper.width,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(Constants.getAsset("task-background")),
+                image: AssetImage(Constants.getAsset("task-backgroud1")),
                 fit: BoxFit.cover,
               ),
             ),
@@ -106,8 +106,15 @@ class _AddTaskViewState extends State<AddTaskView> {
               builder: (context, startState) {
                 return Column(
                   children: [
+                    // if(bloc.model.data!.length > 3 &&
+                    //     ((bloc.model.data!.length.isEven && (bloc.index == bloc.model.data!.length/2))
+                    //         || (bloc.model.data!.length.isOdd && (bloc.index == (bloc.model.data!.length/2).floor()))
+                    //     ))...[
+                    //   TaskDone(),
+                    // ]else...[
+                    //   bloc.tasks[bloc.index],
+                    // ],
                     bloc.tasks[bloc.index],
-                    // UploadImageTask(),
                     Spacer(),
                     CustomButton(
                       text: "Next",
@@ -118,11 +125,6 @@ class _AddTaskViewState extends State<AddTaskView> {
                           "question_id" : bloc.model.data?[bloc.index].id,
                           "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
                         });
-                        // StartTaskBloc.instance.add(Click(arguments: {
-                        //   "question_id" : bloc.model.data?[bloc.index].id,
-                        //   "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
-                        // }));
-                        // bloc.nextTask();
                       },
                       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 42.h),
                     ),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -52,10 +50,9 @@ class _CategoryCardState extends State<CategoryCard> {
                 color: isSelected == true
                     ? Styles.WHITE_COLOR
                     : null,
-              ),
-              child: Center(
-                child: Image.network(
-                  widget.model?.image ?? "",
+                image: DecorationImage(
+                  image: NetworkImage(widget.model?.image ?? ""),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

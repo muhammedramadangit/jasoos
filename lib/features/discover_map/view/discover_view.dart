@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jasoos/core/app_state.dart';
-import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/features/home/bloc/shops_bloc.dart';
 import 'package:jasoos/features/home/models/shops_model.dart';
 import 'package:jasoos/helper/map_helper.dart';
@@ -33,11 +30,32 @@ class _DiscoverViewState extends State<DiscoverView> {
   final TextEditingController _searchController = TextEditingController();
   List<ShopInfo> _filteredShops = [];
   List<ShopInfo> _allShops = [];
+  final ScrollController _scrollController = ScrollController();
+  ShopInfo? _selectedShop;
 
   @override
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _filteredShops = List.from(_allShops); // Initialize filtered list
+      });
+    });
+  }
+
+  void _onMarkerTap(MarkerModel marker) {
+    setState(() {
+      int index = _filteredShops.indexWhere((s) => s.id == marker.id);
+      if (index != -1) {
+        _selectedShop = _filteredShops[index];
+        _scrollController.animateTo(
+          index * 320.0, // Adjust based on item width
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
   }
 
   @override
@@ -48,33 +66,37 @@ class _DiscoverViewState extends State<DiscoverView> {
 
   void _onSearchChanged() {
     setState(() {
-      _filteredShops = _allShops
-          .where((shop) =>
-          shop.name!.toLowerCase().contains(_searchController.text.toLowerCase()))
-          .toList();
+      String query = _searchController.text.toLowerCase();
+
+      if (query.isEmpty) {
+        _filteredShops = List.from(_allShops); // Reset when search is empty
+      } else {
+        _filteredShops = _allShops.where((shop) {
+          return shop.name?.toLowerCase().contains(query) ?? false;
+        }).toList();
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShopsBloc, AppState>(
-      builder: (context, state) {
-        if(state is Loading) {
-          return CustomLoading();
-        } else if (state is Error) {
-          return CustomCenterText(state.error ?? tr("errorException"));
-        } else if (state is Empty) {
-          return CustomEmptyView();
-        } else {
-          ShopsBloc bloc = ShopsBloc.instance;
-          _allShops = bloc.model.data ?? [];
-          _filteredShops = _filteredShops.isEmpty && _searchController.text.isEmpty
-              ? _allShops
-              : _filteredShops;
-          log("USER LAT ${AppStorage.getUserLat} | USER LNG ${AppStorage.getUserLng}");
-          return Scaffold(
-            appBar: discoverAppBar(),
-            body: Padding(
+    return Scaffold(
+      appBar: discoverAppBar(),
+      body: BlocBuilder<ShopsBloc, AppState>(
+        builder: (context, state) {
+          if(state is Loading) {
+            return CustomLoading();
+          } else if (state is Error) {
+            return CustomCenterText(state.error ?? tr("errorException"));
+          } else if (state is Empty) {
+            return CustomEmptyView();
+          } else {
+            ShopsBloc bloc = ShopsBloc.instance;
+            _allShops = bloc.model.data ?? [];
+            _filteredShops = _searchController.text.isEmpty
+                ? List.from(_allShops)
+                : _filteredShops;
+            return Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Stack(
                 children: [
@@ -85,22 +107,12 @@ class _DiscoverViewState extends State<DiscoverView> {
                       topLeft: Radius.circular(24.r),
                     ),
                     child: CustomMap(
-                      // onMapCreated: (GoogleMapController controller) {
-                      //   _mapController = controller;
-                      // },
-                      // initialCameraPosition: CameraPosition(
-                      //   target: _currentLocation,
-                      //   zoom: 10,
-                      // ),
                       lat: double.parse("${ShopsBloc.instance.model.data?.first.latitude}"),
                       long: double.parse("${ShopsBloc.instance.model.data?.first.longitude}"),
-                      markers: ShopsBloc.instance.model.data!.map((ele) {
+                      markers: _filteredShops.map((ele) {
                         return MarkerModel(id: ele.id, lat: double.parse("${ele.latitude}"), lng: double.parse("${ele.longitude}"));
                       }).toList(),
-                      // markers: [
-                      //   MarkerModel(id: 1, lat: 21.5292, lng: 39.1611),
-                      //   MarkerModel(id: 1, lat: 21.4241, lng: 39.8173),
-                      // ],
+                      onMarkerTap: _onMarkerTap,
                     ),
                   ),
 
@@ -146,6 +158,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                         child: _filteredShops.isEmpty
                             ? Center(child: Text("No results found"))
                             :ListView.separated(
+                          controller: _scrollController,
                           itemCount: _filteredShops.length,
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
@@ -153,10 +166,10 @@ class _DiscoverViewState extends State<DiscoverView> {
                           physics: ClampingScrollPhysics(),
                           separatorBuilder: (context, index) => 16.horizontalSpace,
                           itemBuilder: (context, index) {
-                            ShopInfo? shop = bloc.model.data?[index];
+                            ShopInfo? shop = _filteredShops[index];
                             return GestureDetector(
                               onTap: () {
-                                CustomNavigator.push(Routes.SHOP_DETAILS, arguments: shop?.id);
+                                CustomNavigator.push(Routes.SHOP_DETAILS, arguments: shop.id);
                               },
                               child: Container(
                                 width: 300.w,
@@ -173,7 +186,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(12.r),
                                       child: Image.network(
-                                        shop?.image ?? "",
+                                        shop.image ?? "",
                                         width: 90,
                                         height: 80,
                                         fit: BoxFit.cover,
@@ -200,7 +213,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            shop?.name ?? "",
+                                            shop.name ?? "",
                                             maxLines: 2,
                                             style: AppTextStyles.w700.copyWith(
                                               fontSize: 16,
@@ -215,7 +228,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                                               ),
                                               SizedBox(width: 4.w),
                                               Text(
-                                                shop?.distance ?? "",
+                                                shop.distance ?? "",
                                                 style: AppTextStyles.w500.copyWith(
                                                   color: Styles.DARK_TEXT_COLOR,
                                                   fontSize: 10,
@@ -228,7 +241,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                                               ),
                                               SizedBox(width: 4.w),
                                               Text(
-                                                "${shop?.tasksCount} mission",
+                                                "${shop.tasksCount} mission",
                                                 style: AppTextStyles.w500.copyWith(
                                                   color: Styles.DARK_TEXT_COLOR,
                                                   fontSize: 10,
@@ -257,10 +270,10 @@ class _DiscoverViewState extends State<DiscoverView> {
                   ),
                 ],
               ),
-            ),
-          );
+            );
+          }
         }
-      }
+      ),
     );
   }
 }
