@@ -51,14 +51,14 @@ class GeneralTabs extends StatelessWidget {
       //   "description" : "Manage your submissions ",
       //   "onTap" : () {},
       // },
-      {
-        "icon" : "group",
-        "title" : "Invite Friends",
-        "description" : "Share referral code and get bonus",
-        "onTap" : () {
-          CustomNavigator.push(Routes.INVITE_FRIENDS);
-        },
-      },
+      // {
+      //   "icon" : "group",
+      //   "title" : "Invite Friends",
+      //   "description" : "Share referral code and get bonus",
+      //   "onTap" : () {
+      //     CustomNavigator.push(Routes.INVITE_FRIENDS);
+      //   },
+      // },
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

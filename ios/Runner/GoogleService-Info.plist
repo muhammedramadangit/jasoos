@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>463487556848-6u8g5nn8khqkgb002r3fjlsej46f5vi7.apps.googleusercontent.com</string>
+	<string>463487556848-mv7673chagpd8u6e4ijt8021i4rvjpit.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.463487556848-6u8g5nn8khqkgb002r3fjlsej46f5vi7</string>
+	<string>com.googleusercontent.apps.463487556848-mv7673chagpd8u6e4ijt8021i4rvjpit</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>463487556848-5b169k46hd84covqi0oa9q0pk62tbp7d.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.jasoos.user</string>
+	<string>org.akwad.apps.jasoos</string>
 	<key>PROJECT_ID</key>
 	<string>jassos</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:463487556848:ios:e37155787b196fca513635</string>
+	<string>1:463487556848:ios:fddcfb640ea217e7513635</string>
 </dict>
 </plist>

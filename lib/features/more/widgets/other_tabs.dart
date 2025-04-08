@@ -27,13 +27,13 @@ class OtherTabs extends StatelessWidget {
           CustomNavigator.push(Routes.SECURITY_AND_PASSWORD);
         },
       },
-      {
-        "icon" : "global",
-        "title" : "Language",
-        "onTap" : () {
-          CustomNavigator.push(Routes.LANGUAGE);
-        },
-      },
+      // {
+      //   "icon" : "global",
+      //   "title" : "Language",
+      //   "onTap" : () {
+      //     CustomNavigator.push(Routes.LANGUAGE);
+      //   },
+      // },
       {
         "icon" : "message",
         "title" : "Terms and Condition",
@@ -55,11 +55,11 @@ class OtherTabs extends StatelessWidget {
           CustomNavigator.push(Routes.HELP);
         },
       },
-      {
-        "icon" : "call",
-        "title" : "Contact Us",
-        "onTap" : () {},
-      },
+      // {
+      //   "icon" : "call",
+      //   "title" : "Contact Us",
+      //   "onTap" : () {},
+      // },
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

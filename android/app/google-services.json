@@ -37,6 +37,13 @@
             {
               "client_id": "463487556848-mu09omj3nrjlfbu2c4akd1havnm27q7l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "463487556848-6u8g5nn8khqkgb002r3fjlsej46f5vi7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jasoos.user"
+              }
             }
           ]
         }

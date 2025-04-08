@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/core/app_storage.dart';
 import 'package:jasoos/my_app.dart';
 
+import 'helper/notification_helper.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppStorage.init();
-  // await NotificationHelper.init();
+  await NotificationHelper.init();
   await EasyLocalization.ensureInitialized();
   runApp(
     ScreenUtilInit(

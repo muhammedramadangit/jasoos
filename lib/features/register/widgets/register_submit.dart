@@ -3,11 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/features/register/bloc/register_bloc.dart';
-import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
@@ -63,47 +61,47 @@ class RegisterSubmit extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 32.h),
-          Row(
-            children: [
-              Expanded(child: Styles.divider()),
-              SizedBox(width: 24.w),
-              Text(
-                "Or Sign up With Account",
-                style: AppTextStyles.w400.copyWith(fontSize: 14),
-              ),
-              SizedBox(width: 24.w),
-              Expanded(child: Styles.divider()),
-            ],
-          ),
-          SizedBox(height: 16.h),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: social.map((social) {
-              return GestureDetector(
-                onTap: () {
-                  social["onTap"]();
-                },
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  margin: EdgeInsets.symmetric(horizontal: 6.h),
-                  decoration: BoxDecoration(
-                    color: Styles.FILL_COLOR,
-                    border: Border.all(color: Styles.BORDER_COLOR, width: 0.5),
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      Constants.getSvg(social["icon"]),
-                      height: 24,
-                      width: 24,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
+          // SizedBox(height: 32.h),
+          // Row(
+          //   children: [
+          //     Expanded(child: Styles.divider()),
+          //     SizedBox(width: 24.w),
+          //     Text(
+          //       "Or Sign up With Account",
+          //       style: AppTextStyles.w400.copyWith(fontSize: 14),
+          //     ),
+          //     SizedBox(width: 24.w),
+          //     Expanded(child: Styles.divider()),
+          //   ],
+          // ),
+          // SizedBox(height: 16.h),
+          //
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: social.map((social) {
+          //     return GestureDetector(
+          //       onTap: () {
+          //         social["onTap"]();
+          //       },
+          //       child: Container(
+          //         padding: EdgeInsets.all(16),
+          //         margin: EdgeInsets.symmetric(horizontal: 6.h),
+          //         decoration: BoxDecoration(
+          //           color: Styles.FILL_COLOR,
+          //           border: Border.all(color: Styles.BORDER_COLOR, width: 0.5),
+          //           borderRadius: BorderRadius.circular(16.r),
+          //         ),
+          //         child: Center(
+          //           child: SvgPicture.asset(
+          //             Constants.getSvg(social["icon"]),
+          //             height: 24,
+          //             width: 24,
+          //           ),
+          //         ),
+          //       ),
+          //     );
+          //   }).toList(),
+          // ),
 
           SizedBox(height: 24.h),
 
