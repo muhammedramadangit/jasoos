@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +79,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
           } if(response.data["data"]["is_verified"] == 0) {
             showCustomDialog(
               dismiss: false,
-              dialog: CustomAlertDialog("Oops! Your account isn’t verified yet. Verify now to unlock full access!"),
+              dialog: CustomAlertDialog(tr("yourAccountNotVerified")),
             ).then(
               (value) {
                 AppStorage.cacheToken(response.data["data"]["token"]);

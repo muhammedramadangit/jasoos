@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,46 +16,46 @@ class GeneralTabs extends StatelessWidget {
     List<Map<String, dynamic>> tabs = [
       {
         "icon" : "user-info",
-        "title" : "Personal Information",
-        "description" : "Detail your personal data",
+        "title" : tr("personalInformation"),
+        "description" : tr("detailYourPersonalData"),
         "onTap" : () {
           CustomNavigator.push(Routes.PROFILE);
         },
       },
       {
         "icon" : "id-info",
-        "title" : "ID Information",
-        "description" : "Settings for payment transactions",
+        "title" : tr("idInfo"),
+        "description" : tr("settingsForPaymentTransactions"),
         "onTap" : () {
           CustomNavigator.push(Routes.ID_INFORMATION);
         },
       },
       {
         "icon" : "bank",
-        "title" : "Bank Account",
-        "description" : "Settings for payment transactions",
+        "title" : tr("bankAccount"),
+        "description" : tr("settingsForPaymentTransactions"),
         "onTap" : () {
           CustomNavigator.push(Routes.BANK_ACCOUNT);
         },
       },
       {
         "icon" : "gift",
-        "title" : "Rewards",
-        "description" : "Manage your account security",
+        "title" : tr("Rewards"),
+        "description" : tr("manageYourAccountSecurity"),
         "onTap" : () {
           CustomNavigator.push(Routes.REWARDS);
         },
       },
       // {
       //   "icon" : "safe",
-      //   "title" : "Submissions",
-      //   "description" : "Manage your submissions ",
+      //   "title" : tr("submissions"),
+      //   "description" : tr("manageYourSubmissions"),
       //   "onTap" : () {},
       // },
       // {
       //   "icon" : "group",
-      //   "title" : "Invite Friends",
-      //   "description" : "Share referral code and get bonus",
+      //   "title" : tr("inviteFriends"),
+      //   "description" : tr("shareReferralCode")",
       //   "onTap" : () {
       //     CustomNavigator.push(Routes.INVITE_FRIENDS);
       //   },
@@ -64,7 +65,7 @@ class GeneralTabs extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "General",
+          tr("general"),
           style: AppTextStyles.w500.copyWith(fontSize: 16),
         ),
         Container(

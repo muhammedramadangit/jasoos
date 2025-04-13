@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +150,7 @@ class _CustomMapState extends State<CustomMap> {
               child: SizedBox(
                   width: 40, height: 40, child: CircularProgressIndicator()));
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error loading data'));
+          return Center(child: Text(tr('errorLoadingData')));
         } else {
           return ClipRRect(
             clipBehavior: Clip.antiAlias,

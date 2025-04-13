@@ -13,7 +13,7 @@ import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/url_launcher_helper.dart';
 import '../../../main_widgets/custom_center_text.dart';
-import '../../task_details/widgets/how_it_work_info.dart';
+import '../widgets/how_it_work_info.dart';
 import '../widgets/shop_info_card.dart';
 import '../widgets/shop_mission_list.dart';
 
@@ -46,7 +46,7 @@ class ShopDetailsView extends StatelessWidget {
                         8.horizontalSpace,
                         Expanded(
                           child: Text(
-                            "How it Works",
+                            tr("howItWorks"),
                             style: AppTextStyles.w500.copyWith(fontSize: 14),
                           ),
                         ),
@@ -75,7 +75,7 @@ class ShopDetailsView extends StatelessWidget {
                         8.horizontalSpace,
                         Expanded(
                           child: Text(
-                            "Navigate To Restaurant",
+                            tr("navigateToRestaurant"),
                             style: AppTextStyles.w500.copyWith(fontSize: 14),
                           ),
                         ),

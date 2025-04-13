@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,7 @@ class _TwoStepVerificationState extends State<TwoStepVerification> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Two-step verification"),
+      appBar: AppBars.titledAppBar(title: tr("twoStepVerification")),
       body: Padding(
         padding: Styles.SCREEN_PADDING,
         child: Column(
@@ -43,7 +44,7 @@ class _TwoStepVerificationState extends State<TwoStepVerification> {
                 children: [
                   Expanded(
                     child: Text(
-                      "Secure your account with two-step verification",
+                      tr("secureYourAccountWithTwoStepVerification"),
                       style: AppTextStyles.w500.copyWith(
                         fontSize: 16,
                         color: Styles.GREY_TEXT_COLOR,
@@ -76,7 +77,7 @@ class _TwoStepVerificationState extends State<TwoStepVerification> {
                 SizedBox(width: 12.w),
                 Expanded(
                   child: Text(
-                    "Two-step verification provides additional security by asking for a verification code every time you log in on another device.",
+                    tr("twoStepVerificationDesc"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 14,
                       color: Styles.GREY_TEXT_COLOR,
@@ -100,7 +101,7 @@ class _TwoStepVerificationState extends State<TwoStepVerification> {
                 SizedBox(width: 12.w),
                 Expanded(
                   child: Text(
-                    "Adding a phone number or using an authenticator will help keep your account safe from harm.",
+                    tr("addingPhoneNumberOrUsingAuthenticator"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 14,
                       color: Styles.GREY_TEXT_COLOR,
@@ -111,7 +112,7 @@ class _TwoStepVerificationState extends State<TwoStepVerification> {
             ),
             Spacer(),
             CustomButton(
-              text: "Save",
+              text: tr("save"),
               onTap: () {},
             ),
           ],

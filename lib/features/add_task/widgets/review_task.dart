@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -29,7 +30,7 @@ class ReviewTask extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Select an answer",
+                tr("selectAnswer"),
                 style: AppTextStyles.w700.copyWith(
                   fontSize: 14,
                   color: Styles.WHITE_COLOR,
@@ -86,7 +87,7 @@ class ReviewTask extends StatelessWidget {
                     ),
                     12.verticalSpace,
                     Text(
-                      bloc.selectedReview ?? "-",
+                      tr("${bloc.selectedReview ?? "-"}"),
                       style: AppTextStyles.w500.copyWith(
                         fontSize: 16,
                         color: Styles.WHITE_COLOR,

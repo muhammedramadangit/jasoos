@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +37,7 @@ class HomeView extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
-                        "Hi, ${bloc.model.data?.name!.split(" ")[0]}👋",
+                        "${tr("hi")}, ${bloc.model.data?.name!.split(" ")[0]}👋",
                         style: AppTextStyles.w500.copyWith(fontSize: 24),
                       ),
                     ),
@@ -53,7 +54,7 @@ class HomeView extends StatelessWidget {
             HomeCategoriesList(),
             16.verticalSpace,
             _ViewAll(
-              title: "Nearest Shops",
+              title: tr("nearestShops"),
               onView: () {
                 CustomNavigator.push(Routes.NEAREST_SHOPS);
               },
@@ -61,7 +62,7 @@ class HomeView extends StatelessWidget {
             NearestTasksList(),
             16.verticalSpace,
             _ViewAll(
-              title: "Recent Tasks",
+              title: tr("recentTasks"),
               onView: () {
                 CustomNavigator.push(Routes.ALL_RECENT_TASKS);
               },
@@ -99,7 +100,7 @@ class _ViewAll extends StatelessWidget {
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               child: Text(
-                "View all",
+                tr("viewAll"),
                 style: AppTextStyles.w500.copyWith(
                   fontSize: 12,
                   color: Styles.GREY_TEXT_COLOR,

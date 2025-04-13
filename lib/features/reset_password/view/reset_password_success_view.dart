@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,13 +23,13 @@ class ResetPasswordSuccessView extends StatelessWidget {
             SvgPicture.asset(Constants.getSvg("success")),
             SizedBox(height: 24.h),
             Text(
-              "Password changed successfully!",
+              tr("passwordChangedSuccessfully"),
               textAlign: TextAlign.center,
               style: AppTextStyles.w500.copyWith(fontSize: 24),
             ),
             SizedBox(height: 12.h),
             Text(
-              "Your password has been changed successfully, we will let you know if there are more problems with your account",
+              tr("yourPasswordChangedSuccessfully"),
               textAlign: TextAlign.center,
               style: AppTextStyles.w400.copyWith(
                 fontSize: 16,
@@ -38,7 +39,7 @@ class ResetPasswordSuccessView extends StatelessWidget {
 
             Spacer(),
             CustomButton(
-              text: "Back to login",
+              text: tr("backToLogin"),
               onTap: () {
                 CustomNavigator.push(Routes.LOGIN, clean: true);
               },

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/helper/styles.dart';
@@ -12,23 +13,23 @@ class NotificationSettingView extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
       {
-        "title" : "Special tips and offers",
+        "title" : tr("specialTipsAndOffers"),
         "mobile_status" : false,
         "email_status" : true,
       },
       {
-        "title" : "Activity",
+        "title" : tr("activity"),
         "mobile_status" : false,
         "email_status" : true,
       },
       {
-        "title" : "Reminders",
+        "title" : tr("reminders"),
         "mobile_status" : false,
         "email_status" : true,
       },
     ];
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Notifications"),
+      appBar: AppBars.titledAppBar(title: tr("notifications")),
       body: Container(
         padding: EdgeInsets.all(24),
         margin: Styles.SCREEN_PADDING,
@@ -53,7 +54,7 @@ class NotificationSettingView extends StatelessWidget {
                 SizedBox(height: 24.h),
 
                 CustomTitledSwitch(
-                  label: "Push Notification",
+                  label: tr("pushNotification"),
                   isActive: tabs[index]["mobile_status"],
                   padding: EdgeInsets.zero,
                   onChange: (value) {},
@@ -62,7 +63,7 @@ class NotificationSettingView extends StatelessWidget {
                 SizedBox(height: 24.h),
 
                 CustomTitledSwitch(
-                  label: "Email",
+                  label: tr("email"),
                   isActive: tabs[index]["email_status"],
                   padding: EdgeInsets.zero,
                   onChange: (value) {},

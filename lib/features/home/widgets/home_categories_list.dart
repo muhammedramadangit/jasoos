@@ -34,7 +34,7 @@ class HomeCategoriesList extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                 child: Text(
-                  "Choose Tasks",
+                  tr("chooseTasks"),
                   style: AppTextStyles.w500.copyWith(fontSize: 16),
                 ),
               ),
@@ -73,7 +73,7 @@ class HomeCategoriesList extends StatelessWidget {
                             ),
                             8.verticalSpace,
                             Text(
-                              bloc.taskTypes?[index].name ?? "",
+                              typeId == 0 ? tr("allTasks") : bloc.taskTypes?[index].name ?? "",
                               textAlign: TextAlign.center,
                               style: AppTextStyles.w500.copyWith(fontSize: 10),
                             ),

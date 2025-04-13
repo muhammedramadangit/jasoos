@@ -17,7 +17,7 @@ class AllRecentTasksView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Recent Tasks"),
+      appBar: AppBars.titledAppBar(title: tr("recentTasks")),
       body: BlocBuilder<RecentTasksBloc, AppState>(
         builder: (context, state) {
           if(state is Loading) {

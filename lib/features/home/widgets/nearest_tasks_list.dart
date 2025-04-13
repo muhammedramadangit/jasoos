@@ -189,7 +189,7 @@ class NearestTasksList extends StatelessWidget {
                                           ),
                                           SizedBox(width: 4.w),
                                           Text(
-                                            "${shop?.tasksCount} Mission",
+                                            "${shop?.tasksCount} ${tr("mission")}",
                                             style: AppTextStyles.w400.copyWith(
                                               color: Styles.DARK_GREY_COLOR,
                                               fontSize: 12,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,14 +17,14 @@ class ResetPasswordForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextInputField(
-          hintText: "New Password",
+          hintText: tr("newPassword"),
           keyboardType: TextInputType.visiblePassword,
           prefixIcon: SvgPicture.asset(Constants.getSvg("lock")),
           controller: bloc.password,
           errorText: bloc.passwordError,
           hasError: !bloc.passwordValidation,
           hasValidationHint: true,
-          validationHint: "Password must be at least 8 characters",
+          validationHint: tr("passwordLength"),
           onChange: (value) {
             if (!bloc.passwordValidation) {
               bloc.passwordValidation = true;
@@ -34,14 +35,14 @@ class ResetPasswordForm extends StatelessWidget {
         SizedBox(height: 8.h),
 
         TextInputField(
-          hintText: "Confirm New Password",
+          hintText: tr("confirmNewPassword"),
           keyboardType: TextInputType.visiblePassword,
           prefixIcon: SvgPicture.asset(Constants.getSvg("lock")),
           controller: bloc.confirmPassword,
           errorText: bloc.confirmPasswordError,
           hasError: !bloc.confirmPasswordValidation,
           hasValidationHint: true,
-          validationHint: "Both password must match",
+          validationHint: tr("bothPasswordMustMatch"),
           onChange: (value) {
             if (!bloc.confirmPasswordValidation) {
               bloc.confirmPasswordValidation = true;

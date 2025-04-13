@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/helper/constants.dart';
@@ -18,7 +19,7 @@ class TaskDone extends StatelessWidget {
         Image.asset(Constants.getAsset("clamp")),
         10.verticalSpace,
         Text(
-          "Well done we are almost there",
+          tr("wellDone"),
           style: AppTextStyles.w700.copyWith(
             fontSize: 20,
             color: Styles.WHITE_COLOR,
@@ -26,7 +27,7 @@ class TaskDone extends StatelessWidget {
         ),
         6.verticalSpace,
         Text(
-          "Let’s continue and finish this task",
+          tr("LetsContinue"),
           style: AppTextStyles.w400.copyWith(
             fontSize: 16,
             color: Styles.WHITE_COLOR,

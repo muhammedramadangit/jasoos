@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,12 +26,12 @@ class RegisterView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Create Account",
+                  tr("createAccount"),
                   style: AppTextStyles.w500.copyWith(fontSize: 28),
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  "Please create an account to find your dream job",
+                  tr("createAccountToFindYourDreamJob"),
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 16,
                     color: Styles.GREY_TEXT_COLOR,

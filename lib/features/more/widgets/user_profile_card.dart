@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,7 +76,7 @@ class UserProfileCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Your Next Task Awaits!",
+                  easy.tr("yourNextTaskAwaits"),
                   style: AppTextStyles.w500.copyWith(fontSize: 12),
                 ),
                 12.verticalSpace,
@@ -87,7 +88,7 @@ class UserProfileCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Level",
+                          easy.tr("Level"),
                           style: AppTextStyles.w400.copyWith(
                             fontSize: 12,
                             color: Styles.GREY_TEXT_COLOR,
@@ -112,7 +113,7 @@ class UserProfileCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Tasks",
+                          easy.tr("tasks"),
                           style: AppTextStyles.w400.copyWith(
                             fontSize: 12,
                             color: Styles.GREY_TEXT_COLOR,
@@ -137,7 +138,7 @@ class UserProfileCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Rank",
+                          easy.tr("rank"),
                           style: AppTextStyles.w400.copyWith(
                             fontSize: 12,
                             color: Styles.GREY_TEXT_COLOR,

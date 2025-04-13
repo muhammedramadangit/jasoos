@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/features/invite_friend/widgets/invite_friends_code.dart';
@@ -11,7 +12,7 @@ class InviteFriendView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Invite Friends"),
+      appBar: AppBars.titledAppBar(title: tr("inviteFriends")),
       body: Padding(
         padding: Styles.SCREEN_PADDING,
         child: Column(

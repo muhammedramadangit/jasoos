@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +20,7 @@ class BankAccountView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBars.titledAppBar(
-              title: "Bank Account",
+              title: tr("bankAccount"),
               actions: BankAccountBloc.instance.canEdit == true ? [] : [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),

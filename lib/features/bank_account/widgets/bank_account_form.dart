@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jasoos/features/bank_account/bloc/bank_account_bloc.dart';
 import 'package:jasoos/helper/styles.dart';
@@ -15,7 +16,7 @@ class BankAccountForm extends StatelessWidget {
     return Column(
       children: [
         TextInputField(
-          labelText: "Bank Name",
+          labelText: tr("bankName"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.name,
           readOnly: !bloc.canEdit,
@@ -30,7 +31,7 @@ class BankAccountForm extends StatelessWidget {
           },
         ),
         TextInputField(
-          labelText: "Holder Name",
+          labelText: tr("holderName"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.name,
           readOnly: !bloc.canEdit,
@@ -45,7 +46,7 @@ class BankAccountForm extends StatelessWidget {
           },
         ),
         TextInputField(
-          labelText: "IBAN",
+          labelText: tr("iban"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.text,
           readOnly: !bloc.canEdit,

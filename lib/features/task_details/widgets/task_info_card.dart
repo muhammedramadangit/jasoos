@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -39,7 +40,7 @@ class TaskInfoCard extends StatelessWidget {
                 SvgPicture.asset(Constants.getSvg("stop")),
                 4.horizontalSpace,
                 Text(
-                  "Completed",
+                  tr("completed"),
                   style: AppTextStyles.w500.copyWith(
                     fontSize: 12,
                     color: Styles.GREEN_COLOR,
@@ -61,7 +62,7 @@ class TaskInfoCard extends StatelessWidget {
                 ),
                 4.horizontalSpace,
                 Text(
-                  "Rejected",
+                  tr("rejected"),
                   style: AppTextStyles.w500.copyWith(
                     fontSize: 12,
                     color: Styles.RED_COLOR,

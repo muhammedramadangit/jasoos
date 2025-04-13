@@ -19,7 +19,7 @@ class HelpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Help Center"),
+      appBar: AppBars.titledAppBar(title: tr("helpCenter")),
       body: BlocBuilder<HelpBloc, AppState>(
         builder: (context, state) {
           if(state is Loading) {

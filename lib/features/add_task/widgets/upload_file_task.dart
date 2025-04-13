@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,7 @@ class UploadFileTask extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Upload a file",
+                tr("uploadFile"),
                 style: AppTextStyles.w700.copyWith(
                   fontSize: 14,
                   color: Styles.WHITE_COLOR,
@@ -55,7 +56,7 @@ class UploadFileTask extends StatelessWidget {
           ),
           16.verticalSpace,
           Text(
-            "Upload your Receipt",
+            tr("uploadYourReceipt"),
             style: AppTextStyles.w500.copyWith(
               color: Styles.WHITE_COLOR,
               fontSize: 16,
@@ -80,7 +81,7 @@ class UploadFileTask extends StatelessWidget {
                 StartTaskBloc.instance.fileAnswer = value;
               });
             },
-            text: "Add file",
+            text: tr("addFile"),
             color: Styles.BLUE_COLOR,
             borderColor: Styles.BLUE_COLOR,
             prefixIcon: SvgPicture.asset(Constants.getSvg("upload")),

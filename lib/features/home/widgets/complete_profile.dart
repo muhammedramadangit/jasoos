@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,12 +36,12 @@ class CompleteProfile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Complete Profile ",
+                        tr("completeProfile"),
                         style: AppTextStyles.w500.copyWith(fontSize: 14),
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        "Add your details to unlock the full experience.",
+                        tr("addYourDetailsToUnlockFullExperience"),
                         style: AppTextStyles.w400.copyWith(fontSize: 10),
                       ),
                       SizedBox(height: 12.h),

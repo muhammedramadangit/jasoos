@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,49 +16,49 @@ class OtherTabs extends StatelessWidget {
     List<Map<String, dynamic>> tabs = [
       {
         "icon" : "notification",
-        "title" : "Notifications",
+        "title" : tr("notifications"),
         "onTap" : () {
           CustomNavigator.push(Routes.NOTIFICATION_SETTING);
         },
       },
       {
         "icon" : "security",
-        "title" : "Security & Password",
+        "title" : tr("securityPassword"),
         "onTap" : () {
           CustomNavigator.push(Routes.SECURITY_AND_PASSWORD);
         },
       },
-      // {
-      //   "icon" : "global",
-      //   "title" : "Language",
-      //   "onTap" : () {
-      //     CustomNavigator.push(Routes.LANGUAGE);
-      //   },
-      // },
+      {
+        "icon" : "global",
+        "title" : tr("language"),
+        "onTap" : () {
+          CustomNavigator.push(Routes.LANGUAGE);
+        },
+      },
       {
         "icon" : "message",
-        "title" : "Terms and Condition",
+        "title" : tr("terms"),
         "onTap" : () {
           CustomNavigator.push(Routes.TERMS);
         },
       },
       {
         "icon" : "message",
-        "title" : "Privacy policy",
+        "title" : tr("privacyPolicy"),
         "onTap" : () {
           CustomNavigator.push(Routes.POLICY);
         },
       },
       {
         "icon" : "message",
-        "title" : "Help Center",
+        "title" : tr("helpCenter"),
         "onTap" : () {
           CustomNavigator.push(Routes.HELP);
         },
       },
       // {
       //   "icon" : "call",
-      //   "title" : "Contact Us",
+      //   "title" : tr("contactUs"),
       //   "onTap" : () {},
       // },
     ];
@@ -65,7 +66,7 @@ class OtherTabs extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Other",
+          tr("other"),
           style: AppTextStyles.w500.copyWith(fontSize: 16),
         ),
         Container(

@@ -15,8 +15,8 @@ import '../../../helper/styles.dart';
 import '../../../helper/url_launcher_helper.dart';
 import '../../../main_widgets/custom_center_text.dart';
 import '../../add_task/bloc/start_task_bloc.dart';
+import '../../shop_details/widgets/how_it_work_info.dart';
 import '../bloc/task_details_bloc.dart';
-import '../widgets/how_it_work_info.dart';
 import '../widgets/task_info_card.dart';
 
 class TaskDetailsView extends StatelessWidget {
@@ -48,7 +48,7 @@ class TaskDetailsView extends StatelessWidget {
                         8.horizontalSpace,
                         Expanded(
                           child: Text(
-                            "How it Works",
+                            tr("howItWorks"),
                             style: AppTextStyles.w500.copyWith(fontSize: 14),
                           ),
                         ),
@@ -77,7 +77,7 @@ class TaskDetailsView extends StatelessWidget {
                         8.horizontalSpace,
                         Expanded(
                           child: Text(
-                            "Navigate To Restaurant",
+                            tr("navigateToRestaurant"),
                             style: AppTextStyles.w500.copyWith(fontSize: 14),
                           ),
                         ),
@@ -97,7 +97,7 @@ class TaskDetailsView extends StatelessWidget {
                 if(bloc.model.data?.totalQuestions == 0)...[
                   CustomButton(
                     onTap: () {},
-                    text: "Sorry! no questions yet",
+                    text: tr("noQuestionsYet"),
                     loading: state is Loading,
                     textStyle: AppTextStyles.w500.copyWith(
                       fontSize: 16,
@@ -120,7 +120,7 @@ class TaskDetailsView extends StatelessWidget {
                           //   showCustomDialog(dialog: CustomAlertDialog("You cannot start the task unless you are at the designated location."));
                           // }
                         },
-                        text: bloc.model.data?.status == 1 ? "Complete Task" : bloc.model.data?.status == 4 ? "Resubmit Task" : "Start Task",
+                        text: bloc.model.data?.status == 1 ? tr("completeTask1") : bloc.model.data?.status == 4 ? tr("resubmitTask") : tr("startTask"),
                         loading: state is Loading,
                         textStyle: AppTextStyles.w500.copyWith(
                           fontSize: 16,

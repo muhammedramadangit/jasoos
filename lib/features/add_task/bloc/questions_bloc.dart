@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,7 +85,7 @@ class QuestionsBloc extends Bloc<AppEvent, AppState> {
         model = QuestionsModel.fromJson(response.data);
         if(model.data!.isEmpty) {
           CustomNavigator.pop();
-          showCustomDialog(dialog: CustomAlertDialog("Sorry! There are no tasks yet, try again later."));
+          showCustomDialog(dialog: CustomAlertDialog(tr("noTasksYet")));
           emit(Empty());
         } else {
           tasks = model.data!.map((question) {

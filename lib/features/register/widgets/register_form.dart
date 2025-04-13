@@ -18,7 +18,7 @@ class RegisterForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextInputField(
-          hintText: "Name",
+          hintText: tr("name"),
           prefixIcon: SvgPicture.asset(Constants.getSvg("profile")),
           keyboardType: TextInputType.name,
           controller: bloc.name,
@@ -33,7 +33,7 @@ class RegisterForm extends StatelessWidget {
         ),
 
         TextInputField(
-          hintText: "Your number",
+          hintText: tr("yourNumber"),
           keyboardType: TextInputType.phone,
           controller: bloc.phone,
           errorText: bloc.phoneError,
@@ -52,7 +52,7 @@ class RegisterForm extends StatelessWidget {
         ),
 
         TextInputField(
-          hintText: "Email",
+          hintText: tr("email"),
           prefixIcon: SvgPicture.asset(Constants.getSvg("sms")),
           keyboardType: TextInputType.emailAddress,
           controller: bloc.email,
@@ -67,7 +67,7 @@ class RegisterForm extends StatelessWidget {
         ),
 
         TextInputField(
-          hintText: "Password",
+          hintText: tr("password"),
           prefixIcon: SvgPicture.asset(Constants.getSvg("lock")),
           keyboardType: TextInputType.visiblePassword,
           withBottomPadding: false,

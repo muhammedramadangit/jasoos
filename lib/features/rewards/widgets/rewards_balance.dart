@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,7 +21,7 @@ class RewardsBalance extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Total Cashback Balance",
+            tr("totalCashbackBalance"),
             style: AppTextStyles.w400.copyWith(
               fontSize: 14,
               color: Styles.DARK_GREY_COLOR,
@@ -52,7 +53,7 @@ class RewardsBalance extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "Cash out",
+                      tr("cashOut"),
                       style: AppTextStyles.w500.copyWith(fontSize: 12),
                     ),
                     SizedBox(width: 10.w),

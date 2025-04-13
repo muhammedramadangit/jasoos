@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,26 +14,26 @@ abstract class ImagePickerHelper {
       context: CustomNavigator.navigatorState.currentContext!,
       builder: (_) {
         return CupertinoActionSheet(
-          title: Text("Choose your image", style: AppTextStyles.w500.copyWith(fontSize: 14, color: Styles.GREY_TEXT_COLOR)),
+          title: Text(tr("chooseYourImage"), style: AppTextStyles.w500.copyWith(fontSize: 14, color: Styles.GREY_TEXT_COLOR)),
           actions: [
             CupertinoActionSheetAction(
                 onPressed: () async {
                   CustomNavigator.pop();
                   openCamera(onGet: onGet, compress: compress);
                 },
-                child: Text("Camera")),
+                child: Text(tr("camera"))),
             CupertinoActionSheetAction(
                 onPressed: () async {
                   CustomNavigator.pop();
                   openGallery(onGet: onGet);
                 },
-                child: Text("Gallery"))
+                child: Text(tr("gallery")))
           ],
           cancelButton: CupertinoActionSheetAction(
               onPressed: () {
                 CustomNavigator.pop();
               },
-              child: Text("Cancel", style: TextStyle(color: Colors.red))),
+              child: Text(tr("cancel"), style: TextStyle(color: Colors.red))),
         );
       },
     );

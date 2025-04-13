@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jasoos/core/app_event.dart';
@@ -14,7 +15,7 @@ class BankAccountSubmit extends StatelessWidget {
     return BlocBuilder<BankAccountBloc, AppState>(
       builder: (context, state) {
         return CustomButton(
-          text: "save",
+          text: tr("save"),
           padding: Styles.SCREEN_PADDING,
           loading: state is Loading,
           onTap: () {

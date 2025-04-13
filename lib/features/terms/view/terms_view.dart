@@ -17,7 +17,7 @@ class TermsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Terms & Conditions"),
+      appBar: AppBars.titledAppBar(title: tr("terms")),
       body: BlocBuilder<TermsBloc, AppState>(
         builder: (context, state) {
           if(state is Loading) {

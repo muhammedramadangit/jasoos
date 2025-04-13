@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class InviteFriendsCode extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Code",
+                      tr("code"),
                       style: AppTextStyles.w400.copyWith(
                         fontSize: 14,
                         color: Styles.DARK_GREY_COLOR,
@@ -47,7 +48,7 @@ class InviteFriendsCode extends StatelessWidget {
                 onTap: () async {
                   String textToCopy = "550-555-555";
                   await Clipboard.setData(ClipboardData(text: textToCopy));
-                  showToast("Copied to Clipboard : $textToCopy", color: Styles.DARK_GREY_COLOR);
+                  showToast("${tr("copiedToClipboard")} : $textToCopy", color: Styles.DARK_GREY_COLOR);
                 },
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
@@ -58,7 +59,7 @@ class InviteFriendsCode extends StatelessWidget {
         ),
         SizedBox(height: 36.h),
         CustomButton(
-          text: "Share Code",
+          text: tr('shareCode'),
           onTap: () {},
         ),
       ],

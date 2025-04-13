@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ class LoginSubmit extends StatelessWidget {
     List<Map<String, dynamic>> social = [
       {
         "icon": "google",
-        "name": "Continue With Google",
+        "name": tr("continueWithGoogle"),
         "onTap": () {
           SocialAuthHelper.loginWithGoogle.call().then((value) {
             SocialLoginBloc.instance.add(Click(arguments: {
@@ -35,7 +36,7 @@ class LoginSubmit extends StatelessWidget {
       },
       {
         "icon": "facebook",
-        "name": "Continue With Facebook",
+        "name": tr("continueWithFacebook"),
         "onTap": () {
           SocialAuthHelper.loginWithFacebook.call().then((value) {
             SocialLoginBloc.instance.add(Click(arguments: {
@@ -48,7 +49,7 @@ class LoginSubmit extends StatelessWidget {
       if(Platform.isAndroid)
         {
           "icon": "apple",
-          "name": "Continue With Apple",
+          "name": tr("continueWithApple"),
           "onTap": () {
             SocialAuthHelper.loginWithApple.call().then((value) {
               SocialLoginBloc.instance.add(Click(arguments: {
@@ -68,7 +69,7 @@ class LoginSubmit extends StatelessWidget {
             builder: (context, state) {
               LoginBloc bloc = LoginBloc.instance;
               return CustomButton(
-                text: "Login",
+                text: tr("login"),
                 disable: bloc.phone.text.isEmpty || bloc.password.text.isEmpty,
                 loading: state is Loading,
                 onTap: () {
@@ -135,7 +136,7 @@ class LoginSubmit extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don’t have an account?",
+                tr("doNotHaveAccount"),
                 style: AppTextStyles.w500.copyWith(
                   fontSize: 14,
                   color: Styles.GREY_TEXT_COLOR,
@@ -147,7 +148,7 @@ class LoginSubmit extends StatelessWidget {
                   CustomNavigator.push(Routes.REGISTER);
                 },
                 child: Text(
-                  "Register",
+                  tr("register"),
                   style: AppTextStyles.w700.copyWith(
                     fontSize: 14,
                     color: Styles.PRIMARY_COLOR,

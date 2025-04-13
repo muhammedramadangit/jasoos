@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,12 +30,12 @@ class ForgetPasswordView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Reset Password",
+                        tr("resetPassword"),
                         style: AppTextStyles.w500.copyWith(fontSize: 28),
                       ),
                       SizedBox(height: 8.h),
                       Text(
-                        "Enter the email address you used when you joined and we’ll send you instructions to reset your password.",
+                        tr("enterPhoneAndWeWillSendYouInstructionsToResetPassword"),
                         style: AppTextStyles.w400.copyWith(
                           fontSize: 16,
                           color: Styles.GREY_TEXT_COLOR,
@@ -43,7 +44,7 @@ class ForgetPasswordView extends StatelessWidget {
                       SizedBox(height: 40.h),
 
                       TextInputField(
-                        hintText: "Your number",
+                        hintText: tr("yourNumber"),
                         keyboardType: TextInputType.phone,
                         controller: bloc.phone,
                         errorText: bloc.phoneError,
@@ -66,7 +67,7 @@ class ForgetPasswordView extends StatelessWidget {
               ),
 
               CustomButton(
-                text: "Next",
+                text: tr("next"),
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 disable: bloc.phone.text.isEmpty,
                 loading: state is Loading,

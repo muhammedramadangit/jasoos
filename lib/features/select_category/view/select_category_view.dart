@@ -31,12 +31,12 @@ class SelectCategoryView extends StatelessWidget {
               children: [
                 SizedBox(height: 60.h),
                 Text(
-                  "What type of category are you interested in?",
+                  tr("whatTypeOfCategory"),
                   style: AppTextStyles.w500.copyWith(fontSize: 28),
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  "Tell us what you’re interested in so we can customise the app for your needs.",
+                  tr("tellUsWhatYouAreInterested"),
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 16,
                     color: Styles.GREY_TEXT_COLOR,
@@ -54,7 +54,7 @@ class SelectCategoryView extends StatelessWidget {
                 ),
                 SizedBox(height: 24.h),
                 CustomButton(
-                  text: state is Empty ? "Skip" : "Next",
+                  text: state is Empty ? tr("skip") : tr("next"),
                   loading: state is LoadingBTN,
                   onTap: () {
                     if(state is Empty) {

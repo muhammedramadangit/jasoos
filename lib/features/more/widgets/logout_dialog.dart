@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -38,13 +39,13 @@ class LogoutDialog extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Log out of your account?",
+              tr("logOutOfYourAccount"),
               textAlign: TextAlign.center,
               style: AppTextStyles.w600.copyWith(fontSize: 16),
             ),
             SizedBox(height: 8.h),
             Text(
-              "You will be securely signed out from this device",
+              tr("youWillBeSecurelySignedOut"),
               textAlign: TextAlign.center,
               style: AppTextStyles.w500.copyWith(fontSize: 14, color: Styles.GREY_TEXT_COLOR),
             ),
@@ -57,7 +58,7 @@ class LogoutDialog extends StatelessWidget {
                     borderColor: Styles.GREY_TEXT_COLOR,
                     txtColor: Styles.GREY_TEXT_COLOR,
                     txtFontSize: 14,
-                    text: "Cancel",
+                    text: tr("cancel"),
                     radius: 8,
                     height: 40.h,
                     onTap: () => CustomNavigator.pop(),
@@ -69,7 +70,7 @@ class LogoutDialog extends StatelessWidget {
                     color: Styles.RED_COLOR,
                     radius: 8,
                     txtFontSize: 14,
-                    text: "Sign out",
+                    text: tr("signOut"),
                     height: 40.h,
                     onTap: () => AppStorage.signOut(),
                   ),

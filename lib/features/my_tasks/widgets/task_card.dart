@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -71,7 +72,7 @@ class TaskCard extends StatelessWidget {
                   SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
                   4.horizontalSpace,
                   Text(
-                    "Earned ${model?.reward}",
+                    "${tr("earned")} ${model?.reward}",
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 12,
                       color: Styles.PRIMARY_COLOR,
@@ -117,7 +118,7 @@ class TaskCard extends StatelessWidget {
                   SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
                   4.horizontalSpace,
                   Text(
-                    "Reward ${model?.reward}",
+                    "${tr("reward")} ${model?.reward}",
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 12,
                       color: Styles.PRIMARY_COLOR,
@@ -163,13 +164,13 @@ class TaskCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Tasks",
+                      tr("tasks"),
                       style: AppTextStyles.w400.copyWith(fontSize: 12),
                     ),
                     Spacer(),
                     if(model?.totalQuestions == model?.answeredQuestions)...[
                       Text(
-                        "Completed",
+                        tr("completed"),
                         style: AppTextStyles.w700.copyWith(fontSize: 12, color: Styles.GREEN_COLOR),
                       ),
                     ]else...[

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,18 +12,18 @@ class InviteFriendsTips extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tips = [
       {
-        "title" : "Choose Tasks",
-        "description" : "Please provide your name and email",
+        "title" : tr("chooseTasks"),
+        "description" : tr("pleaseProvideYourNameAndEmail"),
         "icon" : "ticket",
       },
       {
-        "title" : "Complete the Task",
-        "description" : "A few details about your company",
+        "title" : tr("completeTask"),
+        "description" : tr("fewDetailsAboutYourCompany"),
         "icon" : "blue-star",
       },
       {
-        "title" : "Earn Rewards",
-        "description" : "Finish the task and earn points to effort!",
+        "title" : tr("earnRewards"),
+        "description" : tr("finishTaskAndEarnPoints"),
         "icon" : "discount",
       },
     ];
@@ -31,12 +32,12 @@ class InviteFriendsTips extends StatelessWidget {
         SvgPicture.asset(Constants.getSvg("add-friend")),
         SizedBox(height: 24.h),
         Text(
-          "Referral  A friend",
+          tr("referralFriend"),
           style: AppTextStyles.w700.copyWith(fontSize: 24),
         ),
         SizedBox(height: 8.h),
         Text(
-          "Your effort makes a difference—keep it up!",
+          tr("yourEffortMakesDifference"),
           style: AppTextStyles.w400.copyWith(fontSize: 14),
         ),
         SizedBox(height: 24.h),

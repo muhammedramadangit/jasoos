@@ -17,7 +17,7 @@ class PolicyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Privacy Policy"),
+      appBar: AppBars.titledAppBar(title: tr("privacyPolicy")),
       body: BlocBuilder<PolicyBloc, AppState>(
         builder: (context, state) {
           if(state is Loading) {

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jasoos/core/app_state.dart';
@@ -13,7 +14,7 @@ class ChangePasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Change password"),
+      appBar: AppBars.titledAppBar(title: tr("changePassword")),
       body: BlocBuilder<ChangePasswordBloc, AppState>(
         builder: (context, state) {
           return Column(

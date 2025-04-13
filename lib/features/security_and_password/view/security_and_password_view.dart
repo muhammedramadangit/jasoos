@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,8 +31,8 @@ class _SecurityAndPasswordState extends State<SecurityAndPassword> {
     List<Map<String, dynamic>> tabs = [
       // {
       //   "icon" : "user-info",
-      //   "title" : "Two-step verification",
-      //   "description" : "Detail your personal data",
+      //   "title" : tr("twoStepVerification"),
+      //   "description" : tr("detailYourPersonalData"),
       //   "can_switch" : false,
       //   "onTap" : () {
       //     CustomNavigator.push(Routes.TWO_STEP_VERIFICATION);
@@ -39,8 +40,8 @@ class _SecurityAndPasswordState extends State<SecurityAndPassword> {
       // },
       {
         "icon" : "bank",
-        "title" : "Change Password",
-        "description" : "Settings for payment transactions",
+        "title" : tr("changePassword"),
+        "description" : tr("settingsForPaymentTransactions"),
         "can_switch" : false,
         "onTap" : () {
           CustomNavigator.push(Routes.CHANGE_PASSWORD);
@@ -48,14 +49,14 @@ class _SecurityAndPasswordState extends State<SecurityAndPassword> {
       },
       {
         "icon" : "bank",
-        "title" : "Face ID",
-        "description" : "Setup your face ID",
+        "title" : tr("faceID"),
+        "description" : tr("setupYourFaceID"),
         "can_switch" : true,
         "onTap" : () {},
       },
     ];
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Security and Password"),
+      appBar: AppBars.titledAppBar(title: tr("securityPassword")),
       body: Container(
         margin: Styles.SCREEN_PADDING,
         padding: EdgeInsets.all(16.h),

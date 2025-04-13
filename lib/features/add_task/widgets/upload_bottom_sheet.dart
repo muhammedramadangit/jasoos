@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/core/app_event.dart';
@@ -102,7 +103,7 @@ class UploadImageBottomSheet extends StatelessWidget {
             ),
             16.verticalSpace,
             CustomButton(
-              text: "Choose from Library",
+              text: tr("chooseFromLibrary"),
               txtColor: Styles.PRIMARY_COLOR,
               color: Styles.HIGHLIGHT_COLOR,
               borderColor: Styles.HIGHLIGHT_COLOR,
@@ -124,7 +125,7 @@ class UploadImageBottomSheet extends StatelessWidget {
             ),
             16.verticalSpace,
             CustomButton(
-              text: "Cancel",
+              text: tr("cancel"),
               txtColor: Styles.WHITE_COLOR,
               color: Colors.transparent,
               borderColor: Styles.WHITE_COLOR,

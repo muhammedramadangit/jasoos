@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,12 +26,12 @@ class LoginView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome Back!",
+                  tr("welcomeBack"),
                   style: AppTextStyles.w500.copyWith(fontSize: 28),
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  "Sign In to your account",
+                  tr("signInToYourAccount"),
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 16,
                     color: Styles.GREY_TEXT_COLOR,

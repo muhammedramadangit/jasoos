@@ -131,7 +131,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                       ),
                       child: TextInputField(
                         controller: _searchController,
-                        hintText: "search",
+                        hintText: tr("search"),
                         withBottomPadding: false,
                         borderColor: Styles.SCAFFOLD_COLOR,
                         prefixIcon: SvgPicture.asset(Constants.getSvg("location-fill")),
@@ -156,7 +156,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                     child: SizedBox(
                         height: 140.h,
                         child: _filteredShops.isEmpty
-                            ? Center(child: Text("No results found"))
+                            ? Center(child: Text(tr("noResults")))
                             :ListView.separated(
                           controller: _scrollController,
                           itemCount: _filteredShops.length,
@@ -241,7 +241,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                                               ),
                                               SizedBox(width: 4.w),
                                               Text(
-                                                "${shop.tasksCount} mission",
+                                                "${shop.tasksCount} ${tr("mission")}",
                                                 style: AppTextStyles.w500.copyWith(
                                                   color: Styles.DARK_TEXT_COLOR,
                                                   fontSize: 10,
@@ -251,7 +251,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                                           ),
                                           8.verticalSpace,
                                           Text(
-                                            "View Details",
+                                            tr("viewDetails"),
                                             style: AppTextStyles.w400.copyWith(
                                               color: Styles.GREY_TEXT_COLOR,
                                               fontSize: 12,

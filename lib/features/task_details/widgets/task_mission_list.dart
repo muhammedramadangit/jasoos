@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,7 +30,7 @@ class TaskMissionList extends StatelessWidget {
               8.horizontalSpace,
               Expanded(
                 child: Text(
-                  "${model?.tasksCount} Missions is available",
+                  "${model?.tasksCount} ${tr("missionsAvailable")}",
                   style: AppTextStyles.w500.copyWith(fontSize: 14),
                 ),
               ),
@@ -71,7 +72,7 @@ class TaskMissionList extends StatelessWidget {
                             4.verticalSpace,
                             if(index.isEven)...[
                               Text(
-                                "${task?.reward} Point",
+                                "${task?.reward} ${tr("point")}",
                                 style: AppTextStyles.w500.copyWith(
                                   fontSize: 12,
                                   color: Styles.PRIMARY_COLOR,
@@ -83,7 +84,7 @@ class TaskMissionList extends StatelessWidget {
                                   SvgPicture.asset(Constants.getSvg("star")),
                                   4.horizontalSpace,
                                   Text(
-                                    "Earned ${task?.reward} Points",
+                                    "${tr("earned")} ${task?.reward} ${tr("point")}",
                                     style: AppTextStyles.w500.copyWith(
                                       fontSize: 11,
                                       color: Styles.GREEN_TEXT_COLOR,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,15 +20,15 @@ class ChangePasswordForm extends StatelessWidget {
         child: Column(
           children: [
             TextInputField(
-              labelText: "Enter your current password",
-              hintText: "Enter your current password",
+              labelText: tr("enterYourCurrentPassword"),
+              hintText: tr("enterYourCurrentPassword"),
               keyboardType: TextInputType.visiblePassword,
               controller: bloc.oldPassword,
             ),
             SizedBox(height: 8.h),
             TextInputField(
-              labelText: "Enter your new password",
-              hintText: "Enter your new password",
+              labelText: tr("enterYourNewPassword"),
+              hintText: tr("enterYourNewPassword"),
               keyboardType: TextInputType.visiblePassword,
               controller: bloc.password,
               errorText: bloc.passwordError,
@@ -41,8 +42,8 @@ class ChangePasswordForm extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             TextInputField(
-              labelText: "Confirm your new password",
-              hintText: "Confirm your new password",
+              labelText: tr("confirmYourNewPassword"),
+              hintText: tr("confirmYourNewPassword"),
               keyboardType: TextInputType.visiblePassword,
               controller: bloc.confirmPassword,
               errorText: bloc.confirmPasswordError,

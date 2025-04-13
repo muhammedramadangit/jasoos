@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
@@ -31,16 +32,16 @@ class HowItWorkBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tips = [
       {
-        "title" : "Choose Tasks",
-        "description" : "Please provide your name and email",
+        "title" : tr("chooseTasks"),
+        "description" : tr("pleaseProvideYourNameAndEmail"),
       },
       {
-        "title" : "Complete the Task",
-        "description" : "A few details about your company",
+        "title" : tr("completeTask"),
+        "description" : tr("fewDetailsAboutYourCompany"),
       },
       {
-        "title" : "Earn Rewards",
-        "description" : "Finish the task and earn points to effort!",
+        "title" : tr("earnRewards"),
+        "description" : tr("finishTaskAndEarnPoints"),
       },
     ];
     return Container(
@@ -63,7 +64,7 @@ class HowItWorkBottomSheet extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "How it works",
+                    tr("howItWorks"),
                     style: AppTextStyles.w700.copyWith(fontSize: 24),
                   ),
                   Spacer(),
@@ -110,7 +111,7 @@ class HowItWorkBottomSheet extends StatelessWidget {
             ),
 
             CustomButton(
-              text: "Close",
+              text: tr("close"),
               padding: EdgeInsets.symmetric(horizontal: 16.w),
             ),
             SizedBox(height: 24.h)

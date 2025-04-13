@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,13 +52,13 @@ class DeleteAccountDialog extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Confirm Account Deletion",
+              tr("confirmAccountDeletion"),
               textAlign: TextAlign.center,
               style: AppTextStyles.w600.copyWith(fontSize: 16),
             ),
             SizedBox(height: 8.h),
             Text(
-              "For your privacy, all personal data will be erased and access will be revoked permanently",
+              tr("deletionAlertMessage"),
               textAlign: TextAlign.center,
               style: AppTextStyles.w500.copyWith(
                   fontSize: 14, color: Styles.GREY_TEXT_COLOR),
@@ -76,7 +77,7 @@ class DeleteAccountDialog extends StatelessWidget {
                           borderColor: Styles.GREY_TEXT_COLOR,
                           txtColor: Styles.GREY_TEXT_COLOR,
                           txtFontSize: 14,
-                          text: "Cancel",
+                          text: tr("cancel"),
                           radius: 8,
                           height: 40.h,
                           onTap: () => CustomNavigator.pop(),
@@ -88,7 +89,7 @@ class DeleteAccountDialog extends StatelessWidget {
                           color: Styles.RED_COLOR,
                           radius: 8,
                           txtFontSize: 14,
-                          text: "Delete",
+                          text: tr("delete"),
                           height: 40.h,
                           onTap: () => DeleteAccountBloc.instance.add(Delete())
                         ),

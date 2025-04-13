@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -86,7 +85,6 @@ class _MainPagesViewState extends State<MainPagesView>
 
   Future<List<ConnectivityResult>> checkConnectivity() async {
     var result = await Connectivity().checkConnectivity();
-    log("CONNECTIVITY $result");
     return result;
   }
 
@@ -129,22 +127,22 @@ class _MainPagesViewState extends State<MainPagesView>
                 BottomNavigationBarItem(
                   icon: image(Constants.getSvg("home")),
                   activeIcon: image(Constants.getSvg("home-fill")),
-                  label: "Home",
+                  label: tr("home"),
                 ),
                 BottomNavigationBarItem(
                   icon: image(Constants.getSvg("discover")),
                   activeIcon: image(Constants.getSvg("discover-fill")),
-                  label: "Discover",
+                  label: tr("discover"),
                 ),
                 BottomNavigationBarItem(
                   icon: image(Constants.getSvg("tasks")),
                   activeIcon: image(Constants.getSvg("tasks-fill")),
-                  label: "My Tasks",
+                  label: tr("myTasks"),
                 ),
                 BottomNavigationBarItem(
                   icon: image(Constants.getSvg("profile")),
                   activeIcon: image(Constants.getSvg("profile-fill")),
-                  label: "Profile",
+                  label: tr("profile"),
                 ),
               ],
             ),

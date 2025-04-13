@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jasoos/core/app_event.dart';
@@ -15,7 +16,7 @@ class ChangePasswordSubmit extends StatelessWidget {
     return BlocBuilder<ChangePasswordBloc, AppState>(
       builder: (context, state) {
         return CustomButton(
-          text: "Save",
+          text: tr("save"),
           loading: state is Loading,
           padding: Styles.SCREEN_PADDING,
           onTap: () {

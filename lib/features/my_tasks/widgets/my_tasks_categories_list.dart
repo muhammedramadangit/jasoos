@@ -11,21 +11,8 @@ import '../../../main_widgets/custom_loading.dart';
 import '../bloc/tasks_status_bloc.dart';
 import '../models/tasts_status_model.dart';
 
-class MyTasksCategoriesList extends StatefulWidget {
+class MyTasksCategoriesList extends StatelessWidget {
   const MyTasksCategoriesList({super.key});
-
-  @override
-  State<MyTasksCategoriesList> createState() => _MyTasksCategoriesListState();
-}
-
-class _MyTasksCategoriesListState extends State<MyTasksCategoriesList> {
-  // int? selected;
-  //
-  // @override
-  // void initState() {
-  //   selected = 0;
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +39,6 @@ class _MyTasksCategoriesListState extends State<MyTasksCategoriesList> {
                 TaskStatusInfo ele = bloc.tasksStatusList[index];
                 return GestureDetector(
                   onTap: () {
-                    // setState(() {
-                    //   selected = index;
-                    // });
                     bloc.onChangeTaskStatus(ele.value);
                   },
                   child: Container(
@@ -66,7 +50,7 @@ class _MyTasksCategoriesListState extends State<MyTasksCategoriesList> {
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Text(
-                      ele.name ?? "",
+                      ele.value == 0 ? tr("allTasks") : ele.name ?? "",
                       style: AppTextStyles.w500.copyWith(
                         fontSize: 12,
                         color: bloc.taskStatus == ele.value ? Styles.WHITE_COLOR : Styles

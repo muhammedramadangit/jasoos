@@ -24,7 +24,7 @@ class NearestShopsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Nearest Shops", center: false, back: true, leadingWidth: 30),
+      appBar: AppBars.titledAppBar(title: tr("nearestShops"), center: false, back: true, leadingWidth: 30),
       body: BlocBuilder<NearestShopsBloc, AppState>(
         builder: (context, state) {
           if(state is Loading) {
@@ -186,7 +186,7 @@ class NearestShopsView extends StatelessWidget {
                                       ),
                                       SizedBox(width: 4.w),
                                       Text(
-                                        "${shop?.tasksCount} Mission",
+                                        "${shop?.tasksCount} ${tr("mission")}",
                                         style: AppTextStyles.w400.copyWith(
                                           color: Styles.DARK_GREY_COLOR,
                                           fontSize: 12,

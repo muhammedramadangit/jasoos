@@ -107,42 +107,49 @@ flutter:
         - asset: assets/fonts/SpaceGrotesk-Bold.ttf
           weight: 700
 
-#    - family: cairo-extra-light
-#      fonts:
-#        - asset: assets/fonts/Cairo-ExtraLight.ttf
-#          weight: 200
-#
-#    - family: cairo-light
-#      fonts:
-#        - asset: assets/fonts/Cairo-Light.ttf
-#          weight: 300
-#
-#    - family: cairo-regular
-#      fonts:
-#        - asset: assets/fonts/Cairo-Regular.ttf
-#          weight: 400
-#
-#    - family: cairo-medium
-#      fonts:
-#        - asset: assets/fonts/Cairo-Medium.ttf
-#          weight: 500
-#
-#    - family: cairo-semi-bold
-#      fonts:
-#        - asset: assets/fonts/Cairo-SemiBold.ttf
-#          weight: 600
-#
-#    - family: cairo-bold
-#      fonts:
-#        - asset: assets/fonts/Cairo-Bold.ttf
-#          weight: 700
-#
-#    - family: cairo-extra-bold
-#      fonts:
-#        - asset: assets/fonts/Cairo-ExtraBold.ttf
-#          weight: 800
-#
-#    - family: cairo-black
-#      fonts:
-#        - asset: assets/fonts/Cairo-Black.ttf
-#          weight: 900
+## IBM PLEX FONT
+
+    - family: IBMPlexSansArabic-Thin
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Thin.ttf
+          weight: 100
+
+    - family: IBMPlexSansArabic-ExtraLight
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-ExtraLight.ttf
+          weight: 200
+
+    - family: IBMPlexSansArabic-Light
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Light.ttf
+          weight: 300
+
+    - family: IBMPlexSansArabic-Regular
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+
+    - family: IBMPlexSansArabic-Medium
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+          weight: 500
+
+    - family: IBMPlexSansArabic-SemiBold
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
+
+    - family: IBMPlexSansArabic-Bold
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
+          weight: 700
+
+    - family: IBMPlexSansArabic-Bold
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
+          weight: 800
+
+    - family: IBMPlexSansArabic-Bold
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
+          weight: 900

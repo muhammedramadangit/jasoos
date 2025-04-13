@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jasoos/core/app_event.dart';
@@ -15,7 +16,7 @@ class OtpSubmit extends StatelessWidget {
     return BlocBuilder<OtpBloc, AppState>(
       builder: (context, state) {
         return CustomButton(
-          text: "Verify",
+          text: tr("verify"),
           loading: state is Loading,
           disable: OtpBloc.instance.code.text.isEmpty,
           onTap: () {

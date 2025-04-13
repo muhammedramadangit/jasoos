@@ -19,7 +19,7 @@ class MyTasksView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "My Tasks", center: false, back: false, leadingWidth: 0),
+      appBar: AppBars.titledAppBar(title: tr("myTasks"), center: false, back: false, leadingWidth: 0),
       body: Column(
         children: [
           16.verticalSpace,
@@ -54,11 +54,6 @@ class MyTasksView extends StatelessWidget {
               },
             ),
           ),
-          // OngoingTasksList(),
-          // 24.verticalSpace,
-          // AddedNewTasksList(),
-          // 24.verticalSpace,
-          // CompletedTasksList(),
         ],
       ),
     );

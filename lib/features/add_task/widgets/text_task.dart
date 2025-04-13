@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +45,7 @@ class TextTask extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Write your answer",
+                      tr("writeYourAnswer"),
                       style: AppTextStyles.w700.copyWith(
                         fontSize: 14,
                         color: Styles.WHITE_COLOR,
@@ -62,8 +63,8 @@ class TextTask extends StatelessWidget {
                     ),
                     24.verticalSpace,
                     TextInputField(
-                      labelText: "Note",
-                      hintText: "Tell us about your ideal customer's needs and desires.",
+                      labelText: tr("notes"),
+                      hintText: tr("TellUsAboutYourIdealCustomersNeeds"),
                       controller: bloc.textAnswer,
                       hasError: !bloc.textAnswerValidation,
                       errorText: bloc.textAnswerError,

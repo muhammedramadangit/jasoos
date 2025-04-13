@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +20,7 @@ class RegisterSubmit extends StatelessWidget {
     List<Map<String, dynamic>> social = [
       {
         "icon": "google",
-        "name": "Continue With Google",
+        "name": tr("continueWithGoogle"),
         "onTap": () {
           // SocialAuthHelper.loginWithGoogle.call().then((value) {
           //   SocialLoginBloc.instance.add(Click(arguments: {
@@ -32,7 +33,7 @@ class RegisterSubmit extends StatelessWidget {
       },
       {
         "icon": "facebook",
-        "name": "Continue With Facebook",
+        "name": tr("continueWithFacebook"),
         "onTap": () {
           // SocialAuthHelper.loginWithFacebook.call().then((value) {
           //   log("FACEBOOK VALUEE ${value.email}");
@@ -48,7 +49,7 @@ class RegisterSubmit extends StatelessWidget {
       if(Platform.isAndroid)
         {
           "icon": "apple",
-          "name": "Continue With Apple",
+          "name": tr("continueWithApple"),
           "onTap": () {
             // SocialAuthHelper.loginWithApple.call().then((value) {
             //   // AuthCubit.get(NavigatorHelper.currentContext).socialLogin(socialId: value.id);
@@ -109,7 +110,7 @@ class RegisterSubmit extends StatelessWidget {
             builder: (context, state) {
               RegisterBloc bloc = RegisterBloc.instance;
               return CustomButton(
-                text: "Create account",
+                text: tr("createAccount"),
                 loading: state is Loading,
                 // disable: bloc.name.text.isEmpty || bloc.phone.text.isEmpty || bloc.email.text.isEmpty || bloc.password.text.isEmpty,
                 onTap: () {
@@ -125,7 +126,7 @@ class RegisterSubmit extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Already have an account?",
+                tr("alreadyHaveAccount"),
                 style: AppTextStyles.w500.copyWith(
                   fontSize: 14,
                   color: Styles.GREY_TEXT_COLOR,
@@ -137,7 +138,7 @@ class RegisterSubmit extends StatelessWidget {
                   CustomNavigator.pop();
                 },
                 child: Text(
-                  "Login",
+                  tr("login"),
                   style: AppTextStyles.w700.copyWith(
                     fontSize: 14,
                     color: Styles.PRIMARY_COLOR,

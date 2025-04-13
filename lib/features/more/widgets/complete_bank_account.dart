@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class CompleteBankAccount extends StatelessWidget {
             children: [
               24.verticalSpace,
               Text(
-                "Complete Profile ",
+                tr("completeProfile"),
                 style: AppTextStyles.w500.copyWith(fontSize: 14),
               ),
               14.verticalSpace,
@@ -55,7 +56,7 @@ class CompleteBankAccount extends StatelessWidget {
                       SizedBox(width: 12.w),
                       Expanded(
                         child: Text(
-                          "Add Your Bank Account",
+                          tr("addYourBankAccount"),
                           style: AppTextStyles.w500.copyWith(fontSize: 14),
                         ),
                       ),

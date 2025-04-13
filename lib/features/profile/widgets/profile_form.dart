@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
@@ -18,8 +19,8 @@ class ProfileForm extends StatelessWidget {
     return Column(
       children: [
         TextInputField(
-          labelText: "Name",
-          hintText: "Name",
+          labelText: tr("name"),
+          hintText: tr("name"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.name,
           controller: bloc.name,
@@ -33,8 +34,8 @@ class ProfileForm extends StatelessWidget {
           },
         ),
         TextInputField(
-          labelText: "Email",
-          hintText: "Email",
+          labelText: tr("email"),
+          hintText: tr("email"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.emailAddress,
           // prefixIcon: SvgPicture.asset(Constants.getSvg("sms")),
@@ -49,8 +50,8 @@ class ProfileForm extends StatelessWidget {
           },
         ),
         TextInputField(
-          labelText: "Phone number",
-          hintText: "Phone number",
+          labelText: tr("phoneNumber"),
+          hintText: tr("phoneNumber"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           keyboardType: TextInputType.phone,
           controller: bloc.phone,
@@ -69,8 +70,8 @@ class ProfileForm extends StatelessWidget {
           },
         ),
         DateInputField(
-          labelText: "Date Of Brith",
-          hintText: "Date Of Brith",
+          labelText: tr("dateOfBirth"),
+          hintText: tr("dateOfBirth"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           maxDate: DateTime(DateTime.now().year - 10),
           initialValue: bloc.birthday != null ? bloc.birthday : DateTime(DateTime.now().year - 10),
@@ -85,14 +86,14 @@ class ProfileForm extends StatelessWidget {
           },
         ),
         SingleSelectInputField(
-          labelText: "Gender",
-          hintText: "Gender",
+          labelText: tr("gender"),
+          hintText: tr("gender"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           isExpanded: true,
           initialValue: bloc.gender?.value == "null" ? null : bloc.gender,
           valueSet: [
-            SelectOption("male", "male"),
-            SelectOption("female", "female"),
+            SelectOption("male", tr("maleGender")),
+            SelectOption("female", tr("femaleGender")),
           ],
           errorText: bloc.genderError,
           hasError: !bloc.genderValidation,
@@ -105,17 +106,17 @@ class ProfileForm extends StatelessWidget {
           },
         ),
         SingleSelectInputField(
-          labelText: "Marital Status",
-          hintText: "Marital Status",
+          labelText: tr("maritalStatus"),
+          hintText: tr("maritalStatus"),
           labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
           isExpanded: true,
           initialValue: bloc.maritalStatus?.value != "null" ? bloc.maritalStatus : null,
           valueSet: [
-            SelectOption("Divorced", "Divorced"),
-            SelectOption("Married", "Married"),
-            SelectOption("Separated", "Separated"),
-            SelectOption("Widowed", "Widowed"),
-            SelectOption("Single", "Single"),
+            SelectOption("Divorced", tr("divorced")),
+            SelectOption("Married", tr("married")),
+            SelectOption("Separated", tr("separated")),
+            SelectOption("Widowed", tr("widowed")),
+            SelectOption("Single", tr("single")),
           ],
           errorText: bloc.maritalStatusError,
           hasError: !bloc.maritalStatusValidation,

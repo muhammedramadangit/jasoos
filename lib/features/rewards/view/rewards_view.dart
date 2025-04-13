@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/features/rewards/widgets/rewards_balance.dart';
@@ -10,7 +11,7 @@ class RewardsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Rewards"),
+      appBar: AppBars.titledAppBar(title: tr("rewards")),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 36.h),
         child: Column(

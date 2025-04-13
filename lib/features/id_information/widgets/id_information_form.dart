@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,8 +26,8 @@ class IdInformationForm extends StatelessWidget {
         return Column(
           children: [
             TextInputField(
-              labelText: "ID Number",
-              hintText: "ID Number",
+              labelText: tr("idNumber"),
+              hintText: tr("idNumber"),
               labelStyle: AppTextStyles.w500.copyWith(fontSize: 16, color: Styles.GREY_TEXT_COLOR),
               keyboardType: TextInputType.number,
               controller: bloc.idController,
@@ -55,7 +56,7 @@ class IdInformationForm extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "ID",
+                          tr("id"),
                           style: AppTextStyles.w500.copyWith(fontSize: 14),
                         ),
                         SizedBox(height: 4.h),

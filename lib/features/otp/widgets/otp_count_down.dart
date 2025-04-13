@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
@@ -45,7 +46,7 @@ class _OtpCountDownState extends State<OtpCountDown> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Didn’t receive code? ",
+            "${tr("didNotReceiveCode")} ",
             style: AppTextStyles.w500.copyWith(fontSize: 14),
           ),
           InkWell(
@@ -57,8 +58,8 @@ class _OtpCountDownState extends State<OtpCountDown> {
             },
             child: Text(
               _count == 0
-                  ? "Resend"
-                  : "send after (${Duration(seconds: _count).inMinutes.remainder(60).toString().padLeft(2, '0')}:${Duration(seconds: _count).inSeconds.remainder(60).toString().padLeft(2, '0')})",
+                  ? tr("resend")
+                  : "${tr("sendAfter")} (${Duration(seconds: _count).inMinutes.remainder(60).toString().padLeft(2, '0')}:${Duration(seconds: _count).inSeconds.remainder(60).toString().padLeft(2, '0')})",
               style: AppTextStyles.w600.copyWith(fontSize: 14, color: Styles.PRIMARY_COLOR),
             ),
           ),

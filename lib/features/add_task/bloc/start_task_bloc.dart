@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,15 +52,15 @@ class StartTaskBloc extends Bloc<AppEvent, AppState> {
 
   getRate() {
     if(selectedRate == 1.0) {
-      selectedReview = "Very poor";
+      selectedReview = "veryPoor";
     } else if (selectedRate == 2.0) {
-      selectedReview = "Poor";
+      selectedReview = "poor";
     } else if (selectedRate == 3.0) {
-      selectedReview = "Good";
+      selectedReview = "good";
     } else if (selectedRate == 4.0) {
-      selectedReview = "Very good";
+      selectedReview = "veryGood";
     } else if (selectedRate == 5.0) {
-      selectedReview = "Excellent";
+      selectedReview = "excellent";
     } else {
       selectedReview = "-";
     }
@@ -69,19 +70,19 @@ class StartTaskBloc extends Bloc<AppEvent, AppState> {
   checkValidation(Map<String, dynamic> arguments) {
     int type = arguments["question_type_id"];
     if(type == 1 && multiSelectedAnswer.isEmpty) {
-      showCustomDialog(dialog: CustomAlertDialog("Please select one or more option to complete"));
+      showCustomDialog(dialog: CustomAlertDialog(tr("pleaseSelectOption")));
     } else if (type == 2 && textAnswer.text.isEmpty) {
       textAnswerError = AppValidations.any(textAnswer.text);
       textAnswerValidation = textAnswerError!.isEmpty;
       add(Update());
     } else if (type == 3 && imageAnswer == null) {
-      showCustomDialog(dialog: CustomAlertDialog("Please select an image to complete"));
+      showCustomDialog(dialog: CustomAlertDialog(tr("pleaseSelectImage")));
     } else if (type == 4 && fileAnswer == null) {
-      showCustomDialog(dialog: CustomAlertDialog("Please select a file to complete"));
+      showCustomDialog(dialog: CustomAlertDialog(tr("pleaseSelectFile")));
     } else if (type == 5 && videoAnswer == null) {
-      showCustomDialog(dialog: CustomAlertDialog("Please select a video to complete"));
+      showCustomDialog(dialog: CustomAlertDialog(tr("pleaseSelectVideo")));
     } else if (type == 6 && selectedRate == 0.0) {
-      showCustomDialog(dialog: CustomAlertDialog("Please select your rate to complete"));
+      showCustomDialog(dialog: CustomAlertDialog(tr("pleaseSelectRate")));
     } else {
       add(Click(arguments: arguments));
     }

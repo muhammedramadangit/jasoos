@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,7 +23,7 @@ class LoginForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextInputField(
-          hintText: "Your number",
+          hintText: tr("yourNumber"),
           keyboardType: TextInputType.phone,
           controller: bloc.phone,
           errorText: bloc.phoneError,
@@ -41,7 +42,7 @@ class LoginForm extends StatelessWidget {
         ),
 
         TextInputField(
-          hintText: "Password",
+          hintText: tr("password"),
           keyboardType: TextInputType.visiblePassword,
           prefixIcon: SvgPicture.asset(Constants.getSvg("lock")),
           withBottomPadding: false,
@@ -68,7 +69,7 @@ class LoginForm extends StatelessWidget {
               ),
               SizedBox(width: 6.w),
               Text(
-                "Remember me",
+                tr("rememberMe"),
                 style: AppTextStyles.w400.copyWith(fontSize: 14),
               ),
               Spacer(),
@@ -78,7 +79,7 @@ class LoginForm extends StatelessWidget {
                 },
                 splashColor: Colors.transparent,
                 child: Text(
-                  "Forgot Password?",
+                  tr("forgotPassword"),
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                     color: Styles.PRIMARY_COLOR,

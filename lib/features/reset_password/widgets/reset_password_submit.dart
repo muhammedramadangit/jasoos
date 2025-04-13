@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jasoos/core/app_event.dart';
@@ -13,7 +14,7 @@ class ResetPasswordSubmit extends StatelessWidget {
     return BlocBuilder<ResetPasswordBloc, AppState>(
       builder: (context, state) {
         return CustomButton(
-          text: "Reset password",
+          text: tr("resetPassword"),
           loading: state is Loading,
           disable: ResetPasswordBloc.instance.password.text.isEmpty || ResetPasswordBloc.instance.confirmPassword.text.isEmpty,
           onTap: () {

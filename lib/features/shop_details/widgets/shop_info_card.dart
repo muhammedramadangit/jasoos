@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -74,7 +75,7 @@ class ShopInfoCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          "${model?.tasksCount} mission",
+                          "${model?.tasksCount} ${tr("mission")}",
                           style: AppTextStyles.w400.copyWith(
                             color: Styles.DARK_TEXT_COLOR,
                             fontSize: 12,

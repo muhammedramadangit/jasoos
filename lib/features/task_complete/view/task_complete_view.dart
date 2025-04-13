@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class TaskComplete extends StatelessWidget {
                           Image.asset(Constants.getAsset("cup")),
                           24.verticalSpace,
                           Text(
-                            "Congratulations",
+                            tr("congratulations"),
                             style: AppTextStyles.w700.copyWith(
                               fontSize: 24,
                               color: Styles.WHITE_COLOR,
@@ -62,7 +63,7 @@ class TaskComplete extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                  "You’ve completed all the tasks and earned",
+                                  tr("youHaveCompletedAllTasks"),
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w500.copyWith(
                                     fontSize: 14,
@@ -103,7 +104,7 @@ class TaskComplete extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "You've Earned ${AppStorage.getTaskRewards}",
+                                          "${tr("youHaveEarned")} ${AppStorage.getTaskRewards}",
                                           style: AppTextStyles.w700.copyWith(
                                             fontSize: 16,
                                             color: Styles.WHITE_COLOR,
@@ -115,7 +116,7 @@ class TaskComplete extends StatelessWidget {
                                     ),
                                     8.verticalSpace,
                                     Text(
-                                      "Keep going to unlock rewards!",
+                                      tr("keepGoingToUnlockRewards"),
                                       style: AppTextStyles.w400.copyWith(
                                         fontSize: 14,
                                         color: Styles.WHITE_COLOR,
@@ -180,7 +181,7 @@ class TaskComplete extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                                 child: Text(
-                                  "Explore More Restaurant Tasks",
+                                  tr("exploreMoreRestaurantTasks"),
                                   style: AppTextStyles.w700.copyWith(
                                     fontSize: 16,
                                     color: Styles.WHITE_COLOR,
@@ -275,7 +276,7 @@ class TaskComplete extends StatelessWidget {
                                                       ),
                                                       SizedBox(width: 4.w),
                                                       Text(
-                                                        "valid till tuesday",
+                                                        "${tr("validTill")} tuesday",
                                                         style: AppTextStyles.w500.copyWith(
                                                           color: Styles.WHITE_COLOR,
                                                           fontSize: 10,
@@ -285,7 +286,7 @@ class TaskComplete extends StatelessWidget {
                                                   ),
                                                   8.verticalSpace,
                                                   Text(
-                                                    "View Details",
+                                                    tr("viewDetails"),
                                                     style: AppTextStyles.w400.copyWith(
                                                       color: Styles.WHITE_COLOR,
                                                       fontSize: 12,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,7 +22,7 @@ class MoreView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Profile", back: false),
+      appBar: AppBars.titledAppBar(title: tr("profile"), back: false),
       body: SingleChildScrollView(
         padding: Styles.SCREEN_PADDING,
         child: Column(
@@ -50,7 +51,7 @@ class MoreView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Sign Out",
+                            tr("signOut"),
                             style: AppTextStyles.w500.copyWith(
                               fontSize: 14,
                               color: Styles.RED_TEXT_COLOR,
@@ -58,7 +59,7 @@ class MoreView extends StatelessWidget {
                           ),
                           SizedBox(height: 4.h),
                           Text(
-                            "Logout from your account",
+                            tr("logoutFromYourAccount"),
                             style: AppTextStyles.w400.copyWith(
                               fontSize: 12,
                               color: Styles.GREY_TEXT_COLOR,
@@ -79,7 +80,7 @@ class MoreView extends StatelessWidget {
             ),
             16.verticalSpace,
             CustomButton(
-              text: "Delete account",
+              text: tr("deleteAccount"),
               color: Styles.BORDER_COLOR,
               txtColor: Styles.GREY_TEXT_COLOR,
               onTap: () {

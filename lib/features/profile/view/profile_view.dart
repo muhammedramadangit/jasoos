@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jasoos/features/profile/widgets/profile_form.dart';
@@ -11,7 +12,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "Account Details"),
+      appBar: AppBars.titledAppBar(title: tr("accountDetails")),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         padding: Styles.SCREEN_PADDING,

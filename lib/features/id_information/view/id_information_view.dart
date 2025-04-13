@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jasoos/features/id_information/widgets/id_information_form.dart';
 import 'package:jasoos/features/id_information/widgets/id_information_submit.dart';
@@ -10,7 +11,7 @@ class IdInformationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.titledAppBar(title: "ID information"),
+      appBar: AppBars.titledAppBar(title: tr("idInfo")),
       body: Column(
         children: [
           Expanded(

@@ -74,7 +74,7 @@ class _SingleSelectBottomSheetState extends State<SingleSelectBottomSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Choose from list",
+                    tr("chooseFromList"),
                     style: AppTextStyles.w700.copyWith(fontSize: 16, color: Colors.black),
                   ),
                   GestureDetector(
