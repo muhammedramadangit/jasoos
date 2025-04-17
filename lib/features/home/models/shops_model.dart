@@ -89,8 +89,9 @@ class Tasks {
   String? description;
   String? type;
   String? reward;
+  int? status;
 
-  Tasks({this.id, this.name, this.description, this.type, this.reward});
+  Tasks({this.id, this.name, this.description, this.type, this.reward, this.status});
 
   Tasks.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -98,6 +99,7 @@ class Tasks {
     description = json['description'];
     type = json['type'];
     reward = json['reward'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -107,6 +109,7 @@ class Tasks {
     data['description'] = this.description;
     data['type'] = this.type;
     data['reward'] = this.reward;
+    data['status'] = this.status;
     return data;
   }
 }

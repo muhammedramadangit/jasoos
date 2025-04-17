@@ -80,24 +80,40 @@ class ShopMissionList extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "${task?.reward}",
+                                  task?.status == 2 ? "${tr("youHaveEarned")} ${task?.reward}" : "${task?.reward}",
                                   style: AppTextStyles.w500.copyWith(
                                     fontSize: 12,
-                                    color: Styles.PRIMARY_COLOR,
+                                    color: task?.status == 2
+                                        ? Styles.GREEN_COLOR
+                                        : task?.status == 4
+                                        ? Styles.RED_COLOR
+                                        : Styles.PRIMARY_COLOR,
                                   ),
                                 ),
-                                4.horizontalSpace,
-                                SvgPicture.asset(Constants.getSvg("riyal")),
+                                // 4.horizontalSpace,
+                                // SvgPicture.asset(
+                                //   Constants.getSvg("riyal"),
+                                //   colorFilter: ColorFilter.mode(
+                                //     task?.status == 2
+                                //         ? Styles.GREEN_COLOR
+                                //         : task?.status == 4
+                                //             ? Styles.RED_COLOR
+                                //             : Styles.PRIMARY_COLOR,
+                                //     BlendMode.srcIn,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ],
                         ),
                       ),
-                      // if(index.isEven)...[
-                      //   Icon(Icons.check_box, size: 16, color: Styles.GREEN_COLOR),
-                      // ]else...[
-                      //   Icon(Icons.arrow_forward_ios, size: 16, color: Styles.DARK_GREY_COLOR),
-                      // ],
+                      if(task?.status == 2)...[
+                        Icon(Icons.check_box, size: 16, color: Styles.GREEN_COLOR),
+                      ]else if(task?.status == 4)...[
+                        Icon(Icons.block, size: 16, color: Styles.RED_COLOR),
+                      ]else...[
+                        Icon(Icons.arrow_forward_ios, size: 16, color: Styles.DARK_GREY_COLOR),
+                      ],
                     ],
                   ),
                 ),

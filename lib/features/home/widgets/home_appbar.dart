@@ -74,26 +74,26 @@ AppBar homeAppBar() {
               },
             ),
             Spacer(),
-            GestureDetector(
-              onTap: () {
-                CustomNavigator.push(Routes.REWARDS);
-              },
-              child: CircleAvatar(
-                radius: 20,
-                backgroundColor: Styles.PRIMARY_COLOR,
-                child: Center(
-                  child: SvgPicture.asset(Constants.getSvg("w-gift")),
-                ),
-              ),
-            ),
-            SizedBox(width: 12.w),
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Styles.PRIMARY_COLOR,
-              child: Center(
-                child: SvgPicture.asset(Constants.getSvg("bell")),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     CustomNavigator.push(Routes.REWARDS);
+            //   },
+            //   child: CircleAvatar(
+            //     radius: 20,
+            //     backgroundColor: Styles.PRIMARY_COLOR,
+            //     child: Center(
+            //       child: SvgPicture.asset(Constants.getSvg("w-gift")),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(width: 12.w),
+            // CircleAvatar(
+            //   radius: 20,
+            //   backgroundColor: Styles.PRIMARY_COLOR,
+            //   child: Center(
+            //     child: SvgPicture.asset(Constants.getSvg("bell")),
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -48,7 +48,8 @@ class _MainPagesViewState extends State<MainPagesView>
       case 0:
         RecentTasksBloc.instance.add(Get());
         return HomeView();
-      case 1:ShopsBloc.instance.add(Get());
+      case 1:
+        // ShopsBloc.instance.add(Get());
         return DiscoverView();
       case 2:
         return MyTasksView();

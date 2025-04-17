@@ -14,13 +14,13 @@ class OtherTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
-      {
-        "icon" : "notification",
-        "title" : tr("notifications"),
-        "onTap" : () {
-          CustomNavigator.push(Routes.NOTIFICATION_SETTING);
-        },
-      },
+      // {
+      //   "icon" : "notification",
+      //   "title" : tr("notifications"),
+      //   "onTap" : () {
+      //     CustomNavigator.push(Routes.NOTIFICATION_SETTING);
+      //   },
+      // },
       {
         "icon" : "security",
         "title" : tr("securityPassword"),

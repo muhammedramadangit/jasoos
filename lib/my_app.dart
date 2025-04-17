@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
               TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
             },
           ),
-          snackBarTheme: SnackBarThemeData(contentTextStyle: TextStyle(fontFamily: Network.lang == "en" ? "SpaceGrotesk-Medium" : "IBMPlexSansArabic-Medium")),
+          snackBarTheme: SnackBarThemeData(contentTextStyle: TextStyle(fontFamily: Network.lang == "en" ? "SpaceGrotesk-Medium" : "cairo-medium")),
           primaryColor: Styles.PRIMARY_COLOR,
           colorScheme: ColorScheme.light(primary: Styles.PRIMARY_COLOR),
           checkboxTheme: CheckboxThemeData(
@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
               borderRadius: BorderRadius.circular(5.0),
             ),
           ),
-          fontFamily: Network.lang == "en" ? "SpaceGrotesk-Medium" : "IBMPlexSansArabic-Medium",
+          fontFamily: Network.lang == "en" ? "SpaceGrotesk-Medium" : "cairo-medium",
           scaffoldBackgroundColor: Styles.SCAFFOLD_COLOR,
         ),
       ),

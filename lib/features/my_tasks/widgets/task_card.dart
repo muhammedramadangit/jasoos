@@ -78,8 +78,8 @@ class TaskCard extends StatelessWidget {
                       color: Styles.PRIMARY_COLOR,
                     ),
                   ),
-                  4.horizontalSpace,
-                  SvgPicture.asset(Constants.getSvg("riyal")),
+                  // 4.horizontalSpace,
+                  // SvgPicture.asset(Constants.getSvg("riyal")),
                 ],
               ),
             ]else if(isRecent == true)...[
@@ -124,8 +124,8 @@ class TaskCard extends StatelessWidget {
                       color: Styles.PRIMARY_COLOR,
                     ),
                   ),
-                  4.horizontalSpace,
-                  SvgPicture.asset(Constants.getSvg("riyal")),
+                  // 4.horizontalSpace,
+                  // SvgPicture.asset(Constants.getSvg("riyal")),
                 ],
               ),
             ]else...[

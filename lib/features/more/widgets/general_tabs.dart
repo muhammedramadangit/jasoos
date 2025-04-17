@@ -38,14 +38,14 @@ class GeneralTabs extends StatelessWidget {
           CustomNavigator.push(Routes.BANK_ACCOUNT);
         },
       },
-      {
-        "icon" : "gift",
-        "title" : tr("Rewards"),
-        "description" : tr("manageYourAccountSecurity"),
-        "onTap" : () {
-          CustomNavigator.push(Routes.REWARDS);
-        },
-      },
+      // {
+      //   "icon" : "gift",
+      //   "title" : tr("Rewards"),
+      //   "description" : tr("manageYourAccountSecurity"),
+      //   "onTap" : () {
+      //     CustomNavigator.push(Routes.REWARDS);
+      //   },
+      // },
       // {
       //   "icon" : "safe",
       //   "title" : tr("submissions"),
