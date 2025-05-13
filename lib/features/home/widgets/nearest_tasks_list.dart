@@ -11,7 +11,6 @@ import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
 import '../../../main_widgets/custom_center_text.dart';
-import '../../../main_widgets/custom_empty_view.dart';
 import '../../../main_widgets/custom_loading.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
@@ -29,7 +28,7 @@ class NearestTasksList extends StatelessWidget {
         } else if (state is Error) {
           return CustomCenterText(state.error ?? tr("errorException"));
         } else if (state is Empty) {
-          return CustomEmptyView();
+          return CustomCenterText(tr("emptyShops"));
         } else {
           NearestShopsBloc bloc = NearestShopsBloc.instance;
           return Column(

@@ -28,4 +28,8 @@ abstract class Endpoints{
   static String TERMS = "terms";
   static String HELP = "faqs";
   static String DELETE_ACCOUNT = "delete-account/";
+  static String INVITATION_CODE = "invitation-code";
+  static String REWARDS = "rewards";
+  static String NOTIFICATIONS = "notifications";
+  static String NOTIFICATIONS_COUNT = "notifications-count";
 }

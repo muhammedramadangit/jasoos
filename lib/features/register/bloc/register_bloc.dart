@@ -37,6 +37,8 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
   bool passwordValidation = true;
   String? passwordError;
 
+  TextEditingController invitingCode = TextEditingController();
+
   bool _validation(){
     nameError = AppValidations.name(name.text);
     phoneError = AppValidations.phone(phone.text.replaceAll("-", ""));
@@ -73,6 +75,8 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
         "phone_code" : countryCode ?? "+966",
         "email" : email.text,
         "password" : password.text,
+        if(invitingCode.text.isNotEmpty)
+          "inviting_code" : invitingCode.text,
       };
       try {
         Response response = await RegisterRepo.register(body);

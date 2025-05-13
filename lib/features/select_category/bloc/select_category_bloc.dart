@@ -49,7 +49,8 @@ class SelectCategoryBloc extends Bloc<AppEvent, AppState> {
     try {
       Response response = await SelectCategoryRepo.selectCategories(body);
       if(response.statusCode == 200) {
-        CustomNavigator.push(Routes.MAIN_PAGES, clean: true);
+        CustomNavigator.push(Routes.LOGIN, clean: true);
+        // CustomNavigator.push(Routes.MAIN_PAGES, clean: true);
         showToast(response.data["message"], color: Styles.GREEN_COLOR);
         emit(Done());
       } else {

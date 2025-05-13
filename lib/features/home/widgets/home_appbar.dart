@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/core/app_state.dart';
+import 'package:jasoos/features/notifications/bloc/notifications_bloc.dart';
 import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
@@ -40,13 +41,15 @@ AppBar homeAppBar() {
                       child: CircleAvatar(
                         radius: 20,
                         backgroundColor: Styles.WHITE_COLOR,
-                        backgroundImage: NetworkImage(bloc.model.data?.profileImage ?? ""),
+                        backgroundImage: NetworkImage(bloc.model.data
+                            ?.profileImage ?? ""),
                       ),
                     ),
                     10.horizontalSpace,
                     if(bloc.model.data?.completedTasks != "0")
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 6),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: Styles.WHITE_COLOR,
@@ -74,26 +77,55 @@ AppBar homeAppBar() {
               },
             ),
             Spacer(),
-            // GestureDetector(
-            //   onTap: () {
-            //     CustomNavigator.push(Routes.REWARDS);
-            //   },
-            //   child: CircleAvatar(
-            //     radius: 20,
-            //     backgroundColor: Styles.PRIMARY_COLOR,
-            //     child: Center(
-            //       child: SvgPicture.asset(Constants.getSvg("w-gift")),
-            //     ),
-            //   ),
-            // ),
-            // SizedBox(width: 12.w),
-            // CircleAvatar(
-            //   radius: 20,
-            //   backgroundColor: Styles.PRIMARY_COLOR,
-            //   child: Center(
-            //     child: SvgPicture.asset(Constants.getSvg("bell")),
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () {
+                CustomNavigator.push(Routes.REWARDS);
+              },
+              child: CircleAvatar(
+                radius: 20,
+                backgroundColor: Styles.PRIMARY_COLOR,
+                child: Center(
+                  child: SvgPicture.asset(Constants.getSvg("w-gift")),
+                ),
+              ),
+            ),
+            SizedBox(width: 12.w),
+            BlocBuilder<NotificationsBloc, AppState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () {
+                    CustomNavigator.push(Routes.NOTIFICATIONS);
+                  },
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Styles.PRIMARY_COLOR,
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: SvgPicture.asset(Constants.getSvg("bell")),
+                        ),
+                        if(state is Done && NotificationsBloc.instance.notificationCount != 0)
+                          Positioned(
+                            top: 4,
+                            right: 8,
+                            child: CircleAvatar(
+                              radius: 8,
+                              backgroundColor: Styles.RED_COLOR,
+                              child: Text(
+                                NotificationsBloc.instance.notificationCount.toString(),
+                                style: AppTextStyles.w500.copyWith(
+                                  fontSize: 10,
+                                  color: Styles.WHITE_COLOR,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

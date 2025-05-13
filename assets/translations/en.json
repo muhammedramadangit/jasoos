@@ -213,6 +213,11 @@
   "twoStepVerificationDesc": "Two-step verification provides additional security by asking for a verification code every time you log in on another device",
   "addingPhoneNumberOrUsingAuthenticator": "Adding a phone number or using an authenticator will help keep your account safe from harm",
   "chooseFromList": "Choose from list",
+  "invitingCode": "Inviting code",
+  "optional": "optional",
+  "emptyShops" : "sorry, No shops found",
+  "noNotifications" : "No notifications to show.",
+  "notificationStayTuned" : "Stay tuned for new notifications.",
 
   "skip": "Skip"
 }

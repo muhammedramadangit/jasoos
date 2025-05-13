@@ -8,9 +8,11 @@ import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
 import 'package:jasoos/main_widgets/custom_toast.dart';
+import 'package:share_plus/share_plus.dart';
 
 class InviteFriendsCode extends StatelessWidget {
-  const InviteFriendsCode({super.key});
+  final String? code;
+  const InviteFriendsCode({super.key, this.code});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class InviteFriendsCode extends StatelessWidget {
                     ),
                     SizedBox(height: 6.h),
                     Text(
-                      "550-555-555",
+                      code ?? "",
                       style: AppTextStyles.w500.copyWith(fontSize: 16),
                     ),
                   ],
@@ -46,7 +48,7 @@ class InviteFriendsCode extends StatelessWidget {
               SizedBox(width: 12.w),
               InkWell(
                 onTap: () async {
-                  String textToCopy = "550-555-555";
+                  String textToCopy = code ?? "";
                   await Clipboard.setData(ClipboardData(text: textToCopy));
                   showToast("${tr("copiedToClipboard")} : $textToCopy", color: Styles.DARK_GREY_COLOR);
                 },
@@ -60,7 +62,12 @@ class InviteFriendsCode extends StatelessWidget {
         SizedBox(height: 36.h),
         CustomButton(
           text: tr('shareCode'),
-          onTap: () {},
+          onTap: () {
+            ShareParams(
+              text: code ?? "",
+              title: tr("referralFriend"),
+            );
+          },
         ),
       ],
     );

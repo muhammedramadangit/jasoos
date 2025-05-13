@@ -73,6 +73,7 @@ class CompleteBankAccount extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12.r),
                                 ),
                               ),
+                              if(bloc.profileBankDataCount != 0)
                               Container(
                                 height: 6,
                                 width: (48.w * (bloc.profileBankDataCount - bloc.profileBankNullCount)) / bloc.profileBankDataCount,

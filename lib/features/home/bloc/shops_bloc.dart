@@ -26,7 +26,11 @@ class ShopsBloc extends Bloc<AppEvent, AppState> {
       );
       if(response.statusCode == 200) {
         model = ShopsModel.fromJson(response.data);
-        emit(Done());
+        if(model.data!.isEmpty) {
+          emit(Empty());
+        } else {
+          emit(Done());
+        }
       } else {
         emit(Error(error: response.data["message"]));
       }

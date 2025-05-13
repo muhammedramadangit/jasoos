@@ -30,4 +30,5 @@ class Routes {
   static const NEAREST_SHOPS = "NEAREST_SHOPS";
   static const TASK_DETAILS = "TASK_DETAILS";
   static const ALL_RECENT_TASKS = "ALL_RECENT_TASKS";
+  static const NOTIFICATIONS = "NOTIFICATIONS";
 }

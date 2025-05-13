@@ -8,11 +8,14 @@ import 'package:jasoos/features/forget_password/view/forget_password_view.dart';
 import 'package:jasoos/features/help/view/help_view.dart';
 import 'package:jasoos/features/home/view/all_recent_tasks_view.dart';
 import 'package:jasoos/features/id_information/view/id_information_view.dart';
+import 'package:jasoos/features/invite_friend/bloc/invitation_code_bloc.dart';
 import 'package:jasoos/features/invite_friend/view/invite_friend_view.dart';
 import 'package:jasoos/features/language/view/language_view.dart';
 import 'package:jasoos/features/login/bloc/login_bloc.dart';
 import 'package:jasoos/features/login/view/login_view.dart';
 import 'package:jasoos/features/notification_setting/view/notification_setting_view.dart';
+import 'package:jasoos/features/notifications/bloc/notifications_bloc.dart';
+import 'package:jasoos/features/notifications/view/notifications_view.dart';
 import 'package:jasoos/features/onboarding/view/onboarding_view.dart';
 import 'package:jasoos/features/otp/bloc/otp_bloc.dart';
 import 'package:jasoos/features/otp/view/otp_view.dart';
@@ -46,6 +49,7 @@ import '../features/help/bloc/help_bloc.dart';
 import '../features/id_information/bloc/id_information_bloc.dart';
 import '../features/home/view/nearest_shops_view.dart';
 import '../features/profile/bloc/profile_bloc.dart';
+import '../features/rewards/bloc/rewards_bloc.dart';
 import '../features/shop_details/view/shop_details_view.dart';
 import '../features/task_details/bloc/task_details_bloc.dart';
 
@@ -153,9 +157,11 @@ abstract class CustomNavigator {
         return pageRoute(IdInformationView());
 
       case Routes.INVITE_FRIENDS:
+        InvitationCodeBloc.instance.add(Get());
         return pageRoute(InviteFriendView());
 
       case Routes.REWARDS:
+        RewardsBloc.instance.add(Get());
         return pageRoute(RewardsView());
 
       case Routes.SHOP_DETAILS:
@@ -179,6 +185,10 @@ abstract class CustomNavigator {
 
       case Routes.ALL_RECENT_TASKS:
         return pageRoute(AllRecentTasksView());
+
+      case Routes.NOTIFICATIONS:
+        NotificationsBloc.instance.add(Get());
+        return pageRoute(NotificationsView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

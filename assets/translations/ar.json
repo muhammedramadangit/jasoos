@@ -213,6 +213,11 @@
   "twoStepVerificationDesc": "توفر ميزة التحقق بخطوتين أمانًا إضافيًا من خلال طلب رمز التحقق في كل مرة تقوم فيها بتسجيل الدخول على جهاز آخر",
   "addingPhoneNumberOrUsingAuthenticator": "إن إضافة رقم هاتف أو استخدام أداة مصادقة سيساعد في الحفاظ على حسابك آمنًا من الأذى",
   "chooseFromList": "اختر من القائمة",
+  "invitingCode": "رمز الدعوة",
+  "optional": "اختياري",
+  "emptyShops" : "عذرا، لم يتم العثور على متاجر",
+  "noNotifications" : "لا يوجد إشعارات لعرضها.",
+  "notificationStayTuned" : "ترقبوا الإشعارات الجديدة.",
 
   "skip": "تخطي"
 }

@@ -32,6 +32,10 @@ class Get extends AppEvent {
   Get({Object? arguments}) : super(arguments);
 }
 
+class GetCount extends AppEvent {
+  GetCount({Object? arguments}) : super(arguments);
+}
+
 class Check extends AppEvent {
   Check({Object? arguments}) : super(arguments);
 }

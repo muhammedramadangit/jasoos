@@ -5,27 +5,23 @@ import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/main_widgets/custom_toast.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 
-import '../models/shops_model.dart';
-import '../repo/home_repo.dart';
-import 'home_categories_bloc.dart';
+import '../model/rewards_model.dart';
+import '../repo/rewards_repo.dart';
 
-class NearestShopsBloc extends Bloc<AppEvent, AppState> {
-  NearestShopsBloc() : super(Loading()) {
+class RewardsBloc extends Bloc<AppEvent, AppState> {
+  RewardsBloc() : super(Loading()) {
     on<Update>(_update);
     on<Get>(_get);
   }
-  static NearestShopsBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
-  ShopsModel model = ShopsModel();
+  static RewardsBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
+  RewardsModel model = RewardsModel();
 
   _get(AppEvent event, Emitter<AppState> emit) async {
     emit(Loading());
     try {
-      Response response = await HomeRepo.getShops(
-        isNearest: true,
-        taskType: HomeCategoriesBloc.instance.selectedTaskType
-      );
+      Response response = await RewardsRepo.getRewards();
       if(response.statusCode == 200) {
-        model = ShopsModel.fromJson(response.data);
+        model = RewardsModel.fromJson(response.data);
         if(model.data!.isEmpty) {
           emit(Empty());
         } else {

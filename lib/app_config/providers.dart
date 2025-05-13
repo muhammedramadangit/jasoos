@@ -22,11 +22,14 @@ import '../features/home/bloc/nearest_shop_bloc.dart';
 import '../features/home/bloc/recent_tasks_bloc.dart';
 import '../features/home/bloc/shops_bloc.dart';
 import '../features/id_information/bloc/id_information_bloc.dart';
+import '../features/invite_friend/bloc/invitation_code_bloc.dart';
 import '../features/login/bloc/social_login.dart';
 import '../features/more/bloc/delete_account_bloc.dart';
 import '../features/my_tasks/bloc/my_tasks_bloc.dart';
 import '../features/my_tasks/bloc/tasks_status_bloc.dart';
+import '../features/notifications/bloc/notifications_bloc.dart';
 import '../features/policy/bloc/policy_bloc.dart';
+import '../features/rewards/bloc/rewards_bloc.dart';
 import '../features/shop_details/bloc/shop_details_bloc.dart';
 import '../features/task_details/bloc/task_details_bloc.dart';
 
@@ -62,5 +65,8 @@ abstract class ProviderList {
     BlocProvider<PolicyBloc>(create: (_) => PolicyBloc()),
     BlocProvider<HelpBloc>(create: (_) => HelpBloc()),
     BlocProvider<DeleteAccountBloc>(create: (_) => DeleteAccountBloc()),
+    BlocProvider<InvitationCodeBloc>(create: (_) => InvitationCodeBloc()),
+    BlocProvider<NotificationsBloc>(create: (_) => NotificationsBloc()),
+    BlocProvider<RewardsBloc>(create: (_) => RewardsBloc()),
   ];
 }

@@ -5,32 +5,24 @@ import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/main_widgets/custom_toast.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 
-import '../models/shops_model.dart';
-import '../repo/home_repo.dart';
-import 'home_categories_bloc.dart';
+import '../models/invitation_code_model.dart';
+import '../repo/invitation_code_repo.dart';
 
-class NearestShopsBloc extends Bloc<AppEvent, AppState> {
-  NearestShopsBloc() : super(Loading()) {
+class InvitationCodeBloc extends Bloc<AppEvent, AppState> {
+  InvitationCodeBloc() : super(Loading()) {
     on<Update>(_update);
     on<Get>(_get);
   }
-  static NearestShopsBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
-  ShopsModel model = ShopsModel();
+  static InvitationCodeBloc get instance => BlocProvider.of(CustomNavigator.navigatorState.currentContext!);
+  InvitationCodeModel model = InvitationCodeModel();
 
   _get(AppEvent event, Emitter<AppState> emit) async {
     emit(Loading());
     try {
-      Response response = await HomeRepo.getShops(
-        isNearest: true,
-        taskType: HomeCategoriesBloc.instance.selectedTaskType
-      );
+      Response response = await InvitationCodeRepo.getInvitationCode();
       if(response.statusCode == 200) {
-        model = ShopsModel.fromJson(response.data);
-        if(model.data!.isEmpty) {
-          emit(Empty());
-        } else {
-          emit(Done());
-        }
+        model = InvitationCodeModel.fromJson(response.data);
+        emit(Done());
       } else {
         emit(Error(error: response.data["message"]));
       }

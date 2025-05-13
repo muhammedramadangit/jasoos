@@ -12,6 +12,8 @@ import 'package:jasoos/navigation/routes.dart';
 import 'package:jasoos/network/network_layer.dart';
 import 'package:jasoos/utiltiy/unfocus.dart';
 
+import 'helper/notification_helper.dart';
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -23,7 +25,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // NotificationHelper.onInit();
+    NotificationHelper.onInit();
     super.initState();
   }
 

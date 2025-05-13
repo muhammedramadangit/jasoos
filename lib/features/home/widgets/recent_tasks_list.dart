@@ -6,7 +6,6 @@ import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/features/home/widgets/recent_task_card.dart';
 
 import '../../../main_widgets/custom_center_text.dart';
-import '../../../main_widgets/custom_empty_view.dart';
 import '../../../main_widgets/custom_loading.dart';
 import '../bloc/recent_tasks_bloc.dart';
 
@@ -22,7 +21,7 @@ class RecentTasksList extends StatelessWidget {
         } else if (state is Error) {
           return CustomCenterText(state.error ?? tr("errorException"));
         } else if (state is Empty) {
-          return CustomEmptyView();
+          return CustomCenterText(tr("emptyShops"));
         } else {
           RecentTasksBloc bloc = RecentTasksBloc.instance;
           return ListView.separated(

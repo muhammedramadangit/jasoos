@@ -67,6 +67,21 @@ class RegisterForm extends StatelessWidget {
         ),
 
         TextInputField(
+          hintText: "${tr("invitingCode")} (${tr("optional")})",
+          prefixIcon: SvgPicture.asset(
+            Constants.getSvg("group"),
+            height: 20,
+            width: 20,
+            colorFilter: ColorFilter.mode(
+              Styles.GREY_COLOR,
+              BlendMode.srcIn,
+            ),
+          ),
+          keyboardType: TextInputType.text,
+          controller: bloc.invitingCode,
+        ),
+
+        TextInputField(
           hintText: tr("password"),
           prefixIcon: SvgPicture.asset(Constants.getSvg("lock")),
           keyboardType: TextInputType.visiblePassword,

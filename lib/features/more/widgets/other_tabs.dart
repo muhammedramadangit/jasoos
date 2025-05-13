@@ -21,11 +21,18 @@ class OtherTabs extends StatelessWidget {
       //     CustomNavigator.push(Routes.NOTIFICATION_SETTING);
       //   },
       // },
+      // {
+      //   "icon" : "security",
+      //   "title" : tr("securityPassword"),
+      //   "onTap" : () {
+      //     CustomNavigator.push(Routes.SECURITY_AND_PASSWORD);
+      //   },
+      // },
       {
         "icon" : "security",
-        "title" : tr("securityPassword"),
+        "title" : tr("changePassword"),
         "onTap" : () {
-          CustomNavigator.push(Routes.SECURITY_AND_PASSWORD);
+          CustomNavigator.push(Routes.CHANGE_PASSWORD);
         },
       },
       {

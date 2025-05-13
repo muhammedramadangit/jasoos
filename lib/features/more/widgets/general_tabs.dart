@@ -38,28 +38,28 @@ class GeneralTabs extends StatelessWidget {
           CustomNavigator.push(Routes.BANK_ACCOUNT);
         },
       },
-      // {
-      //   "icon" : "gift",
-      //   "title" : tr("Rewards"),
-      //   "description" : tr("manageYourAccountSecurity"),
-      //   "onTap" : () {
-      //     CustomNavigator.push(Routes.REWARDS);
-      //   },
-      // },
+      {
+        "icon" : "gift",
+        "title" : tr("Rewards"),
+        "description" : tr("manageYourAccountSecurity"),
+        "onTap" : () {
+          CustomNavigator.push(Routes.REWARDS);
+        },
+      },
       // {
       //   "icon" : "safe",
       //   "title" : tr("submissions"),
       //   "description" : tr("manageYourSubmissions"),
       //   "onTap" : () {},
       // },
-      // {
-      //   "icon" : "group",
-      //   "title" : tr("inviteFriends"),
-      //   "description" : tr("shareReferralCode")",
-      //   "onTap" : () {
-      //     CustomNavigator.push(Routes.INVITE_FRIENDS);
-      //   },
-      // },
+      {
+        "icon" : "group",
+        "title" : tr("inviteFriends"),
+        "description" : tr("shareReferralCode"),
+        "onTap" : () {
+          CustomNavigator.push(Routes.INVITE_FRIENDS);
+        },
+      },
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

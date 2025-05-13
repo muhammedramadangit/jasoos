@@ -14,6 +14,7 @@ import 'package:jasoos/main_widgets/dialogs/custom_show_dialog.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
+import '../../../helper/constants.dart';
 import '../../profile/bloc/profile_bloc.dart';
 
 class LoginBloc extends Bloc<AppEvent, AppState> {
@@ -67,6 +68,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
         "phone" : phone.text.replaceAll("-", ""),
         "phone_code" : countryCode ?? "+966",
         "password" : password.text,
+        "device_token" : Constants.device_id,
       };
       try {
         Response response = await LoginRepo.login(body);

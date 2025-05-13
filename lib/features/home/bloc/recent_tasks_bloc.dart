@@ -27,7 +27,11 @@ class RecentTasksBloc extends Bloc<AppEvent, AppState> {
       Response response = await HomeRepo.getRecentTasks(query);
       if(response.statusCode == 200) {
         model = TasksModel.fromJson(response.data);
-        emit(Done());
+        if(model.data!.isEmpty) {
+          emit(Empty());
+        } else {
+          emit(Done());
+        }
       } else {
         emit(Error(error: response.data["message"]));
       }
