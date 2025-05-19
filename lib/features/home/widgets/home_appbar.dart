@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jasoos/core/app_state.dart';
-import 'package:jasoos/features/notifications/bloc/notifications_bloc.dart';
 import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
+
+import '../../notifications/bloc/notification_count_bloc.dart';
 
 AppBar homeAppBar() {
   return AppBar(
@@ -41,15 +42,13 @@ AppBar homeAppBar() {
                       child: CircleAvatar(
                         radius: 20,
                         backgroundColor: Styles.WHITE_COLOR,
-                        backgroundImage: NetworkImage(bloc.model.data
-                            ?.profileImage ?? ""),
+                        backgroundImage: NetworkImage(bloc.model.data?.profileImage ?? ""),
                       ),
                     ),
                     10.horizontalSpace,
                     if(bloc.model.data?.completedTasks != "0")
                       Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 6),
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: Styles.WHITE_COLOR,
@@ -66,8 +65,7 @@ AppBar homeAppBar() {
                             ),
                             4.horizontalSpace,
                             SvgPicture.asset(Constants.getSvg("star-move"),
-                              colorFilter: ColorFilter.mode(
-                                  Styles.PRIMARY_COLOR, BlendMode.srcIn),
+                              colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),
                             ),
                           ],
                         ),
@@ -90,7 +88,7 @@ AppBar homeAppBar() {
               ),
             ),
             SizedBox(width: 12.w),
-            BlocBuilder<NotificationsBloc, AppState>(
+            BlocBuilder<NotificationsCountBloc, AppState>(
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () {
@@ -104,7 +102,7 @@ AppBar homeAppBar() {
                         Center(
                           child: SvgPicture.asset(Constants.getSvg("bell")),
                         ),
-                        if(state is Done && NotificationsBloc.instance.notificationCount != 0)
+                        if(state is Done && NotificationsCountBloc.instance.notificationCount != 0)
                           Positioned(
                             top: 4,
                             right: 8,
@@ -112,7 +110,7 @@ AppBar homeAppBar() {
                               radius: 8,
                               backgroundColor: Styles.RED_COLOR,
                               child: Text(
-                                NotificationsBloc.instance.notificationCount.toString(),
+                                NotificationsCountBloc.instance.notificationCount.toString(),
                                 style: AppTextStyles.w500.copyWith(
                                   fontSize: 10,
                                   color: Styles.WHITE_COLOR,

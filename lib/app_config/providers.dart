@@ -27,6 +27,7 @@ import '../features/login/bloc/social_login.dart';
 import '../features/more/bloc/delete_account_bloc.dart';
 import '../features/my_tasks/bloc/my_tasks_bloc.dart';
 import '../features/my_tasks/bloc/tasks_status_bloc.dart';
+import '../features/notifications/bloc/notification_count_bloc.dart';
 import '../features/notifications/bloc/notifications_bloc.dart';
 import '../features/policy/bloc/policy_bloc.dart';
 import '../features/rewards/bloc/rewards_bloc.dart';
@@ -67,6 +68,7 @@ abstract class ProviderList {
     BlocProvider<DeleteAccountBloc>(create: (_) => DeleteAccountBloc()),
     BlocProvider<InvitationCodeBloc>(create: (_) => InvitationCodeBloc()),
     BlocProvider<NotificationsBloc>(create: (_) => NotificationsBloc()),
+    BlocProvider<NotificationsCountBloc>(create: (_) => NotificationsCountBloc()),
     BlocProvider<RewardsBloc>(create: (_) => RewardsBloc()),
   ];
 }

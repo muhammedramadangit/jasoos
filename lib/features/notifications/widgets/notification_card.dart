@@ -5,6 +5,8 @@ import 'package:jasoos/features/notifications/model/notifications_model.dart';
 import 'package:jasoos/helper/media_quary_helper.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/helper/text_styles.dart';
+import 'package:jasoos/navigation/custom_navigation.dart';
+import 'package:jasoos/navigation/routes.dart';
 
 import '../../../helper/constants.dart';
 
@@ -14,46 +16,51 @@ class NotificationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQueryHelper.width,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      decoration: BoxDecoration(
-        color: Styles.BORDER_COLOR.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12.r),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 28.r,
-            backgroundColor: Styles.HIGHLIGHT_COLOR,
-            child: Center(
-              child: SvgPicture.asset(
-                Constants.getSvg("bell"),
-                height: 26,
-                colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),
+    return GestureDetector(
+      onTap: () {
+        CustomNavigator.push(Routes.TASK_DETAILS, arguments: model?.taskId);
+      },
+      child: Container(
+        width: MediaQueryHelper.width,
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+        decoration: BoxDecoration(
+          color: Styles.BORDER_COLOR.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 28.r,
+              backgroundColor: Styles.HIGHLIGHT_COLOR,
+              child: Center(
+                child: SvgPicture.asset(
+                  Constants.getSvg("bell"),
+                  height: 26,
+                  colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),
+                ),
               ),
             ),
-          ),
-          8.horizontalSpace,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  model?.title ?? "",
-                  style: AppTextStyles.w500.copyWith(fontSize: 14),
-                ),
-                Text(
-                  model?.body ?? "",
-                  style: AppTextStyles.w400.copyWith(
-                    fontSize: 12,
-                    color: Styles.GREY_TEXT_COLOR,
+            8.horizontalSpace,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    model?.title ?? "",
+                    style: AppTextStyles.w500.copyWith(fontSize: 14),
                   ),
-                ),
-              ],
+                  Text(
+                    model?.body ?? "",
+                    style: AppTextStyles.w400.copyWith(
+                      fontSize: 12,
+                      color: Styles.GREY_TEXT_COLOR,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

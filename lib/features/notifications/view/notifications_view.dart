@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,7 @@ class NotificationsView extends StatelessWidget {
       appBar: AppBars.titledAppBar(title: tr("notifications")),
       body: BlocBuilder<NotificationsBloc, AppState>(
         builder: (context, state) {
+          log("STATUS $state");
           if(state is Loading) {
             return CustomLoading();
           } else if (state is Error) {

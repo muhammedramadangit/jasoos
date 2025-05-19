@@ -72,6 +72,18 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
     add(Update());
   }
 
+  bool checkNull() {
+    bool nameCheck = name.text.isNotEmpty;
+    bool emailCheck = email.text.isNotEmpty;
+    bool phoneCheck = phone.text.isNotEmpty;
+    bool birthdayCheck = birthday != null;
+    bool genderCheck = gender != "null";
+    bool maritalStatusCheck = maritalStatus != "null";
+
+    bool? validation = nameCheck || emailCheck || phoneCheck || birthdayCheck || genderCheck || maritalStatusCheck;
+    return validation;
+  }
+
   bool _validation(){
     nameError = AppValidations.name(name.text);
     emailError = AppValidations.email(email.text);
@@ -169,6 +181,7 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
           clear();
           emit(Done());
         } else {
+          ProfileBloc.instance.add(Get());
           showCustomDialog(dialog: CustomAlertDialog(response.data["message"]));
           emit(Error());
         }

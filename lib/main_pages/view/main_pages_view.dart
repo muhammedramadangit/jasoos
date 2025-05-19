@@ -20,7 +20,7 @@ import '../../features/home/bloc/nearest_shop_bloc.dart';
 import '../../features/home/bloc/recent_tasks_bloc.dart';
 import '../../features/my_tasks/bloc/my_tasks_bloc.dart';
 import '../../features/my_tasks/view/my_tasks_view.dart';
-import '../../features/notifications/bloc/notifications_bloc.dart';
+import '../../features/notifications/bloc/notification_count_bloc.dart';
 
 Widget image(image) => Padding(
       padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
@@ -48,7 +48,7 @@ class _MainPagesViewState extends State<MainPagesView>
     switch (index) {
       case 0:
         RecentTasksBloc.instance.add(Get());
-        NotificationsBloc.instance.add(GetCount());
+        NotificationsCountBloc.instance.add(GetCount());
         return HomeView();
       case 1:
         // ShopsBloc.instance.add(Get());

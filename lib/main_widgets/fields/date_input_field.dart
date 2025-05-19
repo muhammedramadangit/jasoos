@@ -69,7 +69,7 @@ class _DateInputFieldState extends State<DateInputField> {
                 widget.onChange?.call(value);
               });
             },
-            initValue: widget.initialValue,
+            initValue: widget.initialValue ?? widget.maxDate ?? DateTime.now(),
             minDate: widget.minDate,
             maxDate: widget.maxDate,
           ),
