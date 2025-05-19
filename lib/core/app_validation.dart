@@ -50,6 +50,31 @@ mixin AppValidations {
       return "";
   }
 
+  static String? bankHolderName(String? value) {
+    final regex = RegExp(r'^[a-zA-Z\s]+$');
+    if (value!.isEmpty)
+      return tr("empty");
+    else if (value.length < 3)
+      return tr("VName");
+    else if (RegExp(r'\s{2,}').hasMatch(value.replaceAll(RegExp(r'\s+'), ' ').trim())) {
+      return tr("VNameAvoidSpace");
+    } else if (!regex.hasMatch(value))
+      return tr("enterNameLikeCard");
+    else
+      return "";
+  }
+
+  static String? bankName(String? value) {
+    if (value!.isEmpty)
+      return tr("empty");
+    else if (value.length < 3)
+      return tr("VName");
+    else if (RegExp(r'\s{2,}').hasMatch(value.replaceAll(RegExp(r'\s+'), ' ').trim())) {
+      return tr("VNameAvoidSpace");
+    } else
+      return "";
+  }
+
   static String? phone(String? value) {
     final RegExp regex = RegExp(r'^[0-9]+$');
     if (value!.isEmpty)

@@ -8,6 +8,7 @@
   "VCity": "Please select your destination",
   "VName": "The name must be at least 3 characters long",
   "enterNameLikePassport" : "Enter your name exactly as it appears on your passport/ID card.",
+  "enterNameLikeCard" : "Enter your name exactly as it appears on the credit card.",
   "VPhone" : "Phone number must contain only numbers",
   "VPhoneLength" : "The phone number value must be between 8 and 10 digits",
   "VPass": "The password must be at least 8 characters and contains numbers, lowercase, uppercase, and symbol.",

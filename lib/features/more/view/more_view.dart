@@ -81,8 +81,8 @@ class MoreView extends StatelessWidget {
             16.verticalSpace,
             CustomButton(
               text: tr("deleteAccount"),
-              color: Styles.BORDER_COLOR,
-              txtColor: Styles.GREY_TEXT_COLOR,
+              color: Styles.RED_COLOR,
+              borderColor: Styles.RED_COLOR,
               onTap: () {
                 showCustomDialog(dialog: DeleteAccountDialog(), dismiss: true);
               },

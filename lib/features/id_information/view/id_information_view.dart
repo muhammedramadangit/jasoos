@@ -12,21 +12,25 @@ class IdInformationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBars.titledAppBar(title: tr("idInfo")),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: Styles.SCREEN_PADDING,
-              physics: ClampingScrollPhysics(),
-              child: Column(
-                children: [
-                  IdInformationForm(),
-                ],
+      body: SafeArea(
+        top: false,
+        bottom: true,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: Styles.SCREEN_PADDING,
+                physics: ClampingScrollPhysics(),
+                child: Column(
+                  children: [
+                    IdInformationForm(),
+                  ],
+                ),
               ),
             ),
-          ),
-          IdInformationSubmit(),
-        ],
+            IdInformationSubmit(),
+          ],
+        ),
       ),
     );
   }

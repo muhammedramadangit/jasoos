@@ -43,9 +43,9 @@ class BankAccountBloc extends Bloc<AppEvent, AppState> {
   }
 
   bool _validation(){
-    bankNameError = AppValidations.name(bankName.text);
+    bankNameError = AppValidations.bankName(bankName.text);
     bankNameValidation = bankNameError!.isEmpty;
-    holderNameError = AppValidations.name(holderName.text);
+    holderNameError = AppValidations.bankHolderName(holderName.text);
     holderNameValidation = holderNameError!.isEmpty;
     ibanError = AppValidations.any(iban.text);
     ibanValidation = ibanError!.isEmpty;

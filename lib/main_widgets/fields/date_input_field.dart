@@ -142,55 +142,59 @@ showBottomSheetDatePicker({required Function(DateTime) onChange, VoidCallback? o
       builder: (context, orientation) {
         return Container(
           height: orientation == Orientation.landscape ? MediaQueryHelper.height : MediaQueryHelper.height / 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(50),
-                  onTap: () => Navigator.pop(context),
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(width: 1, color: Theme.of(context).colorScheme.primary),
-                    ),
-                    child: Center(
-                      child: Icon(Icons.close, color: Theme.of(context).colorScheme.primary, size: 16),
+          child: SafeArea(
+            bottom: true,
+            top: false,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.primary),
+                      ),
+                      child: Center(
+                        child: Icon(Icons.close, color: Theme.of(context).colorScheme.primary, size: 16),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: ClipRRect(
-                  clipBehavior: Clip.hardEdge,
-                  borderRadius: BorderRadius.circular(20),
-                  child: CupertinoDatePicker(
-                    minimumDate: minDate ?? DateTime(1900),
-                    maximumDate: maxDate,
-                    initialDateTime: initValue ?? DateTime.now(),
-                    mode: CupertinoDatePickerMode.date,
-                    dateOrder: DatePickerDateOrder.ymd,
-                    onDateTimeChanged: (value) {
-                      date = value;
-                      onChange(value);
+                Expanded(
+                  child: ClipRRect(
+                    clipBehavior: Clip.hardEdge,
+                    borderRadius: BorderRadius.circular(20),
+                    child: CupertinoDatePicker(
+                      minimumDate: minDate ?? DateTime(1900),
+                      maximumDate: maxDate,
+                      initialDateTime: initValue ?? DateTime.now(),
+                      mode: CupertinoDatePickerMode.date,
+                      dateOrder: DatePickerDateOrder.ymd,
+                      onDateTimeChanged: (value) {
+                        date = value;
+                        onChange(value);
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16),
+                  child: CustomButton(
+                    text: tr("confirm"),
+                    onTap: onPick ?? () {
+                      onChange(date);
+                      Navigator.pop(context);
                     },
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(16),
-                child: CustomButton(
-                  text: tr("confirm"),
-                  onTap: onPick ?? () {
-                    onChange(date);
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       }

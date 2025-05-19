@@ -35,21 +35,23 @@ class NotificationCard extends StatelessWidget {
             ),
           ),
           8.horizontalSpace,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                model?.title ?? "",
-                style: AppTextStyles.w500.copyWith(fontSize: 14),
-              ),
-              Text(
-                model?.body ?? "",
-                style: AppTextStyles.w400.copyWith(
-                  fontSize: 12,
-                  color: Styles.GREY_TEXT_COLOR,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model?.title ?? "",
+                  style: AppTextStyles.w500.copyWith(fontSize: 14),
                 ),
-              ),
-            ],
+                Text(
+                  model?.body ?? "",
+                  style: AppTextStyles.w400.copyWith(
+                    fontSize: 12,
+                    color: Styles.GREY_TEXT_COLOR,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

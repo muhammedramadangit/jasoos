@@ -17,11 +17,15 @@ class ChangePasswordView extends StatelessWidget {
       appBar: AppBars.titledAppBar(title: tr("changePassword")),
       body: BlocBuilder<ChangePasswordBloc, AppState>(
         builder: (context, state) {
-          return Column(
-            children: [
-              ChangePasswordForm(),
-              ChangePasswordSubmit(),
-            ],
+          return SafeArea(
+            top: false,
+            bottom: true,
+            child: Column(
+              children: [
+                ChangePasswordForm(),
+                ChangePasswordSubmit(),
+              ],
+            ),
           );
         },
       ),

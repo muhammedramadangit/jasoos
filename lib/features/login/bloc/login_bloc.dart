@@ -85,6 +85,8 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
             ).then(
               (value) {
                 AppStorage.cacheToken(response.data["data"]["token"]);
+                AppStorage.cachePhone(phone.text);
+                AppStorage.cachePhoneCode(countryCode ?? "+966");
                 CustomNavigator.push(Routes.OTP, arguments: false);
               },
             );

@@ -104,31 +104,34 @@ class _AddTaskViewState extends State<AddTaskView> {
             ),
             child: BlocBuilder<StartTaskBloc, AppState>(
               builder: (context, startState) {
-                return Column(
-                  children: [
-                    // if(bloc.model.data!.length > 3 &&
-                    //     ((bloc.model.data!.length.isEven && (bloc.index == bloc.model.data!.length/2))
-                    //         || (bloc.model.data!.length.isOdd && (bloc.index == (bloc.model.data!.length/2).floor()))
-                    //     ))...[
-                    //   TaskDone(),
-                    // ]else...[
-                    //   bloc.tasks[bloc.index],
-                    // ],
-                    bloc.tasks[bloc.index],
-                    Spacer(),
-                    CustomButton(
-                      text: "Next",
-                      loading: startState is Loading,
-                      onTap: () {
-                        StartTaskBloc.instance.add(Update());
-                        StartTaskBloc.instance.checkValidation({
-                          "question_id" : bloc.model.data?[bloc.index].id,
-                          "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
-                        });
-                      },
-                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 42.h),
-                    ),
-                  ],
+                return SafeArea(
+                  bottom: true,
+                  child: Column(
+                    children: [
+                      // if(bloc.model.data!.length > 3 &&
+                      //     ((bloc.model.data!.length.isEven && (bloc.index == bloc.model.data!.length/2))
+                      //         || (bloc.model.data!.length.isOdd && (bloc.index == (bloc.model.data!.length/2).floor()))
+                      //     ))...[
+                      //   TaskDone(),
+                      // ]else...[
+                      //   bloc.tasks[bloc.index],
+                      // ],
+                      bloc.tasks[bloc.index],
+                      Spacer(),
+                      CustomButton(
+                        text: "Next",
+                        loading: startState is Loading,
+                        onTap: () {
+                          StartTaskBloc.instance.add(Update());
+                          StartTaskBloc.instance.checkValidation({
+                            "question_id" : bloc.model.data?[bloc.index].id,
+                            "question_type_id" : bloc.model.data?[bloc.index].questionTypeId,
+                          });
+                        },
+                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 42.h),
+                      ),
+                    ],
+                  ),
                 );
               }
             ),
