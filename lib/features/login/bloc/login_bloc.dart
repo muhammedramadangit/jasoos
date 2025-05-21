@@ -68,7 +68,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
         "phone" : phone.text.replaceAll("-", ""),
         "phone_code" : countryCode ?? "+966",
         "password" : password.text,
-        "device_token" : Constants.device_id,
+        "device_token" : Constants.device_id ?? "-",
       };
       try {
         Response response = await LoginRepo.login(body);

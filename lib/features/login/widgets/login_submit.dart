@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,53 +11,50 @@ import 'package:jasoos/main_widgets/custom_button.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
 import 'package:jasoos/navigation/routes.dart';
 
-import '../../../helper/socail_auth_helper.dart';
-import '../bloc/social_login.dart';
-
 class LoginSubmit extends StatelessWidget {
   const LoginSubmit({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> social = [
-      {
-        "icon": "google",
-        "name": tr("continueWithGoogle"),
-        "onTap": () {
-          SocialAuthHelper.loginWithGoogle.call().then((value) {
-            SocialLoginBloc.instance.add(Click(arguments: {
-              "access_token": value.accessToken,
-              "provider": "google",
-            }));
-          });
-        },
-      },
-      {
-        "icon": "facebook",
-        "name": tr("continueWithFacebook"),
-        "onTap": () {
-          SocialAuthHelper.loginWithFacebook.call().then((value) {
-            SocialLoginBloc.instance.add(Click(arguments: {
-              "access_token": value.accessToken,
-              "provider": "facebook",
-            }));
-          });
-        },
-      },
-      if(Platform.isAndroid)
-        {
-          "icon": "apple",
-          "name": tr("continueWithApple"),
-          "onTap": () {
-            SocialAuthHelper.loginWithApple.call().then((value) {
-              SocialLoginBloc.instance.add(Click(arguments: {
-                "access_token": value.accessToken,
-                "provider": "apple",
-              }));
-            });
-          },
-        },
-    ];
+    // List<Map<String, dynamic>> social = [
+    //   {
+    //     "icon": "google",
+    //     "name": tr("continueWithGoogle"),
+    //     "onTap": () {
+    //       SocialAuthHelper.loginWithGoogle.call().then((value) {
+    //         SocialLoginBloc.instance.add(Click(arguments: {
+    //           "access_token": value.accessToken,
+    //           "provider": "google",
+    //         }));
+    //       });
+    //     },
+    //   },
+    //   {
+    //     "icon": "facebook",
+    //     "name": tr("continueWithFacebook"),
+    //     "onTap": () {
+    //       SocialAuthHelper.loginWithFacebook.call().then((value) {
+    //         SocialLoginBloc.instance.add(Click(arguments: {
+    //           "access_token": value.accessToken,
+    //           "provider": "facebook",
+    //         }));
+    //       });
+    //     },
+    //   },
+    //   if(Platform.isAndroid)
+    //     {
+    //       "icon": "apple",
+    //       "name": tr("continueWithApple"),
+    //       "onTap": () {
+    //         SocialAuthHelper.loginWithApple.call().then((value) {
+    //           SocialLoginBloc.instance.add(Click(arguments: {
+    //             "access_token": value.accessToken,
+    //             "provider": "apple",
+    //           }));
+    //         });
+    //       },
+    //     },
+    // ];
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: Column(

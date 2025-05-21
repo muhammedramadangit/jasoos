@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/features/home/bloc/current_location_bloc.dart';
 import 'package:jasoos/features/home/bloc/shops_bloc.dart';
@@ -21,6 +22,7 @@ import '../../features/home/bloc/recent_tasks_bloc.dart';
 import '../../features/my_tasks/bloc/my_tasks_bloc.dart';
 import '../../features/my_tasks/view/my_tasks_view.dart';
 import '../../features/notifications/bloc/notification_count_bloc.dart';
+import '../../helper/permission_helper.dart';
 
 Widget image(image) => Padding(
       padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
@@ -52,6 +54,7 @@ class _MainPagesViewState extends State<MainPagesView>
         return HomeView();
       case 1:
         // ShopsBloc.instance.add(Get());
+        checkDiscoverPermission();
         return DiscoverView();
       case 2:
         return MyTasksView();
@@ -91,6 +94,13 @@ class _MainPagesViewState extends State<MainPagesView>
     return result;
   }
 
+  checkDiscoverPermission() async {
+    PermissionHelper.checkLocationPermission();
+    LocationPermission permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
+      await Geolocator.openLocationSettings();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<ConnectivityResult>>(

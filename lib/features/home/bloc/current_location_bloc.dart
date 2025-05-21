@@ -5,8 +5,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:jasoos/core/app_event.dart';
 import 'package:jasoos/core/app_state.dart';
 import 'package:jasoos/core/app_storage.dart';
-import 'package:jasoos/helper/permission_helper.dart';
 import 'package:jasoos/navigation/custom_navigation.dart';
+
+import '../../../main_widgets/custom_button.dart';
+import '../../../main_widgets/dialogs/custom_dialog.dart';
+import '../../../main_widgets/dialogs/custom_show_dialog.dart';
 
 class CurrentLocationBloc extends Bloc<AppEvent, AppState> {
   CurrentLocationBloc() : super(Loading()) {
@@ -17,28 +20,29 @@ class CurrentLocationBloc extends Bloc<AppEvent, AppState> {
   Timer? _timer;
 
   Future<void> startSendingLocation() async {
-    // Request location permission
-    // LocationPermission permission = await Geolocator.requestPermission();
-    // if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-    //   // Handle permission denied error
-    //   print("Location permission denied");
-    //   // showCustomDialog(
-    //   //   dialog: CustomDialog(
-    //   //     msg: "Location permission required",
-    //   //     actions: CustomButton(
-    //   //       text: "settings",
-    //   //       onTap: () {
-    //   //         CustomNavigator.pop();
-    //   //         // SystemSettings.location();
-    //   //       },
-    //   //     ),
-    //   //   ),
-    //   //   dismiss: true,
-    //   // );
-    //   return;
-    // }
+    /// Request location permission
+    LocationPermission permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      // Handle permission denied error
+      print("Location permission denied");
+      showCustomDialog(
+        dialog: CustomDialog(
+          msg: "Location permission required",
+          actions: CustomButton(
+            text: "settings",
+            onTap: () async {
+              CustomNavigator.pop();
+              await Geolocator.openLocationSettings();
+              // SystemSettings.location();
+            },
+          ),
+        ),
+        dismiss: true,
+      );
+      return;
+    }
 
-    PermissionHelper.checkLocationPermission();
+    // PermissionHelper.checkLocationPermission();
     Position position = await Geolocator.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
     AppStorage.cacheUserLat("${position.latitude}");
     AppStorage.cacheUserLng("${position.longitude}");

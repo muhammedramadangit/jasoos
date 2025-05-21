@@ -7,9 +7,28 @@ import 'package:jasoos/my_app.dart';
 import 'helper/notification_helper.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();;
-  await AppStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
   await NotificationHelper.init();
+
+  // try {
+  //   await NotificationHelper.init();
+  // } catch (e) {
+  //   // Ignore duplicate-app error
+  //   if (e.toString().contains('already exists')) {
+  //     log("ALREADY EXISTS ........................ ");
+  //     try{
+  //       Constants.device_id = await FirebaseMessaging.instance.getToken();
+  //       print("FCM token :::: ${Constants.device_id}");
+  //     }catch(e){
+  //       print("FCM token Exception :: $e");
+  //     }
+  //   } else {
+  //     rethrow;
+  //   }
+  // }
+
+
+  await AppStorage.init();
   await EasyLocalization.ensureInitialized();
 
   runApp(
