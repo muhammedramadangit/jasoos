@@ -14,6 +14,7 @@ import 'package:jasoos/features/profile/bloc/profile_bloc.dart';
 import 'package:jasoos/helper/constants.dart';
 import 'package:jasoos/helper/styles.dart';
 import 'package:jasoos/no_internet.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../features/discover_map/view/discover_view.dart';
 import '../../features/home/bloc/home_categories_bloc.dart';
@@ -54,7 +55,7 @@ class _MainPagesViewState extends State<MainPagesView>
         return HomeView();
       case 1:
         // ShopsBloc.instance.add(Get());
-        checkDiscoverPermission();
+        // checkDiscoverPermission();
         return DiscoverView();
       case 2:
         return MyTasksView();
@@ -67,6 +68,7 @@ class _MainPagesViewState extends State<MainPagesView>
 
   @override
   void initState() {
+    // checkDiscoverPermission();
     if (widget.index != null) {
       currentIndex = widget.index!;
     }
@@ -94,13 +96,25 @@ class _MainPagesViewState extends State<MainPagesView>
     return result;
   }
 
-  checkDiscoverPermission() async {
-    PermissionHelper.checkLocationPermission();
-    LocationPermission permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
-      await Geolocator.openLocationSettings();
-    }
-  }
+  // Future<void> checkDiscoverPermission() async {
+  //   // await PermissionHelper.checkLocationPermission();
+  //   // LocationPermission permission = await Geolocator.requestPermission();
+  //   // if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
+  //   //   await Geolocator.openLocationSettings();
+  //   // }
+  //
+  //   final status = await Permission.locationWhenInUse.request();
+  //
+  //   if (status.isGranted) {
+  //     print("✅ Location permission granted");
+  //   } else if (status.isPermanentlyDenied) {
+  //     print("⚠️ Location permission permanently denied. Open app settings.");
+  //     await openAppSettings();
+  //   } else {
+  //     print("❌ Location permission denied");
+  //     // await openAppSettings();
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<ConnectivityResult>>(

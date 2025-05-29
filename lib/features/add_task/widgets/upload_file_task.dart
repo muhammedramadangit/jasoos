@@ -8,6 +8,7 @@ import 'package:jasoos/main_widgets/custom_button.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/file_picker_helper.dart';
+import '../../../helper/permission_helper.dart';
 import '../../../helper/styles.dart';
 import '../bloc/start_task_bloc.dart';
 import '../models/questions_model.dart';
@@ -74,11 +75,13 @@ class UploadFileTask extends StatelessWidget {
           24.verticalSpace,
           CustomButton(
             onTap: () async {
-              FilePickerHelper.pickFile(
-                type: FileType.custom,
-                allowedExtensions: ['pdf', "doc", "docx"],
-              ).then((value) {
-                StartTaskBloc.instance.fileAnswer = value;
+              await PermissionHelper.checkFilePermission().then((value) {
+                FilePickerHelper.pickFile(
+                  type: FileType.custom,
+                  allowedExtensions: ['pdf', "doc", "docx"],
+                ).then((value) {
+                  StartTaskBloc.instance.fileAnswer = value;
+                });
               });
             },
             text: tr("addFile"),

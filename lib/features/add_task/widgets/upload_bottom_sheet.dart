@@ -7,6 +7,7 @@ import 'package:jasoos/helper/image_picker_helper.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
 
 import '../../../helper/media_quary_helper.dart';
+import '../../../helper/permission_helper.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/text_styles.dart';
 import '../../../navigation/custom_navigation.dart';
@@ -86,19 +87,21 @@ class UploadImageBottomSheet extends StatelessWidget {
               color: Styles.BLUE_COLOR,
               borderColor: Styles.BLUE_COLOR,
               padding: EdgeInsets.symmetric(horizontal: 24.w),
-              onTap: () {
-                CustomNavigator.pop();
-                if(isImage == true) {
-                  ImagePickerHelper.openCamera().then((value) {
-                    StartTaskBloc.instance.imageAnswer = value;
-                    StartTaskBloc.instance.add(Update());
-                  });
-                } else {
-                  ImagePickerHelper.openVideoCamera().then((value) {
-                    StartTaskBloc.instance.videoAnswer = value;
-                    StartTaskBloc.instance.add(Update());
-                  });
-                }
+              onTap: () async {
+                await PermissionHelper.checkCameraPermission().then((value) {
+                  CustomNavigator.pop();
+                  if(isImage == true) {
+                    ImagePickerHelper.openCamera().then((value) {
+                      StartTaskBloc.instance.imageAnswer = value;
+                      StartTaskBloc.instance.add(Update());
+                    });
+                  } else {
+                    ImagePickerHelper.openVideoCamera().then((value) {
+                      StartTaskBloc.instance.videoAnswer = value;
+                      StartTaskBloc.instance.add(Update());
+                    });
+                  }
+                });
               },
             ),
             16.verticalSpace,
@@ -108,19 +111,21 @@ class UploadImageBottomSheet extends StatelessWidget {
               color: Styles.HIGHLIGHT_COLOR,
               borderColor: Styles.HIGHLIGHT_COLOR,
               padding: EdgeInsets.symmetric(horizontal: 24.w),
-              onTap: () {
-                CustomNavigator.pop();
-                if(isImage == true) {
-                  ImagePickerHelper.openGallery().then((value) {
-                    StartTaskBloc.instance.imageAnswer = value;
-                    StartTaskBloc.instance.add(Update());
-                  });
-                } else {
-                  ImagePickerHelper.openVideoGallery().then((value) {
-                    StartTaskBloc.instance.videoAnswer = value;
-                    StartTaskBloc.instance.add(Update());
-                  });
-                }
+              onTap: () async {
+                await PermissionHelper.checkGalleryPermission().then((value) {
+                  CustomNavigator.pop();
+                  if(isImage == true) {
+                    ImagePickerHelper.openGallery().then((value) {
+                      StartTaskBloc.instance.imageAnswer = value;
+                      StartTaskBloc.instance.add(Update());
+                    });
+                  } else {
+                    ImagePickerHelper.openVideoGallery().then((value) {
+                      StartTaskBloc.instance.videoAnswer = value;
+                      StartTaskBloc.instance.add(Update());
+                    });
+                  }
+                });
               },
             ),
             16.verticalSpace,
