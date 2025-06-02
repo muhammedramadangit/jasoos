@@ -18,28 +18,30 @@ class AllRecentTasksView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBars.titledAppBar(title: tr("recentTasks")),
-      body: BlocBuilder<RecentTasksBloc, AppState>(
-        builder: (context, state) {
-          if(state is Loading) {
-            return CustomLoading();
-          } else if (state is Error) {
-            return CustomCenterText(state.error ?? tr("errorException"));
-          } else if (state is Empty) {
-            return CustomEmptyView();
-          } else {
-            RecentTasksBloc bloc = RecentTasksBloc.instance;
-            return ListView.separated(
-              itemCount: bloc.model.data!.length,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              separatorBuilder: (context, index) => 16.verticalSpace,
-              itemBuilder: (context, index) {
-                return RecentTaskCard(model: bloc.model.data?[index]);
-              },
-            );
-          }
-        },
+      body: SizedBox.expand(
+        child: BlocBuilder<RecentTasksBloc, AppState>(
+          builder: (context, state) {
+            if(state is Loading) {
+              return CustomLoading();
+            } else if (state is Error) {
+              return CustomCenterText(state.error ?? tr("errorException"));
+            } else if (state is Empty) {
+              return CustomEmptyView();
+            } else {
+              RecentTasksBloc bloc = RecentTasksBloc.instance;
+              return ListView.separated(
+                itemCount: bloc.model.data!.length,
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                separatorBuilder: (context, index) => 16.verticalSpace,
+                itemBuilder: (context, index) {
+                  return RecentTaskCard(model: bloc.model.data?[index]);
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }

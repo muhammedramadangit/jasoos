@@ -45,8 +45,6 @@ class MyTasksView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return TaskCard(
                         model: bloc.model.data?[index],
-                        isComplete: bloc.model.data?[index] == 2,
-                        isRecent: bloc.model.data?[index] == 0,
                       );
                     },
                   );

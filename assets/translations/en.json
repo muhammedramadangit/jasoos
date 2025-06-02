@@ -217,8 +217,11 @@
   "invitingCode": "Inviting code",
   "optional": "optional",
   "emptyShops" : "sorry, No shops found",
+  "emptyTasks" : "sorry, No Tasks found",
   "noNotifications" : "No notifications to show.",
   "notificationStayTuned" : "Stay tuned for new notifications.",
+  "accepted" : "Accepted",
+  "taskLocationAlert" : "You cannot start the task unless you are at the designated location",
 
   "skip": "Skip"
 }

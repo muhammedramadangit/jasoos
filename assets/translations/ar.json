@@ -217,8 +217,11 @@
   "invitingCode": "رمز الدعوة",
   "optional": "اختياري",
   "emptyShops" : "عذرا، لم يتم العثور على متاجر",
+  "emptyTasks" : "عذرا، لم يتم العثور على مهام",
   "noNotifications" : "لا يوجد إشعارات لعرضها.",
   "notificationStayTuned" : "ترقبوا الإشعارات الجديدة.",
+  "accepted" : "مقبول",
+  "taskLocationAlert" : "لا يمكنك بدء المهمة إلا إذا كنت في الموقع المحدد",
 
   "skip": "تخطي"
 }

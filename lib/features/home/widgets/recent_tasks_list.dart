@@ -21,7 +21,7 @@ class RecentTasksList extends StatelessWidget {
         } else if (state is Error) {
           return CustomCenterText(state.error ?? tr("errorException"));
         } else if (state is Empty) {
-          return CustomCenterText(tr("emptyShops"));
+          return CustomCenterText(tr("emptyTasks"));
         } else {
           RecentTasksBloc bloc = RecentTasksBloc.instance;
           return ListView.separated(

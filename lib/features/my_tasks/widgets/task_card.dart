@@ -13,10 +13,8 @@ import '../../../helper/constants.dart';
 import '../models/tasks_model.dart';
 
 class TaskCard extends StatelessWidget {
-  final bool? isComplete;
-  final bool? isRecent;
   final TaskInfo? model;
-  const TaskCard({super.key, this.isComplete = false, this.isRecent = false, this.model});
+  const TaskCard({super.key, this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +64,7 @@ class TaskCard extends StatelessWidget {
             ),
             8.verticalSpace,
 
-            if(isComplete == true)...[
+            if(model?.status == 2)...[
               Row(
                 children: [
                   SvgPicture.asset(Constants.getSvg("star"), colorFilter: ColorFilter.mode(Styles.PRIMARY_COLOR, BlendMode.srcIn),),
@@ -82,7 +80,7 @@ class TaskCard extends StatelessWidget {
                   // SvgPicture.asset(Constants.getSvg("riyal")),
                 ],
               ),
-            ]else if(isRecent == true)...[
+            ]else if(model?.status == 0)...[
               Row(
                 children: [
                   SvgPicture.asset(
@@ -168,10 +166,15 @@ class TaskCard extends StatelessWidget {
                       style: AppTextStyles.w400.copyWith(fontSize: 12),
                     ),
                     Spacer(),
-                    if(model?.totalQuestions == model?.answeredQuestions)...[
+                    if(model?.status == 3)...[
                       Text(
-                        tr("completed"),
+                        tr("accepted"),
                         style: AppTextStyles.w700.copyWith(fontSize: 12, color: Styles.GREEN_COLOR),
+                      ),
+                    ]else if(model?.status == 4)...[
+                      Text(
+                        tr("rejected"),
+                        style: AppTextStyles.w700.copyWith(fontSize: 12, color: Styles.RED_COLOR),
                       ),
                     ]else...[
                       Row(

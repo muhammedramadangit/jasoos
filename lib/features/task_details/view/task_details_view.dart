@@ -9,11 +9,13 @@ import 'package:jasoos/helper/text_styles.dart';
 import 'package:jasoos/main_widgets/appbars/app_bars.dart';
 import 'package:jasoos/main_widgets/custom_button.dart';
 import 'package:jasoos/main_widgets/custom_loading.dart';
+import 'package:jasoos/main_widgets/dialogs/custom_alert_dialog.dart';
 
 import '../../../helper/constants.dart';
 import '../../../helper/styles.dart';
 import '../../../helper/url_launcher_helper.dart';
 import '../../../main_widgets/custom_center_text.dart';
+import '../../../main_widgets/dialogs/custom_show_dialog.dart';
 import '../../add_task/bloc/start_task_bloc.dart';
 import '../../shop_details/widgets/how_it_work_info.dart';
 import '../bloc/task_details_bloc.dart';
@@ -106,21 +108,22 @@ class TaskDetailsView extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     color: Styles.GREY_COLOR,
                   ),
-                ]else if(bloc.model.data?.status == 0 || bloc.model.data?.status == 1)...[
+                ]else if(bloc.model.data?.status != 2)...[
                   BlocBuilder<StartTaskBloc, AppState>(
                     builder: (context, state) {
                       return CustomButton(
                         onTap: () {
-                          StartTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
-                          // QuestionsBloc.instance.add(Get(arguments: bloc.model.data?.id));
-                          // CustomNavigator.push(Routes.START_TASK);
-                          // if(bloc.distance <= 100) {
-                          //   AddTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
-                          // } else {
-                          //   showCustomDialog(dialog: CustomAlertDialog("You cannot start the task unless you are at the designated location."));
-                          // }
+                          if(bloc.distance <= 100) {
+                            StartTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
+                          } else {
+                            showCustomDialog(dialog: CustomAlertDialog(tr("taskLocationAlert")));
+                          }
                         },
-                        text: bloc.model.data?.status == 1 ? tr("completeTask1") : bloc.model.data?.status == 4 ? tr("resubmitTask") : tr("startTask"),
+                        text: bloc.model.data?.status == 1
+                            ? tr("completeTask1")
+                            : bloc.model.data?.status == 4
+                            ? tr("resubmitTask")
+                            : tr("startTask"),
                         loading: state is Loading,
                         textStyle: AppTextStyles.w500.copyWith(
                           fontSize: 16,

@@ -121,45 +121,67 @@ class _TextInputFieldState extends State<TextInputField> {
   _mapPrefixIcon() {
     if (widget.keyboardType == TextInputType.phone) {
       return Container(
-        child: CountryCodePicker(
-          padding: EdgeInsets.zero,
-          onChanged: widget.onChangedCountryCode,
-          initialSelection: widget.initialSelectionCountryCode ?? '+966',
-          showFlagDialog: true,
-          flagDecoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          hideMainText: true,
-          builder: (p0) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 26.w,
-                  height: 18.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    image: DecorationImage(
-                      image: AssetImage(
-                        "${p0?.flagUri}",
-                        package: 'country_code_picker',
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 6),
-                SvgPicture.asset(Constants.getSvg("arrow-down")),
-                SizedBox(width: 10),
-                Container(
-                  height: 24,
-                  width: 1,
-                  color: Styles.BORDER_COLOR,
-                ),
-              ],
-            );
-          },
+        width: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(Constants.getSvg("sa")),
+            4.horizontalSpace,
+            Text(
+              "+966",
+              style: AppTextStyles.w500.copyWith(
+                fontSize: 14,
+              ),
+            ),
+            8.horizontalSpace,
+            Container(
+              width: 1,
+              height: 50,
+              color: Styles.GREY_COLOR,
+            )
+          ],
         ),
       );
+      // return Container(
+      //   child: CountryCodePicker(
+      //     padding: EdgeInsets.zero,
+      //     onChanged: widget.onChangedCountryCode,
+      //     initialSelection: widget.initialSelectionCountryCode ?? '+966',
+      //     showFlagDialog: true,
+      //     flagDecoration: BoxDecoration(
+      //       borderRadius: BorderRadius.circular(10.r),
+      //     ),
+      //     hideMainText: true,
+      //     builder: (p0) {
+      //       return Row(
+      //         mainAxisSize: MainAxisSize.min,
+      //         children: [
+      //           Container(
+      //             width: 26.w,
+      //             height: 18.h,
+      //             decoration: BoxDecoration(
+      //               borderRadius: BorderRadius.circular(4),
+      //               image: DecorationImage(
+      //                 image: AssetImage(
+      //                   "${p0?.flagUri}",
+      //                   package: 'country_code_picker',
+      //                 ),
+      //               ),
+      //             ),
+      //           ),
+      //           SizedBox(width: 6),
+      //           SvgPicture.asset(Constants.getSvg("arrow-down")),
+      //           SizedBox(width: 10),
+      //           Container(
+      //             height: 24,
+      //             width: 1,
+      //             color: Styles.BORDER_COLOR,
+      //           ),
+      //         ],
+      //       );
+      //     },
+      //   ),
+      // );
     } else {
       return null;
     }
