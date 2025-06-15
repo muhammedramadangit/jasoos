@@ -113,7 +113,7 @@ class TaskDetailsView extends StatelessWidget {
                     builder: (context, state) {
                       return CustomButton(
                         onTap: () {
-                          if(bloc.distance <= 100) {
+                          if(bloc.distance <= 100.0 && bloc.distance != 0.0) {
                             StartTaskBloc.instance.add(Start(arguments: bloc.model.data?.id));
                           } else {
                             showCustomDialog(dialog: CustomAlertDialog(tr("taskLocationAlert")));

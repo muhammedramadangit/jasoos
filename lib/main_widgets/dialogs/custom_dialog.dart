@@ -24,7 +24,7 @@ class CustomDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Lottie.asset(
-              Constants.getLottie("error"),
+              Constants.getLottie("alert"),
               height: 100,
               width: 100,
               fit: BoxFit.cover,

@@ -1,14 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:jasoos/app_config/app_config.dart';
 import 'package:jasoos/core/app_storage.dart';
-import 'package:jasoos/main_widgets/custom_toast.dart';
-import 'package:jasoos/navigation/custom_navigation.dart';
-import 'package:jasoos/navigation/routes.dart';
 import 'package:jasoos/network/mapper.dart';
 import 'package:jasoos/network/network_logger.dart';
 import 'package:jasoos/utiltiy/utility.dart';
@@ -50,16 +45,16 @@ class Network {
       "User-Agent": "Dart",
       'Accept-Language': lang,
     };
-    var check = await Connectivity().checkConnectivity();
-    log("CONNECTIVITY NETWORK LAYER ${check} || CONDITION ${check.contains(ConnectivityResult.none)}");
+    // var check = await Connectivity().checkConnectivity();
+    // log("CONNECTIVITY NETWORK LAYER ${check} || CONDITION ${check.contains(ConnectivityResult.none)}");
     try {
-      if(check.contains(ConnectivityResult.none) == true) {
-        if(method == ServerMethods.GET) {
-          CustomNavigator.push(Routes.NO_INTERNET);
-        } else {
-          showToast(tr("checkInternet"));
-        }
-      } else {
+      // if(check.contains(ConnectivityResult.none) == true) {
+      //   if(method == ServerMethods.GET) {
+      //     CustomNavigator.push(Routes.NO_INTERNET);
+      //   } else {
+      //     showToast(tr("checkInternet"));
+      //   }
+      // } else {
         Response response = await _dio.request(
           (baseUrl ?? AppConfig.BASE_URL) + endpoint,
           data: body,
@@ -75,7 +70,7 @@ class Network {
         } else {
           return Mapper(model, response.data);
         }
-      }
+      // }
     } on SocketException catch (e) {
       cprint(
         "SocketException: ${e.address}",

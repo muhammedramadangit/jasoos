@@ -91,12 +91,12 @@ class UploadImageBottomSheet extends StatelessWidget {
                 await PermissionHelper.checkCameraPermission().then((value) {
                   CustomNavigator.pop();
                   if(isImage == true) {
-                    ImagePickerHelper.openCamera().then((value) {
+                    ImagePickerHelper.openCamera(compress: true).then((value) {
                       StartTaskBloc.instance.imageAnswer = value;
                       StartTaskBloc.instance.add(Update());
                     });
                   } else {
-                    ImagePickerHelper.openVideoCamera().then((value) {
+                    ImagePickerHelper.openVideoCamera(compress: true).then((value) {
                       StartTaskBloc.instance.videoAnswer = value;
                       StartTaskBloc.instance.add(Update());
                     });
@@ -115,12 +115,12 @@ class UploadImageBottomSheet extends StatelessWidget {
                 await PermissionHelper.checkGalleryPermission().then((value) {
                   CustomNavigator.pop();
                   if(isImage == true) {
-                    ImagePickerHelper.openGallery().then((value) {
+                    ImagePickerHelper.openGallery(compress: true).then((value) {
                       StartTaskBloc.instance.imageAnswer = value;
                       StartTaskBloc.instance.add(Update());
                     });
                   } else {
-                    ImagePickerHelper.openVideoGallery().then((value) {
+                    ImagePickerHelper.openVideoGallery(compress: true).then((value) {
                       StartTaskBloc.instance.videoAnswer = value;
                       StartTaskBloc.instance.add(Update());
                     });

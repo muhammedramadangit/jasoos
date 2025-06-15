@@ -43,8 +43,7 @@ class _CustomExpandableWidgetState extends State<CustomExpandableWidget> {
             splashColor: Colors.transparent,
             child: Row(
               children: [
-                widget.title ?? SizedBox(),
-                Spacer(),
+                Expanded(child: widget.title ?? SizedBox()),
                 SizedBox(width: 16),
                 SvgPicture.asset(Constants.getSvg(isOpened == true ? "arrow-up" : "arrow-ios-down"),),
               ],

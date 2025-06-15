@@ -30,6 +30,7 @@ class UserProfileCard extends StatelessWidget {
                       ProfileBloc.instance.profileImage = value;
                       ProfileBloc.instance.add(PickImage());
                     },
+                    compress: true,
                   );
                 },
                 child: Stack(
